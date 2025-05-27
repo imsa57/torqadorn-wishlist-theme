@@ -1,0 +1,273 @@
+<style>
+    .auth-modal-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 99999999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    .auth-modal-wrapper.active {
+      display: flex;
+    }
+    .auth-modal-overlay {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+    }
+    .auth-modal-content {
+      position: relative;
+      z-index: 2;
+      background: white;
+      max-width: 360px;
+      height:95%;
+      width: 100%;
+      overflow-Y:hidden;
+      border-radius:10px;
+    }
+    .auth-content {
+      padding: 20px;
+    }
+    .auth-modal-close {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      color: #333;
+      font-size: 10px;
+      background: white;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+    .auth-content .m-customer-forms, .auth-content .m-register-form{
+   position:absolute;
+   z-index:-3;
+   visibility:hidden;
+   opacity:0;
+   transform:translateY(20px);
+   transition:transform .4s ease,visibility .2s ease;
+  }
+    .auth-content .m-customer-forms.active, .auth-content .m-register-form.active{
+      z-index:1;
+      opacity:1;
+      visibility:visible;
+      transform:translateY(0px);
+      max-height: calc(600px - 360px);
+      overflow-y: auto;
+      scrollbar-width:thin;
+      -webkit-overflow-scrolling: touch;
+
+      {% comment %} overflow: auto; {% endcomment %}
+      {% comment %} height: 240px; {% endcomment %}
+  }
+  .auth-text{
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: #1773b0;
+  }
+  .auth-toggle-buttons slide-popup-button{
+      font-size:20px;
+      padding-right: 40px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+  }
+  .auth-toggle-buttons slide-popup-button.active{
+  border-bottom-color:#333;
+  border-bottom-width:4px;
+  }
+  .auth-content [type="submit"]{
+  font-weight:500;
+  }
+  .auth-form-wrapper{
+  position:relative;
+  {% comment %} height:calc(calc(100vh * 0.92) - 270px); {% endcomment %}
+  {% comment %} overflow-Y:auto; {% endcomment %}
+  }
+  </style>
+<div class="auth-modal-wrapper"id="auth-modal-wrapper">
+  <div class="auth-modal-overlay"></div>
+  <div class="auth-modal-content">
+    <div class="auth-modal-close"><svg class="" fill="currentColor" width="10" height="10" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+      <path d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z"></path>
+    </svg></div>
+    <div class="image-box">
+      <img src="https://cdn.shopify.com/s/files/1/0526/4811/6407/files/Minimalist_Fashion_Launch_Announcement_Instagram_Post.jpg?v=1748254409" alt="" width="360" height="auto">
+    </div>
+    <div class="auth-content">
+      <div class="auth-text">Sign in to save this item to your favourites. Account perks include member offers, personalized styling tips, and birthday discounts.</div>
+      <div class="auth-toggle-buttons m:display-flex m:justify-center m:items-center mb-6">
+        <slide-popup-button class="active" data-popup-id="auth-register-modal">Sign Up</slide-popup-button>
+         <slide-popup-button  data-popup-id="auth-login-modal">Sign In</slide-popup-button>
+      </div>
+
+      <div class="auth-form-wrapper">
+      <slide-popup class="m-customer-forms" id="auth-login-modal">
+        <div class="container">
+          {% comment %}
+            <div id="recover" class="m-recover-form">
+              <h3>{{ 'customer.recover_password.title' | t }}</h3>
+              <p>{{ 'customer.recover_password.subtext' | t }}</p>
+
+              <div data-recover-form>
+                {% form 'recover_customer_password' %}
+                  {% if form.posted_successfully? %}
+                    <div class="notification show success m-customer__recover-form-posted">
+                      {{ 'customer.recover_password.success' | t }}
+                    </div>
+                  {% endif %}
+                  {% render 'form__error', form: form %}
+
+                  <input
+                    class="form-field form-field--input"
+                    type="email"
+                    name="email"
+                    placeholder="{{ 'customer.recover_password.email' | t }}"
+                    spellcheck="false"
+                    autocomplete="off"
+                    autocapitalize="off"
+                  >
+
+                  <div class="m-recover-form__action">
+                    <button type="submit" class="m-button m-button--primary">
+                      {{ 'customer.recover_password.submit' | t }}
+                    </button>
+                    <a href="#login" class="m-recover-form__cancel-btn m-button m-button--white"></a>
+                  </div>
+                {% endform %}
+              </div>
+            </div>
+          {% endcomment %}
+          <div id="login" class="m-login-form">
+            <h3  class="mb-4">{{ 'customer.login.title' | t }}</h3>
+            {% form 'customer_login', return_to: 'back' %}
+              {% render 'form__error', form: form %}
+              <input
+                type="email"
+                name="customer[email]"
+                placeholder="{{ 'customer.login.email' | t }}"
+                class="form-field form-field--input"
+              >
+              <input
+                type="password"
+                name="customer[password]"
+                placeholder="{{ 'customer.login.password' | t }}"
+                class="form-field form-field--input mb-4"
+              >
+
+              {% comment %} <a href="#recover" class="m-reset-password-btn">{{ 'customer.login.forgot_password' | t }}</a> {% endcomment %}
+              <button class="m-button m-button--primary m:w-full" type="submit">
+                {{ 'customer.login.sign_in' | t }}
+              </button>
+            {% endform %}
+          </div>
+          {% comment %}
+            <div class="m-sign-up">
+              <h3>{{ 'customer.login.new_customer' | t }}</h3>
+              <p>{{ 'customer.register.description' | t }}</p>
+              <a class="m-button m-button--primary" href="{{ routes.account_register_url }}">
+                {{- 'customer.register.title' | t -}}
+              </a>
+            </div>
+          {% endcomment %}
+        </div>
+
+      </slide-popup>
+
+      <slide-popup class="m-register-form active" id="auth-register-modal">
+        <div class="m-register-form__wrapper">
+          <h3 class="mb-4">{{ 'customer.register.title' | t }}</h3>
+          <div data-register-form>
+            {% form 'create_customer',return_to: 'back' %}
+              {% render 'form__error', form: form %}
+
+              <input
+                type="text"
+                name="customer[first_name]"
+                placeholder="{{ 'customer.register.first_name' | t }}"
+                class="form-field form-field--input"
+              >
+              <input
+                type="text"
+                name="customer[last_name]"
+                placeholder="{{ 'customer.register.last_name' | t }}"
+                class="form-field form-field--input"
+              >
+              <input
+                type="email"
+                name="customer[email]"
+                placeholder="{{ 'customer.login.email' | t }}"
+                class="form-field form-field--input"
+              >
+              <input
+                type="password"
+                name="customer[password]"
+                placeholder="{{ 'customer.login.password' | t }}"
+                class="form-field form-field--input mb-4"
+              >
+              <div class="m-register-form__description mb-4">
+                {{ 'customer.register.description' | t }}
+              </div>
+              {% assign show_terms = false %}
+              {% if settings.agree_text != blank and settings.show_agree_on_register %}
+                <div class="m-terms-conditons mb-4">
+                  <label class="form-field--checkbox">
+                    <input type="checkbox" name="agree_terms" value="yes" required>
+                    <span class="form-field--checkbox__label">{{ settings.agree_text }}</span>
+                    <span class="form-field--checkbox__icon">
+                      <svg
+                        class="m-svg-icon--medium"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        focusable="false"
+                        fill="none"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M18.5 1.5H1.5L1.5 18.5H18.5V1.5ZM1.5 0.5C0.947715 0.5 0.5 0.947715 0.5 1.5V18.5C0.5 19.0523 0.947715 19.5 1.5 19.5H18.5C19.0523 19.5 19.5 19.0523 19.5 18.5V1.5C19.5 0.947715 19.0523 0.5 18.5 0.5H1.5Z" fill-rule="evenodd" fill="currentColor"/>
+                        <path d="M14.9975 6.09084C15.201 6.27746 15.2147 6.59375 15.0281 6.79728L8.91631 13.4627C8.82231 13.5652 8.68987 13.6239 8.55079 13.6247C8.41172 13.6256 8.27857 13.5684 8.18335 13.4671L4.99513 10.0731C4.80606 9.87179 4.81596 9.55536 5.01723 9.3663C5.21849 9.17723 5.53492 9.18713 5.72399 9.3884L8.54335 12.3897L14.291 6.12145C14.4776 5.91791 14.7939 5.90421 14.9975 6.09084Z" fill="currentColor"/>
+                      </svg>
+                    </span>
+                  </label>
+                </div>
+                {% assign show_terms = true %}
+              {% endif %}
+              <button
+                class="m-button m-button--primary m:w-full"
+                {% if show_terms %}
+                  data-terms-action disabled
+                {% endif %}
+              >
+                {{ 'customer.register.title' | t }}
+              </button>
+              {% comment %}
+                <a class="m-button m-button--secondary m:w-full" href="{{ routes.account_login_url }}">
+                  {{ 'customer.login.title' | t }}
+                </a>
+              {% endcomment %}
+            {% endform %}
+          </div>
+        </div>
+      </slide-popup>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const authElementWrapper = document.getElementById('auth-modal-wrapper');
+const authClose = authElementWrapper.querySelector('.auth-modal-close');
+const authCloseOverlay = authElementWrapper.querySelector('.auth-modal-overlay');
+authCloseOverlay.addEventListener('click',authClosefun);
+authClose.addEventListener('click',authClosefun);
+function authClosefun(){
+    authElementWrapper.classList.remove("active");
+    document.body.style.overflow = 'scroll';
+}
+</script>

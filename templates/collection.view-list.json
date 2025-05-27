@@ -1,0 +1,155 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection-header": {
+      "type": "collection-page-header",
+      "custom_css": [
+        "@media (max-width: 767px) {.m-section-py {padding-bottom: 24px; }}"
+      ],
+      "settings": {
+        "color_scheme": "default",
+        "container": "container-fluid",
+        "layout": "inside",
+        "image_position": "background",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "text_alignment": "center",
+        "text_color": "inherit",
+        "upper_title": false,
+        "show_desc": true,
+        "collection_all_desc": "",
+        "padding_top": 0,
+        "padding_bottom": 4,
+        "enable_bg_zoom_effect": true
+      }
+    },
+    "main": {
+      "type": "main-collection-product-grid",
+      "blocks": {
+        "banner_promotion_KppNc9": {
+          "type": "banner_promotion",
+          "settings": {
+            "color_scheme": "dark",
+            "text_size": "medium",
+            "text_color": "white",
+            "link": "",
+            "content_position": "bottom_center",
+            "content_alignment": "center",
+            "title": "SALE UP TO 25% OFF",
+            "subtitle": "Online Exclusive",
+            "button_label": "Shop The Sale",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "button_fixed": false
+          }
+        }
+      },
+      "block_order": [
+        "banner_promotion_KppNc9"
+      ],
+      "custom_css": [
+        ".m-banner-promotion {order: 3 !important; margin-bottom: 0;}"
+      ],
+      "settings": {
+        "enable_box_1": true,
+        "Row_desktop": 1,
+        "Row_mobile": 1,
+        "vertical_align_1": "center",
+        "horizontal_align_1": "left",
+        "text_heading": "",
+        "text_para": "",
+        "url_text": "Learn more",
+        "btn_url": "",
+        "btn_clr1": "",
+        "enable_box_2": true,
+        "Row_desktop_2": 3,
+        "Row_mobile_2": 3,
+        "vertical_align_2": "center",
+        "horizontal_align_2": "left",
+        "text_heading_2": "",
+        "text_para_2": "",
+        "url_text_2": "Learn more",
+        "btn_url_2": "",
+        "btn_clr2": "",
+        "enable_box_3": false,
+        "Row_desktop_3": 5,
+        "Row_mobile_3": 4,
+        "vertical_align_3": "center",
+        "horizontal_align_3": "left",
+        "text_heading_3": "",
+        "text_para_3": "",
+        "url_text_3": "Learn more",
+        "btn_url_3": "",
+        "btn_clr3": "",
+        "enable_box_4": false,
+        "Row_desktop_4": 12,
+        "Row_mobile_4": 7,
+        "vertical_align_4": "center",
+        "horizontal_align_4": "left",
+        "text_heading_4": "",
+        "text_para_4": "",
+        "url_text_4": "Learn more",
+        "btn_url_4": "",
+        "btn_clr4": "",
+        "container": "container-fluid",
+        "grid_layout": "list",
+        "grid_columns": "2",
+        "show_columns_switcher": true,
+        "pagination_limit": 6,
+        "paginate_type": "paginate",
+        "show_sorting": true,
+        "show_filter": true,
+        "filters_type": "storefront_filters",
+        "sidebar": "leftColumn",
+        "sidebar_title": "Filters",
+        "limit_height_widget": true,
+        "limit_height": 300,
+        "change_product_variant_on_fitlering": true,
+        "show_product_count": true,
+        "collapsed_groups": "Brand, Vendor, Size, Product type",
+        "color_swatches": "color,colour,couleur,farbe",
+        "color_swatches_design": "list"
+      }
+    },
+    "recent-viewed": {
+      "type": "recent-viewed-products",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "heading": "Recently Viewed Products",
+        "heading_size": "h3",
+        "text_align": "left",
+        "limit": 10,
+        "columns": 5,
+        "column_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": true,
+        "hide_title": false,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": true,
+        "mobile_disable_slider": true,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 16,
+        "padding_top": 0,
+        "padding_bottom": 100,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    }
+  },
+  "order": [
+    "collection-header",
+    "main",
+    "recent-viewed"
+  ]
+}

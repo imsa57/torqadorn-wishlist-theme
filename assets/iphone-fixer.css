@@ -1,0 +1,99 @@
+.slide-popup-container {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  width: 100%;
+  left: 0;
+  height: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s ease, opacity 0.3s ease;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transform: translateZ(0); /* Force GPU acceleration */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+.slide-popup-container.active {
+  z-index: 9999999999;
+  visibility: visible;
+  opacity: 1;
+  height: 100vh;
+  height: -webkit-fill-available; /* iOS Safari fix */
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+.slide-popup-overlay {
+  position: fixed; /* Changed from absolute to fixed */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+.slide-popup-content {
+  position: fixed; /* Changed from absolute to fixed */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  transform: translate3d(
+    0,
+    100%,
+    0
+  ); /* Use translate3d for better performance */
+  -webkit-transform: translate3d(0, 100%, 0);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: white;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: 90vh;
+  max-height: -webkit-fill-available;
+  width: 100%;
+  border-radius: 12px 12px 0 0;
+  -webkit-border-radius: 12px 12px 0 0;
+}
+.slide-popup-container.active .slide-popup-content {
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+}
+.slide-popup-content header {
+  height: 40px;
+  border-bottom: 2px solid gray;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+.slide-popup-content header > * {
+  margin-left: auto;
+}
+.slide-popup-content .content-box {
+  padding-block: 30px;
+  padding-inline: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Additional iOS-specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .slide-popup-container {
+    position: fixed;
+    height: 100%;
+    height: -webkit-fill-available;
+  }
+
+  .slide-popup-content {
+    height: auto;
+    max-height: 90%;
+    max-height: -webkit-fill-available;
+  }
+}

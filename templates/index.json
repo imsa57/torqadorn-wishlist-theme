@@ -1,0 +1,864 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_with_text_2_FfwkCA": {
+      "type": "image-with-text-2",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "dark",
+        "container": "w-full",
+        "hero_size": "fullscreen",
+        "show_overlay": false,
+        "image": "shopify://shop_images/Banner_-_Desktop_Vienna_2880_x_1800_px.webp",
+        "image_link": "",
+        "parallax": false,
+        "parallax_direction": "vertical",
+        "content_in_container": false,
+        "content_position": "center bottom",
+        "text_alignment": "center",
+        "text_size": "medium",
+        "text_color": "white",
+        "title": "",
+        "subtitle": "",
+        "text": "",
+        "button_label": "EXPLORE",
+        "button_link": "",
+        "button_style": "m-button--secondary",
+        "button_size": "m-button--large",
+        "text_alignment_mobile": "center",
+        "mb_image": "shopify://shop_images/Night_Shift_Mobile_Banner.webp",
+        "use_content_above": true,
+        "custom_class": "",
+        "animations": "inherit",
+        "enable_bg_zoom_effect": true
+      }
+    },
+    "slider_AgiqBY": {
+      "type": "slider",
+      "blocks": {
+        "slider_item_pwQQTf": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/Banner_-_Desktop_Soleil_9_11zon.jpg",
+            "mb_background": "shopify://shop_images/6_13_11zon.jpg",
+            "content_in_container": false,
+            "content_position": "center bottom",
+            "text_alignment": "center",
+            "text_size": "medium",
+            "text_color": "white",
+            "subheading": "",
+            "title": "",
+            "description": "",
+            "image_link": "shopify://collections/soleil-ss25",
+            "button_text": "",
+            "button_link": "shopify://collections/soleil-ss25",
+            "button_style": "m-button--white",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--link",
+            "second_button_size": "",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "New Collection",
+            "footer_button": "Shop Now",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slider_item_pwQQTf"
+      ],
+      "custom_css": [
+        "h2 {font-size: 48px;}",
+        "[data-live-text-setting=\"template--18720677036244__slider_AgiqBY__slider_item_pwQQTf.description\"] p {font-size: 24px;}",
+        ".m-slide__button-first.m-button.m-button--white {background-color: transparent; color: white; border: 1px solid white; padding: 10px 20px; border-radius: 5px; text-align: center; cursor: pointer; font-weight: 400;}"
+      ],
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "adapt",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "dark",
+        "show_dots": true,
+        "show_arrows": false,
+        "autorotate": false,
+        "autorotate_speed": 5,
+        "use_content_above": true,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "cascading_image_banner_kXjdaM": {
+      "type": "cascading-image-banner",
+      "blocks": {
+        "collection_KrpwEB": {
+          "type": "collection",
+          "settings": {
+            "link": "shopify://collections/bachelorette-fits",
+            "image": "shopify://shop_images/Desktop_banner__1.jpg",
+            "m_image": "shopify://shop_images/5_2.jpg",
+            "collection_title": "collection-1"
+          }
+        },
+        "collection_EL6fCY": {
+          "type": "collection",
+          "settings": {
+            "link": "shopify://collections/25-off",
+            "image": "shopify://shop_images/Banner_-_Desktop.webp",
+            "m_image": "shopify://shop_images/IMG_8991_7076cdfd-613a-4c8f-af98-d8a6ff3ef979.jpg",
+            "collection_title": "collection-2"
+          }
+        },
+        "collection_tezLCi": {
+          "type": "collection",
+          "settings": {
+            "link": "shopify://collections/best-sellers",
+            "image": "shopify://shop_images/Desktop_banner__1.jpg",
+            "m_image": "shopify://shop_images/IMG_4510.jpg",
+            "collection_title": "collection-3"
+          }
+        },
+        "collection_X4zE3c": {
+          "type": "collection",
+          "settings": {
+            "link": "shopify://collections/black-friday-24",
+            "image": "shopify://shop_images/Banner_-_Desktop.webp",
+            "m_image": "shopify://shop_images/5_2.jpg",
+            "collection_title": "collection-4"
+          }
+        }
+      },
+      "block_order": [
+        "collection_KrpwEB",
+        "collection_EL6fCY",
+        "collection_tezLCi",
+        "collection_X4zE3c"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "container": "w-full",
+        "heading": "<p>Shop by collections</p>",
+        "heading_size": "h1",
+        "heading_alignment": "left",
+        "overlay_heading": true,
+        "spacing": "medium",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "product_tabs_Fq7iz3": {
+      "type": "product-tabs",
+      "blocks": {
+        "tab_Ydafzp": {
+          "type": "tab",
+          "settings": {
+            "title": "NEW IN",
+            "collection": "soleil-ss25"
+          }
+        }
+      },
+      "block_order": [
+        "tab_Ydafzp"
+      ],
+      "custom_css": [
+        ".m-product-card .m-product-card__content .m-product-card__info {margin-left: 10px !important;}",
+        ".container-fluid.m-section-my.m-section-py {padding-left: 0 !important; padding-right: 0 !important;}",
+        ".m-product-card__tags {display: none;}",
+        ".m-button {font-size: 14px; font-weight: 500;}",
+        ".m-section__header.m\\:text-center {display: none;}"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "color_scheme": "",
+        "tab_header": "horizontal",
+        "limit": 9,
+        "show_button": true,
+        "button_type": "link",
+        "button_label": "DISCOVER",
+        "button_style": "m-button--secondary",
+        "button_size": "m-button--large",
+        "pcard_layout": "",
+        "pcard_image_ratio": "original",
+        "show_vendor": false,
+        "items_per_row": 4,
+        "item_gap": 0,
+        "enable_slider": true,
+        "show_navigation": false,
+        "show_pagination": false,
+        "mobile_disable_slider": true,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 2,
+        "padding_top": 0,
+        "padding_bottom": 50,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "cascading_image_banner_J3t9ap": {
+      "type": "cascading-image-banner",
+      "blocks": {
+        "collection_GN3XQB": {
+          "type": "collection",
+          "settings": {
+            "link": "shopify://collections/dresses",
+            "image": "shopify://shop_images/DRESSES_6_11zon.jpg",
+            "m_image": "shopify://shop_images/DRESSES_2_11zon.jpg",
+            "collection_title": "DRESSES"
+          }
+        },
+        "collection_x4fcmV": {
+          "type": "collection",
+          "settings": {
+            "link": "shopify://collections/co-ords",
+            "image": "shopify://shop_images/CO-ORDS_5_11zon.jpg",
+            "m_image": "shopify://shop_images/CO-ORDS_1_11zon.jpg",
+            "collection_title": "CO-ORDS"
+          }
+        },
+        "collection_NUTAmd": {
+          "type": "collection",
+          "settings": {
+            "link": "shopify://collections/skirts",
+            "image": "shopify://shop_images/SKIRTS_7_11zon.jpg",
+            "m_image": "shopify://shop_images/SKIRTS_3_11zon.jpg",
+            "collection_title": "SKIRTS"
+          }
+        },
+        "collection_T3yQVJ": {
+          "type": "collection",
+          "settings": {
+            "link": "shopify://collections/tops",
+            "image": "shopify://shop_images/TOPS_8_11zon.jpg",
+            "m_image": "shopify://shop_images/TOPS_4_11zon.jpg",
+            "collection_title": "TOPS"
+          }
+        }
+      },
+      "block_order": [
+        "collection_GN3XQB",
+        "collection_x4fcmV",
+        "collection_NUTAmd",
+        "collection_T3yQVJ"
+      ],
+      "name": "Cascading Image Banner",
+      "settings": {
+        "color_scheme": "",
+        "container": "w-full",
+        "heading": "<p>Shop by collections</p>",
+        "heading_size": "h1",
+        "heading_alignment": "left",
+        "overlay_heading": true,
+        "spacing": "medium",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "ss_slider_3_mUNPFq": {
+      "type": "ss-slider-3",
+      "blocks": {
+        "slide_iHDh4J": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/CKS01108_5_11zon.jpg",
+            "text": "<h3>SELENA Tie up Blazer</h3>",
+            "url": "shopify://products/selena-tie-up-blazer"
+          }
+        },
+        "slide_NzLR64": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/CKS01088_51_11zon.jpg",
+            "text": "<h3>MADISON Back-Tie Shirt</h3>",
+            "url": "shopify://products/madison-back-tie-shirt"
+          }
+        },
+        "slide_DyHGgK": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/CKS00979_7_11zon.jpg",
+            "text": "<h3>TAYLOR Ruffle Mini Dress</h3>",
+            "url": "shopify://products/taylor-ruffle-mini-dress"
+          }
+        },
+        "slide_YLB8C6": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/CKS00967_1_11zon_3bbb6b63-cab4-4854-9841-dca85b0f6b9c.jpg",
+            "text": "<h3>SELENA Structured Mini</h3>",
+            "url": "shopify://products/selena-structured-mini"
+          }
+        },
+        "slide_V6zC4L": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/CKS01005_17_11zon.jpg",
+            "text": "<h3>OLIVIA Scarf Top</h3>",
+            "url": "shopify://products/olivia-scarf-top"
+          }
+        }
+      },
+      "block_order": [
+        "slide_iHDh4J",
+        "slide_NzLR64",
+        "slide_DyHGgK",
+        "slide_YLB8C6",
+        "slide_V6zC4L"
+      ],
+      "name": "SS - Slider #3",
+      "settings": {
+        "heading": "<h2>NEW IN</h2>",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 38,
+        "heading_size_mobile": 20,
+        "heading_height": 130,
+        "heading_align": "center",
+        "heading_align_mobile": "center",
+        "sub_heading": "<p>Just landed: The pieces we've been texting our friends about all week.</p>",
+        "sub_heading_custom": false,
+        "sub_heading_font": "josefin_sans_n4",
+        "sub_heading_size": 24,
+        "sub_heading_size_mobile": 12,
+        "sub_heading_height": 150,
+        "sub_heading_width": 50,
+        "sub_heading_mt": 20,
+        "sub_heading_align": "center",
+        "sub_heading_align_mobile": "center",
+        "button": "",
+        "button_url": "",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 20,
+        "button_size_mobile": 20,
+        "button_height": 100,
+        "button_width": 260,
+        "button_width_mobile": 260,
+        "button_mt": 32,
+        "button_mt_mobile": 32,
+        "button_padding_vertical": 20,
+        "button_padding_vertical_mobile": 20,
+        "button_padding_horizontal": 20,
+        "button_padding_horizontal_mobile": 20,
+        "button_radius": 100,
+        "button_border_thickness": 2,
+        "button_align": "center",
+        "button_align_mobile": "center",
+        "button_style": "outline",
+        "slider_view": 4,
+        "slider_view_mobile": 2,
+        "slider_gap": 4,
+        "slider_gap_mobile": 4,
+        "slider_mt": 40,
+        "slider_mt_mobile": 40,
+        "image_width": 70,
+        "image_width_mobile": 80,
+        "image_shape": "portrait",
+        "image_align": "center",
+        "image_align_mobile": "center",
+        "image_radius": 0,
+        "image_border_thickness": 0,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 22,
+        "text_size_mobile": 14,
+        "text_height": 150,
+        "text_mt": 20,
+        "text_align": "center",
+        "text_align_mobile": "center",
+        "navigation_mt": 20,
+        "navigation_mt_mobile": 20,
+        "navigation_align": "end",
+        "navigation_align_mobile": "center",
+        "arrow_size": 48,
+        "arrow_size_mobile": 48,
+        "arrow_icon_size": 28,
+        "arrow_icon_size_mobile": 28,
+        "arrow_border_thickness": 2,
+        "arrow_show_desktop": false,
+        "arrow_show_mobile": false,
+        "arrow_color": "#41441c",
+        "arrow_hover_color": "#ffffff",
+        "arrow_bg_color": "",
+        "arrow_bg_hover_color": "#41441c",
+        "arrow_border_color": "#41441c",
+        "arrow_border_hover_color": "#41441c",
+        "button_color": "#333333",
+        "button_hover_color": "#333333",
+        "button_bg_color": "",
+        "button_bg_hover_color": "#fa5a28",
+        "button_border_color": "#41441c",
+        "button_border_hover_color": "#41441c",
+        "image_border_color": "#333333",
+        "text_color": "#333333",
+        "heading_color": "#333333",
+        "sub_heading_color": "#333333",
+        "background_color": "#fcfcfc",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 0,
+        "padding_horizontal_mobile": 0,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    },
+    "slider_FK8Ttr": {
+      "type": "slider",
+      "blocks": {
+        "slider_item_TT8tQU": {
+          "type": "slider_item",
+          "settings": {
+            "background": "shopify://shop_images/Banner_-_Desktop_Vienna_1.jpg",
+            "mb_background": "shopify://shop_images/Mobile_Banner_Ordered.jpg",
+            "content_in_container": true,
+            "content_position": "center bottom",
+            "text_alignment": "center",
+            "text_size": "large",
+            "text_color": "white",
+            "subheading": "GET YOUR CARTS READY",
+            "title": "",
+            "description": "",
+            "image_link": "https://torqadorn.com/collections/black-friday-24",
+            "button_text": "",
+            "button_link": "https://torqadorn.com/collections/black-friday-24",
+            "button_style": "m-button--link",
+            "button_size": "",
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_style": "m-button--link",
+            "second_button_size": "m-button--small",
+            "show_footer": false,
+            "footer_alignment": "end",
+            "footer_text": "",
+            "footer_button": "",
+            "footer_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slider_item_TT8tQU"
+      ],
+      "disabled": true,
+      "settings": {
+        "container": "w-full",
+        "slideshow_height": "adapt",
+        "show_overlay": false,
+        "dots_position": "bottom",
+        "dots_color": "dark",
+        "show_dots": false,
+        "show_arrows": false,
+        "autorotate": true,
+        "autorotate_speed": 2,
+        "use_content_above": true,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "rich_text_gtpaeT": {
+      "type": "rich-text",
+      "blocks": {
+        "text_TmPDfJ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>From the heart of Delhi, TORQADORN is a fashion project ignited by a passion for bold design and fearless expression – brought to life by sisters Tanvi and Vithika.</p>"
+          }
+        },
+        "button_ePQV4G": {
+          "type": "button",
+          "settings": {
+            "button_label": "OUR STORY",
+            "button_link": "shopify://pages/about",
+            "button_style": "m-button--link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_TmPDfJ",
+        "button_ePQV4G"
+      ],
+      "custom_css": [
+        ".p {font-size: 18px;}"
+      ],
+      "settings": {
+        "container": "container-full",
+        "color_scheme": "scheme-cee058e4-58e3-46aa-9af9-219dadc79066",
+        "content_alignment": "center",
+        "padding_top": 8,
+        "padding_bottom": 28,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "press_iQ3amc": {
+      "type": "press",
+      "blocks": {
+        "news_QxKnEq": {
+          "type": "news",
+          "settings": {
+            "title": "<p><em>\"Your new wardrobe heroes that work as hard as you do - Making it easy to mix and match with staples from your closet</em>\"</p>",
+            "image": "shopify://shop_images/logo-svg.svg",
+            "image_width": "125px"
+          }
+        }
+      },
+      "block_order": [
+        "news_QxKnEq"
+      ],
+      "custom_css": [
+        ".m-press__title p {font-size: 20px; line-height: 1.4; margin: 0;}"
+      ],
+      "settings": {
+        "heading": "Featured in",
+        "heading_size": "h2",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "w-full",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "show_divider": false,
+        "autoplay": false,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "ss_slider_3_9JFyie": {
+      "type": "ss-slider-3",
+      "blocks": {
+        "slide_P6AiWq": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/torqadorn2024_12_07_14_17_369a0915d5-cf5f-4cf9-8096-d699341088ae.jpg",
+            "text": "<p>@aditiraohydari</p>",
+            "url": "https://torqadorn.com/products/marcella-crop-blazer-and-suiting-pants-co-ord"
+          }
+        },
+        "slide_KbVkBf": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/torqadorn2024_12_07_14_18_10dbb3883e-4f97-4d21-911f-a876f72a2ffc.jpg",
+            "text": "<p>@kushakapila</p>",
+            "url": "https://torqadorn.com/products/black-pinstripe-halter-waistcoat-and-suiting-pants-co-ord"
+          }
+        },
+        "slide_kpf8Am": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/torqadorn2024_12_07_14_17_579ce34c0f-5e4b-41f4-a9a5-baebaa8d352a.jpg",
+            "text": "<p>@thatbohogirl</p>",
+            "url": "https://torqadorn.com/products/aquila-shirt-and-overlap-skirt-co-ord"
+          }
+        },
+        "slide_PpiCyx": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/torqadorn2024_12_07_14_17_46d80eb12b-c707-4a22-a902-31e108fb351e.jpg",
+            "text": "<p>@tanyaghavri</p>",
+            "url": "https://torqadorn.com/products/marcella-suiting-skirt"
+          }
+        },
+        "slide_gekFGC": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/torqadorn2024_12_07_14_18_291a474d00-9ebf-4f64-8172-cb26c15f8417.jpg",
+            "text": "<p>@thecozyvibe</p>",
+            "url": "https://torqadorn.com/products/ekko-smock-top-and-draped-skirt-co-ord"
+          }
+        }
+      },
+      "block_order": [
+        "slide_P6AiWq",
+        "slide_KbVkBf",
+        "slide_kpf8Am",
+        "slide_PpiCyx",
+        "slide_gekFGC"
+      ],
+      "custom_css": [
+        ".p {font-size: 36px;}",
+        "@media (max-width: 768px) {.h2 {font-size: 60px; }}"
+      ],
+      "settings": {
+        "heading": "<p>AS SEEN ON</p>",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 26,
+        "heading_size_mobile": 22,
+        "heading_height": 130,
+        "heading_align": "center",
+        "heading_align_mobile": "center",
+        "sub_heading": "",
+        "sub_heading_custom": false,
+        "sub_heading_font": "josefin_sans_n4",
+        "sub_heading_size": 24,
+        "sub_heading_size_mobile": 18,
+        "sub_heading_height": 150,
+        "sub_heading_width": 50,
+        "sub_heading_mt": 20,
+        "sub_heading_align": "center",
+        "sub_heading_align_mobile": "center",
+        "button": "",
+        "button_url": "",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 20,
+        "button_size_mobile": 20,
+        "button_height": 100,
+        "button_width": 260,
+        "button_width_mobile": 260,
+        "button_mt": 32,
+        "button_mt_mobile": 32,
+        "button_padding_vertical": 20,
+        "button_padding_vertical_mobile": 20,
+        "button_padding_horizontal": 20,
+        "button_padding_horizontal_mobile": 20,
+        "button_radius": 100,
+        "button_border_thickness": 2,
+        "button_align": "center",
+        "button_align_mobile": "center",
+        "button_style": "outline",
+        "slider_view": 2.6,
+        "slider_view_mobile": 1.1,
+        "slider_gap": 0,
+        "slider_gap_mobile": 0,
+        "slider_mt": 20,
+        "slider_mt_mobile": 20,
+        "image_width": 100,
+        "image_width_mobile": 100,
+        "image_shape": "portrait",
+        "image_align": "center",
+        "image_align_mobile": "center",
+        "image_radius": 0,
+        "image_border_thickness": 0,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 18,
+        "text_size_mobile": 16,
+        "text_height": 130,
+        "text_mt": 20,
+        "text_align": "center",
+        "text_align_mobile": "center",
+        "navigation_mt": 20,
+        "navigation_mt_mobile": 20,
+        "navigation_align": "center",
+        "navigation_align_mobile": "center",
+        "arrow_size": 48,
+        "arrow_size_mobile": 48,
+        "arrow_icon_size": 28,
+        "arrow_icon_size_mobile": 28,
+        "arrow_border_thickness": 2,
+        "arrow_show_desktop": false,
+        "arrow_show_mobile": false,
+        "arrow_color": "#41441c",
+        "arrow_hover_color": "#ffffff",
+        "arrow_bg_color": "",
+        "arrow_bg_hover_color": "#333333",
+        "arrow_border_color": "#333333",
+        "arrow_border_hover_color": "#333333",
+        "button_color": "#333333",
+        "button_hover_color": "#333333",
+        "button_bg_color": "",
+        "button_bg_hover_color": "#fa5a28",
+        "button_border_color": "#41441c",
+        "button_border_hover_color": "#41441c",
+        "image_border_color": "#333333",
+        "text_color": "#333333",
+        "heading_color": "#333333",
+        "sub_heading_color": "#333333",
+        "background_color": "rgba(0,0,0,0)",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 40,
+        "margin_bottom": 0,
+        "padding_top": 36,
+        "padding_bottom": 44,
+        "padding_horizontal": 0,
+        "padding_horizontal_mobile": 0,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    },
+    "rich_text_B4UfGC": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_HdXUGj": {
+          "type": "heading",
+          "settings": {
+            "heading": "SHOP BY OCCASSION",
+            "heading_size": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "heading_HdXUGj"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "container": "container",
+        "color_scheme": "",
+        "content_alignment": "center",
+        "padding_top": 68,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "ss_collection_6_J6ARn8": {
+      "type": "ss-collection-6",
+      "blocks": {
+        "slide_cKWkDz": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/2_b64a8818-7e61-416c-ae98-3c3fe27bbbc6.jpg",
+            "text": "BIRTHDAY",
+            "button": "DISCOVER",
+            "button_url": "shopify://collections/birthday"
+          }
+        },
+        "slide_Aj86Lf": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/562X704.jpg",
+            "text": "DATE NIGHT",
+            "button": "DISCOVER",
+            "button_url": "shopify://collections/date-night-outfits"
+          }
+        },
+        "slide_FxrenD": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/3_aa9fa9ae-6861-4ae8-aa08-b205507cc954.jpg",
+            "text": "GIRLS' NIGHT OUT",
+            "button": "DISCOVER",
+            "button_url": "shopify://collections/girls-night-out"
+          }
+        },
+        "slide_mL9XfM": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/4_448d7cf7-2bee-4718-894a-cdff68de3a0e.jpg",
+            "text": "BRUNCH",
+            "button": "DISCOVER",
+            "button_url": "shopify://collections/brunch-picks"
+          }
+        },
+        "slide_PpaLEj": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/5_22c7489c-ccd1-4b10-8c68-dbe470348b22.jpg",
+            "text": "RESORT",
+            "button": "DISCOVER",
+            "button_url": "shopify://collections/resort"
+          }
+        }
+      },
+      "block_order": [
+        "slide_cKWkDz",
+        "slide_Aj86Lf",
+        "slide_FxrenD",
+        "slide_mL9XfM",
+        "slide_PpaLEj"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".collection-button-template--18724690198740__ss_collection_6_J6ARn8 {text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 0.5px;}"
+      ],
+      "settings": {
+        "slider_gap": 120,
+        "slider_gap_mobile": 42,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 48,
+        "text_size_mobile": 34,
+        "text_height": 150,
+        "image_width": 40,
+        "image_width_mobile": 100,
+        "image_radius": 0,
+        "image_border_thickness": 0,
+        "image_ratio": "portrait",
+        "image_ratio_mobile": "portrait",
+        "button_custom": true,
+        "button_font": "futura_n3",
+        "button_size": 14,
+        "button_size_mobile": 14,
+        "button_height": 130,
+        "button_mt": 32,
+        "button_mt_mobile": 32,
+        "button_padding_vertical": 16,
+        "button_padding_vertical_mobile": 16,
+        "button_padding_horizontal": 38,
+        "button_padding_horizontal_mobile": 38,
+        "button_radius": 100,
+        "button_border_thickness": 0,
+        "button_align": "center",
+        "button_align_mobile": "center",
+        "button_style": "link",
+        "button_color": "#333333",
+        "button_hover_color": "#333333",
+        "button_bg_color": "",
+        "button_bg_hover_color": "",
+        "button_border_color": "#000000",
+        "button_border_hover_color": "#000000",
+        "text_color": "#000000",
+        "text_active_color": "#ffffff",
+        "image_border_color": "#000000",
+        "background_color": "#fcfcfc",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 36,
+        "margin_bottom": 32,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 0,
+        "padding_bottom": 36,
+        "padding_horizontal": 0,
+        "padding_horizontal_mobile": 0,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": false
+      }
+    }
+  },
+  "order": [
+    "image_with_text_2_FfwkCA",
+    "slider_AgiqBY",
+    "cascading_image_banner_kXjdaM",
+    "product_tabs_Fq7iz3",
+    "cascading_image_banner_J3t9ap",
+    "ss_slider_3_mUNPFq",
+    "slider_FK8Ttr",
+    "rich_text_gtpaeT",
+    "press_iQ3amc",
+    "ss_slider_3_9JFyie",
+    "rich_text_B4UfGC",
+    "ss_collection_6_J6ARn8"
+  ]
+}

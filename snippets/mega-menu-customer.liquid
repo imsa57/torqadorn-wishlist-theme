@@ -1,0 +1,92 @@
+<div class="m-menu-customer">
+  {% if shop.customer_accounts_enabled or shop.customer_accounts_optional %}
+    <div class="m-menu-customer__wrapper">
+      {% comment %} <div class="m-menu-customer__label">{{ 'customer.account.title' | t }}</div> {% endcomment %}
+      {% if customer %}
+        <a href="{{ routes.account_url }}" class="m-menu-customer__name">
+          <svg
+            fill="currentColor"
+            stroke="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+          >
+            <path d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z"/>
+          </svg>
+          <span>{{ customer.first_name }}</span>
+        </a>
+        <a href="{{ routes.account_logout_url }}" class="m-button m-button--secondary m-logout-button">
+          {{- 'customer.account.log_out' | t -}}
+        </a>
+      {% else %}
+        <a
+          href="{{ routes.account_login_url }}"
+          class="m-signin-button m:display-flex m:items-center"
+          data-tab="signin"
+        >
+          <span class="m:display-flex m:items-center m:justify-center customer-icon">
+            <svg
+              viewBox="0 0 16 18"
+              width="16"
+              height="18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5 4.55556C11.5 6.52 9.93375 8.11111 8 8.11111C6.06625 8.11111 4.5 6.52 4.5 4.55556C4.5 2.59111 6.06625 1 8 1C9.93375 1 11.5 2.59111 11.5 4.55556V4.55556Z" stroke="currentColor" stroke-linecap="round"></path>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M2.11462 11.3387C2.48381 9.46341 4.12804 8.11133 6.03928 8.11133H9.96072C11.872 8.11133 13.5162 9.46341 13.8854 11.3387L15 17.0002H1L2.11462 11.3387Z" stroke="currentColor"></path>
+            </svg>
+          </span>
+          <div>
+            <div>
+              {{ 'layout.customer.log_in' | t }}
+            </div>
+            <div><small>Login to access orders, wishlist and benefits.</small></div>
+          </div>
+          <span class="m:display-flex m:items-center m:justify-center customer-icon" style="margin-left: auto;">
+            <svg
+              viewBox="0 0 10 6"
+              width="10"
+              height="6"
+              style="rotate:270deg"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <rect x="9.19238" width="1" height="7" transform="rotate(45 9.19238 0)" fill="currentColor"></rect>
+              <rect x="0.707031" width="7" height="1" transform="rotate(45 0.707031 0)" fill="currentColor"></rect>
+            </svg>
+          </span>
+        </a>
+        {% comment %}
+          <a
+            href="{{ routes.account_register_url }}"
+            class="m-button m-button--secondary m-register-button"
+            data-tab="register"
+          >
+            {{ 'customer.register.title' | t }}
+          </a>
+        {% endcomment %}
+      {% endif %}
+      {%- if linklists[section.settings.customer_help_menu].links.size > 0 -%}
+        <div class="m-customer-help-menu">
+          {% for link in linklists[section.settings.customer_help_menu].links %}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {% endfor %}
+        </div>
+      {%- endif -%}
+    </div>
+  {% endif %}
+  <div class="m-menu-customer__language-currency">
+    {%- liquid
+      if section.settings.mb_show_country_selector
+        render 'country-selector', box_size: '', pos: 'top'
+      endif
+      if section.settings.mb_show_currency_switcher
+        render 'currency-switcher', box_size: '', pos: 'top'
+      endif
+      if section.settings.mb_show_language_switcher
+        render 'language-switcher', box_size: '', pos: 'top'
+      endif
+    -%}
+  </div>
+</div>

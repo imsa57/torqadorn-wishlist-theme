@@ -1,0 +1,174 @@
+<!-- /snippets/breadcrumb.liquid -->
+{% comment %}
+  Documentation - http://docs.shopify.com/support/your-website/navigation/creating-a-breadcrumb-navigation
+{% endcomment %}
+{% comment %}
+  Accepts:
+  - container: {String} Container class (optional)
+  - justify: {String} Defines how the browser distributes space between and around content items along the main-axis of a flex container (optional)
+  - class: {String} Extra classes (optional)
+  - hide_current: {Boolean} Hide current item (optional)
+
+  Usage:
+  {% render 'breadcrumb' %}
+{% endcomment %}
+{%- liquid
+  if container != null and container == 'w-full'
+    assign container = 'container-full'
+  endif
+  if container == null
+    assign container = 'container-fluid'
+  endif
+
+  if animated == null
+    assign animated = false
+  endif
+  if animation_effect == null
+    assign animation_effect = settings.animations
+  endif
+
+  if animation_effect != 'none'
+    assign animated = true
+  endif
+-%}
+
+{%- capture separator -%}
+    <span aria-hidden="true" class="m-breadcrumb--separator">
+      <svg class="m-svg-icon--small" fill="currentColor" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M17.525 36.465l-7.071 7.07c-4.686 4.686-4.686 12.284 0 16.971L205.947 256 10.454 451.494c-4.686 4.686-4.686 12.284 0 16.971l7.071 7.07c4.686 4.686 12.284 4.686 16.97 0l211.051-211.05c4.686-4.686 4.686-12.284 0-16.971L34.495 36.465c-4.686-4.687-12.284-4.687-16.97 0z"/></svg>
+    </span>
+{%- endcapture -%}
+
+{%- capture home -%}
+    <a href="{{ routes.root_url }}" class="m-breadcrumb--item" title="{{ 'general.breadcrumbs.home_link_title' | t }}">
+        {{ 'general.breadcrumbs.home' | t }}
+    </a>
+{%- endcapture -%}
+{%- capture seprater_2 -%}
+  <div class="m-breadcrumb--cart-arrow"><svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-move-right-icon lucide-move-right" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.75" stroke="lightgray" fill="none" viewBox="0 0 24 24" height="18" width="18"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg></div>
+{%- endcapture -%}
+
+{% unless template == 'index' %}
+  <nav
+    class="m-breadcrumb m:w-full {{ class }}{% if animated %} m-scroll-trigger animate--{{ animation_effect }}{% endif %}"
+    role="navigation"
+    aria-label="breadcrumbs"
+  >
+    <div class="{{ container }}">
+      <div class="m-breadcrumb--wrapper m:flex m:items-center m:justify-{{ justify | default: 'start' }}">
+        {% unless template.name == 'product' or template.name == 'cart' %}
+          {{ home }}
+        {% endunless %}
+
+        {% if template.name == 'product' %}
+          {{ home }}
+          {% liquid
+            assign current_collection = null
+            if collection
+              assign current_collection = collection
+            elsif product and product.collections.size > 0
+              assign current_collection = product.collections.first
+            endif
+          %}
+          {% if current_collection %}
+            {{ separator }}
+            {% if current_collection.handle %}
+              {% capture url %}/collections/{{ current_collection.handle }}{% endcapture %}
+              <a href="{{ url }}" class="m-breadcrumb--item">{{ current_collection.title }}</a>
+            {% endif %}
+          {% endif %}
+          {% unless hide_current == true %}
+            {{ separator }}
+            <span class="m-breadcrumb--item-current m-breadcrumb--item">{{ product.title }}</span>
+          {% endunless %}
+        {% elsif template.name == 'collection' and collection.handle %}
+          {{ separator }}
+          {% if current_tags %}
+            {% capture url %}{{ routes.collections_url }}/{{ collection.handle }}{% endcapture %}
+            <a href="{{ url }}" class="m-breadcrumb--item">{{ collection.title }}</a>
+            {{ separator }}
+            <span class="m-breadcrumb--item m-breadcrumb--item-current">{{ current_tags | join: ' + ' }}</span>
+          {% else %}
+            <span class="m-breadcrumb--item m-breadcrumb--item-current">{{ collection.title }}</span>
+          {% endif %}
+
+        {% elsif template.name == 'blog' %}
+          {{ separator }}
+          {% if current_tags %}
+            <a href="{{ blog.url }}" class="m-breadcrumb--item">{{ blog.title }}</a>
+            {{ separator }}
+            <span class="m-breadcrumb--item m-breadcrumb--item-current">{{ current_tags | join: ' + ' }}</span>
+          {% else %}
+            <span class="m-breadcrumb--item-current m-breadcrumb--item">{{ blog.title }}</span>
+          {% endif %}
+
+        {% elsif template == 'article' %}
+          {{ separator }}
+          <a href="{{ blog.url }}" class="m-breadcrumb--item">{{ blog.title }}</a>
+
+        {% elsif template == 'customers/addresses' %}
+          {{ separator }}
+          <a href="{{ routes.account_url }}" class="m-breadcrumb--item">{{ 'customer.account.page_title' | t }}</a>
+          {{ separator }}
+          <span class="m-breadcrumb--item-current m-breadcrumb--item">{{ page_title }}</span>
+
+        {% elsif template contains 'page' %}
+          {{ separator }}
+          <span class="m-breadcrumb--item-current m-breadcrumb--item">{{ page.title }}</span>
+
+        {% elsif template contains 'search' %}
+          {{ separator }}
+          <span class="m-breadcrumb--item-current m-breadcrumb--item">
+            {{- 'general.search.heading' | t: count: search.results_count, terms: search.terms -}}
+          </span>
+
+        {% elsif template contains 'cart' %}
+          <div class="m-breadcrumb--cart-steps">
+            <div class="m-breadcrumb--cart-step">
+              <span>INFORMATION</span>
+            </div>
+            {{ seprater_2 }}
+            <div class="m-breadcrumb--cart-step">
+              <span>SHIPPING</span>
+            </div>
+            {{ seprater_2 }}
+            <div class="m-breadcrumb--cart-step">
+              <span>PAYMENT</span>
+            </div>
+            {{ seprater_2 }}
+            <div class="m-breadcrumb--cart-step">
+              <span>CONFIRMATION</span>
+            </div>
+          </div>
+
+          <style>
+            .m-breadcrumb--cart-steps {
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              margin: 0 auto;
+              padding: 10px 0;
+            }
+
+            .m-breadcrumb--cart-step {
+              font-size: 11px;
+              font-weight:500;
+              color: #333;
+            }
+            @media screen and (min-width:768px) {
+              .m-breadcrumb--cart-step {
+                font-size: 14px;
+              }
+            }
+          </style>
+          {% comment %} {{ separator }} {% endcomment %}
+          {% comment %} <span class="m-breadcrumb--item-current m-breadcrumb--item">{{ page_title }}</span> {% endcomment %}
+
+        {% else %}
+          {{ separator }}
+          <span class="m-breadcrumb--item-current m-breadcrumb--item">{{ page_title }}</span>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+{% endunless %}
+{% comment %}<!-- ymq option done -->{% endcomment %}

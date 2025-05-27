@@ -1,0 +1,91 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "cart-template",
+      "blocks": {
+        "item_mmDqjj": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/svgexport-7.svg",
+            "header": "100% Secure Payments",
+            "text_size": "h5",
+            "content": "<p>Your credit card details are safe with us. All the information is protected using Secure Sockets Layer (SSL) technology.</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_HiBJEL": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/svgexport-13_2.svg",
+            "header": "Need assistance?",
+            "text_size": "h5",
+            "content": "<p>You can reach our customer support team by phone from Monday to Saturday, between 10:00 AM and 5:30 PM IST. Alternatively, you can send us an email at any time, and we'll get back to you as soon as possible.<br/><br/><a href=\"tel:+918376905539\" title=\"tel:+918376905539\">Call Us</a></p><p><a href=\"mailto:torqaotorqadorn@torqadorn.com\" title=\"mailto:torqaotorqadorn@torqadorn.com\">Email Us</a></p><p><a href=\"https://wa.me/918376905539\" title=\"https://wa.me/918376905539\">Chat on Whatsapp</a></p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_7fnAiC": {
+          "type": "item",
+          "settings": {
+            "icon": "shopify://shop_images/svgexport-14_1.svg",
+            "header": "Free standard shipping",
+            "text_size": "h5",
+            "content": "<p>We offer two rapid and secure delivery options<br/><br/>Standard delivery (6-7 working days): Free<br/><br/>Express delivery (4 working days): ₹300<br/><br/>Delivery timing is estimated from the time your order is shipped.</p>",
+            "content_page": "",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "item_mmDqjj",
+        "item_HiBJEL",
+        "item_7fnAiC"
+      ],
+      "settings": {
+        "heading": "Help & Services"
+      }
+    },
+    "recent-viewed-products": {
+      "type": "recent-viewed-products",
+      "disabled": true,
+      "settings": {
+        "container": "container",
+        "color_scheme": "footer",
+        "heading": "Recently Viewed Products",
+        "heading_size": "h3",
+        "text_align": "left",
+        "limit": 8,
+        "columns": 4,
+        "column_gap": 30,
+        "pcard_layout": "1",
+        "pcard_image_ratio": "3/4",
+        "show_vendor": true,
+        "hide_title": false,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": false,
+        "mobile_disable_slider": true,
+        "use_scroll_mobile": false,
+        "item_gap_mobile": 16,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "recent-viewed-products"
+  ]
+}

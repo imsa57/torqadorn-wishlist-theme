@@ -1,0 +1,56 @@
+
+{% liquid
+  
+    assign locales = shop.metafields.foxify.locales.value
+    assign current_locale = request.locale.iso_code
+    assign primary_locale = current_locale
+    for locale in shop.published_locales
+    if locale.primary
+        assign primary_locale = locale.iso_code
+        break
+    endif
+    endfor
+    assign translation = locales[current_locale] | default: locales[primary_locale]
+  
+  
+%}
+
+<div class="f-app f:content">
+{{ 'foxify-footer.css' | asset_url | stylesheet_tag }}
+{{ 'foxify-section-footer.css' | asset_url | stylesheet_tag }}<div id="f-1716473843pg1vr" class="f:sections f:footer f-1716473843pg1vr f:section--no-margin"><div class="f:container"><div class="f:footer__top"><div id="f-1716473843R3kMK" class="f:blocks f:grid f-1716473843R3kMK" style="--f-grid-columns-sm:minmax(0, 12fr);--f-grid-columns-md:minmax(0, 6fr) minmax(0, 6fr);--f-grid-columns-lg:minmax(0, 4fr) minmax(0, 4fr) minmax(0, 4fr);--f-grid-columns-xl:minmax(0, 4fr) minmax(0, 4fr) minmax(0, 4fr)"><div id="f-1716473843YhrqD" class="f:blocks f:col f-1716473843YhrqD f:column"><h3 id="f-1716473843I0oPR" class="f:blocks f:heading f-1716473843I0oPR f:content-block"><span>
+{{ 'sections.foxify-footer.f-1716473843I0oPR-text_html' | t }}</span></h3><div id="f-17164738434rhbB" class="f:blocks f:menu-block f-17164738434rhbB">{% liquid 
+        assign menu_f-17164738434rhbB = shop.metafields.foxify.menus.value['undefined']
+      %}{% if menu_f-17164738434rhbB %}<ul class="f:list-none">{% for item in menu_f-17164738434rhbB %}<li><a href="{{ item.link }}">{{ item.label }}</a></li>{% endfor %}</ul>{% endif %}</div></div><div id="f-1716473843mXxdt" class="f:blocks f:col f-1716473843mXxdt f:column"><h3 id="f-1716473843aVWEL" class="f:blocks f:heading f-1716473843aVWEL f:content-block"><span>
+{{ 'sections.foxify-footer.f-1716473843aVWEL-text_html' | t }}</span></h3><div id="f-17164738431cOLS" class="f:blocks f:menu-block f-17164738431cOLS">{% liquid 
+        assign menu_f-17164738431cOLS = shop.metafields.foxify.menus.value['undefined']
+      %}{% if menu_f-17164738431cOLS %}<ul class="f:list-none">{% for item in menu_f-17164738431cOLS %}<li><a href="{{ item.link }}">{{ item.label }}</a></li>{% endfor %}</ul>{% endif %}</div></div><div id="f-1716473843SskIm" class="f:blocks f:col f-1716473843SskIm f:column"><h3 id="f-1716473843XPCc7" class="f:blocks f:heading f-1716473843XPCc7 f:content-block"><span>
+{{ 'sections.foxify-footer.f-1716473843XPCc7-text_html' | t }}</span></h3><div id="f-1716473843bgCeO" class="f:blocks f:richtext f-1716473843bgCeO f:content-block f:rte">
+{{ 'sections.foxify-footer.f-1716473843bgCeO-text_html' | t }}</div><div id="f-1716473843lLaW5" class="f:blocks f:subscribe-form f-1716473843lLaW5 f:content-block">{{ 'foxify-newsletter.css' | asset_url | stylesheet_tag }}<div class="f:newsletter-form f:newsletter-form--btn-text">{% form 'customer', id: ContactSubscribe-f-1716473843lLaW5 %}<input type="hidden" name="contact[tags]" value="newsletter"/><label class="f:block f:newsletter-form__label f:visually-hidden" for="ContactSubscribe-f-1716473843lLaW5-email">{{ translation.newsletter.label }}</label><div class="f:newsletter-form__wrapper f:flex"><input type="email" name="contact[email]" id="ContactSubscribe-f-1716473843lLaW5-email" placeholder="
+{{ 'sections.foxify-footer.f-1716473843lLaW5-email_placeholder_html' | t }}" autoCorrect="off" autoCapitalize="off" class="f:form-control" required="" value="{% if customer.email != blank %}{{ customer.email }}{% endif %}"/><button type="submit" aria-label="" class="f:newsletter-form__submit f:btn "><span>Subscribe</span></button></div>{%- if form.posted_successfully? -%}<div class="f:form-status"><div class="f:form-message--success" data-form-status="true" tabindex="-1" autofocus="">{{ translation.newsletter.success }}</div></div>{%- endif -%}{%- if form.errors -%}<div class="f:form-status"><div class="f:form-status__error f:form-message--error">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</div></div>{% endif %}{% endform %}</div></div></div></div></div><div class="f:footer__bottom f:footer__bottom--show-divider"><div class="f:footer__copyright">
+{{ 'sections.foxify-footer.f-1716473843pg1vr-copyright_html' | t }}</div></div></div></div>
+
+</div>
+{% schema %}
+  {
+  "name": "Foxify footer",
+  "class": "foxify-footer f-app",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Customize footer",
+      "info": "Go to [Foxify app](https://admin.shopify.com/store/torqadorn/apps/foxify-builder) to edit this section."
+    }
+  ],
+  "locales": {
+    "en": {
+      "f-1716473843I0oPR-text_html": "Information",
+      "f-1716473843aVWEL-text_html": "Quick links",
+      "f-1716473843XPCc7-text_html": "Subscribe to our emails",
+      "f-1716473843bgCeO-text_html": "<p>You deserve to feel good. Subscribe to our newsletter.</p>",
+      "f-1716473843lLaW5-email_placeholder_html": "Enter your email",
+      "f-1716473843pg1vr-copyright_html": "&copy; 2023, Foxify Powered by FoxEcom"
+    }
+  }
+}
+{% endschema %}
+  
