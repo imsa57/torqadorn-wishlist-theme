@@ -1,0 +1,182 @@
+<script>
+  var isLoggedIn;
+  {% if customer %}
+  isLoggedIn = true;
+  {% else %}
+  isLoggedIn = false;
+{% endif %}
+
+  (function() {
+    function sflInit(swat) {
+        swat.SaveForLater.init(
+            sfl => {
+                swat.sfl = sfl;
+                swat.sflLid = sfl.listid;
+                swat.SaveForLater.fetch(swat.sflLid, function(response){
+                    swat.sfl.listcontents = response.items;
+                }, err => console.error(err))
+            },
+            err => console.error(err)
+        )
+    }
+    if (!window.SwymCallbacks) window.SwymCallbacks = [];
+    window.SwymCallbacks.push(sflInit);
+    class SwymSflLineButton extends HTMLElement {
+        constructor() {
+          super();
+            this.button = this.querySelector('button');
+            if(this.button) this.button.addEventListener('click', this._addToSFL.bind(this));
+        }
+        _addToSFL(evt) {
+          if(!isLoggedIn){
+            const authElementWrapper = document.getElementById('auth-modal-wrapper');
+            authElementWrapper.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            return;
+          }
+            _swat.storage.set("pauseSFLPopup", true);
+            const product = [{
+              du: this.button.dataset.productUrl,
+              empi: this.button.dataset.productId,
+              epi: this.button.dataset.variantId,
+              qty: this.button.dataset.quantity
+            }];
+
+            const cartRemoveButton = this.button.closest('.m-cart-item')?.querySelector('m-cart-remove-button .m-cart-item__remove');
+
+            _swat.SaveForLater.add(
+              _swat.sflLid,
+              product,
+              res => {
+                console.log('Product added to SFL:', res);
+                console.log('Cart remove button', cartRemoveButton);
+                cartRemoveButton.click();
+                setTimeout(() => {_swat.storage.set("pauseSFLPopup", false)}, 2000)
+              },
+              err => console.error('SFL add error:', err)
+            );
+          }
+      }
+      customElements.define('swym-sfl-line-button', SwymSflLineButton);
+  })();
+
+  {% comment %}  Custom Code to Add Wishlist behind Login. {% endcomment %}
+  function swymCallbackFn(swat) {
+  {% if customer %}
+  isLoggedIn = true;
+  {% else %}
+  isLoggedIn = false;
+  {% endif %}
+  if (isLoggedIn == false) {
+    SwymUtils.getHostedURL = function() {
+      /*    	Navigate to login page on click of swym-icons for wishlist page.*/
+      return "/account/login";
+    }
+    //       Override launchpoints.
+    swat.ui.open = function() {
+      console.log("Not Logged IN!");
+      swymRedirectToLogin();
+    }
+    //       Override default Single wishlist API implementations.
+    swat.api.addToWishList = function() {
+      if (swat.retailerSettings.Wishlist.EnableCollections == false) {
+        let product = arguments[0]["product"];
+        saveProductToLocalStorage(product);
+      }
+      swymRedirectToLogin();
+    }
+    //       Override ATW API for multiple lists fn
+    swat.ui.uiRef.addToWishlist = function() {
+      console.log("Not Logged IN!", arguments);
+      if (swat.retailerSettings.Wishlist.EnableCollections == false) {
+        let product = arguments[0]["product"];
+        saveProductToLocalStorage(product);
+      }
+      swymRedirectToLogin();
+    }
+  }
+  //     Login cache mechanism -  Custom work
+  if (isLoggedIn == true && swat.retailerSettings.Wishlist.EnableCollections == false) {
+    postLoginWishlist(swat);
+    //       Check if cookies exists.
+    function postLoginWishlist(swat) {
+      let product = swat.storage.getLocal("historyProduct");
+      let isFirstTimeAdd = swat.storage.getLocal("isFirstTimeAdd");
+      if (isFirstTimeAdd == true) {
+        console.log("First time Add!!");
+          addProductToWishlist(product, swat);
+      }
+    }
+    
+    function addProductToWishlist(product, swat) {
+      let isWishlistNav = false;
+      let navigationUrl = product.du;
+      if (isWishlistNav) {
+        //Wishlist  Store URL
+        navigationUrl = "https://" + window.location.host + SwymUtils.getHostedURL();
+      }
+      swat.addToWishList(product, function() {
+        console.log("Added to wishlist, removing cookies");
+        removeProductHistoryCookies();
+        let notifItem = {
+          empi: product.empi,
+          epi: product.epi,
+          image: product.iu,
+          message: "<span class=\"swym-emphasis\">" + (typeof product.dt == "string" ? product.dt : "Product") + "</span> has been added to <span class=\"swym-emphasis\"> Wishlist</span> successfully.",
+        };
+        swat.ui.uiRef.showNotification(notifItem);
+        swat.collectionsApi.removeCollectionsButtons();
+        swat.collectionsApi.initializeCollections(swat, true, window.Shopify.theme.schema_name);
+        swat.initializeActionButtons("body")
+      });
+    }
+  }
+  //    Function Definitions
+  function swymRedirectToLogin() {
+    // let accountsPageURL = window.origin + "/account/login";
+    // window.location = accountsPageURL;
+     const authElementWrapper = document.getElementById('auth-modal-wrapper');
+        authElementWrapper.classList.add('active');
+        document.body.style.overflow = 'hidden';
+  }
+  function saveProductToLocalStorage() {
+    console.log("Saving product for first add", );
+                let product = arguments[0];
+                if (product && checkIfValidProduct(product)) {
+      setProductHistoryCookies(product, true);
+    }
+  }
+  function setProductHistoryCookies(product, isFirstTimeAdd) {
+    console.log("First time wishlist add", isFirstTimeAdd);
+    if (window._swat) {
+      window._swat.storage.setLocal("historyProduct", product);
+      window._swat.storage.setLocal("isFirstTimeAdd", true);
+    }
+  }
+  function removeProductHistoryCookies() {
+    if (window._swat) {
+      window._swat.storage.removeLocal("historyProduct");
+      window._swat.storage.removeLocal("isFirstTimeAdd");
+    }
+  }
+  //     Check if product has the right schema
+  function checkIfValidProduct(product) {
+    let keys = ["epi", "empi", "du"];
+    return product.hasOwnProperty(...keys);
+  }
+}
+if (!window.SwymCallbacks) {
+  window.SwymCallbacks = [];
+}
+window.SwymCallbacks.push(swymCallbackFn);
+</script>
+{% comment %}
+To add an item to the wishlist using swymCallbackFn, call the swat.addToList function and pass the following parameters:
+1. lid - The list ID.
+2. product - An object containing epi, empi, and du (product data).
+Example:
+javascript<br>let lid = window.swymSelectedListId;<br>let product = {<br> epi: productVariantId,<br> empi: productId,<br> du: productURL<br>};<br>swat.addToList(lid, product, onSuccess, onError);<br>
+To toggle the notification banner, use:
+javascript<br>swat.ui.showSuccessNotification({ message: successMessage });<br>swat.ui.showErrorNotification({ message: errorMessage });<br>
+Replace successMessage and errorMessage with corresponding status messages .
+{% endcomment %}

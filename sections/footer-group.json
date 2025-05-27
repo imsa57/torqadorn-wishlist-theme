@@ -1,0 +1,179 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "newsletter_pyzmjU": {
+      "type": "newsletter",
+      "custom_css": [
+        ".m-newsletter-section__heading {font-family: \"Futura\", sans-serif;}"
+      ],
+      "settings": {
+        "container": "container",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "form_layout": "vertical",
+        "form_design": "2",
+        "heading": "More TORQ this Way",
+        "description": "<p>Join our inner circle and get access to style secrets, exclusive offers, and 10% off your first order!</p>",
+        "text_size": "h2",
+        "email_placeholder": "Enter Your Email",
+        "submit_button": "JOIN",
+        "text_color": "black",
+        "show_icon": false,
+        "icon_img_width": "30",
+        "show_agreement": false,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu_EqEqai": {
+          "type": "menu",
+          "settings": {
+            "menu": "about",
+            "title": "TORQADORN",
+            "width": "25%",
+            "order_first": false,
+            "open_default": false
+          }
+        },
+        "49e72833-c68f-4a7b-ab64-3ef0cae99bcb": {
+          "type": "menu",
+          "settings": {
+            "menu": "footer",
+            "title": "SUPPORT",
+            "width": "25%",
+            "order_first": false,
+            "open_default": false
+          }
+        },
+        "93571032-b171-4c66-8b3e-96cd91946363": {
+          "type": "our_store",
+          "settings": {
+            "title": "GET IN TOUCH",
+            "description": "<p>Email - <a href=\"mailto:torqadorn@torqadorn.com\" title=\"mailto:torqadorn@torqadorn.com\">torqadorn@torqadorn.com</a></p><p>Call : <a href=\"tel:+918376905539\" target=\"_blank\" title=\"tel:+918376905539\">+91 8376905539</a></p><p><a href=\"https://wa.me/918376905539\" target=\"_blank\" title=\"https://wa.me/918376905539\"><strong>Chat With Us</strong></a></p><p>Our studio - 92A, Namberdar Estate, Taimoor Nagar, New Friends Colony, Next to \"All About Bikes\" Showroom, New Delhi - 110065<br/><br/>By Appointment Only</p>",
+            "show_email": false,
+            "show_phone": false,
+            "show_socials_link": false,
+            "width": "25%",
+            "order_first": false,
+            "open_default": false
+          }
+        },
+        "custom_text_K7AURm": {
+          "type": "custom_text",
+          "settings": {
+            "title": "",
+            "image": "shopify://shop_images/TORQADORN_WhiteNoBG_5f079c3e-b19a-41cb-95fb-9ccbcec8e72b.png",
+            "image_max": "400px",
+            "description": "<p>HOUSE OF WISTERIA VINE <br/>GSTIN : 07AAOFH7659C1Z2</p>",
+            "width": "25%",
+            "order_first": false,
+            "open_default": true
+          }
+        }
+      },
+      "block_order": [
+        "menu_EqEqai",
+        "49e72833-c68f-4a7b-ab64-3ef0cae99bcb",
+        "93571032-b171-4c66-8b3e-96cd91946363",
+        "custom_text_K7AURm"
+      ],
+      "custom_css": [
+        ".m-footer--block-spacing {width: 10%;}",
+        ".m-newsletter-form {margin-top: 24px;}",
+        ".m-footer--block-newsletter .m-footer--block-title {font-weight: 400; font-size: 25px;}",
+        "@media (min-width: 1280px) {.m-footer--block-newsletter .m-footer--block-title {font-size: 36px; margin-bottom: 12px; } .m-footer__copyright, .m-footer--bottom-menu {font-size: 14px; }}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-cee058e4-58e3-46aa-9af9-219dadc79066",
+        "design": "footer-1",
+        "container": "container-fluid",
+        "bordered": false,
+        "copyright": "© HOUSE OF WISTERIA VINE - AP",
+        "show_country_selector": false,
+        "show_currency_selector": true,
+        "show_language_selector": false,
+        "show_social_links": true,
+        "enable_follow_on_shop": false,
+        "show_payment_icons": false,
+        "payment_icons_width": 20,
+        "footer_bottom_color_scheme": "",
+        "footer_bottom_menu": "",
+        "show_menu_item_divider": true
+      }
+    },
+    "mobile-sticky-bar": {
+      "type": "mobile-sticky-bar",
+      "custom_css": [
+        "svg {color: white;}",
+        ".m-mobile-sticky-bar {background: #333333;}",
+        ".m-mobile-sticky-bar--item {border: none;}"
+      ],
+      "settings": {
+        "show_mobile_sticky": false,
+        "show_home_icon": true,
+        "show_collection_icon": true,
+        "show_cart_icon": true,
+        "show_search_icon": true,
+        "show_account_icon": false,
+        "show_wishlist_icon": false
+      }
+    },
+    "age-verifier-popup": {
+      "type": "age-verifier-popup",
+      "blocks": {
+        "block-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Confirm your age"
+          }
+        },
+        "block-2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Are you 18 years old or older?</p>"
+          }
+        },
+        "block-3": {
+          "type": "buttons",
+          "settings": {
+            "decline_button": "No, I'm not",
+            "approve_button": "Yes, I am"
+          }
+        }
+      },
+      "block_order": [
+        "block-1",
+        "block-2",
+        "block-3"
+      ],
+      "settings": {
+        "design_mode": false,
+        "enable": false,
+        "bg_blur": true,
+        "decline_heading": "Come back when you're older",
+        "decline_content": "<p>Sorry, the content of this store can't be seen by a younger audience. Come back when you're older.</p>",
+        "return_button": "Oops, I entered incorrectly"
+      }
+    }
+  },
+  "order": [
+    "newsletter_pyzmjU",
+    "footer",
+    "mobile-sticky-bar",
+    "age-verifier-popup"
+  ]
+}

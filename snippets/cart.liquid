@@ -1,0 +1,26 @@
+<a
+  href="{{ routes.cart_url }}"
+  class="m-cart-icon-bubble"
+  aria-label="{{ cart.item_count }}">
+  <span class="m-tooltip m:block m-tooltip--bottom m-tooltip--style-2">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="20"
+      height="20">
+      <defs>
+        <symbol
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 21.6 19.6"
+          id="bag">
+          <path d="M18.6,7V3.2c0-1.8-1.4-3.2-3.2-3.2H6.2C4.4,0,3,1.4,3,3.2V7H0v12.6h21.6V7H18.6z M4.6,3.2c0-0.9,0.7-1.6,1.6-1.6       h9.2c0.9,0,1.6,0.7,1.6,1.6V7H4.6V3.2z" fill="none" />
+          <path d="M18.6,7V3.2c0-1.8-1.4-3.2-3.2-3.2H6.2C4.4,0,3,1.4,3,3.2V7H0v12.6h21.6V7H18.6z M4.6,3.2c0-0.9,0.7-1.6,1.6-1.6       h9.2c0.9,0,1.6,0.7,1.6,1.6V7H4.6V3.2z M20,18H1.6V8.6H20V18z" fill="currentColor" />
+        </symbol>
+      </defs>
+      <title>bag</title>
+      <use role="presentation" href="#bag" />
+    </svg>
+    <span class="m-tooltip__content">{{ 'layout.cart.title' | t }}</span>
+  </span>
+  <span class="m-cart-count-bubble m-cart-count{% if cart == empty %} m:hidden{% endif %}">{{ cart.item_count }}</span>
+</a>

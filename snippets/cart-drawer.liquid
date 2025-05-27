@@ -1,0 +1,661 @@
+<script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+{% liquid
+  if linklists['gift-wrapping'].links != blank and linklists['gift-wrapping'].links.first.type == 'product_link'
+    assign gift_wrapping = linklists['gift-wrapping'].links.first
+    assign gift_wrap_id = gift_wrapping.object.variants.first.id
+    assign gift_wraps_in_cart = 0
+    for item in cart.items
+      if item.id == gift_wrap_id
+        assign gift_wraps_in_cart = item.quantity
+        break
+      endif
+    endfor
+    assign items_in_cart = cart.item_count | minus: gift_wraps_in_cart
+  endif
+%}
+<m-cart-drawer id="MinimogCartDrawer" class="m-cart-drawer{% if cart == empty %} m-cart--empty{% endif %}">
+  <div class="m-cart-drawer__inner m:h-full m-gradient m-color-{{ settings.drawer_popup_color_scheme }}">
+    <button class="m-cart-drawer__close" aria-label="Close">
+      <svg
+        class=""
+        width="16px"
+        height="16px"
+        fill="currentColor"
+        stroke="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 320 512"
+      >
+        <path d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z"/>
+      </svg>
+    </button>
+    <div class="m:flex m:flex-col m:h-full">
+      <div class="m-cart-drawer__header">
+        <h3 class="m-cart-drawer__title m:text-xl md:m:text-2xl m:font-medium">
+          {{ 'cart.general.title' | t }} (<span data-cart-item-count class="m-cart-count-bubble">
+            {{- cart.item_count -}}</span
+          >)
+        </h3>
+        {% if template.name != 'cart' %}
+          <foxkit-cart-countdown></foxkit-cart-countdown>
+        {% endif %}
+        <foxkit-cart-goal></foxkit-cart-goal>
+        <div class="m:flex m:justify-center m:items-center m-cart-free-shipping-text">
+          <span class="">Your Order Ships Free Within India</span>
+          <span class="">Express Delivery Option at Checkout</span>
+        </div>
+      </div>
+      <m-cart-drawer-items
+        data-minimog-cart-items
+        class="m-cart-drawer__body m-scrollbar--vertical m:flex m:flex-col m:flex-1"
+      >
+        <form action="{{ routes.cart_url }}" method="post" id="cart-drawer-form" class="m:w-full" novalidate>
+          {%- if cart.items.size > 0 -%}
+            <div class="m-cart-drawer__items">
+              {% for item in cart.items %}
+                {% render 'cart-drawer-item',
+                  item: item,
+                  gift_wrap_id: gift_wrap_id,
+                  gift_wraps_in_cart: gift_wraps_in_cart,
+                  items_in_cart: items_in_cart
+                %}
+
+                {% comment %}Custom element for FoxKit In-cart upsells{% endcomment %}
+                {% if forloop.last %}
+                  <div class="m:flex m:justify-start m:items-center m-cart-warning-time-text">
+                    <svg
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class=""
+                      xml:space="preserve"
+                      style="enable-background:new 0 0 512 512"
+                      viewBox="0 0 443.294 443.294"
+                      y="0"
+                      x="0"
+                      height="12"
+                      width="12"
+                      version="1.1"
+                    >
+                      <g><path class="" data-original="#000000" opacity="1" fill="#1673b0" d="M221.647 0C99.433 0 0 99.433 0 221.647s99.433 221.647 221.647 221.647 221.647-99.433 221.647-221.647S343.861 0 221.647 0zm0 415.588c-106.941 0-193.941-87-193.941-193.941s87-193.941 193.941-193.941 193.941 87 193.941 193.941-87 193.941-193.941 193.941z"/><path class="" data-original="#000000" opacity="1" fill="#1673b0" d="M235.5 83.118h-27.706v144.265l87.176 87.176 19.589-19.589-79.059-79.059z"/></g>
+                    </svg>
+                    Your picks are reserved for 60 minutes
+                  </div>
+
+                  <slide-popup-button
+                    class="coupon-button m-button m:w-full m:flex m:items-center m:justify-center"
+                    data-popup-id="coupon-code-popup"
+                  >
+                    <svg
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xml:space="preserve"
+                      style=""
+                      viewBox="0 0 50 50"
+                      y="0"
+                      x="0"
+                      height="22"
+                      width="22"
+                      version="1.1"
+                    >
+                      <g><path data-original="#000000" opacity="1" fill="#6c6c6c" d="M48 20.04a.5.5 0 0 0 .5-.5V10a.5.5 0 0 0-.5-.5H2a.5.5 0 0 0-.5.5v9.54a.5.5 0 0 0 .5.5c2.735 0 4.96 2.225 4.96 4.96S4.735 29.96 2 29.96a.5.5 0 0 0-.5.5V40a.5.5 0 0 0 .5.5h46a.5.5 0 0 0 .5-.5v-9.54a.5.5 0 0 0-.5-.5c-2.735 0-4.96-2.225-4.96-4.96s2.225-4.96 4.96-4.96zM42.04 25a5.968 5.968 0 0 0 5.46 5.939V39.5H14.214V38a.5.5 0 0 0-1 0v1.5H2.5v-8.561c3.053-.254 5.46-2.821 5.46-5.939s-2.407-5.685-5.46-5.939V10.5h10.714V12a.5.5 0 0 0 1 0v-1.5H47.5v8.561A5.968 5.968 0 0 0 42.04 25z"/><path data-original="#000000" opacity="1" fill="#6c6c6c" d="M13.714 30.071a.5.5 0 0 0-.5.5v3.714a.5.5 0 0 0 1 0v-3.714a.5.5 0 0 0-.5-.5zM13.714 15.214a.5.5 0 0 0-.5.5v3.714a.5.5 0 0 0 1 0v-3.714a.5.5 0 0 0-.5-.5zM13.714 22.643a.5.5 0 0 0-.5.5v3.714a.5.5 0 0 0 1 0v-3.714a.5.5 0 0 0-.5-.5z"/></g>
+                    </svg>
+                    <span> OFFERS & COUPONS </span>
+                  </slide-popup-button>
+
+                  {% liquid
+                    assign collections = ''
+                    for collection in item.product.collections
+                      assign collections = collections | append: collection.id | append: ','
+                    endfor
+                  %}
+                  <foxkit-incart-upsell
+                    data-collections="{{ collections | remove_last: ',' }}"
+                    data-product-title="{{ item.product.title }}"
+                    data-product-id="{{ item.product_id }}"
+                  ></foxkit-incart-upsell>
+                {% endif %}
+                {% comment %}Custom element for FoxKit In-cart upsells{% endcomment %}
+              {% endfor %}
+            </div>
+          {%- else -%}
+            <div class="m-cart-empty-content-wrapper">
+              <div class="m-cart-drawer__empty m-section__header">
+                {{ 'cart.general.empty' | t }}
+              </div>
+              {% if settings.cart_empty_menu != blank %}
+                <div class="m-empty-cart-menu m:display-flex m:justify-center m:items-center m:flex-wrap">
+                  {% for link in settings.cart_empty_menu.links limit: 5 %}
+                    <a href="{{ link.url }}" class="m:flex-1">{{ link.title }}</a>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          {%- endif -%}
+        </form>
+      </m-cart-drawer-items>
+      <div class="m-cart-drawer__footer" id="MinimogCartDrawerFooter">
+        {% render 'cart-addons', form_id: 'cart-drawer-form' %}
+        <div class="m-cart-drawer__gift-wrapping" data-minimog-gift-wrapping>
+          {%- if gift_wrapping != null -%}
+            <m-gift-wrapping-component
+              class="m-gift-wrapping"
+              data-gift-wrap-id="{{ gift_wrap_id }}"
+              data-gift-wrapping="{{ cart.attributes.gift-wrapping | escape }}"
+              cart-items-size="{{ cart.items.size }}"
+              gift-wraps-in-cart="{{ gift_wraps_in_cart }}"
+              items-in-cart="{{ items_in_cart }}"
+            >
+              <input
+                id="m-gift-wrapping"
+                type="checkbox"
+                name="attributes[gift-wrapping]"
+                value="yes"
+                {% if gift_wraps_in_cart > 0 %}
+                  checked="checked"
+                {% endif %}
+                class="m:visually-hidden"
+              >
+              <label for="m-gift-wrapping" class="m-gift-wrapping--label">
+                {%- capture gift_price -%}<strong class="m-gift-wrapping--price">{{ gift_wrapping.object.price | money }}</strong>{%- endcapture -%}
+                <span class="m-gift-wrapping--text">
+                  {{- 'cart.general.gift_wrapping_html' | t: price: gift_price -}}
+                </span>
+                <div class="m-gift-wrapping--loading">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                </div>
+                <svg
+                  class="m-gift-wrapping--icon"
+                  viewBox="0 0 14 14"
+                  with="16"
+                  height="16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect x="0.5" y="0.5" width="13" height="13" stroke="currentColor"/>
+                  <path d="M3.5625 7.625L5.75 9.8125L10.75 4.8125" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </label>
+              {%- if gift_wraps_in_cart > 0 -%}
+                <m-gift-note-component class="m-gift-wrapping--note">
+                  <textarea
+                    class="form-field"
+                    name="attributes[gift-note]"
+                    placeholder="{{ 'cart.general.gift_note_placeholder' | t }}"
+                  >{{ cart.attributes.gift-note }}</textarea>
+                </m-gift-note-component>
+              {%- endif -%}
+            </m-gift-wrapping-component>
+          {%- endif -%}
+        </div>
+
+        {% comment %}
+          <div class="m:flex m:justify-start m-cart__shipping-text" data-cart-shipping>
+            <span class="m-cart__shipping--label m:font-bold">Items are reserved for 60 minutes</span>
+             <span class="m-cart__shipping--price m:font-medium"> Included </span>
+          </div>
+        {% endcomment %}
+        <div class="m-cart__summary m-cart-drawer__summary">
+          <div data-foxkit-cart-summary></div>
+          <div data-minimog-cart-discounts>
+            {%- if cart.cart_level_discount_applications.size > 0 -%}
+              <ul class="m-cart__discount" role="list">
+                {%- for discount in cart.cart_level_discount_applications -%}
+                  <li class="m-cart__discount--item m:justify-end m:items-center">
+                    <svg
+                      aria-hidden="true"
+                      width="20"
+                      height="20"
+                      focusable="false"
+                      role="presentation"
+                      viewBox="0 0 12 13"
+                    >
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M7 .5h3a2 2 0 0 1 2 2v3a.995.995 0 0 1-.293.707l-6 6a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414l6-6A.995.995 0 0 1 7 .5zm2 2a1 1 0 1 0 2 0 1 1 0 0 0-2 0z" fill="currentColor"></path>
+                    </svg>
+                    <span>{{ discount.title | upcase }}&nbsp;(-{{ discount.total_allocated_amount | money }})</span>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+          <div  data-cart-subtotal>
+            <div class="m-cart__subtotal m:flex m:justify-between">
+              <span class="m-cart__subtotal--label m:font-medium">{{ 'cart.general.subtotal' | t }}</span>
+              <span class="m-cart__subtotal--price m:font-medium" data-cart-subtotal-price>
+                {% if settings.currency_code_enabled %}
+                  {{ cart.total_price | money_with_currency }}
+                {% else %}
+                  {{ cart.total_price | money }}
+                {% endif %}
+              </span>
+            </div>
+          </div>
+          <div class="shipping-text-toggle-wrapper m:flex m:items-center m:justify-end m:text-xs">
+            <span class="" shipping-text-toggle>View breakdown</span>
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 16 16"
+              fill="none"
+              style="margin-left:3px;"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M13.5306 6.53073L8.5306 11.5307C8.46092 11.6007 8.37813 11.6561 8.28696 11.694C8.1958 11.7318 8.09806 11.7513 7.99935 11.7513C7.90064 11.7513 7.8029 11.7318 7.71173 11.694C7.62057 11.6561 7.53778 11.6007 7.4681 11.5307L2.4681 6.53073C2.3272 6.38984 2.24805 6.19874 2.24805 5.99948C2.24805 5.80023 2.3272 5.60913 2.4681 5.46823C2.60899 5.32734 2.80009 5.24818 2.99935 5.24818C3.19861 5.24818 3.3897 5.32734 3.5306 5.46823L7.99997 9.93761L12.4693 5.46761C12.6102 5.32671 12.8013 5.24756 13.0006 5.24756C13.1999 5.24756 13.391 5.32671 13.5318 5.46761C13.6727 5.60851 13.7519 5.7996 13.7519 5.99886C13.7519 6.19812 13.6727 6.38921 13.5318 6.53011L13.5306 6.53073Z" fill="currentColor"></path>
+            </svg>
+          </div>
+          <div class="m:hidden" shipping-text-toggle-content style="padding-top: 10px;">
+            {% comment %}
+              <div class="m-cart__subtotal m:flex m:justify-between m:text-base">
+                <span class="">Shipping in India</span>
+                <span class=" m:font-medium"> Included </span>
+              </div>
+              <div class="m-cart__subtotal m:flex m:justify-end m:text-xs">
+                <span class=""> *All taxes are included in product prices </span>
+              </div>
+            {% endcomment %}
+            <div class="m-cart-breakdown-box">
+              <div class="m-cart-breakdown-row-1 m:flex m:justify-between m:items-center">
+                <span class="m-cart-breakdown-label" style="color: #222;"> Items ({{ cart.item_count }}) </span>
+                <span class="m-cart-breakdown-value" style="color: #222;">
+                  {% if settings.currency_code_enabled %}
+                    {{ cart.original_total_price | money_with_currency }}
+                  {% else %}
+                    {{ cart.original_total_price | money }}
+                  {% endif %}
+                </span>
+              </div>
+              {% if cart.discount_applications.size > 0 %}
+                {% for discount_application in cart.discount_applications %}
+                  <div class="m-cart-breakdown-row m:flex m:justify-between m:items-center">
+                    <span class="m-cart-breakdown-label m:flex m:items-center" style="color: #1673b0;">
+                      <svg
+                        width="16"
+                        height="16"
+                        fill="none"
+                        style="margin-right:4px;"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect x="2" y="7" width="12" height="2" rx="1" fill="#1673b0"/>
+                        <rect x="7" y="2" width="2" height="12" rx="1" fill="#1673b0"/>
+                      </svg>
+                      Discount ({{ discount_application.title }})
+                    </span>
+                    <span class="m-cart-breakdown-value" style="color: #1673b0">
+                      - {{ discount_application.total_allocated_amount | money }}
+                    </span>
+                  </div>
+                {% endfor %}
+              {% endif %}
+              <div class="m-cart-breakdown-row m:flex m:justify-between m:items-center">
+                <span class="m-cart-breakdown-label" style="color: #222;"> Shipping in India </span>
+                <div>
+                  <span class="m-cart-breakdown-value">
+                    {% comment %} Example: ₹150, you may want to dynamically show shipping if not free {% endcomment %}
+                    <s>₹150</s>
+                  </span>
+                  <span class="m-cart-breakdown-value-text"> Included </span>
+                </div>
+              </div>
+              <div class="m-cart-breakdown-row m:flex m:items-center" style="margin-bottom: 0;">
+                <span class="m-cart-breakdown-note" style="color: #888; font-size: 12px;">
+                  *All taxes are included in product prices
+                </span>
+              </div>
+            </div>
+          </div>
+
+         
+          <div id="discountWidget" class="m-cart__discount-widget" style="display: none;">
+            <p>Get this order for <span id="discountedAmount"></span>, use code <strong>TAKE10</strong> at checkout</p>
+          </div>
+
+          <script>
+            (function () {
+              const enableDiscountWidget = false;
+              let lastCartTotal = 0;
+
+              function updateDiscountWidget(cart) {
+                if (!enableDiscountWidget) return;
+                const discountWidget = document.getElementById('discountWidget');
+                const discountedAmountElement = document.getElementById('discountedAmount');
+                if (discountWidget && discountedAmountElement) {
+                  const subtotalValue = cart.total_price / 100;
+                  if (subtotalValue >= 4995) {
+                    const discountedAmount = subtotalValue * 0.9;
+                    discountedAmountElement.textContent = new Intl.NumberFormat('en-IN', {
+                      style: 'currency',
+                      currency: 'INR',
+                    }).format(discountedAmount);
+                    discountWidget.style.display = 'block';
+                  } else {
+                    discountWidget.style.display = 'none';
+                  }
+                }
+              }
+
+              function fetchCartAndUpdateWidget() {
+                if (!enableDiscountWidget) return;
+                fetch('/cart.js')
+                  .then((response) => response.json())
+                  .then((cart) => {
+                    if (cart.total_price !== lastCartTotal) {
+                      lastCartTotal = cart.total_price;
+                      updateDiscountWidget(cart);
+                    }
+                  })
+                  .catch((error) => console.error('Error:', error));
+              }
+
+              fetchCartAndUpdateWidget();
+              setInterval(fetchCartAndUpdateWidget, 500);
+              document.addEventListener('cart:updated', fetchCartAndUpdateWidget);
+              document.addEventListener('cart:refresh', fetchCartAndUpdateWidget);
+              document.addEventListener('cart:change', fetchCartAndUpdateWidget);
+            })();
+          </script>
+
+          <style>
+            .coupon-button {
+              display: flex;
+              gap: 8px;
+              margin-bottom:20px;
+            }
+            .shipping-text-toggle-wrapper > span {
+              padding-bottom: 0.5px;
+              border-bottom: 1px solid;
+            }
+            .shipping-text-toggle-wrapper > span.open + svg {
+              transform: rotate(180deg);
+            }
+            .m-cart__discount-widget {
+              background-color: #ffffff;
+              border: 0px solid #333333;
+              border-radius: 4px;
+              padding: 3px 5px;
+              margin: 5px 0 0 0;
+              text-align: center;
+              font-size: 10px;
+              line-height: 1.2;
+            }
+            .m-cart__discount-widget p {
+              margin: 0;
+            }
+            .m-cart__discount-widget strong {
+              color: #333333;
+            }
+          </style>
+        </div>
+        <div class="m:flex m:flex-col m:items-center">
+          {% assign show_terms = false %}
+          {% if settings.agree_text != blank and settings.show_agree_on_cart %}
+            <div class="m-terms-conditons">
+              <label class="form-field--checkbox">
+                <input type="checkbox" name="agree_terms" value="yes" required>
+                <span class="form-field--checkbox__label">{{ settings.agree_text }}</span>
+                <span class="form-field--checkbox__icon">
+                  <svg
+                    class="m-svg-icon--medium"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    focusable="false"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M18.5 1.5H1.5L1.5 18.5H18.5V1.5ZM1.5 0.5C0.947715 0.5 0.5 0.947715 0.5 1.5V18.5C0.5 19.0523 0.947715 19.5 1.5 19.5H18.5C19.0523 19.5 19.5 19.0523 19.5 18.5V1.5C19.5 0.947715 19.0523 0.5 18.5 0.5H1.5Z" fill-rule="evenodd" fill="currentColor"/>
+                    <path d="M14.9975 6.09084C15.201 6.27746 15.2147 6.59375 15.0281 6.79728L8.91631 13.4627C8.82231 13.5652 8.68987 13.6239 8.55079 13.6247C8.41172 13.6256 8.27857 13.5684 8.18335 13.4671L4.99513 10.0731C4.80606 9.87179 4.81596 9.55536 5.01723 9.3663C5.21849 9.17723 5.53492 9.18713 5.72399 9.3884L8.54335 12.3897L14.291 6.12145C14.4776 5.91791 14.7939 5.90421 14.9975 6.09084Z" fill="currentColor"/>
+                  </svg>
+                </span>
+              </label>
+            </div>
+            {% assign show_terms = true %}
+          {% endif %}
+          <button
+            type="submit"
+            form="cart-drawer-form"
+            class="m-button m-button--primary m:w-full checkout-button"
+            name="checkout"
+            {% if show_terms %}
+              data-terms-action disabled
+            {% endif %}
+          >
+            <div class="button-content m:flex m:items-center m:justify-between">
+              <div checkout-data-cart-subtotal>
+                <span class="m-cart__subtotal--price m:font-medium" data-cart-subtotal-price>
+                  {% if settings.currency_code_enabled %}
+                    {{ cart.total_price | money_with_currency }}
+                  {% else %}
+                    {{ cart.total_price | money }}
+                  {% endif %}
+                </span>
+              </div>
+              {% comment %}
+                <span class="lock-icon">
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0526/4811/6407/files/svg-image-9.svg?v=1720861706"
+                    alt="Secure checkout"
+                    width="20"
+                    height="20"
+                  >
+                </span>
+              {% endcomment %}
+              <span class="checkout-text m:flex">
+                {{- 'cart.general.checkout' | t }}
+                {% comment %} <span class="checkout-button-icon-wrapper m:flex m:items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="346.845 368.41 680.149 304.513"
+                    width="32"
+                    height="auto"
+                    fill="#fff"
+                  >
+                    <defs/>
+                    <path d="m124 450.456c9 4 17 9 26 14 11 6 15 18 10 29-4 12-16 17-28 14-11-3-21-6-31-10l-1 2c21 17 41 34 62 52 3 2 4 2 6-1 41-49 82-97 123-146 3-4 4-6 0-10-25-20-49-40-73-60-3-3-4-3-7 0-10 13-21 26-32 39-19 22-38 45-57 67-4 5-4 7 2 10zm64-43c20 1 37 18 37 37s-14 33-33 32c-20 0-37-17-37-36s15-33 33-33zm60 235c2 3 4 3 7 2 23-2 46-4 71-6-8-19-14-38-24-55-7-13-18-23-35-24-26-3-52-1-78-1-8 0-13 6-12 13 0 7 5 12 13 13h30c4 0 7 0 7 5 1 4-3 4-7 4h-50c-10 0-19-3-27-9-12-9-24-17-37-25-7-5-15-4-19 2-6 6-5 14 2 21l39 33c12 11 26 17 43 17 17-1 35 0 52 0 10 0 19 2 25 10zm-97-153c2-8-1-13-8-17-14-7-27-15-40-23-5-2-8-5-6-11 1-5 5-6 10-6 4 0 8 2 10-2 10-11 20-23 31-36-6-1-10-2-15-3-17-3-33-7-51-2-16 5-31 10-48 13-4 0-4 3-4 5v62c7-2 13-3 18-5 8-3 15-1 20 6 4 4 8 8 14 10 17 6 34 12 51 17 9 3 16-1 18-8zm180 159c-27 3-54 6-81 8-6 0-5 4-5 7 0 4 2 5 5 5h71c15 0 16 0 14-16 0-2 0-4-4-4zm-319-254h-7c-4-1-5 1-5 6 3 26 5 52 7 78 1 5 3 5 7 5 5 1 6-2 6-6-1-13 0-25 0-38s-1-25 0-38c0-6-2-8-8-7zm158 49c2 4 5 7 10 7s8-2 12-4c2-1 4-2 6 0s0 4-2 6c-1 1-2 2-4 3s-5 2-2 6c2 3 4 4 8 2 1-2 3-5 6-3 2 2 3 2 5 0 2-3 2-4 0-7-2-1-1-4 0-5 0-13-8-18-20-12-3 1-6 5-8 2-2-4 2-6 4-8 2-1 4-1 3-4-4-10-11 3-15-2-2-1-5 4-5 4 5 4 0 10 2 15zm218 25c4 2 8 3 12 3 3 0 5 0 8-1s5-1 7-3c3-1 5-2 7-4s3-4 4-7l-8-5c-1 2-2 4-4 5-1 2-2 3-4 4-1 0-3 1-5 1s-3 1-4 1c-3 0-6-1-9-2-2-1-4-3-6-5s-3-5-4-8-2-6-2-9 0-6 1-8 2-6 4-8 4-4 7-5c2-2 5-3 8-3 2 0 3 1 5 1s3 1 5 2c1 0 3 2 4 3s2 3 3 5l8-6c-2-4-5-7-9-10s-9-4-15-4c-5 0-10 1-13 3s-7 4-10 7c-3 4-5 7-6 11-2 4-2 8-2 12s0 8 2 12c1 4 3 7 6 10 3 4 6 7 10 8zm86-9v-17c0-7-2-11-6-15s-8-5-15-5-13 2-19 6l3 7c2-2 5-3 8-4 2-1 5-2 7-2 4 0 7 1 9 3s3 5 3 9v3c-2-1-4-1-6-2s-5 0-7 0c-3 0-6 0-8 1s-5 2-6 3c-2 1-4 3-5 5-1 1-1 4-1 6s0 4 1 6 2 3 3 5l6 3s4 1 6 1c4 0 7-1 10-2 3-2 6-4 8-7v3c1 2 1 3 2 4s3 1 5 1h5v-9h-3zm-10-3c0 1-1 2-2 3-1 2-3 3-5 4s-5 1-7 1c-3 0-5 0-7-2s-3-4-3-6c0-3 2-5 4-6s5-3 9-3c1 0 3 1 5 1s4 1 6 2zm40 8c-6 0-12-2-18-6l-4 7c2 1 3 2 5 3s3 1 5 2 4 1 6 1 4 1 6 1c3 0 6-1 8-1s5-2 6-3 3-3 4-5 2-4 2-6-1-4-2-5c0-2-1-3-3-4s-3-2-6-3-5-1-8-2c-2-1-4-1-5-2s-3 0-4-1c0 0-1-1-1-2-1 0-1-1-1-2 0-2 1-4 3-5s4-2 6-2c5 0 10 2 15 5l4-6c-2-2-5-3-8-4s-7-2-11-2c-2 0-5 0-7 1l-6 3c-2 1-3 3-4 5s-1 4-1 6v5l3 3c2 1 3 2 6 3s4 2 7 2c5 1 8 2 10 3s3 3 3 5-1 3-3 5c-2 1-4 1-7 1zm68-36c-1-2-3-3-5-4s-4-2-7-2c-4 0-7 1-10 3s-6 4-8 8v-29h-10v67h10v-29c1-1 1-3 2-4 1-2 2-3 4-4s2-2 4-2c1-1 2-1 4-1 3 0 5 1 7 3s2 6 2 10v27h10v-29c0-3 0-5-1-8s-1-4-2-6zm77 36c2-2 3-5 5-8s1-6 1-9 0-7-1-10c-2-3-3-5-5-7-3-3-5-5-8-6s-7-2-10-2c-4 0-7 1-10 2s-6 3-8 6c-2 2-4 4-5 7s-2 7-2 10 1 6 2 9 3 6 5 8c2 3 4 4 7 6s7 2 11 2c3 0 7-1 10-2s5-3 8-6zm-18-1c-2 0-4 0-6-1s-3-2-4-3c-2-2-3-4-3-6s-2-4-2-6 1-4 2-6c0-2 1-4 3-6s2-2 4-3 4-1 6-1 4 0 5 1 4 2 5 3c1 2 2 3 3 5s1 5 1 7-1 4-1 6c-1 2-2 4-3 5-2 2-3 3-5 4-1 1-3 1-5 1zm43-21c1-1 1-3 2-4 1-2 3-3 4-4s2-2 4-2c1-1 3-1 4-1 3 0 5 1 7 3 1 2 2 6 2 10v27h10v-29c0-3 0-5-1-8s-1-4-2-6-2-3-4-4-4-2-7-2c-4 0-8 1-12 3-3 2-6 4-8 8v-10h-9v48h10zm-212 84c-5-5-11-9-18-12s-15-4-25-4h-41v114h41c9 0 17-2 24-4s12-7 17-12 9-11 12-18 4-15 4-23-2-16-4-23-6-12-10-18zm-11 55c-1 5-4 9-6 12-3 4-7 6-11 8s-9 3-14 3h-20v-75h20c5 0 10 1 14 3s8 4 11 7 5 8 6 12c2 5 2 10 2 15 0 6 0 11-2 15zm112-30c-4-4-9-7-14-9s-12-4-19-4c-6 0-13 1-18 4-6 2-10 5-14 9s-7 9-9 14-3 11-3 17 1 11 3 17 5 9 9 13 8 7 14 10 11 3 18 3c10 0 18-2 25-6s11-9 14-16l-18-5c-1 3-4 6-8 8s-8 3-12 3c-3 0-5 0-8-1s-5-2-7-4-4-4-5-7c-1-2-2-5-2-9h65v-3-4c0-5-1-11-3-16s-5-10-8-14zm-55 24c1-4 1-6 3-9 1-3 2-5 4-7s4-3 7-4c2-1 5-1 8-1 6 0 11 2 15 5s6 9 7 16zm114 30h-5c-5 0-8-3-8-9v-90h-22v98c0 7 2 12 6 15s9 6 15 6c3 0 7-1 11-1 4-1 7-2 10-3l-3-18c-1 1-3 1-4 2zm16-65h22v84h-22zm0-33h22v21h-22zm76 99-22-66h-22l31 84h23l31-84h-20zm123-55c-3-4-8-7-13-9s-12-4-19-4-13 1-18 4c-6 2-11 5-14 9s-7 9-9 14-3 11-3 17 1 11 3 17 5 9 9 13 8 7 14 10 11 3 18 3c9 0 18-2 24-6s12-9 15-16l-18-5c-2 3-4 6-8 8s-8 3-12 3c-3 0-6 0-8-1-3-1-5-2-7-4s-4-4-5-7c-1-2-2-5-2-9h65v-3-4c0-5-1-11-3-16s-5-10-9-14zm-54 24c0-4 1-6 2-9 2-3 3-5 5-7s4-3 7-4c2-1 5-1 8-1 6 0 11 2 15 5s6 9 7 16zm125-37c-5 0-10 2-15 6s-8 8-11 14v-18h-20v84h22v-51c2-5 5-9 11-11 5-2 11-4 17-4v-19c0-1-1-1-2-1zm72 2-20 65-23-65h-22l33 84-3 9s-2 4-3 5l-3 3h-8s-4 0-6-1v19c4 1 8 1 12 1 6 0 12-1 17-5 5-3 9-8 11-15l35-100z"/>
+                  </svg>
+                  {% comment %} <span class="checkout-button-icon"></span> {% endcomment %}
+                  <span class="checkout-button-icon"></span>
+                  <span class="checkout-button-icon"></span>
+                </span> {% endcomment %}
+              </span>
+            </div>
+          </button>
+          <a class="m-cart-drawer__link-to-cart m-button m-button--link" href="{{ routes.cart_url }}">
+            {{ 'cart.general.viewcart' | t }}
+          </a>
+          {% comment %}
+            <div class="payment-methods m:flex m:items-center m:justify-between m:mb-4 m:w-full">
+              <span>We accept</span>
+              <div class="payment-icons m:flex">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0526/4811/6407/files/visa_1.svg?v=1720857724"
+                  alt="Visa"
+                  width="36"
+                  height="36"
+                >
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0526/4811/6407/files/mastercard_symbol.svg?v=1720857821"
+                  alt="MasterCard"
+                  width="36"
+                  height="36"
+                >
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0526/4811/6407/files/amex-svg.svg?v=1720857811"
+                  alt="American Express"
+                  width="36"
+                  height="36"
+                >
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0526/4811/6407/files/UPI-Logo-vector.svg?v=1720858027"
+                  alt="UPI"
+                  width="36"
+                  height="36"
+                >
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0526/4811/6407/files/cod1.svg?v=1720859199"
+                  alt="Cash on Delivery"
+                  width="36"
+                  height="36"
+                >
+              </div>
+            </div>
+          {% endcomment %}
+        </div>
+        {% if settings.cart_drawer_trust_badge %}
+          <div class="m-cart__trust-badge">
+            <img
+              src="{{ settings.cart_drawer_trust_badge | image_url: width: 840 }}"
+              loading="lazy"
+              width="400"
+              height="100"
+              alt="Trust secure badge"
+            >
+          </div>
+        {% endif %}
+      </div>
+      <div class="m-cart__overlay"></div>
+    </div>
+    {%- capture cart_offer_content -%}
+      {%- render 'offers-coupon' -%}
+    {%- endcapture -%}
+    {%- render 'popup-slide', id: 'coupon-code-popup', heading: 'Offers & Coupons', content: cart_offer_content -%}
+  </div>
+</m-cart-drawer>
+
+<style>
+  #MinimogCartDrawer .checkout-button {
+    background-color: #333333;
+    color: white;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+  }
+  .checkout-button-icon-wrapper {
+    gap: 6px;
+    padding-left: 6px;
+  }
+  .checkout-button-icon {
+    width: 26px;
+    height: 14px;
+    background: gray;
+    border-radius: 3px;
+  }
+
+  #MinimogCartDrawer .checkout-button:hover {
+    background-color: #000000;
+  }
+
+  #MinimogCartDrawer .checkout-button .lock-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+
+  #MinimogCartDrawer .checkout-button .lock-icon img {
+    width: 16px;
+    height: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  #MinimogCartDrawer .checkout-button .checkout-text {
+    letter-spacing: 0.5px;
+  }
+
+  .payment-methods {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
+
+  .payment-icons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .payment-icons img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .m-cart-drawer__footer {
+    background-color: #fcfcfc;
+    border-top: none;
+    box-shadow: none;
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .m-cart-drawer__inner {
+    background-color: #fcfcfc; /* Ensures the inner cart and footer are the same color */
+  }
+
+  .m-quantity {
+    background-color: #fcfcfc;
+  }
+
+  .m-cart__shipping {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+  }
+
+  .m-cart__shipping--label {
+    font-size: 10px;
+    /* color: #999999; */
+  }
+
+  .m-cart__shipping--price {
+    font-size: 14px;
+    color: #1673b0;
+    font-weight: 500;
+    text-align: right;
+  }
+  .m-cart-free-shipping-text,
+  .m-cart-warning-time-text {
+    height: 26px;
+    margin-top: 20px;
+    align-items: center;
+    padding: 3px 0;
+    font-size: 10px;
+  }
+  .m-cart-free-shipping-text {
+    background: #f9fafc;
+    margin-inline: -16px;
+    margin-top: 10px;
+  }
+  .m-cart-warning-time-text {
+    font-size: 13px;
+    background: #e3f1ff;
+    color: #1673b0;
+    padding-left: 10px;
+    gap: 3px;
+  }
+  .m-cart-free-shipping-text span:first-child {
+    border-right: 2px solid;
+    padding-right: 10px;
+    margin-right: 10px;
+  }
+  #MinimogCartDrawer .m-cart__shipping-text {
+    margin-top: 5px;
+    margin-bottom: -9px;
+  }
+  .m-empty-cart-menu {
+    gap: 10px;
+  }
+  .m-empty-cart-menu > a {
+    min-width: 48%;
+    flex: 1;
+    padding: 4px;
+    border: 1px solid;
+    text-align: center;
+  }
+  .m-cart-empty-content-wrapper {
+    margin-top: 33%;
+    text-align: center;
+  }
+</style>

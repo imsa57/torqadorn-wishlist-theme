@@ -1,0 +1,307 @@
+{{ 'component-product-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-inventory.css' | asset_url | stylesheet_tag }}
+{{ 'tabs.css' | asset_url | stylesheet_tag }}
+{{ 'product-tabs.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign button_type = section.settings.button_type
+  assign product_limit = section.settings.limit
+
+  assign enable_slider = true
+  assign mobile_disable_slider = false
+
+
+  assign items_per_row = '2'
+  assign card_style = '1'
+  assign image_ratio = section.settings.pcard_image_ratio
+  assign show_vendor = false
+  assign tab_header = 'horizontal'
+  assign button_type = 'link'
+  assign use_scroll_mobile = section.settings.use_scroll_mobile
+
+  if card_style == null or card_style == blank
+    assign card_style = settings.pcard_layout
+  endif
+
+  assign animation_effect = settings.animations
+  assign animated = false
+  if animation_effect != 'none'
+    assign animated = true
+    if section.settings.animations != 'inherit'
+      assign animation_effect = section.settings.animations
+    endif
+  endif
+
+  assign container = 'container-fluid'
+  if container == 'w-full'
+    assign container = 'container-full'
+  endif
+
+  assign button_loadmore_class = ''
+  if enable_slider
+    assign button_loadmore_class = 'md:m:hidden'
+    if mobile_disable_slider
+      if use_scroll_mobile
+        assign button_loadmore_class = button_loadmore_class | append: ' m:hidden'
+      else
+        assign button_loadmore_class = button_loadmore_class | append: ' m:flex'
+      endif
+    else
+      assign button_loadmore_class = button_loadmore_class | append: ' m:hidden'
+    endif
+  else
+    assign button_loadmore_class = 'md:m:flex'
+    if use_scroll_mobile
+      assign button_loadmore_class = button_loadmore_class | append: ' m:hidden'
+    else
+      assign button_loadmore_class = button_loadmore_class | append: ' m:flex'
+    endif
+  endif
+
+  assign classes = 'm-section m-product-tabs m:block'
+  if section.settings.custom_class != blank
+    assign classes = classes | append: ' ' | append: section.settings.custom_class
+  endif
+  assign classes = classes | append: ' m-product-tabs--' | append: tab_header | append: ' m-gradient' | append: ' m-color-' | append: section.settings.color_scheme
+-%}
+
+{%- capture dropdown -%}
+  {% if section.blocks.size > 0 %}
+    <m-select-component data-tab-header="{{ tab_header }}">
+      <select
+        name="country_code"
+        class="js-selectNative"
+        data-tab-select
+      >
+        {% for block in section.blocks %}
+          {%- liquid
+            assign tab_name = block.settings.title
+            assign current_collection = block.settings.collection
+            if block.settings.title == blank
+              assign tab_name = 'Tab ' | append: forloop.index
+              if collection != blank
+                assign tab_name = current_collection.title
+              endif
+            endif
+          -%}
+          <option
+            value="{{ forloop.index0 }}"
+            {% if forloop.index0 == 0 %}
+              selected="selected"
+            {% endif %}
+          >
+            {{ tab_name }}
+          </option>
+        {%- endfor -%}
+      </select>
+      <div
+        class="m-select-custom m-select-custom--custom-width m-select-custom--plain js-selectCustom h3"
+        aria-hidden="true"
+      >
+        <div class="m-select-custom--trigger">
+          <span class="m-select-custom--trigger-text"></span>
+          <span class="m-select-custom--trigger-icon">
+            <svg
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+            >
+              <path d="M441.9 167.3l-19.8-19.8c-4.7-4.7-12.3-4.7-17 0L224 328.2 42.9 147.5c-4.7-4.7-12.3-4.7-17 0L6.1 167.3c-4.7 4.7-4.7 12.3 0 17l209.4 209.4c4.7 4.7 12.3 4.7 17 0l209.4-209.4c4.7-4.7 4.7-12.3 0-17z" />
+            </svg>
+          </span>
+        </div>
+        <div class="m-select-custom--options">
+          {% for block in section.blocks %}
+            {%- liquid
+              assign tab_name = block.settings.title
+              assign current_collection = block.settings.collection
+              if block.settings.title == blank
+                assign tab_name = 'Tab ' | append: forloop.index
+                if collection != blank
+                  assign tab_name = current_collection.title
+                endif
+              endif
+            -%}
+            <div class="m-select-custom--option" data-value="{{ forloop.index0 }}">
+              {{ tab_name }}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </m-select-component>
+  {% endif %}
+{%- endcapture -%}
+<style>
+  #m-section--{{ section.id }} {
+    --column-gap: {{ section.settings.item_gap }}px;
+    --column-gap-mobile: {{ section.settings.item_gap_mobile }}px;
+    --row-gap: {{ section.settings.item_gap | plus: 10 }}px;
+    --items: {{ items_per_row }};
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  .shop-the-look-wrapper [data-products-container]{
+    gap:10px;
+  }
+</style>
+<section
+  id="m-section--{{ section.id }}"
+  class="{{ classes }} shop-the-look-wrapper"
+>
+  <m-product-tabs
+    id="{{ section.id }}"
+    data-section-type="product-tabs"
+    data-enable-slider="{{ enable_slider }}"
+    data-mobile-disable-slider="{{ section.settings.mobile_disable_slider }}"
+    data-button-type="{{ button_type }}"
+    {% if enable_slider %}
+      data-show-pagination="false"
+      data-show-navigation="false" 
+      data-items="{{ items_per_row }}"
+    {% endif -%}
+  >
+    <div class="{{ container }} m-section-my m-section-py">
+      <div class="m-section__header m:text-center">
+
+        {% if tab_header == 'horizontal' and section.blocks.size > 0 %}
+          <div class="m-section__tabs{% if animated %} m-scroll-trigger animate--{{ animation_effect }}{% endif %}">
+            <div class="m-tabs__wrapper">
+              
+                <a
+                  class="m-tab-header"
+                  href="#product-tabs-{{ section.id }}-1"
+                  data-index="0"
+                >
+                  In the set
+                </a>
+            </div>
+            {{ dropdown }}
+          </div>
+        {% endif %}
+      </div>
+
+        <div class="m-product-tabs__content">
+          
+              <div
+                id="product-tabs-{{ section.id }}-1"
+                class="m-tab-content m-swiper-overflow"
+                data-index="0"
+                data-enable-slide="{{ enable_slider }}"
+              >
+                <div class="m-product-list m-slider-control-hover-inside m-mixed-layout {% if mobile_disable_slider or enable_slider != true %} m-mixed-layout--mobile-grid{% if use_scroll_mobile %} m-mixed-layout--mobile-scroll{% endif %}{% endif %}">
+                  <div class="m-mixed-layout__wrapper{% if enable_slider %} swiper-container{% endif %}">
+                    <div
+                      class="m-mixed-layout__inner m:grid m:grid-2-cols md:m:grid-3-cols lg:m:grid-4-cols xl:m:grid-{{- items_per_row -}}-cols{% if enable_slider %} swiper-wrapper{% endif %}"
+                      data-products-container
+                    >
+                      {% for product in product.metafields.custom.in_the_set.value limit: 10 %}
+                        {% if enable_slider %}
+                          <div class="swiper-slide m:column">
+                            {% liquid
+                              case card_style
+                                when '1'
+                                  render 'product-card-1', product: product, image_ratio: image_ratio, show_vendor: show_vendor, index: forloop.index, animated: animated, animation_effect: animation_effect
+                                when '2'
+                                  render 'product-card-2', product: product, image_ratio: image_ratio, show_vendor: show_vendor, index: forloop.index, animated: animated, animation_effect: animation_effect
+                                when '3'
+                                  render 'product-card-3', product: product, image_ratio: image_ratio, show_vendor: show_vendor, index: forloop.index, animated: animated, animation_effect: animation_effect
+                                when '4'
+                                  render 'product-card-4', product: product, image_ratio: image_ratio, show_vendor: show_vendor, index: forloop.index, animated: animated, animation_effect: animation_effect
+                                when '5'
+                                  render 'product-card-5', product: product, image_ratio: image_ratio, show_vendor: show_vendor, index: forloop.index, animated: animated, animation_effect: animation_effect
+                              endcase
+                            %}
+                          </div>
+                        {% else %}
+                          {% liquid
+                            case card_style
+                              when '1'
+                                render 'product-card-1', product: product, image_ratio: image_ratio, show_vendor: show_vendor, index: forloop.index, animated: animated, animation_effect: animation_effect, column_wrapper: true
+                              when '2'
+                                render 'product-card-2', product: product, image_ratio: image_ratio, show_vendor: show_vendor, index: forloop.index, animated: animated, animation_effect: animation_effect, column_wrapper: true
+                              when '3'
+                                render 'product-card-3', product: product, image_ratio: image_ratio, show_vendor: show_vendor, index: forloop.index, animated: animated, animation_effect: animation_effect, column_wrapper: true
+                              when '4'
+                                render 'product-card-4', product: product, image_ratio: image_ratio, show_vendor: show_vendor, index: forloop.index, animated: animated, animation_effect: animation_effect, column_wrapper: true
+                              when '5'
+                                render 'product-card-5', product: product, image_ratio: image_ratio, show_vendor: show_vendor, index: forloop.index, animated: animated, animation_effect: animation_effect, column_wrapper: true
+                            endcase
+                          %}
+                        {% endif %}
+                      {% else %}
+                        {% for i in (1..product_limit) %}
+                          <div class="swiper-slide m:column m:text-{{ settings.pcard_alignment }}">
+                            <div
+                              class="m-product-card m-product-card--placeholder{% if animated %} m-scroll-trigger animate--{{ animation_effect }}{% endif %}"
+                              {% if animated %}
+                                data-cascade
+                                style="--animation-order: {{ forloop.index }};"
+                              {% endif %}
+                            >
+                              <div class="m-product-card__media" style="--aspect-ratio: 1/1;">
+                                {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                                {{ 'product-' | append: current | placeholder_svg_tag: 'm-placeholder-svg' }}
+                              </div>
+                              <div class="m-product-card__name{% if settings.uppercase_prd_name %} m:uppercase{% endif %}">
+                                {{ 'homepage.onboarding.product_title' | t }}
+                              </div>
+                              <div class="m-product-card__price">
+                                <p class="m-price">$19.99</p>
+                              </div>
+                            </div>
+                          </div>
+                        {% endfor %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                  {% if enable_slider %}
+                    {% if section.settings.show_navigation or section.settings.show_pagination %}
+                      {% render 'slider-controls',
+                        extra_classes: 'm:hidden',
+                        absolute: true,
+                        container: section.settings.container,
+                        show_nav: section.settings.show_navigation,
+                        show_pagination: section.settings.show_pagination,
+                        nav_class: 'm:hidden'
+                      %}
+                    {% endif %}
+                  {% endif %}
+                </div>
+                {% if section.settings.button_label != blank and section.settings.show_button == true %}
+                  {%- if button_type == 'load' and paginate.pages > 1 -%}
+                    <div class="m-product-tabs__load-more {{ button_loadmore_class }}{% if animated %} m-scroll-trigger animate--{{ animation_effect }}{% endif %}">
+                      <button
+                        class="m-button {{ section.settings.button_style | replace: 'sf__btn-primary', 'm-button--primary' | replace: 'sf__btn-secondary', 'm-button--secondary' | replace: 'sf__btn-link', 'm-button--link' | replace: 'sf__btn-white', 'm-button--white' }} {{ section.settings.button_size }} m-spinner-button"
+                        data-load-more-product
+                      >
+                        <span class="m-spinner-icon">
+                          <svg
+                            class="animate-spin m-svg-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                          >
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                        </span>
+                        <span>{{ section.settings.button_label }}</span>
+                      </button>
+                    </div>
+                  {%- endif -%}
+                  {% if button_type == 'link' %}
+                    <div class="m-product-tabs__load-more m:text-center{% if animated %} m-scroll-trigger animate--{{ animation_effect }}{% endif %}">
+                      <a
+                        class="m-button {{ section.settings.button_style | replace: 'sf__btn-primary', 'm-button--primary' | replace: 'sf__btn-secondary', 'm-button--secondary' | replace: 'sf__btn-link', 'm-button--link' | replace: 'sf__btn-white', 'm-button--white' }} {{ section.settings.button_size }}"
+                        href="{{ current_collection.url }}"
+                        data-load-more-product
+                      >
+                        <span>{{ section.settings.button_label }}</span>
+                      </a>
+                    </div>
+                  {% endif %}
+                {% endif %}
+              </div>
+        </div>
+    </div>
+  </m-product-tabs>
+</section>

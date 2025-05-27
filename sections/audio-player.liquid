@@ -1,0 +1,29 @@
+<div id="audio-player-container" style="position: fixed; left: 10px; bottom: 75%; z-index: 9999;">
+    <audio id="audio-player" loop>
+        <source src="https://cdn.shopify.com/s/files/1/0526/4811/6407/files/05_-_Vienna.mp3?v=1712615495" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <button id="play-pause-btn" onclick="togglePlayPause()" style="font-weight: bold;">Play 'Vienna' by Billy Joel</button>
+</div>
+
+<script>
+    var audio = document.getElementById('audio-player');
+    var playPauseBtn = document.getElementById('play-pause-btn');
+
+    function togglePlayPause() {
+        if (audio.paused) {
+            audio.play();
+            playPauseBtn.innerHTML = '<span style="font-size: 24px;">⏯</span>';
+        } else {
+            audio.pause();
+            playPauseBtn.innerHTML = "Play 'Vienna' by Billy Joel";
+        }
+    }
+
+    audio.onplay = () => playPauseBtn.innerHTML = '<span style="font-size: 24px;">⏯</span>';
+    audio.onpause = () => playPauseBtn.innerHTML = "Play Vienna";
+</script>
+
+
+
+

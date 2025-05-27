@@ -1,0 +1,2170 @@
+{% liquid
+  assign selected_variant = product.selected_or_first_available_variant
+  assign size_title = 'size'
+  assign product_form_id = 'product-form-' | append: section.id
+  assign product_form_class = 'product-form-' | append: section.id
+
+  if update_browser_history == null
+    assign update_browser_history = section.settings.enable_history_state
+  endif
+
+  assign image_field = section.blocks | where: 'type', 'image_field'
+  assign wishlist_app = settings.wishlist_app
+
+  if section.settings.layout == 'layout-7'
+    assign alignBreadcrumb = 'center'
+  else
+    assign alignBreadcrumb = 'left'
+  endif
+
+  for block in section.blocks
+    if block.type == 'variant_picker'
+      assign size_title = block.settings.size_title | default: 'size'
+      break
+    endif
+  endfor
+
+  assign variant_id = product.selected_or_first_available_variant.id
+  assign selected_variant_id = ''
+  unless section.settings.show_featured_media
+    assign selected_variant_id = product.selected_variant.id
+  endunless
+%}
+<style>
+  {%  if template.suffix contains 'pre-order' %}
+    .main-product__block-shipping_details{
+    display:none;
+    }
+  {% endif %}
+</style>
+{% comment %} Fallback for case not show block price, buy buttons {% endcomment %}
+<input type="hidden" name="id" value="{{ variant_id }}" data-selected-variant="{{ selected_variant_id }}" disabled>
+{% comment %} End comment {% endcomment %}
+{%- for block in section.blocks -%}
+  {% if block.type == 'select_size' %}
+    {% assign hidden_class = 'md:m:hidden' %}
+  {% elsif block.type == 'variant_picker' or block.type == 'buy_buttons' %}
+    {% assign hidden_class = 'm:hidden md:m:block' %}
+  {% else %}
+    {% assign hidden_class = '' %}
+  {% endif %}
+  <div
+    class="main-product__block main-product__block-{{ block.type }} {{ hidden_class }}"
+    {{ block.shopify_attributes }}
+  >
+    {%- case block.type -%}
+      {%- when '@app' -%}
+        {% render block %}
+      {%- when 'badge' -%}
+        {%- liquid
+          assign has_tags = false
+          for tag in product.tags
+            if tag contains 'tag__'
+              assign has_tags = true
+            endif
+          endfor
+        -%}
+        {% if has_tags %}
+          <div class="product-block-group product-block-group--tags m:display-flex">
+            {% render 'product-tags', product: product %}
+          </div>
+        {% endif %}
+      {%- when 'breadcrumb' -%}
+        {% render 'breadcrumb', container: 'container', justify: alignBreadcrumb, hide_current: true %}
+      {%- when 'title' -%}
+        <div class="product-block-group product-block-group--title">
+          {% if is_featured == true %}
+            <h2 class="m-product-title">
+              {{ product.title }}
+              {% if product.metafields.custom and product.metafields.custom.productpagebadgebyap %}
+                <span class="custom-badge">
+                  {{ product.metafields.custom.productpagebadgebyap }}
+                </span>
+              {% endif %}
+            </h2>
+          {% else %}
+            <h1 class="m-product-title">
+              {{ product.title }}
+              {% if product.metafields.custom and product.metafields.custom.productpagebadgebyap %}
+                <span class="custom-badgebyap">
+                  {{ product.metafields.custom.productpagebadgebyap }}
+                </span>
+              {% endif %}
+            </h1>
+          {% endif %}
+          {% if section.settings.show_atwl and section.settings.layout != 'layout-7' %}
+            <div class="m-product-wishlist m:hidden md:m:block">
+              {% if wishlist_app == 'growave' %}
+                {% liquid
+                  capture the_snippet_fave_icon
+                    render 'ssw-widget-faveicon' with product.id
+                  endcapture
+                %}
+                {% unless the_snippet_fave_icon contains 'Liquid error' %}
+                  {{ the_snippet_fave_icon }}
+                {% else %}
+                  {% render 'mm-ssw-widget-faveicon' with product.id %}
+                {% endunless %}
+              {% else %}
+                {% render 'tooltip', type: 'wishlist', product: product, class_name: 'm-tooltip--left', style: style %}
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+        {% if settings.review_app == 'ali_reviews' %}
+          <div product-id="{{ product.id }}" class="alr-display-review-badge"></div>
+        {% endif %}
+      {%- when 'inline_price' -%}
+        <div class="inline-price-wrapper m:display-flex m:justify-between m:items-start ">
+          <h2 class="m-product-title m:flex-1">
+            {{ product.title }}
+          </h2>
+          {% render 'product-prices',
+            use_variant: true,
+            product: product,
+            show_sale_badge: block.settings.show_saving,
+            price_text_size: 'h2',
+            sale_badge_type: block.settings.sale_badge_type
+          %}
+        </div>
+      {%- when 'price' -%}
+        <div class="product-block-group--price">
+          {% render 'product-prices',
+            use_variant: true,
+            product: product,
+            show_sale_badge: block.settings.show_saving,
+            price_text_size: 'm:text-xl md:m:text-2xl',
+            sale_badge_type: block.settings.sale_badge_type
+          %}
+        </div>
+        {%- if shop.taxes_included -%}
+          <div class="m-product-tax">
+            {{ 'products.product.include_taxes' | t }}
+          </div>
+        {%- endif -%}
+        <div class="installment-shoppay">
+          {%- form 'product', product, id: 'product-form-installment', class: 'installment' -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            {{ form | payment_terms }}
+          {%- endform -%}
+        </div>
+      {%- when 'short_description' -%}
+        {% if product.metafields.descriptor.short_description != blank %}
+          <div class="m-product-description">{{ product.metafields.descriptor.short_description }}</div>
+        {% endif %}
+      {%- when 'description' -%}
+        <div class="m-product-description rte">
+          {{ product.description }}
+        </div>
+      {%- when 'rating' -%}
+        {% render 'product-reviews-app__badge', product: product %}
+      {%- when 'meta' -%}
+        <ul class="m-product-meta">
+          {% if block.settings.show_vendor and product.vendor != blank %}
+            <li>
+              <span class="m-product-meta--label">{{ 'products.product.vendor' | t }}:</span>
+              <div class="m-product-meta--value">{{ product.vendor | link_to_vendor }}</div>
+            </li>
+          {% endif %}
+          {% if block.settings.show_type and product.type != blank %}
+            <li>
+              <span class="m-product-meta--label">{{ 'products.product.type' | t }}:</span>
+              <div class="m-product-meta--value">{{ product.type | link_to_type }}</div>
+            </li>
+          {% endif %}
+          {% if block.settings.show_collections and product.collections.size > 0 %}
+            <li>
+              <span class="m-product-meta--label">{{ 'products.product.collections' | t }}:</span>
+              <div class="m-product-meta--value">
+                {% for collection in product.collections %}
+                  <a href="{{ collection.url }}" class="hover:text-black">
+                    {{ collection.title }}
+                    {%- if forloop.last != true -%},{%- endif -%}
+                  </a>
+                {% endfor %}
+              </div>
+            </li>
+          {% endif %}
+          {% if block.settings.show_availability %}
+            <li>
+              <span class="m-product-meta--label">{{ 'products.product.availability' | t }}:</span>
+              <div
+                class="m-product-meta--value m-product-availability{% unless selected_variant.available %} m-product-availability--outofstock{% endunless %}"
+                data-availability
+              >
+                {%- if selected_variant.available -%}
+                  {{- 'products.product.in_stock' | t -}}
+                {%- else -%}
+                  {% render 'new-locale', key: 'products.product.out_of_stock' %}
+                {%- endif -%}
+              </div>
+            </li>
+          {% endif %}
+          {% if block.settings.show_sku %}
+            <li>
+              <span class="m-product-meta--label">{{ 'products.product.sku' | t }}:</span>
+              <div class="m-product-meta--value" data-variant-sku>{{ selected_variant.sku | default: 'N/A' }}</div>
+            </li>
+          {% endif %}
+        </ul>
+      {%- when 'custom_field' -%}
+        {% liquid
+          assign label_hidden = false
+          assign field_type = block.settings.field_type
+          assign field_options = block.settings.field_options
+          assign field_name = block.settings.title
+          assign field_placeholder = block.settings.field_placeholder
+          assign field_required = block.settings.field_required
+          assign show_at_checkout = block.settings.show_at_checkout
+
+          if field_name == blank
+            assign label_hidden = true
+            assign field_name = 'Custom field ' | append: forloop.index
+          endif
+        %}
+        <div class="m-product-custom-field" data-theme-fields data-product-custom-field="{{ field_type }}">
+          <label class="m-product-option--label{% if label_hidden %} m:hidden{% endif %}" for="{{ block.id }}">
+            {{ field_name -}}
+            {%- if field_required -%}
+              <sup>*</sup>
+            {%- endif %}
+          </label>
+          {% unless show_at_checkout %}
+            {% assign field_name = field_name | prepend: '_' %}
+          {% endunless %}
+          {% case field_type %}
+            {% when 'text' %}
+              <input
+                type="text"
+                id="{{ block.id }}"
+                class="form-field form-field--input"
+                placeholder="{{ field_placeholder }}"
+                name="properties[{{- field_name -}}]"
+                {% if field_required %}
+                  required
+                {% endif %}
+                form="{{ product_form_id }}"
+              >
+            {% when 'textarea' %}
+              <textarea
+                id="{{ block.id }}"
+                class="form-field form-field--input"
+                placeholder="{{ field_placeholder }}"
+                name="properties[{{- field_name -}}]"
+                {% if field_required %}
+                  required
+                {% endif %}
+                form="{{ product_form_id }}"
+              ></textarea>
+            {% when 'select' %}
+              {% assign options = field_options | newline_to_br | split: '<br />' %}
+              <select
+                id="{{ block.id }}"
+                class="form-field form-field--input"
+                name="properties[{{- field_name -}}]"
+                {% if field_required %}
+                  required
+                {% endif %}
+                form="{{ product_form_id }}"
+              >
+                {% if field_placeholder != blank %}
+                  <option value="">{{ field_placeholder }}</option>
+                {% endif %}
+                {% for option in options %}
+                  <option value="{{ option }}" label="{{ option }}">{{ option }}</option>
+                {% endfor %}
+              </select>
+          {% endcase %}
+        </div>
+      {%- when 'image_field' -%}
+        {% liquid
+          assign label_hidden = false
+          assign field_name = block.settings.title
+          assign field_required = block.settings.field_required
+          assign show_at_checkout = block.settings.show_at_checkout
+          if field_name == blank
+            assign label_hidden = true
+            assign field_name = 'Custom image ' | append: forloop.index
+          endif
+        %}
+        <div class="m-product-custom-field" data-theme-fields data-product-custom-field="image_field">
+          <label class="m-product-option--label{% if label_hidden %} m:hidden{% endif %}" for="{{ block.id }}">
+            {{ field_name -}}
+            {%- if field_required -%}
+              <sup>*</sup>
+            {%- endif %}
+          </label>
+          {% unless show_at_checkout %}
+            {% assign field_name = field_name | prepend: '_' %}
+          {% endunless %}
+          <input
+            type="file"
+            accept="image/*"
+            id="{{ block.id }}"
+            name="properties[{{- field_name -}}]"
+            {% if field_required %}
+              required
+            {% endif %}
+            form="{{ product_form_id }}"
+            class="form-field form-field--input"
+          >
+        </div>
+
+      {%- when 'visitors' -%}
+        {%- liquid
+          assign live_views_min = block.settings.live_views_range | split: '-' | first
+          assign live_views_max = block.settings.live_views_range | split: '-' | last
+          assign modulo_numb = live_views_max | minus: live_views_min
+          assign live_views_current = 'now' | date: '%S' | modulo: modulo_numb | plus: live_views_min
+        -%}
+        <m-visitiors-counter
+          class="m-product-live-views m:inline-flex m:items-center m-gradient m-color-{{ block.settings.color_scheme }}"
+          data-live-views-current="{{ live_views_current }}"
+          data-live-views-min="{{ live_views_min }}"
+          data-live-views-max="{{ live_views_max }}"
+          data-live-views-duration="{{ block.settings.live_view_duration }}"
+        >
+          <span class="live-views-icon{% if block.settings.live_view_icon_blinks %} animate-pulse{% endif %}">
+            <svg
+              class="m-svg-icon--medium"
+              fill="currentColor"
+              stroke="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 576 512"
+            >
+              <path d="M569.354 231.631C512.97 135.949 407.81 72 288 72 168.14 72 63.004 135.994 6.646 231.631a47.999 47.999 0 0 0 0 48.739C63.031 376.051 168.19 440 288 440c119.86 0 224.996-63.994 281.354-159.631a47.997 47.997 0 0 0 0-48.738zM288 392c-102.556 0-192.091-54.701-240-136 44.157-74.933 123.677-127.27 216.162-135.007C273.958 131.078 280 144.83 280 160c0 30.928-25.072 56-56 56s-56-25.072-56-56l.001-.042C157.794 179.043 152 200.844 152 224c0 75.111 60.889 136 136 136s136-60.889 136-136c0-31.031-10.4-59.629-27.895-82.515C451.704 164.638 498.009 205.106 528 256c-47.908 81.299-137.444 136-240 136z"/>
+            </svg>
+          </span>
+          <div class="live-views-text">
+            {%- assign live_views_numb = '{count_number}' -%}
+            {{ block.settings.live_views_text | replace: live_views_numb, live_views_current }}
+          </div>
+        </m-visitiors-counter>
+        <script src="{{ 'visitors-counter.js' | asset_url }}" defer="defer"></script>
+      {%- when 'variant_picker' -%}
+        {% render 'product-option-2',
+          unique: '200e29ie929eMCkjnvdj',
+          product: product,
+          section: section,
+          block: block,
+          size_title: size_title,
+          product_form_id: product_form_id,
+          update_browser_history: update_browser_history
+        %}
+      {%- when 'buy_buttons' -%}
+        {% style %}
+                {% if block.settings.button_style   %}
+                  button.shopify-payment-button__button::before {
+                content: '{{ block.settings.buynow_text }}';
+                  }
+                          button.shopify-payment-button__button::before {
+              background:#fcfcfc;
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              width: 100%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              padding-left: 10px;
+              color: black;
+              font-size: 14px;
+              font-weight: 500;
+              border-radius: 0 !important;
+              }
+              .shopify-payment-button__button.shopify-payment-button__button--unbranded {
+              background: transparent;
+              border: 1px solid lightgray !important;
+          }
+              .m-product-form .m-add-to-cart {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding: 10px;
+              font-size: 14px;
+              }
+
+              .image_bag svg {
+              max-width: 20px;
+              height: auto;
+              }
+              .shopify-payment-button__button.shopify-payment-button__button--unbranded {
+              /* border: 0 !important; */
+              /* border-radius: 0px !important; */
+              }
+              .shopify-payment-button__button {
+              position: relative;
+              }
+              button.m-add-to-cart {
+              /* border-radius: 0 !important; */
+              }
+              button.m-add-to-cart {
+              background: #333333;
+              color: white;
+              text-align: left;
+              }
+              .main-product__block-buy_buttons .m-product-dynamic-checkout.show-add-to-cart {
+              margin-top: 10px !important;
+              }
+              /* button.shopify-payment-button__button:hover {
+              box-shadow: none !important;
+              } */
+              button.shopify-payment-button__button::after {
+              content: '';
+              background: url('https://cdn.shopify.com/s/files/1/0526/4811/6407/files/arrow-right.svg?v=1727614412') no-repeat center;
+              background-size: contain; /* Ensures the image scales properly */
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 24px; /* Adjust based on your icon size */
+              height: 24px; /* Adjust based on your icon size */
+              right: 10px; /* Adjust as needed */
+              }
+                  {% endif %}
+        {% endstyle %}
+
+        {% liquid
+          assign gift_card_recipient_feature_active = false
+          if block.settings.show_gift_card_recipient and product.gift_card?
+            assign gift_card_recipient_feature_active = true
+          endif
+
+          assign show_dynamic_checkout = block.settings.show_dynamic_checkout
+          if image_field.size > 0 or gift_card_recipient_feature_active == true
+            assign show_dynamic_checkout = false
+          endif
+        %}
+        <product-form class="m-product-form m-product-form--main" data-product-id="{{ product.id }}">
+          {%- form 'product',
+            product,
+            id: product_form_id,
+            data-product-id: product.id,
+            class: product_form_class,
+            novalidate: 'novalidate',
+            data-type: 'add-to-cart-form',
+            data-product-id: product.id,
+            data-product-handle: product.handle,
+            data-dynamic-checkout: show_dynamic_checkout,
+            data-enable-image-zoom: section.settings.show_zoom_button,
+            data-enable-history-state: section.settings.enable_history_state,
+            data-enable-video-autoplay: section.settings.enable_video_autoplay
+          -%}
+            <input
+              type="hidden"
+              name="id"
+              value="{{ variant_id }}"
+              data-selected-variant="{{ selected_variant_id }}"
+              disabled
+            >
+            {%- if gift_card_recipient_feature_active -%}
+              {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
+            {%- endif -%}
+
+            <div class="m-product-form--wrapper m:display-flex m:flex-wrap m:items-end">
+              {% if block.settings.show_quantity_selector %}
+                <div class="m-product-form--input">
+                  <label class="m-product-option--label">
+                    {{ 'products.product.quantity' | t }}
+                  </label>
+                  {% render 'product-qty-input', product_form_id: product_form_id, product: product %}
+                </div>
+              {% endif %}
+              {% if block.settings.show_atc_button %}
+                {% liquid
+                  assign btn_class = 'm-button--primary'
+                  if show_dynamic_checkout
+                    assign btn_class = 'm-button--secondary'
+                  endif
+                %}
+                <button
+                  type="submit"
+                  name="add"
+                  class="m-add-to-cart m-add-to-cartbutton m-spinner-button m-button {{ btn_class }} {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}"
+                  data-atc-text="{{ 'products.product.add_to_cart' | t }}"
+                >
+                  <span class="m-spinner-icon">
+                    <svg
+                      class="animate-spin m-svg-icon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                  </span>
+                  <span class="m-add-to-cart--text m-add-to-cart--buttontext">
+                    {% if product.selected_or_first_available_variant.available %}
+                      {{ 'products.product.add_to_cart' | t }}
+                    {% else %}
+                      {{ 'products.product.sold_out' | t }}
+                    {% endif %}
+                  </span>
+                  {% if block.settings.button_style %}
+                    <span class="image_bag">
+                      <svg
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class=""
+                        xml:space="preserve"
+                        style="enable-background:new 0 0 512 512"
+                        viewBox="0 0 512 512"
+                        y="0"
+                        x="0"
+                        height="512"
+                        width="512"
+                        version="1.1"
+                      >
+                        <g><path class="" data-sanitized-data-original="#000000" data-original="#000000" opacity="1" fill="#ffffff" d="M454.66 169.4A31.86 31.86 0 0 0 432 160h-64v-16a112 112 0 0 0-224 0v16H80a32 32 0 0 0-32 32v216c0 39 33 72 72 72h272a72.22 72.22 0 0 0 50.48-20.55 69.48 69.48 0 0 0 21.52-50.2V192a31.78 31.78 0 0 0-9.34-22.6zM320 336H192a16 16 0 0 1 0-32h128a16 16 0 0 1 0 32zm16-176H176v-16a80 80 0 0 1 160 0z"/></g>
+                      </svg>
+                    </span>
+                  {% endif %}
+                  <span class="m-add-to-cartprice">{{ product.price | money }}</span>
+                </button>
+                {% if section.settings.show_atwl and section.settings.layout == 'layout-7' %}
+                  <div class="m-product-wishlist m:hidden md:m:block">
+                    {% render 'tooltip', type: 'wishlist', class_name: 'm-tooltip--top' %}
+                  </div>
+                {% endif %}
+              {% endif %}
+              {% liquid
+                assign show_terms = false
+                if settings.agree_text != blank and settings.show_agree_on_product
+                  render 'agree-terms-checkbox'
+                  assign show_terms = true
+                endif
+              %}
+              {% if show_dynamic_checkout %}
+                <div
+                  class="m-product-dynamic-checkout buy-one-click{% if block.settings.show_atc_button %} show-add-to-cart{% else %} m:flex-1{% endif %}"
+                  {% if show_terms %}
+                    data-terms-action disabled
+                  {% endif %}
+                >
+                  {{ form | payment_button }}
+                </div>
+              {% endif %}
+            </div>
+            <div class="m-product-form-message"></div>
+
+            <div class="main-product__block-size_popup">
+              <div class="popup-main-container">
+                <div class="popup-content-container">
+                  <div class="exit_btn"><span>✖</span></div>
+
+                  <div class="tab-switcher">
+                    <div class="tab-switcher-button is-active">
+                      <span class="tab-cotent">I KNOW MY SIZE</span>
+                    </div>
+                    <div class="tab-switcher-button">
+                      <span class="tab-cotent">I DON’T KNOW MY SIZE</span>
+                    </div>
+                  </div>
+
+                  <div class="tab_container active_first">
+                    <div class="left_box_content">
+                      <div class="left_box_container">
+                        <h4 class="heading_top">{{ block.settings.heading_top }}</h4>
+
+                        <p class="line-item-property__field">
+                          <label>Choose your units</label>
+
+                          <input type="radio" name="properties[Choose your units]" value="inches">
+                          <span>inches</span>
+
+                          <input type="radio" name="properties[Choose your units]" value="cms">
+                          <span>cms</span>
+                        </p>
+                        <div class="line_item_properties">
+                          <!-- Shoulder Width -->
+                          <p class="line-item-property__field">
+                            <label for="shoulder-width">Shoulder Width</label>
+                            <input id="shoulder-width" type="text" name="properties[Shoulder Width]">
+                          </p>
+                          <!-- Upper Bust -->
+                          <p class="line-item-property__field">
+                            <label for="upper-bust">Upper Bust</label>
+                            <input id="upper-bust" type="text" name="properties[Upper Bust]">
+                          </p>
+                          <!-- Bust -->
+                          <p class="line-item-property__field">
+                            <label for="bust">Bust</label>
+                            <input id="bust" type="text" name="properties[Bust]">
+                          </p>
+                          <!-- Under Bust -->
+                          <p class="line-item-property__field">
+                            <label for="under-bust">Under Bust</label>
+                            <input id="under-bust" type="text" name="properties[Under Bust]">
+                          </p>
+                          <!-- High Waist -->
+                          <p class="line-item-property__field">
+                            <label for="high-waist">High Waist</label>
+                            <input id="high-waist" type="text" name="properties[High Waist]">
+                          </p>
+                          <!-- Lower Waist -->
+                          <p class="line-item-property__field">
+                            <label for="lower-waist">Lower Waist</label>
+                            <input id="lower-waist" type="text" name="properties[Lower Waist]">
+                          </p>
+                          <!-- Hips -->
+                          <p class="line-item-property__field">
+                            <label for="hips">Hips</label>
+                            <input id="hips" type="text" name="properties[Hips]">
+                          </p>
+                          <!-- Thigh -->
+                          <p class="line-item-property__field">
+                            <label for="thigh">Thigh</label>
+                            <input id="thigh" type="text" name="properties[Thigh]">
+                          </p>
+                          <!-- Calf -->
+                          <p class="line-item-property__field">
+                            <label for="calf">Calf</label>
+                            <input id="calf" type="text" name="properties[Calf]">
+                          </p>
+                          <!-- Top/Dress Length (with heels) -->
+                          <p class="line-item-property__field">
+                            <label for="TopDress-length">Top/Dress Length</label>
+                            <input id="TopDress-length" type="text" name="properties[Top/Dress Length]">
+                          </p>
+                          <!-- Pants Length -->
+                          <p class="line-item-property__field">
+                            <label for="pants-length">Pants Length</label>
+                            <input id="pants-length" type="text" name="properties[Pants Length]">
+                          </p>
+                        </div>
+                        <div class="client_information">
+                          <h4 class="heading_top">{{ block.settings.heading_bottom }}</h4>
+                          <div class="line_item_properties">
+                            <!-- Email ID -->
+                            <p class="line-item-property__field">
+                              <label for="email-id">Email ID</label>
+                              <input id="email-id" type="text" name="properties[Email ID]">
+                            </p>
+                            <!-- Mobile Number -->
+                            <p class="line-item-property__field">
+                              <label for="mobile-number">Mobile Number</label>
+                              <input id="mobile-number" type="text" name="properties[Mobile Number]">
+                            </p>
+                          </div>
+                          <div class="custom_button_kn">
+                            <span class="custom_button_kn_inner">Submit</span>
+                          </div>
+                          <div class="bottom_text">
+                            <p class="botttom_text_inner">{{ block.settings.submit_btn_txt }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% if block.settings.popup_image != blank %}
+                      <div class="right_box_image">
+                        <img src="{{ block.settings.popup_image | img_url: 'master' }}" width="" height="">
+                      </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="tab_container">
+                    <div class="custom_form">
+                      <div class="custom_form_inner">
+                        {% if block.settings.tab_two_txt != blank %}
+                          <div class="tab_upper_text">
+                            <p class="tab_upper_text_inner">{{ block.settings.tab_two_txt }}</p>
+                          </div>
+                        {% endif %}
+
+                        <div class="image_whatsapp">
+                          <a href="{{ block.settings.link_whatsapp }}" target="_blank">
+                            <img
+                              src="https://cdn.shopify.com/s/files/1/0526/4811/6407/files/start-chat-whatsapp-10062122-8173609-ezgif.com-crop_1.gif?v=1714660911"
+                              width=""
+                              height=""
+                            >
+                          </a>
+                        </div>
+                        <h4 class="heading_top">{{ block.settings.text_tab_two }}</h4>
+                        <div class="line_item_properties">
+                          <!-- Full Name -->
+                          <p class="line-item-property__field">
+                            <label for="full-name">Full Name</label>
+                            <input id="full-name" type="text" name="properties[Full Name]">
+                          </p>
+                          <!-- Email ID -->
+                          <p class="line-item-property__field">
+                            <label for="email">Email ID</label>
+                            <input id="email" type="text" name="properties[Email]">
+                          </p>
+                          <!-- Mobile Number -->
+                          <p class="line-item-property__field">
+                            <label for="mobile">Mobile Number</label>
+                            <input id="mobile" type="text" name="properties[Mobile]">
+                          </p>
+                          <!-- Special Request -->
+                          <p class="line-item-property__field">
+                            <label for="special-request">Special Request</label>
+                            <input id="special-request" type="text" name="properties[Special Request]">
+                          </p>
+                          <div class="submit_button_cs">
+                            <span>Submit</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {%- endform -%}
+        </product-form>
+        <link
+          rel="stylesheet"
+          href="{{ 'pickup-availability.css' | asset_url }}"
+          media="print"
+          onload="this.media='all';"
+        >
+        {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities
+          | where: 'pick_up_enabled', true
+        -%}
+        {% capture available %}{% if product.selected_or_first_available_variant.available and pick_up_availabilities.size > 0 %} available{% endif %}{% endcapture %}
+        <pickup-availability
+          {{ available }}
+          class="product__pickup-availabilities"
+          data-base-url="{{ routes.root_url }}"
+          data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+          data-has-only-default-variant="{{ product.has_only_default_variant }}"
+        >
+          <template>
+            <pickup-availability-preview class="m-pickup-availability__preview m:display-flex">
+              <svg
+                class="m-svg-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                aria-hidden="true"
+                viewBox="0 0 20 20"
+              >
+                <path fill="#DE3618" stroke="#fff" d="M13.94 3.94 10 7.878l-3.94-3.94A1.499 1.499 0 1 0 3.94 6.06L7.88 10l-3.94 3.94a1.499 1.499 0 1 0 2.12 2.12L10 12.12l3.94 3.94a1.497 1.497 0 0 0 2.12 0 1.499 1.499 0 0 0 0-2.12L12.122 10l3.94-3.94a1.499 1.499 0 1 0-2.121-2.12z"/>
+              </svg>
+              <div class="m-pickup-availability__info">
+                <p class="m:text-color-subtext">
+                  {%- render 'new-locale', key: 'products.product.pickup_availability.unavailable' -%}
+                </p>
+                <button class="m-pickup-availability__button m-button m-button--link">
+                  {%- render 'new-locale', key: 'products.product.pickup_availability.refresh' -%}
+                </button>
+              </div>
+            </pickup-availability-preview>
+          </template>
+        </pickup-availability>
+        <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
+      {% when 'shipping_details' %}
+        {% unless template.suffix contains 'pre-order' %}
+          <style>
+            #pin-code-delivery-form {
+              align-items: center;
+              justify-content: flex-start;
+            }
+            #pin-code-delivery-form input {
+              height: 42px;
+              border-radius:0;
+              flex:1;
+              padding-left:12px;
+              outline:none;
+            }
+            #pin-code-delivery-form .dl-m-button {
+              font-weight: 500;
+              text-transform: capitalize;
+              border-radius:0;
+              padding: 10px 20px;
+              height:42px;
+              display:flex;
+              gap:8px;
+            }
+            .delivery-widget {
+              font-family: 'Futura', 'FuturaStd-Medium', -apple-system, BlinkMacSystemFont, sans-serif;
+              {% comment %} padding: 10px; {% endcomment %}
+              {% comment %} border: 1px solid #e5e7eb; {% endcomment %}
+              {% comment %} border-radius: 4px; {% endcomment %}
+              position: relative;
+            }
+
+            .delivery-header-container {
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-start;
+              margin-bottom: 10px;
+              position: relative;
+            }
+
+            .header-content {
+              display: grid;
+                  flex-grow: 1;
+                  gap: 12px;
+                  {% comment %} margin-bottom: 12px; {% endcomment %}
+            }
+
+            .delivery-header {
+              color: #333333;
+              {% comment %} font-size: 14px; {% endcomment %}
+              font-weight: 400;
+              margin: 0;
+              gap:10px;
+            }
+
+            .tooltip {
+              position: relative;
+              display: inline-block;
+            }
+
+            .tooltip-circle {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+            }
+
+            .info-icon {
+              width: 18px;
+              height: 18px;
+            }
+
+            .tooltip .tooltiptext {
+              visibility: hidden;
+              width: 380px;
+              background-color: #f9f9f9;
+              color: #333333;
+              text-align: left;
+              border-radius: 6px;
+              padding: 10px 12px;
+              position: absolute;
+              z-index: 1;
+              bottom: 125%;
+              right: 0;
+              font-size: 12px;
+              line-height: 1.4;
+              opacity: 0;
+              transition: opacity 0.15s ease, transform 0.15s ease;
+              transform: translateY(10px);
+            }
+
+            .tooltip .tooltiptext::after {
+              content: '';
+              position: absolute;
+              top: 100%;
+              right: 10px;
+              margin-left: -5px;
+              border-width: 5px;
+              border-style: solid;
+              border-color: #f9f9f9 transparent transparent transparent;
+            }
+
+            .tooltip:hover .tooltiptext {
+              visibility: visible;
+              opacity: 1;
+              transform: translateY(0);
+            }
+
+            .delivery-info {
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+            }
+
+            .standard-delivery {
+              color: #6b7280;
+              color: #6b7280;
+              padding-bottom: 12px;
+              border-bottom: .5px solid #ccc;
+              {% comment %} font-size: 12px; {% endcomment %}
+              {% comment %} line-height: 1.4; {% endcomment %}
+            }
+
+            .delivery-title {
+              margin: 0 0 4px 0;
+            }
+
+            .delivery-times {
+              display: flex;
+              align-items: center;
+            }
+
+            .delivery-estimate {
+              margin: 0;
+            }
+
+            .express-option-btn {
+              {% comment %} border-top:1px solid #ccc; {% endcomment %}
+              width: 100%;
+              {% comment %} background-color: #f9f9f9; {% endcomment %}
+              border: none;
+              {% comment %} border-radius: 6px; {% endcomment %}
+              {% comment %} padding: 12px 0; {% endcomment %}
+              cursor: pointer;
+              transition: background-color 0.15s ease;
+            }
+
+            .btn-content {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              font-size:12px
+            }
+
+            .left-content {
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              {% comment %} font-size: 12px; {% endcomment %}
+              color: #1673b0;
+            }
+
+            .express-icon {
+              width: 20px;
+              height: 20px;
+            }
+
+            .chevron-icon {
+              width: 16px;
+              height: 16px;
+              transition: transform 0.2s ease;
+              filter: brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) hue-rotate(223deg) brightness(98%)
+                contrast(94%);
+            }
+
+            .chevron-icon.open {
+              transform: rotate(180deg);
+            }
+
+            .express-details {
+              background-color: #f4f4f4;
+              border-radius: 4px;
+              padding: 12px 16px;
+            }
+
+            .express-details h3 {
+              color: #1673b0;
+              margin: 0 0 4px 0;
+            }
+
+            .price-text {
+              font-weight: 500;
+            }
+
+            .express-details p {
+              color: #6b7280;
+              {% comment %} font-size: 12px; {% endcomment %}
+          font-size:12px;
+              margin: 0;
+            }
+            .button-ctiy {
+              background: #f5f5f5;
+              padding: 8px;
+              border-radius: 2px;
+              color: #333;
+              font-weight: 500;
+              margin-left:8px;
+            }
+            .delivery-times #cod-delivery,.delivery-times #prepaid-delivery,.express-details #express-delivery{
+            font-weight:400;
+            color:#333;
+            }
+
+
+            {% comment %} #pin-code-delivery-form .dl-m-button .loader {
+              width: 14px;
+              height: 14px;
+              border: 3px solid gray;
+              border-top: 3px solid transparent;
+              border-radius: 50%;
+              animation: spin 1s linear infinite;
+            } {% endcomment %}
+
+            .delivery-text{
+              display: flex;
+              gap: 5px;
+              align-items: center;
+              font-weight:500;
+              font-size: 12px
+              {% comment %} font-size: 12px; {% endcomment %}
+            }
+            .delivery-text span{
+            width:max-content;
+            }
+            .header-content.open .sp_form{
+            display:none;
+            }
+          </style>
+          <div class="delivery-widget">
+            <div class="delivery-header-container">
+              <div class="header-content">
+                <div class="delivery-header m:display-flex m:justify-between m:items-center">
+                  <span>Free Shipping Across India, On Us!</span>
+                  <div class="tooltip">
+                    <div class="tooltip-circle">
+                      {% comment %}
+                        <img
+                          src="https://cdn.shopify.com/s/files/1/0526/4811/6407/files/info_3.svg?v=1739402973"
+                          alt="Info"
+                          class="info-icon"
+                        >
+                      {% endcomment %}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" viewBox="0 0 24 24" height="18">
+                        <path stroke-linejoin="round" stroke-linecap="round" stroke="#000" fill="none" d="m10.5 10.5h1v5m-1 0h2m-.5-7.5c0 .276-.224.5-.5.5s-.5-.224-.5-.5.224-.5.5-.5.5.224.5.5zm-.5 12.5c-4.971 0-9-4.029-9-9s4.029-9 9-9 9 4.029 9 9-4.029 9-9 9z"/>
+                      </svg>
+                    </div>
+                    <span class="tooltiptext"
+                      >Our team works 24/7 for swift delivery. These dates are estimates – 90% of orders arrive earlier.</span
+                    >
+                  </div>
+                </div>
+                <div class="delivery-header m:display-flex m:items-center m:justify-between">
+                  <span class="m:display-flex m:items-center">
+                    Delivery to
+                    <span class="button-ctiy m:display-flex m:items-center">
+                      <svg
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class=""
+                        xml:space="preserve"
+                        style="margin-right:2px;margin-left:6px;"
+                        viewBox="0 0 64 64"
+                        y="0"
+                        x="0"
+                        height="auto"
+                        width="16"
+                        version="1.1"
+                      >
+                        <g><path data-original="#000000" opacity="1" fill="#6c6c6c" d="M32 13a11 11 0 1 0 11 11 11.012 11.012 0 0 0-11-11zm0 20a9 9 0 1 1 9-9 9.01 9.01 0 0 1-9 9z"/><path data-original="#000000" opacity="1" fill="#6c6c6c" d="M32 0A24.027 24.027 0 0 0 8 24c0 17.229 22.357 38.813 23.309 39.723a1 1 0 0 0 1.382 0C33.643 62.813 56 41.229 56 24A24.027 24.027 0 0 0 32 0zm0 61.594C28.194 57.776 10 38.744 10 24a22 22 0 0 1 44 0c0 14.737-18.194 33.774-22 37.594z"/></g>
+                      </svg>
+                      <span id="delivery-city" style="cursor:pointer;">INDIA</span>
+                      <svg
+                        width="16"
+                        height="16"
+                        style="margin-left:3px; rotate:270deg;"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M13.5306 6.53073L8.5306 11.5307C8.46092 11.6007 8.37813 11.6561 8.28696 11.694C8.1958 11.7318 8.09806 11.7513 7.99935 11.7513C7.90064 11.7513 7.8029 11.7318 7.71173 11.694C7.62057 11.6561 7.53778 11.6007 7.4681 11.5307L2.4681 6.53073C2.3272 6.38984 2.24805 6.19874 2.24805 5.99948C2.24805 5.80023 2.3272 5.60913 2.4681 5.46823C2.60899 5.32734 2.80009 5.24818 2.99935 5.24818C3.19861 5.24818 3.3897 5.32734 3.5306 5.46823L7.99997 9.93761L12.4693 5.46761C12.6102 5.32671 12.8013 5.24756 13.0006 5.24756C13.1999 5.24756 13.391 5.32671 13.5318 5.46761C13.6727 5.60851 13.7519 5.7996 13.7519 5.99886C13.7519 6.19812 13.6727 6.38921 13.5318 6.53011L13.5306 6.53073Z" fill="currentColor"></path>
+                      </svg>
+                    </span>
+                  </span>
+                  <div class="sp_form" style="color: #1673b0;cursor:pointer;">Check Pincode</div>
+                </div>
+                <form id="pin-code-delivery-form" class="m:display-flex m:hidden">
+                  <input type="number" id="delivery-zip-code">
+                  <button type="submit" class="dl-m-button m-button--primary m:justify-center m:items-center">
+                    <span class="loader m:block m:hidden"></span>
+                    <span class="submit-text">Check</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div class="delivery-info">
+              <div class="standard-delivery">
+                <p class="delivery-title">Arrives by:</p>
+                <div class="delivery-times m:display-flex m:items-center m:justify-between">
+                  <div class="delivery-text">
+                    <span class="m:display-flex m:items-center">
+                      <svg
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xml:space="preserve"
+                        style="margin-right:3px;"
+                        viewBox="0 0 64 64"
+                        y="0"
+                        x="0"
+                        height="24"
+                        width="24"
+                        version="1.1"
+                      >
+                        <g><path data-original="#000000" opacity="1" fill="#acb2b4" d="M52.1 13.1H11.8c-4.3 0-7.8 3.5-7.8 7.8v22.3c0 4.3 3.5 7.8 7.8 7.8h40.3c4.4 0 7.9-3.5 7.9-7.8V20.9c0-4.3-3.5-7.8-7.9-7.8zm-40.3 2h40.3c3.2 0 5.9 2.7 5.9 5.8v3.6H6v-3.6c0-3.2 2.6-5.8 5.8-5.8zm40.3 33.8H11.8c-3.2 0-5.8-2.6-5.8-5.8V26.4h52v16.7c0 3.2-2.7 5.8-5.9 5.8z"/><path data-original="#000000" opacity="1" fill="#acb2b4" d="M28.8 42.3H12.9c-.6 0-1 .4-1 1s.4 1 1 1h15.8c.6 0 1-.4 1-1s-.4-1-.9-1z"/></g>
+                      </svg>
+                      Pay Online:
+                    </span>
+                    <span id="prepaid-delivery">Calculating...</span>
+                  </div>
+                  <div class="delivery-text">
+                    <span class="m:display-flex m:items-center">
+                      <svg
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class=""
+                        xml:space="preserve"
+                        style="margin-right:3px;"
+                        viewBox="0 0 68 68"
+                        y="0"
+                        x="0"
+                        height="auto"
+                        width="24px"
+                        version="1.1"
+                      >
+                        <g><path data-original="#000000" opacity="1" fill="#acb2b4" d="M60.8 15.19H7.21C3.79 15.19 1 17.98 1 21.4v25.21c0 3.42 2.79 6.2 6.21 6.2H60.8c3.42 0 6.2-2.78 6.2-6.2V21.4c0-3.42-2.78-6.21-6.2-6.21zM65 46.61a4.2 4.2 0 0 1-4.2 4.2H7.21c-2.32 0-4.21-1.88-4.21-4.2V21.4c0-2.32 1.89-4.21 4.21-4.21H60.8c2.32 0 4.2 1.89 4.2 4.21z"/><path data-original="#000000" opacity="1" fill="#acb2b4" d="M61 25.27a4.08 4.08 0 0 1-4.07-4.07c0-.55-.45-1-1-1H12.07c-.55 0-1 .45-1 1A4.08 4.08 0 0 1 7 25.27c-.55 0-1 .45-1 1v15.47c0 .55.45 1 1 1 2.24 0 4.07 1.82 4.07 4.07 0 .55.45 1 1 1h43.86c.55 0 1-.45 1-1 0-2.25 1.83-4.07 4.07-4.07.55 0 1-.45 1-1V26.27c0-.55-.45-1-1-1zm-1 15.55c-2.55.42-4.56 2.44-4.99 4.99H12.99A6.099 6.099 0 0 0 8 40.82V27.19a6.099 6.099 0 0 0 4.99-4.99h42.02A6.099 6.099 0 0 0 60 27.19z"/><path data-original="#000000" opacity="1" fill="#acb2b4" d="M17.963 30.066A3.938 3.938 0 0 0 14.03 34a3.941 3.941 0 0 0 3.933 3.94 3.945 3.945 0 0 0 3.94-3.94 3.941 3.941 0 0 0-3.94-3.934zm0 5.874A1.939 1.939 0 0 1 16.03 34c0-1.067.867-1.934 1.933-1.934 1.07 0 1.94.867 1.94 1.934 0 1.07-.87 1.94-1.94 1.94zM49.917 30.066A3.938 3.938 0 0 0 45.984 34a3.941 3.941 0 0 0 3.933 3.94 3.945 3.945 0 0 0 3.94-3.94 3.941 3.941 0 0 0-3.94-3.934zm0 5.874A1.939 1.939 0 0 1 47.984 34c0-1.067.867-1.934 1.933-1.934 1.07 0 1.94.867 1.94 1.934 0 1.07-.87 1.94-1.94 1.94zM40.26 30.53c0 .55-.44 1-1 1h-1.89a5.257 5.257 0 0 1-5.15 4.24h-1.45l4.14 5.35c.33.43.25 1.06-.18 1.4a1.002 1.002 0 0 1-1.41-.18l-5.38-6.95c-.33-.44-.25-1.07.18-1.41.18-.14.39-.21.6-.21h3.5c1.44 0 2.65-.94 3.08-2.24h-6.56c-.56 0-1-.45-1-1 0-.56.44-1 1-1h6.56c-.43-1.31-1.64-2.25-3.08-2.25h-3.48a.96.96 0 0 1-.68-.28.952.952 0 0 1-.32-.72c0-.55.44-1 1-1h10.52c.56 0 1 .45 1 1s-.44 1-1 1h-2.95c.52.64.89 1.4 1.06 2.25h1.89c.56 0 1 .44 1 1z"/></g>
+                      </svg>
+                      COD:
+                    </span>
+                    <span id="cod-delivery">Calculating...</span>
+                  </div>
+                </div>
+              </div>
+              <button class="express-option-btn" id="toggle-options">
+                <div class="btn-content">
+                  <div class="left-content">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      fill="currentColor"
+                      height="20px"
+                      width="20px"
+                      viewBox="0 0 50 50"
+                    >
+                      <path fill="#1673b0" d="M 0 8 L 0 10 L 28.09375 10 C 28.492188 10 29 10.507813 29 10.90625 L 29 38 L 18.90625 38 C 18.429688 35.164063 15.964844 33 13 33 C 10.035156 33 7.570313 35.164063 7.09375 38 L 3 38 C 2.445313 38 2 37.554688 2 37 L 2 28 L 0 28 L 0 37 C 0 38.644531 1.355469 40 3 40 L 7.09375 40 C 7.570313 42.835938 10.035156 45 13 45 C 15.964844 45 18.429688 42.835938 18.90625 40 L 34.09375 40 C 34.570313 42.835938 37.035156 45 40 45 C 42.964844 45 45.429688 42.835938 45.90625 40 L 47 40 C 47.832031 40 48.5625 39.625 49.09375 39.09375 C 49.625 38.5625 50 37.832031 50 37 L 50 27.40625 C 50 26.28125 49.570313 25.25 49.1875 24.46875 C 48.804688 23.6875 48.40625 23.125 48.40625 23.125 L 48.40625 23.09375 L 44.3125 17.59375 L 44.28125 17.59375 L 44.28125 17.5625 C 43.394531 16.453125 41.972656 15 40 15 L 32 15 C 31.640625 15 31.3125 15.066406 31 15.1875 L 31 10.90625 C 31 9.304688 29.695313 8 28.09375 8 Z M 0 12 L 0 14 L 18 14 L 18 12 Z M 0 16 L 0 18 L 15 18 L 15 16 Z M 32 17 L 36 17 L 36 26 C 36 26.832031 36.375 27.5625 36.90625 28.09375 C 37.4375 28.625 38.167969 29 39 29 L 48 29 L 48 37 C 48 37.167969 47.875 37.4375 47.65625 37.65625 C 47.4375 37.875 47.167969 38 47 38 L 45.90625 38 C 45.429688 35.164063 42.964844 33 40 33 C 37.035156 33 34.570313 35.164063 34.09375 38 L 31 38 L 31 18 C 31 17.832031 31.125 17.5625 31.34375 17.34375 C 31.5625 17.125 31.832031 17 32 17 Z M 38 17 L 40 17 C 40.824219 17 41.972656 17.925781 42.6875 18.8125 L 46.78125 24.28125 L 46.8125 24.3125 C 46.832031 24.339844 47.101563 24.722656 47.40625 25.34375 C 47.660156 25.859375 47.792969 26.472656 47.875 27 L 39 27 C 38.832031 27 38.5625 26.875 38.34375 26.65625 C 38.125 26.4375 38 26.167969 38 26 Z M 0 20 L 0 22 L 12 22 L 12 20 Z M 0 24 L 0 26 L 9 26 L 9 24 Z M 13 35 C 15.222656 35 17 36.777344 17 39 C 17 41.222656 15.222656 43 13 43 C 10.777344 43 9 41.222656 9 39 C 9 36.777344 10.777344 35 13 35 Z M 40 35 C 42.222656 35 44 36.777344 44 39 C 44 41.222656 42.222656 43 40 43 C 37.777344 43 36 41.222656 36 39 C 36 36.777344 37.777344 35 40 35 Z"/>
+                    </svg>
+                    <span>Want it sooner? Express delivery available</span>
+                  </div>
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0526/4811/6407/files/svgexport-25.svg?v=1738623808"
+                    class="chevron-icon"
+                    alt="Toggle express options"
+                  >
+                </div>
+              </button>
+              <div class="express-details m:hidden" id="express-options">
+                <div><span>Express shipping : </span> <span class="price-text">+₹300</span></div>
+                <div><span>Arrives by: </span><span id="express-delivery">Calculating...</span></div>
+              </div>
+            </div>
+          </div>
+
+          <script>
+            function calculateDeliveryDates() {
+              // Helper to add business days while skipping weekends
+              function addBusinessDays(date, days) {
+                let currentDate = new Date(date);
+                let addedDays = 0;
+                while (addedDays < days) {
+                  currentDate.setDate(currentDate.getDate() + 1);
+                  if (currentDate.getDay() !== 0 && currentDate.getDay() !== 6) {
+                    addedDays++;
+                  }
+                }
+                return currentDate;
+              }
+
+              // Format date to "Month Day" format
+              function formatDate(date) {
+                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                return `${months[date.getMonth()]} ${date.getDate()}`;
+              }
+
+              // Get delivery estimates based on shipping method
+              function getDeliveryEstimate(shippingMethod = 'prepaid') {
+                const today = new Date();
+
+                switch (shippingMethod.toLowerCase()) {
+                  case 'express':
+                    const expressDate = addBusinessDays(today, 4);
+                    return formatDate(expressDate);
+
+                  case 'cod':
+                    const codStartDate = addBusinessDays(today, 8);
+                    const codEndDate = addBusinessDays(today, 9);
+                    return `${formatDate(codStartDate)} - ${formatDate(codEndDate).slice(3)}`;
+
+                  case 'prepaid':
+                  default:
+                    const prepaidDate = addBusinessDays(today, 7);
+                    return formatDate(prepaidDate);
+                }
+              }
+
+              // City detection using IP geolocation
+              async function detectCity() {
+                try {
+                  const response1 = await fetch('https://api.ipify.org?format=json');
+                  const { ip } = await response1.json();
+
+                  const response = await fetch(`https://pro.ip-api.com/json?key=5TLDXWFGcDJhR3Q`);
+                  const data = await response.json();
+                  console.log(data);
+                  return data.regionName
+                    ? data.country.toLowerCase() == 'india'
+                      ? data.regionName.includes('National Capital')
+                        ? 'Delhi N.C.R'
+                        : data.regionName
+                      : 'INDIA'
+                    : 'INDIA';
+                } catch (err) {
+                  console.log('Error detecting city:', err);
+                  return 'India';
+                }
+              }
+
+              // Initialize delivery widget
+              async function initDeliveryWidget() {
+                const city = await detectCity();
+                const prepedDelivery = document.querySelector('#prepaid-delivery');
+                const codDelivery = document.querySelector('#cod-delivery');
+                const expressDelivery = document.querySelector('#express-delivery');
+                const deliveryCity = document.querySelector('#delivery-city');
+
+                prepedDelivery.textContent = `${getDeliveryEstimate('prepaid')}`;
+                codDelivery.textContent = `${getDeliveryEstimate('cod')}`;
+                expressDelivery.textContent = `${getDeliveryEstimate('express')}`;
+                deliveryCity.textContent = city;
+
+                // Add click handler for city selector
+                const pincodeForm = document.querySelector('#pin-code-delivery-form');
+                const openForm = document.querySelector('.sp_form');
+                const pincodeFormLoader = pincodeForm.querySelector('.loader');
+                const pincodeFormSubmitText = pincodeForm.querySelector('.submit-text');
+                pincodeForm.addEventListener('submit', async function (e) {
+                  e.preventDefault();
+                  if (pincodeForm.querySelector('#delivery-zip-code').value.trim().length > 1) {
+                    pincodeFormLoader.classList.remove('m:hidden');
+                    pincodeFormSubmitText.textContent = 'checking';
+                    await new Promise((resolve) => {
+                      setTimeout(() => {
+                        resolve();
+                      }, 1000);
+                    });
+
+                    deliveryCity.textContent = pincodeForm.querySelector('#delivery-zip-code').value;
+                    pincodeFormLoader.classList.add('m:hidden');
+                    pincodeFormSubmitText.textContent = 'check';
+                    pincodeForm.classList.add('m:hidden');
+                    pincodeForm.parentElement.classList.remove('open');
+                  }
+                });
+                deliveryCity.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  pincodeForm.classList.toggle('m:hidden');
+                  pincodeForm.parentElement.classList.toggle('open');
+                });
+                openForm.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  pincodeForm.parentElement.classList.toggle('open');
+                  pincodeForm.classList.toggle('m:hidden');
+                });
+                const expressToggleButton = document.querySelector('#toggle-options');
+                const arrowIcon = expressToggleButton.querySelector('.chevron-icon');
+                const expressOption = document.querySelector('#express-options');
+                expressToggleButton.addEventListener('click', function () {
+                  arrowIcon.classList.toggle('open');
+                  expressOption.classList.toggle('m:hidden');
+                });
+              }
+
+              // Initialize when DOM is ready
+              if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initDeliveryWidget);
+              } else {
+                initDeliveryWidget();
+              }
+            }
+
+            calculateDeliveryDates();
+          </script>
+        {% endunless %}
+      {% when 'divider' %}
+        <div class="divider-block" style="--divider-height:{{ block.settings.height |append:'px' }}"></div>
+      {% when 'select_size' %}
+        <div class="m:display-flex m:justify-between m:items-center" style="margin-bottom: 10px;font-size: 13px;">
+          <i>
+            {% if product.metafields.custom.text_on_first_product_image != blank %}
+              {{ product.metafields.custom.text_on_first_product_image | metafield_tag }}
+            {% endif %}
+          </i>
+          <a
+            href="#open-size-guide"
+            data-open-sizeguide
+            class="m-product-addon--item m:display-flex m:items-center m:justify-end"
+          >
+            <svg 
+              class="m-svg-icon--large"
+              fill="currentColor"
+              stroke="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 640 512"
+              style="margin-right:4px;"
+            >
+              <path d="M608 128H32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h576c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zm0 224H32V160h80v56c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-56h64v56c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-56h64v56c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-56h64v56c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-56h64v56c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-56h80v192z"/>
+            </svg>
+            {% comment %} <span class="m-product-addon--label">{{ 'products.product.size_guide' | t }}</span> {% endcomment %}
+            {% comment %} <span class="m-product-addon--label">{{ 'products.product.size_guide' | t }}</span> {% endcomment %}
+          </a>
+        </div>
+        {% liquid
+          assign select_size_text = 'ADD TO BAG'
+          if product.available == false
+            assign select_size_text = 'OUT OF STOCK - NOTIFY ME'
+          endif
+          if template.suffix contains 'pre-order'
+            assign select_size_text = 'PRE-ORDER'
+          endif
+        %}
+        <slide-popup-button
+          class="m-button m-button--primary m:w-full select-size-button-1"
+          data-popup-id="size-popup"
+          style="max-width: calc(100% - 60px);padding-block:13px;"
+        >
+          <b>{{ select_size_text }}</b>
+        </slide-popup-button>
+      {% when 'in_the_set' %}
+        {% if product.metafields.custom.in_the_set.value != blank %}
+          <p class="m-section__header">In the set</p>
+          <div class="m:display-grid m:grid-2-cols m:items-start m:w-full" style="gap:10px;">
+            {% for product in product.metafields.custom.in_the_set.value %}
+              {% render 'product-card-1', product: product %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      {%- when 'collapsible_tab' -%}
+        {% if block.settings.heading != blank %}
+          <div class="m-product-collapsible">
+            <collapsible-tab
+              class="m-collapsible no-js-hidden"
+              data-block-id="collapsible-tab-{{ block.id }}"
+              {% if block.settings.default_open %}
+                open="true"
+              {% endif %}
+            >
+              <button class="m-collapsible--button" data-trigger>
+                <span>{{ block.settings.heading }}</span>
+                <span class="m-collapsible--icon">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.5306 6.53073L8.5306 11.5307C8.46092 11.6007 8.37813 11.6561 8.28696 11.694C8.1958 11.7318 8.09806 11.7513 7.99935 11.7513C7.90064 11.7513 7.8029 11.7318 7.71173 11.694C7.62057 11.6561 7.53778 11.6007 7.4681 11.5307L2.4681 6.53073C2.3272 6.38984 2.24805 6.19874 2.24805 5.99948C2.24805 5.80023 2.3272 5.60913 2.4681 5.46823C2.60899 5.32734 2.80009 5.24818 2.99935 5.24818C3.19861 5.24818 3.3897 5.32734 3.5306 5.46823L7.99997 9.93761L12.4693 5.46761C12.6102 5.32671 12.8013 5.24756 13.0006 5.24756C13.1999 5.24756 13.391 5.32671 13.5318 5.46761C13.6727 5.60851 13.7519 5.7996 13.7519 5.99886C13.7519 6.19812 13.6727 6.38921 13.5318 6.53011L13.5306 6.53073Z" fill="currentColor"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="m-collapsible--content" data-content hidden>
+                <div class="m-collapsible--content__inner rte">
+                  {{ block.settings.content }}
+                  {{ block.settings.liquid }}
+                </div>
+              </div>
+            </collapsible-tab>
+          </div>
+        {% endif %}
+      {% when 'quatity_progress_bar' %}
+        {% if template.suffix contains 'pre-order' %}
+          {% if product.metafields.custom.pre_order_quantity_info.value %}
+            {% liquid
+              assign quantity_text_array = product.metafields.custom.pre_order_quantity_info.value | split: '__'
+              assign quantity_number = quantity_text_array | first | times: 1
+            %}
+            <style>
+              .qpb-wrapper {
+                padding: 20px 15px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                display: grid;
+                gap: 20px;
+              }
+              .qpb-progress-bar {
+                min-width: 100%;
+                height: 4px;
+                background: lightgray;
+                position: relative;
+              }
+              .qpb-progress-bar .qpb-fill {
+                content: '';
+                position: absolute;
+                height: 100%;
+                background: black;
+              }
+              .qpb-quantity-fade-text h6 {
+                color: gray;
+              }
+              @keyframes fill {
+                from {
+                  width: 0%;
+                }
+                to {
+                  width: var(--pb-width);
+                }
+              }
+              .animation-fill {
+                animation: fill 2s ease-out forwards;
+              }
+            </style>
+            <div class="qpb-wrapper">
+              <div class="qpb-order-text m:display-flex m:items-center m:justify-between">
+                <h6>Limited Pre-Order</h6>
+                <h6>Ships on: {{ quantity_text_array | last }}</h6>
+              </div>
+              <div class="qpb-progress-bar">
+                <div class="qpb-fill" style="--pb-width:{{ quantity_number }}%"></div>
+              </div>
+              <div class="qpb-quantity-fade-text m:display-flex m:items-center m:justify-between">
+                <h6>{{ quantity_text_array | first }}% pre order booked</h6>
+                <!-- <h6>{{ 100 | minus: quantity_number }}% remaining</h6> -->
+              </div>
+            </div>
+
+            <script>
+              document.addEventListener('DOMContentLoaded', function () {
+                const bar = document.querySelector('.qpb-progress-bar');
+                const fillBar = document.querySelector('.qpb-fill');
+                const observer = new IntersectionObserver((entries) => {
+                  entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                      {% comment %} entry.target.classList.add('animation-fill'); {% endcomment %}
+                      fillBar.classList.add('animation-fill');
+                    }
+                  });
+                });
+
+                observer.observe(bar);
+              });
+            </script>
+          {% endif %}
+        {% endif %}
+      {%- when 'collapsible_help_tab' -%}
+        {% if block.settings.heading != blank %}
+          <style>
+            .help-buttons-wrapper {
+              display: grid;
+              gap: 20px;
+            }
+            .help-buttons-wrapper .m-button {
+              padding-block: 4px !important;
+              border: 1px solid #ccc !important;
+              border-radius: 4px !important;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 4px;
+              font-size: 13px;
+              font-weight: 500;
+            }
+            .help-buttons-wrapper .m-button > svg {
+              width: 13px;
+              height: 13px;
+            }
+            .help-buttons-wrapper .special-layout {
+              display: grid;
+              grid-template-columns: repeat(2, calc(50% - 6px));
+              gap: 12px;
+            }
+            .help-buttons-wrapper .m-button {
+              box-shadow: none !important;
+            }
+            .help-buttons-wrapper a::before,
+            .help-buttons-wrapper a::after {
+              content: none !important;
+            }
+          </style>
+          <div class="m-product-collapsible need-help-tab">
+            <collapsible-tab
+              class="m-collapsible no-js-hidden"
+              data-block-id="collapsible-tab-{{ block.id }}"
+              {% if block.settings.default_open %}
+                open="true"
+              {% endif %}
+            >
+              <button class="m-collapsible--button" data-trigger>
+                <span>{{ block.settings.heading }}</span>
+                <span class="m-collapsible--icon">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.5306 6.53073L8.5306 11.5307C8.46092 11.6007 8.37813 11.6561 8.28696 11.694C8.1958 11.7318 8.09806 11.7513 7.99935 11.7513C7.90064 11.7513 7.8029 11.7318 7.71173 11.694C7.62057 11.6561 7.53778 11.6007 7.4681 11.5307L2.4681 6.53073C2.3272 6.38984 2.24805 6.19874 2.24805 5.99948C2.24805 5.80023 2.3272 5.60913 2.4681 5.46823C2.60899 5.32734 2.80009 5.24818 2.99935 5.24818C3.19861 5.24818 3.3897 5.32734 3.5306 5.46823L7.99997 9.93761L12.4693 5.46761C12.6102 5.32671 12.8013 5.24756 13.0006 5.24756C13.1999 5.24756 13.391 5.32671 13.5318 5.46761C13.6727 5.60851 13.7519 5.7996 13.7519 5.99886C13.7519 6.19812 13.6727 6.38921 13.5318 6.53011L13.5306 6.53073Z" fill="currentColor"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="m-collapsible--content" data-content hidden>
+                <div class="m-collapsible--content__inner rte">
+                  {{ block.settings.content }}
+
+                  <div class="help-buttons-wrapper">
+                    <div class="special-layout">
+                      <a class="m-button" href="tel:+918376905539">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="lucide lucide-phone-icon lucide-phone"
+                        >
+                          <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/>
+                        </svg>
+                        Call Us</a
+                      >
+                      <a class="m-button" href="mailto:torqadorn@torqadorn.com">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="lucide lucide-mail-icon lucide-mail"
+                        >
+                          <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/>
+                        </svg>
+                        Email Us</a
+                      >
+                    </div>
+                    <a class="m-button" href="https://wa.me/918376905539">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-message-circle-icon lucide-message-circle"
+                      >
+                        <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+                      </svg>
+                      Whatsapp Us</a
+                    >
+                    <a
+                      class="m-button"
+                      href="https://wa.me/918376905539?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20visit%20to%20your%20studio.%20Here%20are%20the%20times%20that%20work%20for%20me%3A%20%5BAdd%20your%20preferred%20times%20here%5D"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-calendar-icon lucide-calendar"
+                      >
+                        <path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/>
+                      </svg>
+                      Book a Studio Appointment</a
+                    >
+                  </div>
+                  {% comment %} {{ block.settings.liquid }} {% endcomment %}
+                </div>
+              </div>
+            </collapsible-tab>
+          </div>
+        {% endif %}
+      {%- when 'offer_collapsible_tab' -%}
+        {% if block.settings.heading != blank %}
+          <style>
+              .m-collapsible--button [d="M12 5v14"]{
+                transition: transform .3s ease;
+                transform-origin: center;
+                /* rotate: 90deg; */
+              }
+              .m-collapsible--button[aria-expanded="true"] [d="M12 5v14"]{
+                transform: rotate(90deg);
+              }
+
+              .offer_collapsible_tab  {
+                {% comment %} padding-block:10px; {% endcomment %}
+                border:1px solid lightgray;
+                border-radius:4px;
+                overflow: hidden;
+              }
+              .offer_collapsible_tab .m-collapsible--button{
+              padding:10px;
+            }
+            .offer_collapsible_tab .m-collapsible--button[aria-expanded="true"]{
+              border-bottom:1px solid lightgray !important;
+              }
+              .offer_collapsible_tab .m-collapsible--content__inner {
+                {% comment %} border-top:1px solid #ccc; {% endcomment %}
+              padding-block:0;
+              }
+              .offer_collapsible_tab .m-collapsible--content{
+              padding-inline:10px;
+              }
+              .code-button{
+              padding:10px;
+              background:#1673B0;
+              border-radius:4px;
+              display:flex;
+              color:white;
+              box-sizing: content-box;
+                font-size:12px;
+              width: 70px;
+              }
+              .code-button  path{
+              fill:#fff !important;
+              }
+              .offer-block{
+                padding:15px 0px;
+              }
+              .offer-block:not(:last-child){
+                border-bottom:1px solid lightgray;
+              }
+              .offer-info{
+                padding: 10px;
+                text-align: center;
+                margin-top: 6px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                color:#1673B0;
+                background:#e6f4ff;
+              }
+              .offer-block .text div .changable-text{
+              display:none;
+              }
+              .offer-block .text.changed div.remain-text{
+              display:none;
+              }
+              .offer-block .text.changed div .changable-text {
+              display:block;
+              }
+              .code-button .ocl-tick-svg,.code-button.copied .ocl-copy-svg{
+              display:none
+              }
+              .code-button.copied .ocl-tick-svg{
+              display:block;
+              }
+          </style>
+          <div class="m-product-collapsible offer_collapsible_tab">
+            <collapsible-tab
+              class="m-collapsible no-js-hidden"
+              data-block-id="collapsible-tab-{{ block.id }}"
+              {% if block.settings.default_open %}
+                open="true"
+              {% endif %}
+            >
+              <button class="m-collapsible--button" data-trigger>
+                <span class="m:display-flex m:items-center h3" style="font-weight:400; color:#333;">
+                  {% if block.settings.image != blank %}
+                    {{ block.settings.image | image_url: height: 24 | image_tag: style: 'margin-right:8px' }}
+                  {% endif %}
+                  {{ block.settings.heading }}
+                </span>
+                <span class="m-collapsible--icon-new">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="lucide lucide-plus-icon lucide-plus"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    stroke-width="2"
+                    stroke="#333333"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    height="16"
+                    width="16"
+                  >
+                    <path d="M5 12h14"/><path d="M12 5v14"/>
+                  </svg>
+                  {% comment %} <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-minus-icon lucide-minus" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.5" stroke="#333333" fill="none" viewBox="0 0 24 24" height="24" width="24"><path d="M5 12h14"/></svg> {% endcomment %}
+                </span>
+              </button>
+              <div class="m-collapsible--content" data-content hidden>
+                <div class="m-collapsible--content__inner rte">
+                  <div class="offer-block m:display-flex m:justify-between m:items-center">
+                    <div class="text">
+                      <div>10% off your next order</div>
+                      <div class="remain-text"><small>Limited to the first 100 style insiders today</small></div>
+                      <div><small class="changable-text"></small></div>
+                    </div>
+                    {% comment %} <div class="code"> {% endcomment %}
+                    <button class="code-button m:display-flex m:items-center" data-code="INSIDER">
+                      <svg
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="ocl-copy-svg"
+                        xml:space="preserve"
+                        viewBox="0 0 800 800"
+                        y="0"
+                        x="0"
+                        style="margin-right:6px"
+                        width="20px"
+                        height="20px"
+                        version="1.1"
+                      >
+                        <g transform="matrix(-1,0,0,1,800,0)"><path class="" data-original="#8e93a6" opacity="1" d="M200 658.3c-68.9 0-125-56.1-125-125v-200c0-64.8 0-111.7 5.1-149.6 5.8-43.5 18.6-73 41.3-95.7s52.2-35.4 95.7-41.3c38-5.1 84.8-5.1 149.6-5.1H500c68.9 0 125 56.1 125 125h-50c0-41.4-33.6-75-75-75H366.7c-118.7 0-178.2 0-209.9 31.7-31.8 31.8-31.8 91.4-31.8 210v200c0 41.4 33.6 75 75 75z" fill="#c5c5c5"/><path class="" data-original="#1c274c" opacity="1" d="M500 758.3H400c-48.9 0-84.2 0-113.1-3.9-34-4.6-57.3-14.7-75.3-32.7-18.1-18.1-28.2-41.3-32.7-75.3-3.9-28.9-3.9-64.2-3.9-113.1V366.7c0-48.9 0-84.2 3.9-113.1 4.6-34 14.7-57.3 32.7-75.3 18.1-18.1 41.3-28.2 75.3-32.7 28.9-3.9 64.2-3.9 113.1-3.9h100c48.9 0 84.2 0 113.1 3.9 34 4.6 57.3 14.7 75.3 32.7 18.1 18.1 28.2 41.3 32.7 75.3 3.9 28.9 3.9 64.2 3.9 113.1v166.7c0 48.9 0 84.2-3.9 113.1-4.6 34-14.7 57.3-32.7 75.3s-41.3 28.2-75.3 32.7c-28.9 3.8-64.2 3.8-113.1 3.8zM400 191.7c-87.3 0-131.1 0-153 22-22 22-22 65.8-22 153v166.7c0 87.3 0 131.1 22 153s65.8 22 153 22h100c87.3 0 131.1 0 153-22 22-22 22-65.8 22-153V366.7c0-87.3 0-131.1-22-153-22-22-65.8-22-153-22z" fill="#333333"/></g>
+                      </svg>
+                      <svg
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="ocl-tick-svg"
+                        xml:space="preserve"
+                        viewBox="0 0 24 24"
+                        y="0"
+                        x="0"
+                        style="margin-right:6px"
+                        width="20px"
+                        height="20px"
+                        version="1.1"
+                      >
+                        <g><g data-name="Flat Color" fill="#20bf55"><path class="" data-original="#20bf55" opacity="1" fill="#333333" d="M12 22.75a10.75 10.75 0 0 1 0-21.5 10.53 10.53 0 0 1 4.82 1.15.75.75 0 0 1-.68 1.34 9 9 0 0 0-4.14-1A9.25 9.25 0 1 0 21.25 12a2 2 0 0 0 0-.25.75.75 0 1 1 1.5-.14V12A10.76 10.76 0 0 1 12 22.75z"/><path class="" data-original="#20bf55" opacity="1" fill="#333333" d="M11.82 15.41a.7.7 0 0 1-.52-.22l-4.83-4.74a.75.75 0 0 1 0-1.06.77.77 0 0 1 1.07 0l4.29 4.23 9.65-9.49a.77.77 0 0 1 1.07 0 .75.75 0 0 1 0 1.06l-10.18 10a.74.74 0 0 1-.55.22z"/></g></g>
+                      </svg>
+
+                      INSIDER
+                    </button>
+                    {% comment %} </div> {% endcomment %}
+                  </div>
+                  <div class="offer-block m:display-flex m:justify-between m:items-center">
+                    <div class="text">
+                      <div>20% off when you spend ₹16,000+</div>
+                      <div class="remain-text"><small>Copy code and apply at checkout</small></div>
+                      {% comment %} <div><small class="changable-text"></small></div> {% endcomment %}
+                    </div>
+                    {% comment %} <div class="code"> {% endcomment %}
+                    <button class="code-button m:display-flex m:items-center" data-code="TORQ20">
+                      <svg
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="ocl-copy-svg"
+                        xml:space="preserve"
+                        viewBox="0 0 800 800"
+                        y="0"
+                        x="0"
+                        style="margin-right:6px"
+                        width="20px"
+                        height="20px"
+                        version="1.1"
+                      >
+                        <g transform="matrix(-1,0,0,1,800,0)"><path class="" data-original="#8e93a6" opacity="1" d="M200 658.3c-68.9 0-125-56.1-125-125v-200c0-64.8 0-111.7 5.1-149.6 5.8-43.5 18.6-73 41.3-95.7s52.2-35.4 95.7-41.3c38-5.1 84.8-5.1 149.6-5.1H500c68.9 0 125 56.1 125 125h-50c0-41.4-33.6-75-75-75H366.7c-118.7 0-178.2 0-209.9 31.7-31.8 31.8-31.8 91.4-31.8 210v200c0 41.4 33.6 75 75 75z" fill="#c5c5c5"/><path class="" data-original="#1c274c" opacity="1" d="M500 758.3H400c-48.9 0-84.2 0-113.1-3.9-34-4.6-57.3-14.7-75.3-32.7-18.1-18.1-28.2-41.3-32.7-75.3-3.9-28.9-3.9-64.2-3.9-113.1V366.7c0-48.9 0-84.2 3.9-113.1 4.6-34 14.7-57.3 32.7-75.3 18.1-18.1 41.3-28.2 75.3-32.7 28.9-3.9 64.2-3.9 113.1-3.9h100c48.9 0 84.2 0 113.1 3.9 34 4.6 57.3 14.7 75.3 32.7 18.1 18.1 28.2 41.3 32.7 75.3 3.9 28.9 3.9 64.2 3.9 113.1v166.7c0 48.9 0 84.2-3.9 113.1-4.6 34-14.7 57.3-32.7 75.3s-41.3 28.2-75.3 32.7c-28.9 3.8-64.2 3.8-113.1 3.8zM400 191.7c-87.3 0-131.1 0-153 22-22 22-22 65.8-22 153v166.7c0 87.3 0 131.1 22 153s65.8 22 153 22h100c87.3 0 131.1 0 153-22 22-22 22-65.8 22-153V366.7c0-87.3 0-131.1-22-153-22-22-65.8-22-153-22z" fill="#333333"/></g>
+                      </svg>
+                      <svg
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="ocl-tick-svg"
+                        xml:space="preserve"
+                        viewBox="0 0 24 24"
+                        y="0"
+                        x="0"
+                        style="margin-right:6px"
+                        width="20px"
+                        height="20px"
+                        version="1.1"
+                      >
+                        <g><g data-name="Flat Color" fill="#20bf55"><path class="" data-original="#20bf55" opacity="1" fill="#333333" d="M12 22.75a10.75 10.75 0 0 1 0-21.5 10.53 10.53 0 0 1 4.82 1.15.75.75 0 0 1-.68 1.34 9 9 0 0 0-4.14-1A9.25 9.25 0 1 0 21.25 12a2 2 0 0 0 0-.25.75.75 0 1 1 1.5-.14V12A10.76 10.76 0 0 1 12 22.75z"/><path class="" data-original="#20bf55" opacity="1" fill="#333333" d="M11.82 15.41a.7.7 0 0 1-.52-.22l-4.83-4.74a.75.75 0 0 1 0-1.06.77.77 0 0 1 1.07 0l4.29 4.23 9.65-9.49a.77.77 0 0 1 1.07 0 .75.75 0 0 1 0 1.06l-10.18 10a.74.74 0 0 1-.55.22z"/></g></g>
+                      </svg>
+
+                      TORQ20
+                    </button>
+                    {% comment %} </div> {% endcomment %}
+                  </div>
+                </div>
+              </div>
+            </collapsible-tab>
+          </div>
+          <div class="offer-info m:hidden">Promo code copied - Find your size and add it to your bag.</div>
+          <script>
+          
+            const codeButtons = document.querySelectorAll('.code-button');
+            const offerBlockText = document.querySelectorAll('.offer-block .text');
+            const offerInfo = document.querySelector('.offer-info');
+            const collepsTabSwitch = document.querySelector('.offer_collapsible_tab .m-collapsible--button');
+            function getRandomNumber(min, max) {
+              return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            if (!sessionStorage.getItem('offerRandomNumber')) {
+              const randomNumber = getRandomNumber(61, 66);
+              sessionStorage.setItem('offerRandomNumber', randomNumber);
+            }
+            collepsTabSwitch.addEventListener('click', function () {
+              if (this.getAttribute('aria-expanded') === 'true') {
+                offerInfo.classList.add('m:hidden');
+                offerBlockText.forEach((e) => e.classList.remove('changed'));
+              }
+            });
+            codeButtons.forEach((e) =>
+              e.addEventListener('click', function () {
+                const code = this.getAttribute('data-code');
+                this.classList.add('copied');
+                navigator.clipboard
+                  .writeText(code)
+                  .then(() => {
+                    console.log('Code copied to clipboard', code);
+                  })
+                  .catch((err) => {
+                    console.error('Failed to copy code:', err);
+                  });
+
+                const textElement = e.parentElement.querySelector('.changable-text');
+                if (textElement) {
+                  const previousTextContent = textElement.textContent;
+                  textElement.textContent = `${sessionStorage.getItem(
+                    'offerRandomNumber'
+                  )} people have claimed this offer`;
+                  textElement.closest('.text').classList.add('changed');
+                }
+                setTimeout(() => {
+                  this.classList.remove('copied');
+                  offerInfo.classList.remove('m:hidden');
+                }, 700);
+              })
+            );
+          </script>
+        {% endif %}
+      {%- when 'key_feature_tab' -%}
+        {% if product.metafields.custom.key_features.value != blank %}
+          <div class="m-product-collapsible key_feature_tab">
+            <collapsible-tab
+              class="m-collapsible no-js-hidden"
+              data-block-id="collapsible-tab-{{ block.id }}"
+              {% if block.settings.default_open %}
+                open="true"
+              {% endif %}
+            >
+              <button class="m-collapsible--button" data-trigger>
+                <span>{{ block.settings.heading }}</span>
+                <span class="m-collapsible--icon">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.5306 6.53073L8.5306 11.5307C8.46092 11.6007 8.37813 11.6561 8.28696 11.694C8.1958 11.7318 8.09806 11.7513 7.99935 11.7513C7.90064 11.7513 7.8029 11.7318 7.71173 11.694C7.62057 11.6561 7.53778 11.6007 7.4681 11.5307L2.4681 6.53073C2.3272 6.38984 2.24805 6.19874 2.24805 5.99948C2.24805 5.80023 2.3272 5.60913 2.4681 5.46823C2.60899 5.32734 2.80009 5.24818 2.99935 5.24818C3.19861 5.24818 3.3897 5.32734 3.5306 5.46823L7.99997 9.93761L12.4693 5.46761C12.6102 5.32671 12.8013 5.24756 13.0006 5.24756C13.1999 5.24756 13.391 5.32671 13.5318 5.46761C13.6727 5.60851 13.7519 5.7996 13.7519 5.99886C13.7519 6.19812 13.6727 6.38921 13.5318 6.53011L13.5306 6.53073Z" fill="currentColor"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="m-collapsible--content" data-content hidden>
+                <div class="m-collapsible--content__inner rte m:display-grid m:grid-2-cols" style="row-gap:1.5rem">
+                  {% for item in product.metafields.custom.key_features.value %}
+                    {% assign pkf_item = item | split: '__' %}
+                    <div class="m:display-grid m:grid-1-cols">
+                      <span class="key">{{ pkf_item[0] }}</span>
+                      <span class="value" style="color:black;">{{ pkf_item[1] }}</span>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </collapsible-tab>
+          </div>
+        {% endif %}
+      {%- when 'text' -%}
+        {% if block.settings.text != blank %}
+          {% liquid
+            assign text_style = block.settings.text_style
+            assign text_class = ''
+            case text_style
+              when 'subtitle'
+                assign text_class = 'm-product-text--subtitle'
+              when 'uppercase'
+                assign text_class = 'm-product-text--subtitle m-product-text--upercase'
+            endcase
+          %}
+          <div class="m-product-text {{ text_class }}">
+            {{ block.settings.text }}
+          </div>
+        {% endif %}
+      {%- when 'custom_text' -%}
+        {% if block.settings.content != blank %}
+          <div class="m-product-text">
+            <div class="rte">
+              {{ block.settings.content }}
+            </div>
+          </div>
+        {% endif %}
+      {%- when 'image' -%}
+        {% if block.settings.image != blank %}
+          {% assign image_link = block.settings.image_link %}
+          <div class="m:display-flex m:justify-{{ block.settings.image_alignment }}">
+            <div class="m-product-image" style="width: {{ block.settings.image_width }}%">
+              {% if image_link != blank %}<a href="{{ image_link }}" class="m:block">{% endif %}
+              {% render 'responsive-image', image: block.settings.image %}
+              {% if image_link != blank %}</a>{% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {%- when 'custom_liquid' -%}
+        {% if block.settings.custom_liquid != blank %}
+          <div class="m-product-text">
+            {{ block.settings.custom_liquid }}
+          </div>
+        {% endif %}
+      {%- when 'trust_badge' -%}
+        {% if block.settings.trust_badges_image != blank %}
+          {% assign position = block.settings.position %}
+          <div class="m-product-trust-badge m:text-center m-product-trust-badge--{{ position | default: 'below' }}">
+            <div style="width: {{ block.settings.trust_badges_image_width }};">
+              {% render 'responsive-image', image: block.settings.trust_badges_image %}
+            </div>
+            {% if block.settings.trust_badges_text != blank %}
+              <div class="m-product-trust-badge__content m:text-base rte">{{ block.settings.trust_badges_text }}</div>
+            {% endif %}
+          </div>
+        {% endif %}
+      {%- when 'addons' -%}
+        {% liquid
+          assign show_size_button = true
+          assign size_title_downcase = size_title | downcase
+          for option in product.options_with_values
+            assign downcased_option = option.name | downcase
+            if size_title_downcase contains downcased_option
+              assign show_size_button = false
+              break
+            endif
+          endfor
+        %}
+        <div class="m-product-addon">
+          {% if block.settings.show_atcp or block.settings.show_ask_a_question or show_size_button %}
+            <div class="m-product-addon--wrapper m:display-flex m:flex-wrap">
+              {% if block.settings.show_atcp %}
+                <a
+                  href="#add-to-compare"
+                  class="m-product-addon--item m-compare-button in-prod-page m:display-flex m:items-center"
+                  data-product-handle="{{ product.handle }}"
+                >
+                  <svg
+                    class="m-svg-icon--medium"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 384 512"
+                  >
+                    <path fill="currentColor" d="M164 384h-44V48a16 16 0 0 0-16-16H88a16 16 0 0 0-16 16v336H28a12 12 0 0 0-8.73 20.24l68 72a12 12 0 0 0 17.44 0l68-72A12 12 0 0 0 164 384zm200.72-276.24l-68-72a12 12 0 0 0-17.44 0l-68 72A12 12 0 0 0 220 128h44v336a16 16 0 0 0 16 16h16a16 16 0 0 0 16-16V128h44a12 12 0 0 0 8.72-20.24z" class=""></path>
+                  </svg>
+                  <span
+                    class="m-product-addon--label"
+                    data-revert-text="{{ 'products.product.remove_from_compare' | t }}"
+                  >
+                    {{- 'products.product.add_to_compare' | t -}}
+                  </span>
+                </a>
+              {% endif %}
+              {% if block.settings.show_ask_a_question %}
+                <m-ask-question class="m-product-addon--item m:display-flex">
+                  <a class="form-ask__button m:display-flex m:items-center" data-open-ask-question>
+                    <svg
+                      class="m-svg-icon--medium"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                    >
+                      <path d="M256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28zm7.67-24h-16c-6.627 0-12-5.373-12-12v-.381c0-70.343 77.44-63.619 77.44-107.408 0-20.016-17.761-40.211-57.44-40.211-29.144 0-44.265 9.649-59.211 28.692-3.908 4.98-11.054 5.995-16.248 2.376l-13.134-9.15c-5.625-3.919-6.86-11.771-2.645-17.177C185.658 133.514 210.842 116 255.67 116c52.32 0 97.44 29.751 97.44 80.211 0 67.414-77.44 63.849-77.44 107.408V304c0 6.627-5.373 12-12 12zM256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8z"/>
+                    </svg>
+                    <span class="m-product-addon--label">{{ 'products.product.add_a_question' | t }}</span>
+                  </a>
+                  {% render 'form__ask-a-question' %}
+                </m-ask-question>
+                <script src="{{ 'ask-question.js' | asset_url }}" defer="defer"></script>
+              {% endif %}
+              {% if show_size_button %}
+                <a
+                  href="#open-size-guide"
+                  data-open-sizeguide
+                  class="m-product-addon--item m:display-flex m:items-center m:hidden"
+                >
+                  <svg
+                    class="m-svg-icon--large"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 512"
+                  >
+                    <path d="M608 128H32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h576c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zm0 224H32V160h80v56c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-56h64v56c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-56h64v56c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-56h64v56c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-56h64v56c0 4.42 3.58 8 8 8h16c4.42 0 8-3.58 8-8v-56h80v192z"/>
+                  </svg>
+                  <span class="m-product-addon--label">{{ 'products.product.size_guide' | t }}</span>
+                </a>
+              {% endif %}
+              {% if block.settings.show_social %}
+                <m-sharing class="m-product-addon--item m:display-flex">
+                  <a class="m:display-flex m:items-center" data-open-share>
+                    <svg class="m-svg-icon--medium" width="14" height="16" fill="none" viewBox="0 0 14 16">
+                      <path fill="currentColor" d="M11 10c.8333 0 1.5417.2917 2.125.875.5833.5833.875 1.2917.875 2.125 0 .8333-.2917 1.5417-.875 2.125-.5833.5833-1.2917.875-2.125.875-.8333 0-1.54167-.2917-2.125-.875C8.29167 14.5417 8 13.8333 8 13c0-.3125.04167-.6146.125-.9062l-3.0625-1.9063C4.47917 10.7292 3.79167 11 3 11c-.83333 0-1.54167-.2917-2.125-.875C.291667 9.54167 0 8.83333 0 8c0-.83333.291667-1.54167.875-2.125C1.45833 5.29167 2.16667 5 3 5c.79167 0 1.47917.27083 2.0625.8125L8.125 3.90625C8.04167 3.61458 8 3.3125 8 3c0-.83333.29167-1.54167.875-2.125C9.45833.291667 10.1667 0 11 0c.8333 0 1.5417.291667 2.125.875C13.7083 1.45833 14 2.16667 14 3c0 .83333-.2917 1.54167-.875 2.125C12.5417 5.70833 11.8333 6 11 6c-.7917 0-1.47917-.27083-2.0625-.8125L5.875 7.09375c.1875.60417.1875 1.20833 0 1.8125l3.0625 1.90625C9.52083 10.2708 10.2083 10 11 10zm1.0625-8.0625C11.7708 1.64583 11.4167 1.5 11 1.5c-.4167 0-.7708.14583-1.0625.4375C9.64583 2.22917 9.5 2.58333 9.5 3s.14583.77083.4375 1.0625c.2917.29167.6458.4375 1.0625.4375.4167 0 .7708-.14583 1.0625-.4375.2917-.29167.4375-.64583.4375-1.0625s-.1458-.77083-.4375-1.0625zm-10.125 7.125C2.22917 9.35417 2.58333 9.5 3 9.5s.77083-.14583 1.0625-.4375S4.5 8.41667 4.5 8s-.14583-.77083-.4375-1.0625S3.41667 6.5 3 6.5s-.77083.14583-1.0625.4375S1.5 7.58333 1.5 8s.14583.77083.4375 1.0625zm8 5c.2917.2917.6458.4375 1.0625.4375.4167 0 .7708-.1458 1.0625-.4375.2917-.2917.4375-.6458.4375-1.0625 0-.4167-.1458-.7708-.4375-1.0625-.2917-.2917-.6458-.4375-1.0625-.4375-.4167 0-.7708.1458-1.0625.4375C9.64583 12.2292 9.5 12.5833 9.5 13c0 .4167.14583.7708.4375 1.0625z"/>
+                    </svg>
+                    <span class="m-product-addon--label">{{ 'products.product.social_share' | t }}</span>
+                  </a>
+                  <div class="m-product-addon--sharing m:hidden">
+                    <div
+                      class="m-product-addon--sharing__copy-link"
+                      data-color-scheme="m-color-{{ settings.drawer_popup_color_scheme }}"
+                    >
+                      <label>{{ 'products.product.copy_link' | t }}</label>
+                      <input
+                        class="form-field form-field--input"
+                        type="text"
+                        value="{{ shop.secure_url }}/products/{{ product.handle }}"
+                      >
+                    </div>
+                    {% assign url = shop.url | append: product.url %}
+                    {% render 'social-sharing', url: url %}
+                  </div>
+                </m-sharing>
+                <script src="{{ 'sharing.js' | asset_url }}" defer="defer"></script>
+              {% endif %}
+            </div>
+            {% if block.settings.show_ask_a_question %}
+              <div class="m-product-ask-question"></div>
+            {% endif %}
+          {% endif %}
+        </div>
+      {%- when 'shipping' -%}
+        <ul class="m-product-shipping">
+          {% if block.settings.show_delivery_times %}
+            <li class="m-product-shipping--item m:display-flex m:items-center">
+              <span class="m-product-shipping--icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.5 7.50087H20.4938C20.6432 7.4999 20.7894 7.54415 20.9132 7.62781C21.037 7.71147 21.1326 7.83062 21.1875 7.96962L22.5 11.2509" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M1.5 13.5009H16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M17.625 20.2509C18.8676 20.2509 19.875 19.2435 19.875 18.0009C19.875 16.7582 18.8676 15.7509 17.625 15.7509C16.3824 15.7509 15.375 16.7582 15.375 18.0009C15.375 19.2435 16.3824 20.2509 17.625 20.2509Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"/>
+                  <path d="M6.375 20.2509C7.61764 20.2509 8.625 19.2435 8.625 18.0009C8.625 16.7582 7.61764 15.7509 6.375 15.7509C5.13236 15.7509 4.125 16.7582 4.125 18.0009C4.125 19.2435 5.13236 20.2509 6.375 20.2509Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"/>
+                  <path d="M15.375 18.0009H8.625" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M4.125 18.0009H2.25C2.05109 18.0009 1.86032 17.9218 1.71967 17.7812C1.57902 17.6405 1.5 17.4498 1.5 17.2509V6.75085C1.5 6.55194 1.57902 6.36118 1.71967 6.22052C1.86032 6.07987 2.05109 6.00085 2.25 6.00085H16.5V16.0509" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M16.5 11.2509H22.5V17.2509C22.5 17.4498 22.421 17.6405 22.2803 17.7812C22.1397 17.9218 21.9489 18.0009 21.75 18.0009H19.875" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              {% liquid
+                assign range = 2 | times: 24 | times: 60 | times: 60
+                assign deliver_in = block.settings.deliver_days | times: 24 | times: 60 | times: 60
+                assign date_format = block.settings.date_format | default: '%b %d'
+                assign now = 'now' | date: '%s'
+
+                assign from = now | plus: deliver_in | minus: range | date: date_format
+                assign to = now | plus: deliver_in | plus: range | date: date_format
+              %}
+              <div class="m-product-shipping--content m:display-flex">
+                <p>
+                  <strong>{{ block.settings.deliver_text | strip_html }}</strong
+                  ><span class="m-product-shipping--content__value">{{ from }} - {{ to }}</span>
+                </p>
+              </div>
+            </li>
+          {% endif %}
+          {% if block.settings.show_shipping_text and block.settings.shipping_text != blank %}
+            <li class="m-product-shipping--item m-product-shipping--text m:display-flex m:items-center">
+              <span class="m-product-shipping--icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 16.6231V7.37934C20.9993 7.24582 20.9634 7.11484 20.8959 6.99963C20.8284 6.88441 20.7317 6.78903 20.6156 6.72309L12.3656 2.08247C12.2545 2.01829 12.1284 1.9845 12 1.9845C11.8716 1.9845 11.7455 2.01829 11.6344 2.08247L3.38437 6.72309C3.26827 6.78903 3.1716 6.88441 3.10411 6.99963C3.03663 7.11484 3.00072 7.24582 3 7.37934V16.6231C3.00072 16.7566 3.03663 16.8876 3.10411 17.0028C3.1716 17.118 3.26827 17.2134 3.38437 17.2793L11.6344 21.92C11.7455 21.9841 11.8716 22.0179 12 22.0179C12.1284 22.0179 12.2545 21.9841 12.3656 21.92L20.6156 17.2793C20.7317 17.2134 20.8284 17.118 20.8959 17.0028C20.9634 16.8876 20.9993 16.7566 21 16.6231Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M16.5938 14.2977V9.42273L7.5 4.4071" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M20.8963 6.99426L12.0838 12.0005L3.10254 6.99426" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12.0844 12.0009L12 22.0134" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <div class="m-product-shipping--content m:display-flex rte">
+                {{ block.settings.shipping_text }}
+              </div>
+            </li>
+          {% endif %}
+        </ul>
+      {%- when 'complementary' -%}
+        {{ 'component-product-card.css' | asset_url | stylesheet_tag }}
+        {{ 'product-complementary.css' | asset_url | stylesheet_tag }}
+        {%- if settings.show_swatch_option == false and block.settings.enable_variant_options -%}
+          <script src="{{ 'product-card-swatch.js' | asset_url }}" defer="defer"></script>
+        {%- endif -%}
+        <product-recommendations
+          class="m-complementary-products m:block{% if block.settings.make_collapsible_row %} m-complementary-products--collapsible{% else %} m-complementary-products--default{% endif %}"
+          data-items-per-page="{{ block.settings.products_per_page }}"
+          data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ block.settings.product_list_limit }}&intent=complementary"
+          style="--column-gap: 15px; --column-gap-mobile: 15px;"
+          data-enable-slider="true"
+        >
+          {%- if recommendations.performed and recommendations.products_count > 0 -%}
+            {%- liquid
+              assign number_of_slides = recommendations.products_count | plus: 0.0 | divided_by: block.settings.products_per_page | ceil
+              assign enable_slider = false
+              if number_of_slides > 1
+                assign enable_slider = true
+              endif
+            -%}
+            {% capture block_content %}
+              <div class="m-complementary-products__wrapper">
+                <div class="m-complementary-products__inner m-product-list m-cols-{{ block.settings.products_per_page }} m:grid m:grid-2-cols md:m:grid-{{ block.settings.products_per_page | divided_by: 2.0 | ceil }}-cols xl:m:grid-{{ block.settings.products_per_page }}-cols{% if enable_slider %} swiper-container{% endif %}">
+                  {%- if enable_slider -%}<div class="swiper-wrapper">{%- endif -%}
+                    {%- for product in recommendations.products -%}
+                      {%- if enable_slider -%}
+                        <div class="swiper-slide m:column">
+                          {% render 'product-card-1', product: product, image_ratio: block.settings.pcard_image_ratio, show_desc: false, show_vendor: false, show_inventory: false, show_variant_options: block.settings.enable_variant_options, show_cart_button: block.settings.enable_quick_add, show_quickview_button: block.settings.enable_quick_view, show_wishlist_button: block.settings.enable_wishlist, show_compare_button: block.settings.enable_compare %}
+                        </div>
+                      {%- else -%}
+                        {% render 'product-card-1', product: product, image_ratio: block.settings.pcard_image_ratio, show_desc: false, show_vendor: false, show_inventory: false, show_variant_options: block.settings.enable_variant_options, show_cart_button: block.settings.enable_quick_add, show_quickview_button: block.settings.enable_quick_view, show_wishlist_button: block.settings.enable_wishlist, show_compare_button: block.settings.enable_compare, column_wrapper: true %}
+                      {%- endif -%}
+                    {%- endfor -%}
+                    {%- if enable_slider -%}</div>{%- endif -%}
+                </div>
+              </div>
+              {% if enable_slider %}
+                {%- liquid
+                  assign controls_absolute = true
+                  if block.settings.make_collapsible_row
+                    assign controls_absolute = false
+                  endif
+                -%}
+                {% render 'slider-controls', absolute: controls_absolute, container: 'container', show_pagination: true, show_nav: true, pagination_type: 'fraction', position: 'bottom-right' %}
+              {% endif %}
+            {% endcapture %}
+            {% if block.settings.make_collapsible_row %}
+              <collapsible-tab
+                class="m-collapsible no-js-hidden"
+                data-block-id="collapsible-tab-{{ block.id }}"
+                open="true"
+              >
+                <button
+                  class="m-collapsible--button"
+                  data-trigger
+                >
+                  <span>{{ block.settings.block_heading }}</span>
+                  <span class="m-collapsible--icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M13.5306 6.53073L8.5306 11.5307C8.46092 11.6007 8.37813 11.6561 8.28696 11.694C8.1958 11.7318 8.09806 11.7513 7.99935 11.7513C7.90064 11.7513 7.8029 11.7318 7.71173 11.694C7.62057 11.6561 7.53778 11.6007 7.4681 11.5307L2.4681 6.53073C2.3272 6.38984 2.24805 6.19874 2.24805 5.99948C2.24805 5.80023 2.3272 5.60913 2.4681 5.46823C2.60899 5.32734 2.80009 5.24818 2.99935 5.24818C3.19861 5.24818 3.3897 5.32734 3.5306 5.46823L7.99997 9.93761L12.4693 5.46761C12.6102 5.32671 12.8013 5.24756 13.0006 5.24756C13.1999 5.24756 13.391 5.32671 13.5318 5.46761C13.6727 5.60851 13.7519 5.7996 13.7519 5.99886C13.7519 6.19812 13.6727 6.38921 13.5318 6.53011L13.5306 6.53073Z" fill="currentColor"/>
+                    </svg>
+                  </span>
+                </button>
+                <div class="m-collapsible--content" data-content hidden>
+                  <div class="m-collapsible--content__inner">
+                    {{ block_content }}
+                  </div>
+                </div>
+              </collapsible-tab>
+            {% else %}
+              {% unless block.settings.block_heading == blank %}
+                <h3 class="m-complementary-products__heading h4">{{ block.settings.block_heading }}</h3>
+              {% endunless %}
+              {{ block_content }}
+            {% endif %}
+          {%- endif -%}
+        </product-recommendations>
+      {%- when 'inventory_status' -%}
+        {{ 'component-product-inventory.css' | asset_url | stylesheet_tag }}
+        <script src="{{ 'product-inventory.js' | asset_url }}" defer="defer"></script>
+        {% liquid
+          assign show_indicator_bar = block.settings.show_indicator_bar
+          assign inventory_threshold = settings.low_inventory_threshold
+          assign show_inventory_count = settings.show_inventory_count
+          assign inventory_visibility = settings.inventory_visibility
+        %}
+        <m-product-inventory
+          class="m-product-inventory m:block"
+          data-product-id="{{ product.id }}"
+          data-normal-text="{{ block.settings.normal_text | escape }}"
+          data-low-text="{{ block.settings.low_text | escape }}"
+          data-outofstock-text="{{ block.settings.outofstock_text | escape }}"
+          data-backordered-text="{{ block.settings.backordered_text | escape }}"
+          data-hide-stock-backordered="{%- if settings.inventory_hide_backordered -%}true{%- else -%}false{%- endif -%}"
+          data-inventory-threshold="{{ inventory_threshold }}"
+          data-show-inventory-count="{{ show_inventory_count }}"
+          data-inventory-visibility="{{ inventory_visibility }}"
+          data-status=""
+          data-variant-available="{{ selected_variant.available }}"
+          data-inventory-quantity="{{ selected_variant.inventory_quantity | at_least: 0 }}"
+          data-inventory-policy="{{ selected_variant.inventory_policy | escape }}"
+          data-total="100"
+        >
+          <div class="m-product-inventory__inner">
+            <span class="m-product-inventory__text">
+              <span class="m-product-inventory__pin"></span>
+              <span class="m-product-inventory__status"></span>
+            </span>
+            <span class="m-product-inventory__message"></span>
+          </div>
+          {%- if show_indicator_bar -%}
+            <div class="m-product-inventory__indicator-bar"><span style="width: 0%;"></span></div>
+          {%- endif -%}
+          <script type="application/json">
+            [
+              {%- for variant in product.variants -%}
+                {"id":{{- variant.id -}},"inventory_quantity":{{- variant.inventory_quantity | at_least: 0 -}},"available":{{- variant.available -}}, "inventory_policy":"{{- variant.inventory_policy -}}"}
+                {%- unless forloop.last -%},{%- endunless -%}
+              {%- endfor -%}
+            ]
+          </script>
+        </m-product-inventory>
+    {%- endcase -%}
+  </div>
+{%- endfor -%}

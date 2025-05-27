@@ -1,0 +1,150 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection-header": {
+      "type": "collection-page-header",
+      "custom_css": [
+        "h1 {font-size: 30px;}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "container": "w-full",
+        "layout": "without_breadcrumb",
+        "image_position": "background",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "text_alignment": "center",
+        "text_color": "inherit",
+        "upper_title": false,
+        "show_desc": true,
+        "collection_all_desc": "",
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "enable_bg_zoom_effect": false
+      }
+    },
+    "17177635285c6afac7": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "main": {
+      "type": "main-collection-product-grid",
+      "blocks": {
+        "banner_promotion_KppNc9": {
+          "type": "banner_promotion",
+          "disabled": true,
+          "settings": {
+            "color_scheme": "dark",
+            "text_size": "medium",
+            "text_color": "white",
+            "link": "",
+            "content_position": "bottom_center",
+            "content_alignment": "center",
+            "title": "SALE UP TO 25% OFF",
+            "subtitle": "Online Exclusive",
+            "button_label": "Shop The Sale",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "button_fixed": false
+          }
+        }
+      },
+      "block_order": [
+        "banner_promotion_KppNc9"
+      ],
+      "custom_css": [
+        ".m-product-card__action {display: grid; justify-content: end;}",
+        ".m-product-item {padding-left: 1px; padding-right: 1px;}",
+        ".m-product-card__info {margin-top: 0px; padding-left: 5px;}"
+      ],
+      "settings": {
+        "enable_box_1": true,
+        "Row_desktop": 1,
+        "Row_mobile": 2,
+        "image_src": "shopify://shop_images/5.webp",
+        "vertical_align_1": "end",
+        "horizontal_align_1": "end",
+        "text_heading": "<p>EKKO Co-Ord</p>",
+        "text_para": "",
+        "url_text": "Shop",
+        "btn_url": "shopify://products/ekko-smock-top-and-draped-skirt-co-ord",
+        "btn_clr1": "#ffffff",
+        "enable_box_2": true,
+        "Row_desktop_2": 3,
+        "Row_mobile_2": 5,
+        "image_src_2": "shopify://shop_images/7_1.webp",
+        "vertical_align_2": "end",
+        "horizontal_align_2": "end",
+        "text_heading_2": "<p>BROWN CORSET DRESS</p>",
+        "text_para_2": "",
+        "url_text_2": "Shop",
+        "btn_url_2": "shopify://products/brown-corset-tiered-dress",
+        "btn_clr2": "#ffffff",
+        "enable_box_3": true,
+        "Row_desktop_3": 5,
+        "Row_mobile_3": 9,
+        "image_src_3": "shopify://shop_images/Promo-Tile-1-Hot-this-week-_1.webp",
+        "vertical_align_3": "end",
+        "horizontal_align_3": "end",
+        "text_heading_3": "<p>VALERIE Cutwork Mini</p>",
+        "text_para_3": "",
+        "url_text_3": "Shop",
+        "btn_url_3": "shopify://products/valerie-cutwork-mini",
+        "btn_clr3": "#ffffff",
+        "enable_box_4": true,
+        "Row_desktop_4": 7,
+        "Row_mobile_4": 12,
+        "image_src_4": "shopify://shop_images/8_1.webp",
+        "vertical_align_4": "end",
+        "horizontal_align_4": "end",
+        "text_heading_4": "<p>BLACK PEPLUM DRESS</p>",
+        "text_para_4": "",
+        "url_text_4": "Shop",
+        "btn_url_4": "shopify://products/black-peplum-flared-dress",
+        "btn_clr4": "#ffffff",
+        "container": "container-fluid",
+        "grid_layout": "grid",
+        "grid_columns": "5",
+        "show_columns_switcher": true,
+        "pagination_limit": 20,
+        "paginate_type": "infinite",
+        "show_sorting": true,
+        "show_filter": true,
+        "filters_type": "storefront_filters",
+        "sidebar": "fixed",
+        "sidebar_title": "Refine",
+        "limit_height_widget": false,
+        "limit_height": 410,
+        "change_product_variant_on_fitlering": true,
+        "show_product_count": true,
+        "collapsed_groups": "Product type, Brand, Vendor, Size",
+        "color_swatches": "color,colour,couleur,farbe",
+        "color_swatches_design": "list"
+      }
+    }
+  },
+  "order": [
+    "collection-header",
+    "17177635285c6afac7",
+    "main"
+  ]
+}

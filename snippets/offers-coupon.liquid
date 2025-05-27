@@ -1,0 +1,297 @@
+<style>
+    .offers-coupon-popup {
+      padding: 0 0 24px 0;
+      background: #fff;
+      border-radius: 8px;
+      max-width: 480px;
+      margin: 0 auto;
+      font-family: inherit;
+    }
+    .offers-coupon-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 18px 0;
+      padding: 24px 0 0 0;
+      letter-spacing: 0.01em;
+    }
+    .offers-coupon-section {
+      margin-top: 0;
+    }
+    .offers-coupon-label {
+      color: #888;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+    }
+    .offers-coupon-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .offers-coupon-card {
+      background: #fff;
+      border: 1px solid #e3e6e8;
+      border-radius: 6px;
+      padding: 8px 12px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
+      gap: 20px;
+    }
+    .offers-coupon-card-header {
+      display: grid;
+      gap:4px;
+      flex:1;
+    }
+    .offers-coupon-code {
+      {% comment %} font-size: 15px; {% endcomment %}
+      color: #1976d2;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: text-decoration 0.2s;
+    }
+    .offers-coupon-code:hover {
+      text-decoration: underline;
+    }
+    .offers-coupon-apply-btn {
+      background: #fff;
+      color: #1673B0;
+      border: 1px solid #1673B0;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 7px 18px;
+      cursor: pointer;
+      transition: background 0.2s;
+      letter-spacing: 0.01em;
+      min-width: 64px;
+      min-height: 36px;
+      display: flex;
+      gap:3px;
+      align-items: center;
+      justify-content: center;
+    }
+    .offers-coupon-apply-btn[data-coupon-code="NEW10"]{
+    pointer-events:none;
+    }
+    .offers-coupon-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .offers-coupon-desc {
+      {% comment %} font-size: 15px; {% endcomment %}
+      font-weight: 500;
+      color: #222;
+      margin-bottom: 2px;
+    }
+    .offers-coupon-note {
+      color: #888;
+      font-size: 12px;
+      font-weight: 400;
+    }
+    .offers-coupon-progress {
+      margin-top: 6px;
+      padding: 6px 0px;
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #e3e6e8;
+      padding-bottom: 0px;
+    }
+    .offers-coupon-progress > span{
+      border-left:2px solid black;
+      padding-left:4px;
+  }
+
+    .offers-coupon-section + .offers-coupon-section {
+      margin-top: 24px;
+    }
+    .offers-coupon-form {
+      margin-top: 8px;
+      border: 1px solid #e3e6e8;
+    border-radius: 6px;
+    padding: 16px 18px 12px 18px;
+    }
+    .offers-coupon-form-content-wrapper {
+      display: flex;
+      gap: 8px;
+    }
+    .offers-coupon-input {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      {% comment %} font-size: 15px; {% endcomment %}
+      background: #fff;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .offers-coupon-input:focus {
+      border-color: #1976d2;
+    }
+    .offers-coupon-info {
+      margin-top: 12px;
+      background: #fafbfc;
+      border-radius: 4px;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .offers-coupon-info svg {
+      margin-right: 6px;
+      min-width: 16px;
+    }
+    .offers-coupon-skip-btn {
+      margin-top: 24px;
+      width: 100%;
+      padding: 12px;
+    }
+    .offers-coupon-form-error-info-wrapper{
+      color:red;
+      font-size:12px;
+      margin-top:3px;
+    }
+</style>
+{% liquid
+  assign is_new_10 = false
+  assign is_torq_20 = false
+  for discount_application in cart.discount_applications
+    if discount_application.title == 'NEW10'
+      assign is_new_10 = true
+    endif
+    if discount_application.title == 'TORQ20'
+      assign is_torq_20 = true
+    endif
+  endfor
+%}
+<div class="offers-coupon-popup">
+  <div class="offers-coupon-section">
+    <div class="offers-coupon-label">AVAILABLE OFFERS</div>
+    <div class="offers-coupon-list">
+      <div class="offers-coupon-card m:flex m:justify-between m:items-center">
+        <div class="offers-coupon-card-header">
+          <span class="offers-coupon-code">NEW10</span>
+          <div class="offers-coupon-desc">10% off your next order</div>
+        </div>
+        <discount-code-button class="offers-coupon-apply-btn" data-coupon-code="NEW10">
+          <span class="loader m:block m:hidden"></span
+          ><span class="apply-text m:flex m:items-center">
+            {%- if is_new_10 %}
+              <svg
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlns="http://www.w3.org/2000/svg"
+                class=""
+                xml:space="preserve"
+                style="margin-right:3px;"
+                viewBox="0 0 24 24"
+                y="0"
+                x="0"
+                height="16"
+                width="16"
+                version="1.1"
+              >
+                <g><g data-name="Flat Color" fill="#1673B0"><path class="" data-original="#20bf55" opacity="1" fill="#1673B0" d="M12 22.75a10.75 10.75 0 0 1 0-21.5 10.53 10.53 0 0 1 4.82 1.15.75.75 0 0 1-.68 1.34 9 9 0 0 0-4.14-1A9.25 9.25 0 1 0 21.25 12a2 2 0 0 0 0-.25.75.75 0 1 1 1.5-.14V12A10.76 10.76 0 0 1 12 22.75z"/><path class="" data-original="#20bf55" opacity="1" fill="#1673B0" d="M11.82 15.41a.7.7 0 0 1-.52-.22l-4.83-4.74a.75.75 0 0 1 0-1.06.77.77 0 0 1 1.07 0l4.29 4.23 9.65-9.49a.77.77 0 0 1 1.07 0 .75.75 0 0 1 0 1.06l-10.18 10a.74.74 0 0 1-.55.22z"/></g></g>
+              </svg>
+              APPLIED
+            {% else %}
+              APPLY
+            {%- endif -%}
+          </span>
+        </discount-code-button>
+      </div>
+      {% comment %}
+        <div class="offers-coupon-card">
+          <div class="offers-coupon-card-header">
+            <span class="offers-coupon-code">NO DISCOUNT</span>
+            <discount-code-button class="offers-coupon-apply-btn" data-coupon-code="NO DISCOUNT">
+              <span class="loader m:block m:hidden"></span>
+              <span class="apply-text">APPLY</span>
+            </discount-code-button>
+          </div>
+          <div class="offers-coupon-card-body">
+            <div class="offers-coupon-desc">10% off your next order</div>
+            <div class="offers-coupon-note">Limited to the first 100 style insiders today</div>
+          </div>
+        </div>
+      {% endcomment %}
+      <div class="offers-coupon-card">
+        <div class="m:flex m:justify-between m:items-center" style="gap:20px;">
+          <div class="offers-coupon-card-header">
+            <span class="offers-coupon-code">TORQ20</span>
+            <div class="offers-coupon-desc">20% off when you spend ₹16,000+</div>
+            {% comment %} <div class="offers-coupon-note">Applies to your entire cart</div> {% endcomment %}
+          </div>
+          <discount-code-button class="offers-coupon-apply-btn" data-coupon-code="TORQ20">
+            <span class="loader m:block m:hidden"></span> <span class="apply-text m:flex m:items-center"> {%- if is_torq_20 %}
+              <svg
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlns="http://www.w3.org/2000/svg"
+                class=""
+                xml:space="preserve"
+                style="margin-right:3px;"
+                viewBox="0 0 24 24"
+                y="0"
+                x="0"
+                height="16"
+                width="16"
+                version="1.1"
+              >
+                <g><g data-name="Flat Color" fill="#1673B0"><path class="" data-original="#20bf55" opacity="1" fill="#1673B0" d="M12 22.75a10.75 10.75 0 0 1 0-21.5 10.53 10.53 0 0 1 4.82 1.15.75.75 0 0 1-.68 1.34 9 9 0 0 0-4.14-1A9.25 9.25 0 1 0 21.25 12a2 2 0 0 0 0-.25.75.75 0 1 1 1.5-.14V12A10.76 10.76 0 0 1 12 22.75z"/><path class="" data-original="#20bf55" opacity="1" fill="#1673B0" d="M11.82 15.41a.7.7 0 0 1-.52-.22l-4.83-4.74a.75.75 0 0 1 0-1.06.77.77 0 0 1 1.07 0l4.29 4.23 9.65-9.49a.77.77 0 0 1 1.07 0 .75.75 0 0 1 0 1.06l-10.18 10a.74.74 0 0 1-.55.22z"/></g></g>
+              </svg>
+              APPLIED
+            {% else %}
+              APPLY
+            {%- endif -%}</span>
+          </discount-code-button>
+        </div>
+        <div
+          class="offers-coupon-progress"
+        >
+          {% assign cart_total_price = cart.original_total_price |divided_by:100 %}
+          <span> {%  if cart_total_price < 16000 %} You're  ₹{{ cart_total_price | minus:16000 | replace: '-', '' }} away from 20% off your order {% else %} {% if is_torq_20 %}
+          Applied — you're saving ₹{{ cart_total_price |times:0.2 }} {% else %} You can save ₹{{ cart_total_price |times:0.2 }} on this order{% endif %} {% endif %}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="offers-coupon-section">
+    <div class="offers-coupon-label">HAVE ANOTHER CODE?</div>
+    <m-discount-form>
+    <form
+      action=""
+      class="offers-coupon-form"
+      apply-coupon-form
+    >
+      <div class="offers-coupon-form-content-wrapper">
+        <input
+          type="text"
+          class="offers-coupon-input"
+          placeholder="Enter discount code"
+        >
+        <button type="submit" class="offers-coupon-apply-btn">
+          <span class="loader m:block m:hidden"></span> <span class="apply-text">APPLY</span>
+        </button>
+      </div>
+      <div class="offers-coupon-form-error-info-wrapper m:hidden" apply-coupon-error>Coupon code is invalid!</div>
+    </form>
+    </m-discount-form>
+    <div
+      class="offers-coupon-info"
+    >
+      <svg width="16" height="16" fill="none" style="margin-right:6px;" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="8" cy="8" r="7" stroke="#bbb" stroke-width="2"/><rect x="7" y="4" width="2" height="5" rx="1" fill="#bbb"/><rect x="7" y="11" width="2" height="2" rx="1" fill="#bbb"/>
+      </svg>
+      Offers cannot be combined with other discounts. Apply at checkout to see final price.
+    </div>
+  </div>
+  <button
+    class="offers-coupon-skip-btn"
+    style="margin-top:24px; width:100%; padding:12px; border:1px solid #ccc; border-radius:4px; background:#fff; font-weight:500; font-size:15px; cursor:pointer;"
+  >
+    CONTINUE WITHOUT OFFER
+  </button>
+</div>

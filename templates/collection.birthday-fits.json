@@ -1,0 +1,156 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection-header": {
+      "type": "collection-page-header",
+      "custom_css": [
+        "h1 {font-size: 30px;}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "container": "w-full",
+        "layout": "without_breadcrumb",
+        "image_position": "top",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "text_alignment": "center",
+        "text_color": "inherit",
+        "upper_title": false,
+        "show_desc": true,
+        "collection_all_desc": "",
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "enable_bg_zoom_effect": false
+      }
+    },
+    "1717761951c4effa7d": {
+      "type": "apps",
+      "disabled": true,
+      "custom_css": [
+        ".quinn_cards {padding: 0px;}"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "main": {
+      "type": "main-collection-product-grid",
+      "blocks": {
+        "banner_promotion_KppNc9": {
+          "type": "banner_promotion",
+          "disabled": true,
+          "settings": {
+            "color_scheme": "dark",
+            "text_size": "medium",
+            "text_color": "white",
+            "link": "",
+            "content_position": "bottom_center",
+            "content_alignment": "center",
+            "title": "SALE UP TO 25% OFF",
+            "subtitle": "Online Exclusive",
+            "button_label": "Shop The Sale",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "button_fixed": false
+          }
+        }
+      },
+      "block_order": [
+        "banner_promotion_KppNc9"
+      ],
+      "custom_css": [
+        ".m-product-card__action {display: grid; justify-content: end;}",
+        ".m-product-item {padding-left: 1px; padding-right: 1px;}",
+        ".m-product-card__info {margin-top: 0px; padding-left: 5px;}"
+      ],
+      "settings": {
+        "show_card_style": true,
+        "show_grid_style": false,
+        "show_simple_style": false,
+        "enable_box_1": true,
+        "Row_desktop": 1,
+        "Row_mobile": 2,
+        "image_src": "shopify://shop_images/IMG_4510.jpg",
+        "vertical_align_1": "end",
+        "horizontal_align_1": "left",
+        "text_heading": "<p>JUNO CO-ORD</p>",
+        "text_para": "<p>@samxnthaferreira</p>",
+        "url_text": "Shop The Look",
+        "btn_url": "https://torqadorn.com/products/juno-co-ord",
+        "btn_clr1": "#ffffff",
+        "enable_box_2": true,
+        "Row_desktop_2": 3,
+        "Row_mobile_2": 5,
+        "image_src_2": "shopify://shop_images/NYX_DENIM_CROP.jpg",
+        "vertical_align_2": "end",
+        "horizontal_align_2": "left",
+        "text_heading_2": "<p>LUMI HALTER & <br/>LANA CRYSTAL DENIM</p>",
+        "text_para_2": "<p>@reshmaaroraa</p>",
+        "url_text_2": "Shop The Look",
+        "btn_url_2": "https://torqadorn.com/products/lumi-halter-top-and-lana-crystal-denims-co-ord",
+        "btn_clr2": "#ffffff",
+        "enable_box_3": true,
+        "Row_desktop_3": 5,
+        "Row_mobile_3": 9,
+        "image_src_3": "shopify://shop_images/5_2.jpg",
+        "vertical_align_3": "end",
+        "horizontal_align_3": "left",
+        "text_heading_3": "<p>LEILA SEQUINS CO-ORD</p>",
+        "text_para_3": "<p>@thegirlinskyhighheels</p>",
+        "url_text_3": "Shop The Look",
+        "btn_url_3": "https://torqadorn.com/products/leila-sequins-crop-and-maxi-skirt-co-ord",
+        "btn_clr3": "#ffffff",
+        "enable_box_4": true,
+        "Row_desktop_4": 7,
+        "Row_mobile_4": 12,
+        "image_src_4": "shopify://shop_images/IMG_4402_copy.jpg",
+        "vertical_align_4": "end",
+        "horizontal_align_4": "left",
+        "text_heading_4": "<p>BELLA TOP & <br/>HELENA SKIRT CO-ORD</p>",
+        "text_para_4": "<p>@soundaryathakur</p>",
+        "url_text_4": "Shop The Look",
+        "btn_url_4": "https://torqadorn.com/products/bella-ruched-top-and-helena-maxi-skirt-co-ord",
+        "btn_clr4": "#ffffff",
+        "container": "container-fluid",
+        "grid_layout": "grid",
+        "grid_columns": "5",
+        "show_columns_switcher": true,
+        "pagination_limit": 36,
+        "paginate_type": "paginate",
+        "show_sorting": true,
+        "show_filter": true,
+        "filters_type": "storefront_filters",
+        "sidebar": "fixed",
+        "sidebar_title": "",
+        "limit_height_widget": false,
+        "limit_height": 410,
+        "change_product_variant_on_fitlering": true,
+        "show_product_count": true,
+        "collapsed_groups": "Product type, Brand, Vendor, Size",
+        "color_swatches": "color,colour,couleur,farbe",
+        "color_swatches_design": "list"
+      }
+    }
+  },
+  "order": [
+    "collection-header",
+    "1717761951c4effa7d",
+    "main"
+  ]
+}

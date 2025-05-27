@@ -1,0 +1,347 @@
+{{ 'cascading.css' | asset_url | stylesheet_tag }}
+{% style %}
+
+  .cascade-image-banner .m-cascading__header--overlay {
+    pointer-events: unset;
+    mix-blend-mode: unset;
+    color: white;
+    filter: unset;
+    background: rgba(0, 0, 0, 0.4);
+  }
+  .cascade-image-banner .m-cascade_button-text {
+    position: relative;
+    margin-top: 40px;
+    display: inline-flex;
+    justify-content: center;
+  }
+  .cascade-navigate-link {
+    position: absolute;
+    z-index: -2;
+    opacity: 0;
+    width: max-content;
+    padding-bottom: 1px;
+    border-bottom: 1px solid;
+  }
+  .cascade-navigate-link.active {
+    position: absolute;
+    z-index: 1;
+    opacity: 1;
+  }
+  .cascade-image-banner .m-cascading__header--overlay a {
+    color: gray;
+  }
+  .cascade-image-banner .m-cascading__header--overlay a.active {
+    color: inherit;
+  }
+{% endstyle %}
+
+{% comment %} {% if section.index > 1 %}
+              <link
+                rel="stylesheet"
+                href="{{ 'cascading.css' | asset_url }}"
+                media="print"
+                onload="this.media='all'">
+            {% else %}
+              {{ 'cascading.css' | asset_url | stylesheet_tag }}
+{% endif %} {% endcomment %}
+
+{% liquid
+  assign section_class = 'm-cascading-collection m:overflow-clip m-gradient' | append: ' m-color-' | append: section.settings.color_scheme
+  if section.settings.custom_class != blank
+    assign section_class = section_class | append: ' ' | append: section.settings.custom_class
+  endif
+
+assign loading='lazy'
+if section.index == 1
+assign loading='eager'
+endif
+
+  assign header_class = 'm-cascading__header'
+  if section.settings.overlay_heading
+    assign header_class = header_class | append: ' m-cascading__header--overlay'
+  else
+    assign header_class = header_class | append: ' m-section__header'
+    assign header_class = header_class | append: ' m:text-' | append: section.settings.heading_alignment
+  endif
+%}
+<section class="cascade-image-banner {{ section_class }}" style="--section-padding-top: {{ section.settings.padding_top }}px; --section-padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <m-cascade-image-banner class="m-cascading m:block m-cascading-collection__wrapper m:relative">
+    <div class="{{ header_class }}">
+      <div class="m-cascading__header-wrapper m:flex-col">
+        {% for block in section.blocks %}
+          <a
+            href="#{{ block.settings.link | append: block.id }}"
+            class="h1 {%if forloop.first%}active{% endif %}"
+            data-id="{{ block.settings.link | append: block.id }}">{{ block.settings.collection_title }}</a>
+        {% endfor %}
+        <div class="m-cascade_button-text">
+          {% for block in section.blocks %}
+            <a
+              href="{{ block.settings.link }}"
+              class="cascade-navigate-link {%if forloop.first%}active{% endif %}"
+              data-id="{{ block.settings.link | append: block.id }}">
+              <small>Discover More</small>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="{{ section.settings.container }} m-section-my m-section-py">
+
+      {% for block in section.blocks limit: section.blocks.size %}
+        {% if block.settings.image != blank %}
+          {% assign mobile_image = block.settings.m_image | default: block.settings.image %}
+          <div id="{{ block.settings.link | append: block.id }}" data-media-item>
+            <div>
+              <picture>
+                <source media="(max-width:767px)" srcset="{{ mobile_image | image_url: width: 800 }}">
+                {{ block.settings.image | image_url: width: 3840 | image_tag: loading:loading,sizes:'100vw' }}
+              </picture>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </m-cascade-image-banner>
+</section>
+<script>
+  if(!customElements.get('m-cascade-image-banner')){
+    class e extends HTMLElement{
+      constructor(){
+        super();
+        // this.addEventListener('wheel',this.pickImage.bind(this));
+        this.allImages = this.querySelectorAll('[data-media-item]');
+        this.setupIntersectionObserver();
+      }
+      setupIntersectionObserver() {
+        const options = {
+        root: null, // use viewport
+        rootMargin: '0px',
+        threshold: 0.5 // 50% of the element must be visible
+      };
+  
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Get the parent div with ID
+            const id = entry.target.id;
+            
+            // Update active states for navigation
+            this.updateActiveStates(id);
+          }
+        });
+      }, options);
+  
+       // Observe all images
+       this.allImages.forEach(image => {
+        observer.observe(image);
+      });
+  
+      }
+  
+      updateActiveStates(id) {
+      // Remove active class from all links
+      this.querySelectorAll('a').forEach(link => {
+        link.classList.remove('active');
+      });
+  
+      // Add active class to matching links
+      this.querySelectorAll(`a[data-id="${id}"]`).forEach(link => {
+        link.classList.add('active');
+      });
+    }
+      // pickImage(e){
+      //   console.dir(window.scrollY);
+      //   console.dir(this.allImages[2].offsetTop,this.offsetTop);
+      // }
+    }
+    customElements.define('m-cascade-image-banner',e);
+  }
+</script>
+{% schema %}
+  {
+    "name": "Cascading Image banner",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "Color scheme"
+      },
+      {
+        "type": "select",
+        "id": "container",
+        "label": "Container type",
+        "default": "container-fluid",
+        "options": [
+          {
+            "value": "container-fluid",
+            "label": "Default"
+          }, {
+            "value": "w-full",
+            "label": "Full width"
+          }, {
+            "value": "container",
+            "label": "Use container box"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Section header"
+      }, {
+        "type": "richtext",
+        "id": "heading",
+        "label": "Heading",
+        "default": "<p>Shop by collections</p>"
+      }, {
+        "type": "select",
+        "id": "heading_size",
+        "label": "Heading size",
+        "default": "h3",
+        "options": [
+          {
+            "label": "Small",
+            "value": "h3"
+          }, {
+            "label": "Medium",
+            "value": "h2"
+          }, {
+            "label": "Large",
+            "value": "h1"
+          }
+        ],
+        "default": "h1"
+      }, {
+        "type": "select",
+        "id": "heading_alignment",
+        "label": "Text aligmnent",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "center",
+            "label": "Center"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      }, {
+        "type": "checkbox",
+        "id": "overlay_heading",
+        "label": "Overlay heading",
+        "default": true
+      }, {
+        "type": "header",
+        "content": "Grid settings"
+      }, {
+        "type": "paragraph",
+        "content": "Adjust variation and sequence of media sizes to create unique layouts"
+      }, {
+        "type": "select",
+        "id": "spacing",
+        "label": "Vertical space between items",
+        "options": [
+          {
+            "value": "small",
+            "label": "Small"
+          }, {
+            "value": "medium",
+            "label": "Medium"
+          }, {
+            "value": "large",
+            "label": "Large"
+          }, {
+            "value": "no_space",
+            "label": "No space"
+          }
+        ],
+        "default": "medium"
+      }, {
+        "type": "header",
+        "content": "Section Padding"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Padding Top",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px"
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Padding Bottom",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px"
+      }, {
+        "type": "header",
+        "content": "Custom Attributes"
+      }, {
+        "type": "text",
+        "id": "custom_class",
+        "label": "Custom classes"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "limit": 12,
+        "settings": [
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link"
+          }, {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }, {
+            "type": "image_picker",
+            "id": "m_image",
+            "label": "Mobile Image"
+          }, {
+            "type": "text",
+            "id": "collection_title",
+            "label": "Collection title"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Cascading Image Banner",
+        "blocks": [
+          {
+            "type": "collection"
+          },
+          {
+            "type": "collection"
+          },
+          {
+            "type": "collection"
+          },
+          {
+            "type": "collection"
+          }, {
+            "type": "collection"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
