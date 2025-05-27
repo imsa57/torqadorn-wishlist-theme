@@ -1,0 +1,38 @@
+{{ 'slide-popup.css' | asset_url | stylesheet_tag }}
+<slide-popup class="slide-popup-container" id="{{ id |default:'id' }}">
+  <div class="slide-popup-overlay"></div>
+  <div class="slide-popup-content m:w-full">
+    <header class="m:display-flex m:items-center container-fluid">
+      <h3>
+        {{ heading | default: 'Heading' }}
+      </h3>
+      <svg
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlns="http://www.w3.org/2000/svg"
+        class="s1b82pw s1b82p7c s1b82p12s s1b82p591 _12i4meh4 menu_close"
+        viewBox="0 0 24 24"
+        width="20"
+        height="20">
+        <defs>
+          <symbol
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            id="close-small">
+            <path
+              d="M2 14L14 2"
+              stroke="currentColor"
+              stroke-miterlimit="10" />
+            <path
+              d="M14 14L2 2"
+              stroke="currentColor"
+              stroke-miterlimit="10" />
+          </symbol>
+        </defs>
+        <title>close-small</title><use role="presentation" xlink:href="#close-small" />
+      </svg>
+    </header>
+    <div class="content-box container-fluid">
+      {{ content | default: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores veniam iusto, ratione repudiandae fugiat numquam? Dolore aspernatur culpa minus eius magni repellat molestiae placeat consequatur, consequuntur eveniet atque provident veniam. Cum fugit, eum rerum pariatur veritatis, laudantium nihil maiores et totam ex temporibus saepe voluptas eveniet officia repudiandae, ipsum soluta!' }}
+    </div>
+  </div>
+</slide-popup>

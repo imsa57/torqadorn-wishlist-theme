@@ -1,0 +1,11 @@
+<script defer>
+  document.querySelectorAll('foxkit-visible-check').forEach(el => {
+    const child = el.querySelector('.foxkit-button');
+    if (!child || getComputedStyle(child).display === 'none') {
+      el.style.display = 'none';
+    } else {
+      el.style.display = 'block'; // or 'flex' if you want
+      el.style.width = '100%';
+    }
+  });
+</script>

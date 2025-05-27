@@ -1,0 +1,894 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "disabled": true,
+      "settings": {
+        "container": "container",
+        "text_alignment": "center",
+        "hide_current": false,
+        "hide_on_mb": false,
+        "animations": "inherit"
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "inline_price_YR9UkT": {
+          "type": "inline_price",
+          "settings": {}
+        },
+        "text_G4m7Hc": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.metafields.custom.product_subtitle.value }}",
+            "text_style": "body"
+          }
+        },
+        "custom_liquid_aKXYVt": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div id='ss-size-guide'></div>"
+          }
+        },
+        "custom_text_PRKQLN": {
+          "type": "custom_text",
+          "settings": {
+            "content": "{{ product.metafields.custom.shipping_text | metafield_tag }}"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "size_title": "Size"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "button_style": false,
+            "buynow_text": "Buy Now",
+            "show_quantity_selector": false,
+            "show_atc_button": true,
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true,
+            "heading_top": "Tell us your body measurements",
+            "heading_bottom": "Your Contact Details",
+            "submit_btn_txt": "*Your custom order is tailored especially for you. Please double-check your measurements as custom orders are not eligible for exchange.",
+            "text_tab_two": "Tell us how to get in touch with you",
+            "popup_image": "shopify://shop_images/shop-8e4b-aacdfe3d0878-1602173322297.png",
+            "link_whatsapp": "https://wa.me/+918376905539",
+            "tab_two_txt": "We want you to love your fit. Chat with us for personalised sizing assistance."
+          }
+        },
+        "select_size_g3NF3k": {
+          "type": "select_size",
+          "settings": {
+            "size_title": "Size"
+          }
+        },
+        "custom_liquid_TGXeL3": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n  @media screen and (min-width: 750px) {\n    .mobile-only-divider {\n      display: none;\n    }\n  }\n</style>\n\n<div class=\"mobile-only-divider\" style=\"position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; width: 100vw; height: 8px; background-color: #f4f4f4;\"></div>"
+          }
+        },
+        "shipping_details_AjenTj": {
+          "type": "shipping_details",
+          "settings": {}
+        },
+        "custom_liquid_M6qtxG": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n  @media screen and (min-width: 750px) {\n    .mobile-only-divider {\n      display: none;\n    }\n  }\n</style>\n\n<div class=\"mobile-only-divider\" style=\"position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; width: 100vw; height: 8px; background-color: #f4f4f4;\"></div>"
+          }
+        },
+        "custom_liquid_tGwF7y": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n  #torqOffers_b7e21a9c3d {\n    width: 100%;\n    font-family: 'Futura', sans-serif;\n    border-radius: 4px;\n    background: transparent;\n    overflow: hidden;\n  }\n  #torqOffers_b7e21a9c3d .torqOffers_header {\n    cursor: pointer;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: 8px 10px;\n    border: 1px solid #ccc;\n    border-radius: 4px;\n    background: #fcfcfc;\n  }\n  #torqOffers_b7e21a9c3d .torqOffers_header img {\n    height: 20px;\n    margin-right: 5px;\n  }\n  #torqOffers_b7e21a9c3d .torqOffers_header strong {\n    display: flex;\n    align-items: center;\n    font-weight: 400;\n    gap: 0px;\n  }\n  #torqOffers_b7e21a9c3d .torqOffers_titleText {\n    padding-top: 5px;\n    display: inline-block;\n  }\n  #torqOffers_b7e21a9c3d .torqOffers_toggleIcon {\n    font-size: 1.2em;\n    font-weight: 500;\n  }\n  #torqOffers_b7e21a9c3d .torqOffers_body {\n    overflow: hidden;\n    transition: height 0.4s ease, opacity 0.4s ease;\n    padding: 0;\n    background: transparent;\n    box-sizing: border-box;\n    opacity: 0;\n    height: 0;\n  }\n  #torqOffers_b7e21a9c3d.torqOffers_open .torqOffers_body {\n    opacity: 1;\n  }\n  .torqOffers_bodyInner {\n    display: flex;\n    flex-direction: column;\n    padding: 0;\n  }\n  .torqOffers_row {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: 10px 0px;\n  }\n  .torqOffers_row + .torqOffers_row {\n    border-top: 1px solid #ddd;\n  }\n  .torqOffers_textWrapper {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n  }\n  .torqOffers_promoText {\n    font-size: 0.95em;\n    white-space: nowrap;\n  }\n  .torqOffers_limitText {\n    font-size: 0.85em;\n    color: #555;\n    margin-top: 2px;\n  }\n  .torqOffers_badge {\n    display: inline-block;\n    background: #E3F1FF;\n    color: #1673B0;\n    border-radius: 4px;\n    padding: 2px 6px;\n    font-size: 0.8em;\n    margin-top: 4px;\n    font-weight: 500;\n    width: fit-content;\n  }\n  .torqOffers_btn {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    height: 35px;\n    min-width: 100px;\n    border: 1px solid #1673B0;\n    border-radius: 4px;\n    background: transparent;\n    padding: 0 12px;\n    cursor: pointer;\n    color: #1673B0;\n    font-size: 12px;\n  }\n  .torqOffers_autoBtn {\n    cursor: default;\n  }\n  .torqOffers_btn img {\n    width: 16px;\n    height: 16px;\n    margin-right: 6px;\n    filter: invert(29%) sepia(94%) saturate(1304%) hue-rotate(188deg) brightness(91%) contrast(98%);\n  }\n  .torqOffers_nudge {\n    display: none;\n    margin: 8px 0;\n    padding: 8px 10px;\n    background: #e6f4ff;\n    border: 1px solid #b3e0ff;\n    border-radius: 4px;\n    font-size: 0.9em;\n    color: #1673B0;\n    text-align: center;\n    opacity: 0;\n    transition: opacity 0.4s ease;\n  }\n  .torqOffers_nudge.torqOffers_visible {\n    display: block;\n    opacity: 1;\n  }\n</style>\n\n<div id=\"torqOffers_b7e21a9c3d\">\n  <div class=\"torqOffers_header\">\n    <strong>\n      <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/Untitled_design_7.svg?v=1747218345\" alt=\"offers icon\">\n      <span class=\"torqOffers_titleText\"></span>\n    </strong>\n    <span class=\"torqOffers_toggleIcon\">−</span>\n  </div>\n  <div class=\"torqOffers_body\">\n    <div class=\"torqOffers_bodyInner\">\n      <div class=\"torqOffers_row\">\n        <div class=\"torqOffers_textWrapper\">\n          <span class=\"torqOffers_promoText\">10% off your next order</span>\n          <span class=\"torqOffers_badge\">Auto-applied in cart</span>\n        </div>\n        <div class=\"torqOffers_btn torqOffers_autoBtn\">\n          <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/check.svg\" alt=\"check icon\">\n          <span>NEW10</span>\n        </div>\n      </div>\n      <div class=\"torqOffers_row\">\n        <div class=\"torqOffers_textWrapper\">\n          <span class=\"torqOffers_promoText\">20% off when you spend ₹16,000+</span>\n          <span class=\"torqOffers_limitText\">Copy code and apply at checkout</span>\n        </div>\n        <button id=\"torqOffers_copyBtn_b7e21a9c3d\" class=\"torqOffers_btn\">\n          <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/copy.svg\" alt=\"copy icon\">\n          <span>TORQ20</span>\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<div class=\"torqOffers_nudge\">Promo code copied - Pick your size and add to bag.</div>\n\n<script>\n(function() {\n  const TorqOffersWidget = {\n    elements: {\n      drawer: document.getElementById('torqOffers_b7e21a9c3d'),\n      nudge: document.querySelector('.torqOffers_nudge')\n    },\n    init: function() {\n      this.elements.header = this.elements.drawer.querySelector('.torqOffers_header');\n      this.elements.toggleIcon = this.elements.drawer.querySelector('.torqOffers_toggleIcon');\n      this.elements.body = this.elements.drawer.querySelector('.torqOffers_body');\n      this.elements.bodyInner = this.elements.drawer.querySelector('.torqOffers_bodyInner');\n      this.elements.torqBtn = document.getElementById('torqOffers_copyBtn_b7e21a9c3d');\n      this.elements.header.addEventListener('click', this.toggleDrawer.bind(this));\n      this.elements.torqBtn.addEventListener('click', this.copyCode.bind(this));\n      this.initializeDrawer();\n    },\n    initializeDrawer: function() {\n      setTimeout(() => {\n        this.elements.drawer.classList.add('torqOffers_open');\n        const contentHeight = this.elements.bodyInner.scrollHeight;\n        this.elements.body.style.height = `${contentHeight}px`;\n        this.elements.body.style.opacity = '1';\n      }, 10);\n    },\n    toggleDrawer: function() {\n      const isOpen = this.elements.drawer.classList.toggle('torqOffers_open');\n      this.elements.toggleIcon.textContent = isOpen ? '−' : '+';\n      if (isOpen) {\n        const contentHeight = this.elements.bodyInner.scrollHeight;\n        this.elements.body.style.height = `${contentHeight}px`;\n        this.elements.body.style.opacity = '1';\n      } else {\n        this.elements.body.style.height = '0';\n        this.elements.body.style.opacity = '0';\n        this.elements.nudge.classList.remove('torqOffers_visible');\n        setTimeout(() => { this.elements.nudge.style.display = 'none'; }, 400);\n      }\n    },\n    copyCode: function() {\n      const checkIconUrl = 'https://cdn.shopify.com/s/files/1/0526/4811/6407/files/check.svg';\n      navigator.clipboard.writeText('TORQ20');\n      this.elements.torqBtn.innerHTML = `<img src=\"${checkIconUrl}\" alt=\"check icon\"><span>TORQ20</span>`;\n      setTimeout(() => {\n        this.elements.nudge.style.display = 'block';\n        requestAnimationFrame(() => {\n          this.elements.nudge.classList.add('torqOffers_visible');\n        });\n      }, 700);\n      setTimeout(() => {\n        this.elements.torqBtn.innerHTML = '<img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/copy.svg\" alt=\"copy icon\"><span>TORQ20</span>';\n      }, 3000);\n    }\n  };\n  document.addEventListener('DOMContentLoaded', function() {\n    TorqOffersWidget.init();\n  });\n  if (document.readyState === 'complete' || document.readyState === 'interactive') {\n    TorqOffersWidget.init();\n  }\n})();\n</script>"
+          }
+        },
+        "custom_liquid_mdpAYW": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n  @media screen and (min-width: 750px) {\n    .mobile-only-divider {\n      display: none;\n    }\n  }\n</style>\n\n<div class=\"mobile-only-divider\" style=\"position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; width: 100vw; height: 8px; background-color: #f4f4f4;\"></div>"
+          }
+        },
+        "key_feature_tab_F9fJ3n": {
+          "type": "key_feature_tab",
+          "settings": {
+            "heading": "Key Features",
+            "default_open": true
+          }
+        },
+        "collapsible_tab_NGBEjb": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Description",
+            "content": "",
+            "liquid": "{{product.description}}",
+            "default_open": false
+          }
+        },
+        "collapsible_tab_Admpgr": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Stylist's Note",
+            "content": "<p>{{ product.metafields.custom.how_to_wear | metafield_tag }}</p>",
+            "liquid": "",
+            "default_open": true
+          }
+        },
+        "collapsible_tab_ArqMaJ": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Customisation",
+            "content": "<p>We celebrate size-inclusivity / If your measurements fall outside the size chart, simply mention your measurements in the ‘customization request’ box at checkout and we’ll have everything made accordingly. There is absolutely no additional cost for sizes beyond XL.</p><p>No returns or COD will be accepted for customisations. </p>",
+            "liquid": "",
+            "default_open": false
+          }
+        },
+        "collapsible_help_tab_caeWL4": {
+          "type": "collapsible_help_tab",
+          "settings": {
+            "heading": "Need Assistance?",
+            "content": "",
+            "liquid": "",
+            "default_open": true
+          }
+        },
+        "custom_liquid_bEejxY": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n  @media screen and (min-width: 750px) {\n    .mobile-only-divider {\n      display: none;\n    }\n  }\n</style>\n\n<div class=\"mobile-only-divider\" style=\"position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; width: 100vw; height: 8px; background-color: #f4f4f4;\"></div>"
+          }
+        },
+        "meta_LDHWxr": {
+          "type": "meta",
+          "settings": {
+            "show_collections": false,
+            "show_vendor": false,
+            "show_type": false,
+            "show_availability": false,
+            "show_sku": true
+          }
+        },
+        "collapsible_tab_yYQhpe": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "Details",
+            "content": "{{ product.metafields.custom.compostion_care | metafield_tag }}",
+            "liquid": "",
+            "default_open": false
+          }
+        },
+        "custom_liquid_i4a8wU": {
+          "type": "custom_liquid",
+          "disabled": true,
+          "settings": {
+            "custom_liquid": "<div class=\"valentines-offer-widget\" role=\"region\" aria-label=\"Valentine's Day Offer\">\n  <div class=\"content-wrapper\">\n    <div class=\"offer-row\">\n      <p class=\"offer-message\" aria-live=\"polite\">10% off your entire order</p>\n      <p id=\"countdown-timer\" class=\"countdown-timer\" style=\"visibility: hidden;\" aria-live=\"assertive\" aria-label=\"Countdown timer for the offer\"></p>\n    </div>\n    <p class=\"offer-subtext\" aria-label=\"10 percent discount waiting in your cart\">Auto-applied at checkout</p>\n  </div>\n</div>\n\n<style>\n.valentines-offer-widget {\n  position: relative;\n  width: 100%;\n  max-width: 100%;\n  height: 60px;\n  background: #fcfcfc;\n  border-radius: 4px;\n  overflow: hidden;\n  display: flex;\n  align-items: flex-start;\n  justify-content: flex-start;\n  padding: 10px;\n  box-sizing: border-box;\n  margin: 2px auto;\n  border: 1px solid #D3D3D3;\n}\n\n.content-wrapper {\n  z-index: 2;\n  width: 100%;\n  padding: 0;\n}\n\n.offer-row {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n}\n\n.offer-message {\n  font-size: 14px;\n  color: #333333;\n  margin: 0;\n}\n\n.countdown-timer {\n  font-size: 14px;\n  color: #333333;\n  margin: 0;\n}\n\n.offer-subtext {\n  font-size: 12px;\n  color: #666666;\n  margin: 2px 0 0;\n}\n\n@media screen and (max-width: 768px) {\n  .valentines-offer-widget {\n    height: 55px;\n  }\n\n  .offer-message {\n    font-size: 12px;\n  }\n\n  .countdown-timer {\n    font-size: 12px;\n  }\n\n  .offer-subtext {\n    font-size: 10px;\n  }\n}\n</style>\n\n<script>\n  document.addEventListener('DOMContentLoaded', function () {\n    function getNextResetDate() {\n      const now = new Date();\n      const istOffset = 5.5 * 60 * 60 * 1000; // IST offset in milliseconds\n      const istNow = new Date(now.getTime() + istOffset);\n      const resetDate = new Date(istNow);\n\n      resetDate.setUTCHours(18, 30, 0, 0); // 12:00 AM IST\n\n      const daysUntilNextReset = (2 - (istNow.getUTCDate() % 2)) % 2;\n      resetDate.setUTCDate(istNow.getUTCDate() + daysUntilNextReset);\n\n      return resetDate;\n    }\n\n    function updateCountdown() {\n      const now = new Date();\n      let nextResetDate = getNextResetDate();\n\n      if (now >= nextResetDate) {\n        nextResetDate.setUTCDate(nextResetDate.getUTCDate() + 2);\n      }\n\n      const timeLeft = nextResetDate - now;\n\n      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));\n      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));\n      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));\n      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);\n\n      const timerDisplay = document.getElementById('countdown-timer');\n\n      timerDisplay.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;\n      timerDisplay.setAttribute('aria-label', `Offer ends in ${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds`);\n      timerDisplay.style.visibility = 'visible';\n    }\n\n    updateCountdown();\n    setInterval(updateCountdown, 1000);\n  });\n</script>"
+          }
+        },
+        "custom_liquid_dGCA8m": {
+          "type": "custom_liquid",
+          "disabled": true,
+          "settings": {
+            "custom_liquid": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<style>\n.dlv-carousel-container {\n  width: 100%;\n  position: relative;\n  background: #f9f9f9;\n  border-radius: 8px;\n  overflow: hidden;\n}\n\n.dlv-carousel-track {\n  display: flex;\n  transition: transform 0.3s ease-in-out;\n  width: 300%;\n}\n\n.dlv-carousel-slide {\n  flex: 0 0 33.33%;\n  padding: 16px 20px;\n  min-width: 33.33%;\n}\n\n.dlv-slide-title {\n  font-size: 14px;\n  color: #333333;\n  margin: 0 0 8px;\n  font-weight: 400;\n  line-height: 1.4;\n}\n\n.dlv-slide-timeframe {\n  color: #666;\n}\n\n.dlv-slide-description {\n  font-size: 14px;\n  color: #6b7280;\n  margin: 0;\n  line-height: 1.4;\n}\n\n.dlv-payment-icons {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  margin-top: 8px;\n}\n\n.payment-icon {\n  width: 20px;\n  height: 20px;\n  object-fit: contain;\n}\n\n.dlv-carousel-indicators {\n  position: absolute;\n  top: 50%;\n  right: 20px;\n  transform: translateY(-50%);\n  display: flex;\n  flex-direction: row;\n  gap: 6px;\n  z-index: 2;\n}\n\n.dlv-indicator {\n  width: 20px;\n  height: 2px;\n  background: #ccc;\n  cursor: pointer;\n  transition: background-color 0.2s ease;\n  border-radius: 1px;\n}\n\n.dlv-indicator.active {\n  background: #000;\n}\n\n@media (max-width: 768px) {\n  .payment-icon {\n    width: 28px;\n    height: 28px;\n  }\n  .dlv-carousel-slide {\n    padding: 12px 16px;\n  }\n}\n</style>\n</head>\n<body>\n<div class=\"dlv-carousel-container\">\n  <div class=\"dlv-carousel-track\">\n    <div class=\"dlv-carousel-slide\">\n      <h3 class=\"dlv-slide-title\">Secure Payments</h3>\n      <div class=\"dlv-payment-icons\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/visa_1.svg?v=1720857724\" alt=\"Visa\" class=\"payment-icon\" />\n        <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/mastercard_symbol.svg?v=1720857821\" alt=\"Mastercard\" class=\"payment-icon\" />\n        <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/amex-svg.svg?v=1720857811\" alt=\"American Express\" class=\"payment-icon\" />\n        <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/UPI-Logo-vector.svg?v=1720858027\" alt=\"UPI\" class=\"payment-icon\" />\n        <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/Cash_on_Delivery_21055eb1-5198-480f-9b7c-a9b7320d3488.svg?v=1739127719\" alt=\"Cash on Delivery\" class=\"payment-icon\" />\n      </div>\n    </div>\n    <div class=\"dlv-carousel-slide\">\n      <h3 class=\"dlv-slide-title\">Easy Customisations</h3>\n      <p class=\"dlv-slide-description\">Custom fits available. Just ask.</p>\n    </div>\n    <div class=\"dlv-carousel-slide\">\n      <h3 class=\"dlv-slide-title\">Personal Stylist</h3>\n      <p class=\"dlv-slide-description\">Fashion advice on speed dial. DM us!</p>\n    </div>\n  </div>\n  \n  <div class=\"dlv-carousel-indicators\">\n    <div class=\"dlv-indicator active\" data-index=\"0\"></div>\n    <div class=\"dlv-indicator\" data-index=\"1\"></div>\n    <div class=\"dlv-indicator\" data-index=\"2\"></div>\n  </div>\n</div>\n\n<script>\n(function() {\n  const track = document.querySelector('.dlv-carousel-track');\n  const container = document.querySelector('.dlv-carousel-container');\n  const indicators = document.querySelectorAll('.dlv-indicator');\n  const slides = document.querySelectorAll('.dlv-carousel-slide');\n\n  let currentSlide = 0;\n  let startX, moveX;\n  let isTransitioning = false;\n\n  function goToSlide(index) {\n    if (isTransitioning) return;\n    \n    // Handle infinite loop\n    let targetIndex = index;\n    if (index < 0) targetIndex = slides.length - 1;\n    if (index >= slides.length) targetIndex = 0;\n    \n    isTransitioning = true;\n    track.style.transition = 'transform 0.3s ease-in-out';\n    track.style.transform = `translateX(-${targetIndex * 33.33}%)`;\n    \n    // Update indicators\n    indicators.forEach((indicator, i) => {\n      indicator.classList.toggle('active', i === targetIndex);\n    });\n    \n    currentSlide = targetIndex;\n    \n    // Reset transition flag after animation\n    setTimeout(() => {\n      isTransitioning = false;\n    }, 300);\n  }\n\n  function handleSwipe() {\n    if (!moveX) return;\n    \n    const diff = startX - moveX;\n    const threshold = container.offsetWidth / 4;\n    \n    if (Math.abs(diff) > threshold) {\n      goToSlide(diff > 0 ? currentSlide + 1 : currentSlide - 1);\n    } else {\n      goToSlide(currentSlide);\n    }\n  }\n\n  // Touch events\n  container.addEventListener('touchstart', (e) => {\n    if (isTransitioning) return;\n    startX = e.touches[0].clientX;\n    moveX = startX;\n    track.style.transition = 'none';\n  }, { passive: true });\n\n  container.addEventListener('touchmove', (e) => {\n    if (isTransitioning) return;\n    moveX = e.touches[0].clientX;\n    const diff = startX - moveX;\n    const offset = (currentSlide * 33.33) + (diff / container.offsetWidth * 33.33);\n    track.style.transform = `translateX(-${offset}%)`;\n  }, { passive: true });\n\n  container.addEventListener('touchend', () => {\n    handleSwipe();\n    moveX = null;\n  });\n\n  // Click events for indicators\n  indicators.forEach((indicator, i) => {\n    indicator.addEventListener('click', () => goToSlide(i));\n  });\n\n  // Autoplay with infinite loop\n  function autoPlay() {\n    if (!document.hidden && !isTransitioning) {\n      goToSlide(currentSlide + 1);\n    }\n  }\n\n  const autoPlayInterval = setInterval(autoPlay, 5000);\n\n  // Pause autoplay when page is not visible\n  document.addEventListener('visibilitychange', () => {\n    if (document.hidden) {\n      clearInterval(autoPlayInterval);\n    }\n  });\n})();\n</script>\n</body>\n</html>"
+          }
+        },
+        "custom_liquid_X6eDhD": {
+          "type": "custom_liquid",
+          "disabled": true,
+          "settings": {
+            "custom_liquid": "<div class=\"collapsible-section\">\n    <div class=\"collapsible-btn\">\n        Delivery Date Estimate\n    </div>\n    <div class=\"collapsible-content open\">\n        <div class=\"cod-checker\">\n            <input type=\"number\" id=\"postal-code\" maxlength=\"6\" placeholder=\"Enter your pincode\">\n            <button id=\"check-cod\">→</button>\n        </div>\n        <div class=\"delivery-estimator\" id=\"delivery-estimator\" style=\"display:none;\">\n            <ul>\n                <li><span style=\"font-weight: 600;\">COD Orders:</span> <span id=\"cod-delivery-days\"></span> days (<span id=\"cod-delivery-date\"></span>)</li>\n                <li><span style=\"font-weight: 600;\">Prepaid Orders:</span> <span id=\"prepaid-delivery-days\"></span> working days (<span id=\"prepaid-delivery-date\"></span>)</li>\n                <li><span style=\"font-weight: 600;\">Express Shipping:</span> <span id=\"express-delivery-days\"></span> working days (<span id=\"express-delivery-date\"></span>)</li>\n            </ul>\n        </div>\n    </div>\n</div>\n\n<style>\n.collapsible-section {\n    width: 100%;\n    padding-top: 0px;\n}\n\n.collapsible-btn {\n    background: none;\n    border: none;\n    width: 100%;\n    text-align: left;\n    padding-bottom: 10px;\n    font-family: 'Futura', sans-serif;\n    font-weight: normal;\n    color: #333;\n    outline: none;\n    font-size: 18px;\n    margin-bottom: 15px;\n}\n\n@media (max-width: 768px) {\n    .collapsible-btn {\n        font-size: 14px;\n    }\n}\n\n.collapsible-content {\n    font-size: 14px;\n    color: #333;\n    padding-top: 0px;\n    padding-bottom: 15px;\n    border-bottom: 1px solid #e0e0e0;\n}\n\n.delivery-estimator ul {\n    list-style-type: none;\n    padding-left: 0;\n}\n\n.delivery-estimator li {\n    margin-bottom: 8px;\n}\n\n.delivery-estimator {\n    background-color: #fcfcfc;\n    padding: 0;\n    margin-top: 20px;\n}\n\n.cod-checker {\n    margin-top: 0;\n    display: flex;\n    justify-content: space-between;\n    align-items: stretch;\n    margin-bottom: 20px;\n}\n\n#postal-code {\n    width: 85%;\n    padding: 12px;\n    font-size: 14px;\n    background-color: transparent;\n    border: 1px solid #E0E0E0;\n    border-right: none;\n    color: #333;\n    border-radius: 2px 0 0 2px;\n    box-sizing: border-box;\n    height: 42px;\n    line-height: normal;\n}\n\n#check-cod {\n    width: 15%;\n    padding: 0 12px;\n    font-size: 18px;\n    background-color: #333333;\n    color: white;\n    border: none;\n    border-left: none;\n    cursor: pointer;\n    border-radius: 0 2px 2px 0;\n    box-sizing: border-box;\n    height: 42px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    text-align: center;\n}\n\n#check-cod:disabled {\n    background-color: #ccc;\n    cursor: not-allowed;\n}\n</style>\n\n<script>\ndocument.addEventListener('DOMContentLoaded', function() {\n    function addDaysSkippingWeekends(date, days) {\n        let result = new Date(date);\n        let addedDays = 0;\n        while (addedDays < days) {\n            result.setDate(result.getDate() + 1);\n            if (result.getDay() !== 0 && result.getDay() !== 6) {\n                addedDays++;\n            }\n        }\n        return result;\n    }\n\n    function formatDate(date) {\n        const options = { weekday: 'short', month: 'short', day: 'numeric' };\n        return date.toLocaleDateString('en-US', options).replace(/, \\d{4}/, '');\n    }\n\n    function showDeliveryDates() {\n        const today = new Date();\n\n        const codDeliveryStartDate = addDaysSkippingWeekends(today, 8);\n        const codDeliveryEndDate = addDaysSkippingWeekends(today, 9);\n        document.getElementById('cod-delivery-days').innerText = '8-9';\n        document.getElementById('cod-delivery-date').innerText = `${formatDate(codDeliveryStartDate)} - ${formatDate(codDeliveryEndDate)}`;\n\n        const prepaidDeliveryDate = addDaysSkippingWeekends(today, 7);\n        document.getElementById('prepaid-delivery-days').innerText = '7';\n        document.getElementById('prepaid-delivery-date').innerText = formatDate(prepaidDeliveryDate);\n\n        const expressDeliveryDate = addDaysSkippingWeekends(today, 4);\n        document.getElementById('express-delivery-days').innerText = '4';\n        document.getElementById('express-delivery-date').innerText = formatDate(expressDeliveryDate);\n        \n        document.getElementById('delivery-estimator').style.display = 'block';\n    }\n\n    function checkCODAvailability() {\n        const postalCode = document.getElementById('postal-code').value;\n        if (postalCode.length === 6 && /^\\d+$/.test(postalCode)) {\n            showDeliveryDates();\n        } else {\n            alert(\"Please enter a valid 6-digit postal code.\");\n            document.getElementById('delivery-estimator').style.display = 'none';\n        }\n    }\n\n    document.getElementById('check-cod').addEventListener('click', checkCODAvailability);\n});\n</script>"
+          }
+        }
+      },
+      "block_order": [
+        "inline_price_YR9UkT",
+        "text_G4m7Hc",
+        "custom_liquid_aKXYVt",
+        "custom_text_PRKQLN",
+        "variant_picker",
+        "buy_buttons",
+        "select_size_g3NF3k",
+        "custom_liquid_TGXeL3",
+        "shipping_details_AjenTj",
+        "custom_liquid_M6qtxG",
+        "custom_liquid_tGwF7y",
+        "custom_liquid_mdpAYW",
+        "key_feature_tab_F9fJ3n",
+        "collapsible_tab_NGBEjb",
+        "collapsible_tab_Admpgr",
+        "collapsible_tab_ArqMaJ",
+        "collapsible_help_tab_caeWL4",
+        "custom_liquid_bEejxY",
+        "meta_LDHWxr",
+        "collapsible_tab_yYQhpe",
+        "custom_liquid_i4a8wU",
+        "custom_liquid_dGCA8m",
+        "custom_liquid_X6eDhD"
+      ],
+      "custom_css": [
+        "@media (max-width: 768px) {.m-main-product--media {padding: 0; }}",
+        ".m-product-meta--label {display: none;}",
+        "@media only screen and (max-width: 767px) {.m-product-title {font-size: 20px; }}"
+      ],
+      "settings": {
+        "container": "container-fluid",
+        "layout": "layout-3",
+        "show_atwl": false,
+        "enable_history_state": false,
+        "enable_variant_group_images": false,
+        "disable_selected_variant_default": false,
+        "show_featured_media": true,
+        "show_zoom_button": false,
+        "enable_video_autoplay": true,
+        "show_nav_media_mobile": false,
+        "show_pagination_mobile": false,
+        "use_sticky_atc": false,
+        "use_sticky_atc_on_mobile": false,
+        "enable_dynamic_checkout": false,
+        "sticky_atc_wishtlist": false,
+        "sticky_atc_compare": false
+      }
+    },
+    "ss_trust_badges_2_VRfFWW": {
+      "type": "ss-trust-badges-2",
+      "blocks": {
+        "item_KMHCe3": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "icon": "truck",
+            "title": "<p>Free Shipping for You</p>",
+            "subtitle": "<p>Express Delivery Available</p>"
+          }
+        },
+        "item_D3nM8a": {
+          "type": "item",
+          "settings": {
+            "icon": "payment",
+            "image": "shopify://shop_images/shield.svg",
+            "title": "<p>Secure Payments</p>",
+            "subtitle": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_KMHCe3",
+        "item_D3nM8a"
+      ],
+      "settings": {
+        "trust_position": "below_buy",
+        "template": "standard",
+        "svg_color": "#333333",
+        "bg_color": "#fcfcfc",
+        "bg_color_item": "",
+        "title_color": "#333333",
+        "subtitle_color": "#716969",
+        "icon_size": 26,
+        "title_font_size": 14,
+        "subtitle_font_size": 11,
+        "subtitle_margin_top": 5,
+        "space_items": 8,
+        "pt": 0,
+        "pb": 0,
+        "mt": 0,
+        "mb": 0
+      }
+    },
+    "ss_upsell_03_nYajcx": {
+      "type": "ss-upsell-03",
+      "disabled": true,
+      "settings": {
+        "upsell_position": "below_buy",
+        "heading": "In the Set",
+        "heading_custom": false,
+        "heading_font": "futura_n4",
+        "heading_size": 18,
+        "heading_height": 100,
+        "heading_align": "left",
+        "heading_on_border": true,
+        "content_mt": 0,
+        "content_padding_horizontal": 18,
+        "content_padding_vertical": 30,
+        "content_border_thickness": 1,
+        "content_radius": 4,
+        "content_betweens": 12,
+        "content_use_shadow": false,
+        "content_shadow_width": 20,
+        "products": "{{ product.metafields.custom.in_the_set.value }}",
+        "content_gap": 20,
+        "content_align": "left",
+        "content_items_mt": 10,
+        "image_width": 90,
+        "image_radius": 0,
+        "product_heading_custom": true,
+        "product_heading_font": "futura_n4",
+        "product_heading_size": 18,
+        "product_heading_height": 150,
+        "product_price_custom": true,
+        "product_price_font": "futura_n4",
+        "product_price_size": 16,
+        "product_price_height": 100,
+        "product_quick": "",
+        "product_quick_custom": false,
+        "product_quick_font": "assistant_n4",
+        "product_quick_size": 0,
+        "product_quick_height": 50,
+        "product_quick_padding_horizontal": 0,
+        "product_quick_padding_vertical": 0,
+        "product_quick_border_thickness": 0,
+        "product_quick_radius": 0,
+        "modal_width": 30,
+        "modal_padding_horizontal": 20,
+        "modal_padding_vertical": 18,
+        "modal_align": "start",
+        "modal_heading_custom": false,
+        "modal_heading_font": "assistant_n4",
+        "modal_heading_size": 20,
+        "modal_heading_height": 150,
+        "modal_price_custom": false,
+        "modal_price_font": "assistant_n4",
+        "modal_price_size": 16,
+        "modal_price_height": 100,
+        "modal_price_mt": 20,
+        "modal_image_mt": 40,
+        "modal_space": 20,
+        "modal_variants_mt": 30,
+        "modal_options_mt": 16,
+        "modal_variants_gap": 10,
+        "variant_name_custom": false,
+        "variant_name_font": "assistant_n4",
+        "variant_name_size": 12,
+        "variant_name_height": 100,
+        "variant_option_custom": false,
+        "variant_option_font": "assistant_n4",
+        "variant_option_size": 12,
+        "variant_option_height": 100,
+        "variant_option_padding_horizontal": 16,
+        "variant_option_padding_vertical": 16,
+        "variant_option_border_thickness": 1,
+        "modal_button_text": "Add to Cart",
+        "modal_button_text_added": "Added",
+        "modal_button_text_sold": "Sold Out",
+        "modal_button_custom": false,
+        "modal_button_font": "assistant_n4",
+        "modal_button_size": 12,
+        "modal_button_height": 100,
+        "modal_button_mt": 16,
+        "modal_button_padding_horizontal": 20,
+        "modal_button_padding_vertical": 20,
+        "modal_button_border_thickness": 1,
+        "product_heading_color": "#333333",
+        "product_price_color": "#333333",
+        "product_quick_color": "#d2815f",
+        "product_quick_hover_color": "#d2815f",
+        "product_quick_bg_color": "#f5e9e4",
+        "product_quick_bg_hover_color": "#e6d4cc",
+        "product_quick_border": "#f5e9e4",
+        "product_quick_hover_border": "#e6d4cc",
+        "modal_heading_color": "#000000",
+        "modal_price_color": "#000000",
+        "variant_name_color": "#334641",
+        "modal_bg_color": "#ffffff",
+        "variant_option_color": "#000000",
+        "variant_option_hover_color": "#ffffff",
+        "variant_option_bg": "#ffffff",
+        "variant_option_hover_bg": "#000000",
+        "variant_option_border": "#000000",
+        "variant_option_hover_border": "#000000",
+        "modal_button_color": "#d2815f",
+        "modal_button_hover_color": "#d2815f",
+        "modal_button_bg": "#ffffff",
+        "modal_button_hover_bg": "#f1e8e4",
+        "modal_button_border": "#d2815f",
+        "modal_button_hover_border": "#d2815f",
+        "heading_color": "#333333",
+        "content_border_color": "#dedede",
+        "background_color": "#fcfcfc",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_horizontal": 0,
+        "padding_horizontal_mobile": 0,
+        "border_thickness": 0,
+        "lazy": false
+      }
+    },
+    "ss_trust_badges_emojis_ne9tBb": {
+      "type": "ss-trust-badges-emojis",
+      "blocks": {
+        "item_MX7xQj": {
+          "type": "item",
+          "settings": {
+            "icon": "",
+            "image": "shopify://shop_images/svg-image-8.svg",
+            "title": "<p>Great fit</p>",
+            "subtitle": ""
+          }
+        },
+        "item_RWpCx8": {
+          "type": "item",
+          "settings": {
+            "icon": "",
+            "image": "shopify://shop_images/svg-image-9_f0cb3558-cc14-4ed9-9723-d81f7ffbe591.svg",
+            "title": "<p>Secure Payments</p>",
+            "subtitle": ""
+          }
+        },
+        "item_j4qh6L": {
+          "type": "item",
+          "settings": {
+            "icon": "",
+            "image": "shopify://shop_images/svg-image-10.svg",
+            "title": "<p>Timeless Design</p>",
+            "subtitle": ""
+          }
+        },
+        "item_xhhkcp": {
+          "type": "item",
+          "settings": {
+            "icon": "",
+            "image": "shopify://shop_images/svg-image-11.svg",
+            "title": "<p>Fast Delivery</p>",
+            "subtitle": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_MX7xQj",
+        "item_RWpCx8",
+        "item_j4qh6L",
+        "item_xhhkcp"
+      ],
+      "disabled": true,
+      "settings": {
+        "trust_position": "below_buy",
+        "emoji_font_size": 20,
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 16,
+        "title_size_mobile": 14,
+        "title_height": 100,
+        "sub_title_custom": false,
+        "sub_title_font": "josefin_sans_n4",
+        "sub_title_size": 10,
+        "sub_title_size_mobile": 8,
+        "sub_title_height": 100,
+        "title_color": "#000000",
+        "sub_title_color": "#716969",
+        "line_border_color": "#dedede",
+        "background_color": "#fcfcfc",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 0,
+        "padding_horizontal_mobile": 0,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0
+      }
+    },
+    "ss_size_guide_K7VKFg": {
+      "type": "ss-size-guide",
+      "blocks": {
+        "tab_LJ33QR": {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Sizes",
+            "tab_text": "",
+            "size_chart_page": "size-guide"
+          }
+        },
+        "tab_gd48Uc": {
+          "type": "tab",
+          "settings": {
+            "tab_title": "How to measure",
+            "tab_text": "<p><strong>A. CHEST:</strong> Place the tape close under the armhole and measure from side seam to side seam.<br/><br/><strong>B. WAIST:</strong> This is the narrowest part of the waist. Place the tape from side to side directly at the waistline.<br/><br/><strong>C. HIPS:</strong> Place the tape approximately 7–9 inches below the natural waistline and measure from side to side at the hip line.</p>",
+            "size_chart_page": "",
+            "image": "shopify://shop_images/shop-8e4b-aacdfe3d0878-1602173322297_1.png"
+          }
+        }
+      },
+      "block_order": [
+        "tab_LJ33QR",
+        "tab_gd48Uc"
+      ],
+      "disabled": true,
+      "settings": {
+        "guide_position": "below_buy",
+        "toggle": "Size Guide",
+        "toggle_custom": true,
+        "toggle_font": "futura_n4",
+        "toggle_size": 14,
+        "toggle_size_mobile": 14,
+        "toggle_height": 130,
+        "toggle_align": "left",
+        "toggle_align_mobile": "left",
+        "icon": "shopify://shop_images/svgexport-13_eb3346d7-b444-46c3-b739-cde2067ab887.svg",
+        "icon_size": 24,
+        "icon_size_mobile": 24,
+        "modal_width": 70,
+        "modal_width_mobile": 100,
+        "modal_padding_vertical": 48,
+        "modal_padding_vertical_mobile": 6,
+        "modal_padding_horizontal": 80,
+        "modal_padding_horizontal_mobile": 10,
+        "modal_radius": 0,
+        "modal_border_thickness": 0,
+        "modal_overlay": 0.3,
+        "close_icon_size": 20,
+        "close_icon_size_mobile": 14,
+        "toggles_border_thickness": 1,
+        "title_padding_vertical": 12,
+        "title_padding_vertical_mobile": 6,
+        "title_padding_horizontal": 6,
+        "title_padding_horizontal_mobile": 50,
+        "title_border_thickness": 1,
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 16,
+        "title_size_mobile": 16,
+        "title_height": 130,
+        "tab_gap": 20,
+        "tab_gap_mobile": 20,
+        "tab_mt": 20,
+        "tab_mt_mobile": 20,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 14,
+        "text_size_mobile": 14,
+        "text_height": 150,
+        "text_align": "left",
+        "text_align_mobile": "left",
+        "modal_overlay_color": "#000000",
+        "modal_bg_color": "#ffffff",
+        "modal_border_color": "#000000",
+        "close_icon_color": "#000000",
+        "toggles_border_color": "#e5e5e5",
+        "title_color": "#000000",
+        "title_hover_color": "#000000",
+        "title_active_color": "#000000",
+        "title_bg_color": "#f6f8fa",
+        "title_bg_hover_color": "#f6f8fa",
+        "title_bg_active_color": "#ffffff",
+        "title_border_color": "#e5e5e5",
+        "title_border_hover_color": "#e5e5e5",
+        "title_border_active_color": "#e5e5e5",
+        "text_color": "#000000",
+        "toggle_color": "#000000",
+        "toggle_hover_color": "#555555",
+        "background_color": "",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": -20,
+        "margin_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 0,
+        "padding_horizontal_mobile": 0,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    },
+    "ss_trust_badges_4_F7TARC": {
+      "type": "ss-trust-badges-4",
+      "blocks": {
+        "item_HiFPm6": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "custom_icon": "shopify://shop_images/Free_Delivery.svg",
+            "text": "<p>FREE SHIPPING</p>"
+          }
+        },
+        "item_Bxq8LX": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "custom_icon": "shopify://shop_images/Easy_Customisations.svg",
+            "text": "<p>EASY CUSTOMISATIONS</p>"
+          }
+        },
+        "item_FNgdHC": {
+          "type": "item",
+          "settings": {
+            "icon": "chat",
+            "custom_icon": "shopify://shop_images/Cash_On_Delivery.svg",
+            "text": "<p>CASH ON DELIVERY</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_HiFPm6",
+        "item_Bxq8LX",
+        "item_FNgdHC"
+      ],
+      "disabled": true,
+      "settings": {
+        "trust_position": "below_buy",
+        "autoplay": true,
+        "autoplay_delay": 3,
+        "item_gap": 10,
+        "item_gap_mobile": 10,
+        "image_icon_size": 30,
+        "image_icon_size_mobile": 30,
+        "text_custom": true,
+        "text_font": "futura_n4",
+        "text_size": 14,
+        "text_size_mobile": 14,
+        "text_height": 100,
+        "dots_size": 5,
+        "dots_size_mobile": 5,
+        "dots_mt": 8,
+        "dots_mt_mobile": 8,
+        "dots_show_desktop": true,
+        "dots_show_mobile": true,
+        "dots_color": "#fcfcfc",
+        "icon_color": "#000000",
+        "text_color": "#333333",
+        "background_color": "rgba(0,0,0,0)",
+        "background_gradient": "",
+        "border_color": "rgba(0,0,0,0)",
+        "margin_top": -8,
+        "margin_bottom": -8,
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "padding_horizontal": 0,
+        "padding_horizontal_mobile": 0,
+        "border_thickness": 0
+      }
+    },
+    "empty_space_fUB9xr": {
+      "type": "empty-space",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "show_divider_line": false,
+        "divider_style": "solid",
+        "divider_height": 1,
+        "padding_top": 10,
+        "padding_bottom": 10,
+        "custom_class": ""
+      }
+    },
+    "17259670466a7c9336": {
+      "type": "apps",
+      "blocks": {
+        "foxkit_sales_boost_related_products_iqVwYx": {
+          "type": "shopify://apps/foxkit-sales-boost/blocks/related-products/13f41957-6b79-47c1-99a2-e52431f06fff",
+          "settings": {
+            "heading_size": "h3",
+            "header_alignment": "left",
+            "limit": 10,
+            "columns": 4,
+            "column_gap": 4
+          }
+        }
+      },
+      "block_order": [
+        "foxkit_sales_boost_related_products_iqVwYx"
+      ],
+      "custom_css": [
+        "@media only screen and (max-width: 768px) {.foxkit-related-products__heading {font-size: 15px; color: #333333; }}",
+        "@media only screen and (min-width: 769px) {.foxkit-related-products__heading {font-size: 17px; color: #333333; }}"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "w-full",
+        "background_color": "",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "custom_class": ""
+      }
+    },
+    "empty_space_B4z9EH": {
+      "type": "empty-space",
+      "disabled": true,
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "show_divider_line": false,
+        "divider_style": "solid",
+        "divider_height": 1,
+        "padding_top": 16,
+        "padding_bottom": 16,
+        "custom_class": ""
+      }
+    },
+    "custom_liquid_bYxibV": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "settings": {
+        "custom_liquid": "<p style=\"font-size: 15px; padding-left: 15px; padding-right: 15px; margin-bottom: 15px; color: #323232;\">\n    Styled & Loved by You\n</p>\n\n<div style=\"margin-top: -25px;\">\n    <script \n        type=\"text/javascript\" \n        src=\"https://cdn.grw.reputon.com/assets/widget.js?shop=torqadorn.myshopify.com\" defer></script>\n\n    <div class=\"reputon-google-reviews-widget\"\n        data-content-index=\"1\"\n        data-theme=\"light\"\n        data-type=\"carousel\"\n        data-autoscroll=\"true\"\n        data-show-review-photos=\"false\"\n        data-write-review=\"false\"\n        data-show-rating=\"false\"\n        data-fixed-reviews-height=\"false\"></div>\n</div>",
+        "custom_class": ""
+      }
+    },
+    "empty_space_kH3axx": {
+      "type": "empty-space",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "show_divider_line": false,
+        "divider_style": "solid",
+        "divider_height": 1,
+        "padding_top": 16,
+        "padding_bottom": 16,
+        "custom_class": ""
+      }
+    },
+    "apps_qHNQKD": {
+      "type": "apps",
+      "blocks": {
+        "xo_gallery_xo_gallery_kbQAqM": {
+          "type": "shopify://apps/xo-gallery/blocks/xo-gallery/e61dfbaa-1a75-4e4e-bffc-324f17325251",
+          "settings": {
+            "id": 7,
+            "mid": ""
+          }
+        }
+      },
+      "block_order": [
+        "xo_gallery_xo_gallery_kbQAqM"
+      ],
+      "custom_css": [
+        "@media (min-width: 1024px) {.m-section-my {display: none; }}"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "header_alignment": "left",
+        "container": "container",
+        "background_color": "",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "custom_class": ""
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "custom_css": [
+        ".m-product-tag--soldout {background-color: transparent; color: black;}",
+        ".foxkit-preorder-badge {background-color: transparent; color: black;}",
+        ".m-product-tag--sale {background-color: transparent; color: black;}",
+        ".m-section__heading {font-family: \"Futura\", Arial, sans-serif;}"
+      ],
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "remove_params": false,
+        "heading": "More Styles You'll LOVE",
+        "heading_size": "h3",
+        "text_align": "left",
+        "limit": 4,
+        "columns": 4,
+        "column_gap": 8,
+        "enable_slider": false,
+        "use_scroll_mobile": false,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "1715332902703fde33": {
+      "type": "apps",
+      "blocks": {
+        "xo_gallery_xo_gallery_VdpEXi": {
+          "type": "shopify://apps/xo-gallery/blocks/xo-gallery/e61dfbaa-1a75-4e4e-bffc-324f17325251",
+          "settings": {
+            "id": 5,
+            "mid": ""
+          }
+        }
+      },
+      "block_order": [
+        "xo_gallery_xo_gallery_VdpEXi"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "@media (min-width: 1024px) {.m-section-my {display: none; }}",
+        ".m-section-my {padding-left: 15px; padding-right: 15px;}"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "header_alignment": "left",
+        "container": "container",
+        "background_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "product-details-tabs": {
+      "type": "product-details-tabs",
+      "blocks": {
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+            "header": "Product Details"
+          }
+        },
+        "tab": {
+          "type": "tab",
+          "disabled": true,
+          "settings": {
+            "header": "Fabric & Fit",
+            "content": "<p>{{ product.metafields.custom.fabric_fit | metafield_tag }}</p>",
+            "content_page": ""
+          }
+        },
+        "tab_6D9RgL": {
+          "type": "tab",
+          "disabled": true,
+          "settings": {
+            "header": "Care & Instructions",
+            "content": "<p>Shipping cost is based on weight. Just add products to your cart and use the Shipping Calculator to see the shipping price.</p><p>We want you to be 100% satisfied with your purchase. Items can be returned or exchanged within 30 days of delivery.</p>",
+            "content_page": ""
+          }
+        }
+      },
+      "block_order": [
+        "description",
+        "tab",
+        "tab_6D9RgL"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".m-tabs__header {justify-content: flex-start;}"
+      ],
+      "settings": {
+        "container": "container",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "default_open": false,
+        "padding_top": 0,
+        "padding_bottom": 50,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main",
+    "ss_trust_badges_2_VRfFWW",
+    "ss_upsell_03_nYajcx",
+    "ss_trust_badges_emojis_ne9tBb",
+    "ss_size_guide_K7VKFg",
+    "ss_trust_badges_4_F7TARC",
+    "empty_space_fUB9xr",
+    "17259670466a7c9336",
+    "empty_space_B4z9EH",
+    "custom_liquid_bYxibV",
+    "empty_space_kH3axx",
+    "apps_qHNQKD",
+    "product-recommendations",
+    "1715332902703fde33",
+    "product-details-tabs"
+  ]
+}

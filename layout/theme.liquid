@@ -1,0 +1,357 @@
+{% liquid
+  assign enable_rtl = settings.enable_rtl
+  assign language_support_rtl = settings.language_support_rtl
+  if enable_rtl and language_support_rtl != blank
+    assign shop_locale = localization.language.iso_code
+    assign language_support_rtl_list = language_support_rtl | split: ','
+    assign is_rtl = language_support_rtl_list | where: shop_locale
+    if is_rtl.size > 0
+      assign enable_rtl = true
+    else
+      assign enable_rtl = false
+    endif
+  endif
+
+  assign body_classes = 'template-' | append: template.name | append: ' ' | append: template.suffix | append: ' m-gradient m-color-' | append: settings.default_color_scheme
+  if settings.page_transition
+    assign body_classes = body_classes | append: ' m:overflow-hidden'
+  endif
+  if template.suffix == 'about-us'
+    assign body_classes = body_classes | append: ' sf__page-about'
+  endif
+%}
+<!doctype html>
+<html
+  class="no-js {% if settings.page_transition %} m:overflow-hidden{% endif %} custom-html-top"
+  lang="{{ request.locale.iso_code }}"
+  data-template="{{ template.name }}"
+  {% if enable_rtl %}
+  dir="rtl"
+  {% endif %}>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+    <meta name="theme-color" content="{{ settings.color_primary }}">
+    {%- liquid
+      render 'preload'
+      render 'SEO'
+      render 'social-meta-tags'
+      render 'font-face'
+    -%}
+    {% unless template contains 'cart' or template contains 'customer' %}
+      <script data-cfasync="false" src="https://cdn.fixvitals.com/resources/preload"></script>
+    {% endunless %}
+    {% render 'critical-css' %}
+    {% render 'custom-code-head' %}
+
+    {{ 'grid.css' | asset_url | stylesheet_tag }}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'modules.css' | asset_url | stylesheet_tag }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    {% render 'style-tags' %}
+
+    <script src="{{ 'vendor.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'theme-global.js' | asset_url }}" defer="defer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    {%- if settings.animations != 'none' -%}
+      <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+    {%- if request.design_mode -%}
+      <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+    {% unless template contains 'cart' or template contains 'customer' %}
+      <script data-cfasync="false" src="https://cdn.fixvitals.com/resources/lazyload"></script>
+    {% endunless %}
+    {{ content_for_header }}
+
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+      if (Shopify.designMode) {
+        document.documentElement.classList.add('shopify-design-mode');
+      }
+    </script>
+    {% render 'theme-data' %}
+
+    <script>
+      jQuery(document).ready(function () {
+        setInterval(function () {
+          jQuery("li.swatch-view-item[orig-value='custom']").click(function () {
+            jQuery('.main-product__block-size_popup').addClass('open_popup');
+            jQuery('.m-header__wrapper').addClass('header_behind');
+            jQuery('.custom-html-top').addClass('scroll_lock');
+            jQuery('body.template-product').addClass('scroll_lock');
+          });
+
+          jQuery('.popup-content-container .exit_btn span').click(function () {
+            jQuery('.main-product__block-size_popup').removeClass('open_popup');
+            jQuery('.m-header__wrapper').removeClass('header_behind');
+            jQuery('.custom-html-top').removeClass('scroll_lock');
+
+            jQuery('body.template-product').removeClass('scroll_lock');
+          });
+
+          jQuery('.submit_button_cs').click(function () {
+            jQuery('.main-product__block-size_popup').removeClass('open_popup');
+            jQuery('.m-header__wrapper').removeClass('header_behind');
+            jQuery('.custom-html-top').removeClass('scroll_lock');
+            jQuery('body.template-product').removeClass('scroll_lock');
+          });
+
+          jQuery('.custom_button_kn').click(function () {
+            jQuery('.main-product__block-size_popup').removeClass('open_popup');
+            jQuery('.m-header__wrapper').removeClass('header_behind');
+            jQuery('.custom-html-top').removeClass('scroll_lock');
+            jQuery('body.template-product').removeClass('scroll_lock');
+          });
+        }, 2000);
+      });
+    </script>
+
+    <script>
+      var TabBlock = {
+        s: {
+          animLen: 200,
+        },
+
+        init: function () {
+          TabBlock.bindUIActions();
+          TabBlock.hideInactive();
+        },
+
+        bindUIActions: function () {
+          $('.tab-switcher').on('click', '.tab-switcher-button', function () {
+            TabBlock.switchTab($(this));
+          });
+        },
+
+        hideInactive: function () {
+          var $tabBlocks = $('.tab-switcher-button');
+
+          $tabBlocks.each(function (i) {
+            var $tabBlock = $($tabBlocks[i]),
+              $panes = $tabBlock.find('.tab_container'),
+              $activeTab = $tabBlock.find('.tab-switcher-button.is-active');
+
+            $panes.hide();
+            $($panes[$activeTab.index()]).show();
+          });
+        },
+
+        switchTab: function ($tab) {
+          var $context = $tab.closest('.popup-content-container');
+
+          if (!$tab.hasClass('is-active')) {
+            $tab.siblings().removeClass('is-active');
+            $tab.addClass('is-active');
+
+            TabBlock.showPane($tab.index(), $context);
+          }
+        },
+
+        showPane: function (i, $context) {
+          var $panes = $context.find('.tab_container');
+          $panes.slideUp(TabBlock.s.animLen);
+          $($panes[i]).slideDown(TabBlock.s.animLen);
+        },
+      };
+
+      $(function () {
+        TabBlock.init();
+      });
+    </script>
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = 'https://www.clarity.ms/tag/' + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, 'clarity', 'script', 'l3s9xg5vrt');
+    </script>
+
+    <!-- HTML Meta Tags -->
+    <title>TORQADORN® | Fashion-Forward Looks for Her</title>
+    <meta name="description" content="Express your individuality with statement dresses, bold co-ords, and fashion-forward styles. Shop the hottest looks of the season.">
+
+      <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://torqadorn.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="TORQADORN® | Fashion-Forward Looks for Her">
+    <meta property="og:description" content="Express your individuality with statement dresses, bold co-ords, and fashion-forward styles. Shop the hottest looks of the season.">
+    <meta property="og:image" content="http://torqadorn.com/cdn/shop/files/TORQADORN.png?height=628&pad_color=fcfcfc&v=1711458770&width=1200">
+
+      <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="torqadorn.com">
+    <meta property="twitter:url" content="https://torqadorn.com/">
+    <meta name="twitter:title" content="TORQADORN® | Fashion-Forward Looks for Her">
+    <meta name="twitter:description" content="Express your individuality with statement dresses, bold co-ords, and fashion-forward styles. Shop the hottest looks of the season.">
+    <meta name="twitter:image" content="http://torqadorn.com/cdn/shop/files/TORQADORN.png?height=628&pad_color=fcfcfc&v=1711458770&width=1200">
+    <meta name="p:domain_verify" content="961f73e83615a73234955d4396d60e34">
+    {%- render 'foxify-head' -%}
+  </head>
+
+  <body
+    id="m-theme"
+    class="{{ body_classes }}"
+    {% if template.name == 'product' %}
+    data-product-id="{{ product.id }}"
+    {% endif %}>
+    {% render 'page-transition' %}
+    {% comment %} {% render 'page-transition' %} {% endcomment %}
+    {% render "auth-modal" %}
+    {%- liquid
+      render 'scroll-top-button'
+      sections 'header-group'
+    -%}
+
+    <main
+      class=""
+      role="main"
+      id="MainContent">
+      {% comment %} {%- render 'claviyo-form-ui' -%} {% endcomment %}
+      <script>
+          const m_header_ele = document.getElementsByClassName('m-header')[0];
+          if (m_header_ele.getAttribute('data-transparent') === 'false') {
+            m_header_ele.closest('.shopify-section').classList.add('m-section-header-sticky');
+          }
+      </script>
+      {{ content_for_layout }} 
+    </main>
+
+    {%- sections 'footer-group' -%}
+
+    {% render 'script-tags' %}
+    {% render 'cookie-banner' %}
+    {% render 'custom-code-body' %}
+
+    <script src="{{ 'product-quick-view.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'wishlist.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'compare-product.js' | asset_url }}" defer="defer"></script>
+
+    <script>
+      $(document).ready(function () {
+        // Initialize all Owl Carousels
+        function initializeCarousels() {
+          $('.collection_images').each(function () {
+            $(this).owlCarousel({
+              items: 1,
+              loop: false,
+              nav: false,
+              lazyLoad: true,
+              dots: true,
+            });
+          });
+        }
+
+        initializeCarousels(); // Initialize carousels on page load
+
+        // Function to reinitialize the Owl Carousel for all carousels
+        function reinitializeCarousels(width) {
+          $('.collection_images').each(function () {
+            // Destroy the current Owl Carousel instance
+            $(this).trigger('destroy.owl.carousel');
+
+            // Clean up the Owl Carousel DOM structure
+            $(this).find('.owl-stage-outer').children().unwrap();
+
+            // Set the width to the specified value
+            // $(this).css('width', width);
+
+            // Reinitialize the Owl Carousel with the same settings
+            $(this).owlCarousel({
+              items: 1,
+              loop: false,
+              nav: false,
+              lazyLoad: true,
+              dots: true,
+            });
+          });
+        }
+
+        // On click: Reinitialize all carousels with 50% width
+        $('.btn_50').on('click', function () {
+          reinitializeCarousels(); // Reinitialize all carousels with 50% width
+        });
+
+        // On click: Reinitialize all carousels with 100% width
+        $('.btn_100').on('click', function () {
+          reinitializeCarousels(); // Reinitialize all carousels with 100% width
+        });
+      });
+    </script>
+
+    {%- if settings.enable_predictive_search -%}
+      <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if linklists['gift-wrapping'].links != blank and linklists['gift-wrapping'].links.first.type == 'product_link'
+    -%}
+      <script src="{{ 'gift-wrapping.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if settings.show_swatch_option -%}
+      <script src="{{ 'product-card-swatch.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if settings.enable_cart_drawer and template != 'cart' -%}
+      {% render 'cart-drawer' %}
+    {%- endif -%}
+    <!-- Structured data markup code added by Simprosys Infomedia - Start -->
+    {% if template contains 'product' %}
+      <script type="application/ld+json">
+        {
+          "@context": "http://schema.org",
+          "@type": "Product",
+          "@id":"{{ shop.url }}{{ product.url }}",
+          "name": {{ product.title | json }},
+          "sku": {{ product.selected_or_first_available_variant.sku | json }},
+          "description": {{ product.description | strip_html | truncatewords: 50 | json }},
+          "url": "{{ shop.secure_url }} {{ product.selected_or_first_available_variant.url }}",
+          "image": "https:{{ product.featured_image | product_img_url: 'grande' }}",
+          "brand": {
+            "@type": "Brand",
+            "name": {{ product.vendor | json }},
+            "url": {{ jsonld_brand_url | json }}
+          },
+          "gtin": "{{ product.selected_or_first_available_variant.barcode }}",
+          "offers": [
+            {
+              "@type": "Offer",
+              "priceCurrency": "{{ cart.currency.iso_code }}",
+              "price": "{{ product.selected_or_first_available_variant.price | money_without_currency | remove: ',' }}",
+              "availability": "http://schema.org/{% if product.selected_or_first_available_variant.available %} InStock{% else %}OutOfStock{% endif %}",
+              "itemCondition": "http://schema.org/NewCondition",
+              "seller": "{{ shop.name | escape }}",
+              "url": "{{ shop.secure_url }} {{ product.selected_or_first_available_variant.url }}"
+            }
+          ]
+
+        }
+      </script>
+  {% endif %}
+    <!-- Structured data markup code added by Simprosys Infomedia - End -->
+    {%- render 'foxify-footer' -%}
+    {% render 'swym-custom-1' %}
+   
+  </body>
+</html>
+{% comment %} 
+<div id="ss-product-videos"></div>
+<style>
+.main-product__block:has(.swiper){
+display:none;
+}
+.main-product__block:has(.swiper .swiper-slide){
+display:block;
+}
+</style> 
+{% endcomment %}

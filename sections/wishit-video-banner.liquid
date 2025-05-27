@@ -1,0 +1,398 @@
+<div class="wishit-custom-video-section {{ section.settings.video_height }}">
+{% for source in section.settings.video_link_desktop.sources -%}
+  {% assign video_url = source.url %} 
+{%- endfor %}
+{% for source in section.settings.video_link_mobile.sources -%}
+  {% assign video_url_mobile = source.url %} 
+  {% if video_url_mobile == blank %}
+    {% assign video_url_mobile = video_url %}   
+  {% endif %}
+{%- endfor %}
+{% if section.settings.video_link_mobile == blank %}
+  {% assign video_url_mobile = video_url %}   
+{% endif %}
+  <video class="desktop-video-url" src="{{ video_url }}" loop="" muted="" autoplay="" playsinline></video>
+  <video class="mobile-video-url" style="display: none;" src="{{ video_url_mobile }}" loop="" muted="" autoplay="" playsinline></video>
+  <div class="banner__box content-container content-container--full-width-mobile  gradient" style="background: {{ section.settings.overlay_bg_color | color_modify: 'alpha', section.settings.image_overlay_opacity }} !important;">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'heading' -%}
+          <h2 class="Heading banner__heading" {{ block.shopify_attributes }}>
+            <span style="font-size: {{ block.settings.heading_size }}px;  color: {{ block.settings.heading_color }}">{{ block.settings.heading | escape }}</span>
+          </h2>
+        {%- when 'text' -%}
+          <div style="font-size: {{ block.settings.description_size }}px; color: {{ block.settings.description_color }}; {% if block.settings.description_line_height > 1 %} line-height: {{ block.settings.description_line_height }}px; {% endif %}" class="banner__text {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
+            <span>{{ block.settings.text | escape }}</span>
+          </div>
+        {%- when 'buttons' -%}
+          <div class="banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
+            {%- if block.settings.button_label_1 != blank -%}
+              <a{% if block.settings.button_link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link_1 }}"{% endif %} class="Button button{% if block.settings.button_bg_color_1 %} button--secondary{% else %} button--primary{% endif %}" style="background-color: {{ block.settings.button_bg_color_1 }}; color: {{ block.settings.button_color_1 }} !important;">{{ block.settings.button_label_1 | escape }}</a>
+            {%- endif -%}
+            {%- if block.settings.button_label_2 != blank -%}
+              <a{% if block.settings.button_link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link_2 }}"{% endif %} class="Button button{% if block.settings.button_bg_color_2 %} button--secondary{% else %} button--primary{% endif %}" style="background-color: {{ block.settings.button_bg_color_2 }}; color: {{ block.settings.button_color_2 }} !important;">{{ block.settings.button_label_2 | escape }}</a>
+            {%- endif -%}
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</div>  
+
+{%- style -%}
+
+.wishit-custom-video-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.wishit-custom-video-section video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    left: 0;
+    top: 0;
+} 
+.wishit-custom-video-section .banner__box {
+    padding: 30px 50px 40px 50px;
+    text-align: center;
+    z-index: 2;
+}
+.banner__buttons a.button {
+    padding: 10px;
+}
+.wishit-custom-video-section .banner__text{
+  margin-bottom: 20px;
+}
+.wishit-custom-video-section .banner__buttons > *:not(:last-child) {
+    margin-right: 15px;
+    font-weight: 600;
+}
+.wishit-custom-video-section .banner__buttons {
+    margin-top: 25px;
+    font-weight: 600;
+}  
+.wishit-custom-video-section{
+  height: calc(100vw*{{ section.settings.mobile_aspect_ratio }})
+}
+
+@media only screen and (min-width: 767px) {
+    .wishit-custom-video-section.small {
+        min-height: 42rem;
+    }
+    .wishit-custom-video-section.medium {
+        min-height: 56rem;
+    }
+    .wishit-custom-video-section.large {
+        min-height: 72rem;
+    }
+  .wishit-custom-video-section .banner__box {
+    {% if section.settings.banner-top > -1 or section.settings.banner-left> -1 %}
+    position: absolute;
+    top: {{ section.settings.banner-top }}%;
+    left: {{ section.settings.banner-left }}%;
+    {% endif %}
+  }
+  .wishit-custom-video-section{
+    height: calc(100vw*{{section.settings.desktop_aspect_ratio}})
+  }
+  .wishit-custom-video-section .banner__box {
+      width: {{ section.settings.banner-max-width }}%;
+  }  
+}
+
+@media only screen and (max-width: 767px) {
+  .wishit-custom-video-section .banner__box {
+    margin-top: {{ section.settings.mobile-banner-top }}%;
+  }
+  .wishit-custom-video-section .banner__buttons > *:not(:last-child) {
+    margin-right: unset;
+    margin-bottom: 10px;
+  }
+  video.desktop-video-url {
+    display: none;
+  }
+  video.mobile-video-url {
+    display: block !important;
+  }
+  .wishit-custom-video-section .banner__buttons {
+    text-align: center;
+    display: grid;
+    width: 180px;
+    margin: 0 auto;
+  }
+  .wishit-custom-video-section .banner__buttons > a {
+    width: 100%;
+  }
+  .wishit-custom-video-section .banner__box {
+    width: 95%;
+    padding: 25px 20px 35px 20px !important;
+  }
+}  
+{%- endstyle -%}
+
+{% schema %}
+{
+  "name": "Wishit Video Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Wishit Customization Support",
+      "info": "For any customizations required in this section, feel free to write to us at contact@adevole.com"
+    },
+    {
+      "type": "video",
+      "id": "video_link_desktop",
+      "label": "Desktop Video .mp4 link"
+    },
+    {
+      "type": "video",
+      "id": "video_link_mobile",
+      "label": "Mobile Video .mp4 link"
+    },
+    {
+      "type": "color",
+      "id": "overlay_bg_color",
+      "default": "transparent",
+      "label": "Overlay Background Color"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "unit": "%",
+      "label": "Overlay Opacity",
+      "default": 0.8
+    },
+    {
+      "type": "select",
+      "id": "video_height",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium",
+      "label": "Minimum Height of Video Section"
+    },
+    {
+      "type": "range",
+      "id": "desktop_aspect_ratio",
+      "min": 0,
+      "max": 2,
+      "step": 0.1,
+      "label": "Desktop Aspect Ratio",
+      "default": 0.2,
+      "info": "Will control the height of video with respect to width, 1 = square image"
+    },
+    {
+      "type": "range",
+      "id": "mobile_aspect_ratio",
+      "min": 0,
+      "max": 2,
+      "step": 0.1,
+      "label": "Mobile Aspect Ratio",
+      "default": 1.2,
+      "info": "Will control the height of video with respect to width, 1 = square image"
+    },
+    {
+      "type": "header",
+      "content": "Banner Content Settings"
+    },
+    {
+      "type": "range",
+      "id": "banner-max-width",
+      "min": 30,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Desktop Banner Max Width",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "banner-top",
+      "min": -1,
+      "max": 99,
+      "step": 1,
+      "unit": "%",
+      "label": "Desktop Position Top",
+      "info": "Set top and left to  -1 for center align",
+      "default": -1
+    },
+    {
+      "type": "range",
+      "id": "banner-left",
+      "min": -1,
+      "max": 99,
+      "step": 1,
+      "unit": "%",
+      "label": "Desktop Position Left",
+      "info": "Set top and left to -1 for center align",
+      "default": -1
+    },
+    {
+      "type": "range",
+      "id": "mobile-banner-top",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
+      "label": "Mobile Position Top",
+      "info": "Set 0 for middle align",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Video banner",
+          "label": "Heading"
+        },
+        {
+          "type": "range",
+          "id": "heading_size",
+          "min": 10,
+          "max": 100,
+          "step": 2,
+          "default": 32,
+          "label": "Heading Size"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "default": "#ffffff",
+          "label": "Heading Color"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Give customers details about the banner video(s) or content on the template.",
+          "label": "Description"
+        },
+        {
+          "type": "range",
+          "id": "description_size",
+          "min": 10,
+          "max": 100,
+          "step": 2,
+          "default": 16,
+          "label": "Description Size"
+        },
+        {
+          "type": "range",
+          "id": "description_line_height",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 0,
+          "label": "Line Height"
+        },
+        {
+          "type": "color",
+          "id": "description_color",
+          "default": "#ffffff",
+          "label": "Description Color"
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "Buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "default": "Button label",
+          "label": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "Button Link"
+        },
+        {
+          "type": "color",
+          "id": "button_bg_color_1",
+          "default": "#fefefe",
+          "label": "Button Background Color"
+        },
+        {
+          "type": "color",
+          "id": "button_color_1",
+          "default": "#111111",
+          "label": "Button Text Color"
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "default": "Button label",
+          "label": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "Button Link"
+        },
+        {
+          "type": "color",
+          "id": "button_bg_color_2",
+          "default": "#111111",
+          "label": "Button Background Color"
+        },
+        {
+          "type": "color",
+          "id": "button_color_2",
+          "default": "#fefefe",
+          "label": "Button Text Color"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "WishIt Video Banner",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "buttons"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

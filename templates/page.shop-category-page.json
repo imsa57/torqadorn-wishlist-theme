@@ -1,0 +1,618 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page",
+      "disabled": true,
+      "settings": {}
+    },
+    "image_with_text_2_igURx6": {
+      "type": "image-with-text-2",
+      "settings": {
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "container": "w-full",
+        "hero_size": "adapt",
+        "show_overlay": true,
+        "image": "shopify://shop_images/Untitled_design_6_6028be9a-42d8-4a80-b35a-9a5afa108efd.jpg",
+        "image_link": "",
+        "parallax": false,
+        "parallax_direction": "zoom",
+        "content_in_container": false,
+        "content_position": "center middle",
+        "text_alignment": "center",
+        "text_size": "large",
+        "text_color": "white",
+        "title": "Discover head-turning designs you'll <i>Love</i> to wear.",
+        "subtitle": "",
+        "text": "",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "m-button--primary",
+        "button_size": "",
+        "text_alignment_mobile": "center",
+        "mb_image": "shopify://shop_images/DSC6463_ae79120a-7dff-4291-b765-0d4026c7b4db.jpg",
+        "use_content_above": true,
+        "custom_class": "",
+        "animations": "inherit",
+        "enable_bg_zoom_effect": true
+      }
+    },
+    "custom_content_dHxtPT": {
+      "type": "custom-content",
+      "blocks": {
+        "text_taANVx": {
+          "type": "text",
+          "settings": {
+            "title": "Living out every single day and\nbe brave to show off your own true colors",
+            "subheading": "",
+            "text": "<p>Our new cozy collection is made with environmentally friendly materials and<br/>simple to care for so you can stay cozy wherever .</p>",
+            "width": "100%",
+            "alignment": "center",
+            "align_text": "center",
+            "text_size": "medium",
+            "text_color": "inherit",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "block_custom_class": "",
+            "animations": "inherit"
+          }
+        }
+      },
+      "block_order": [
+        "text_taANVx"
+      ],
+      "custom_css": [],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "color_scheme": "",
+        "content_color_scheme": "",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "gap": 30,
+        "gap_mobile": 16,
+        "use_scroll_mobile": false,
+        "padding_top": 100,
+        "padding_bottom": 20,
+        "custom_class": ""
+      }
+    },
+    "collection_list_kLik8D": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_block_w3zDRT": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "dresses",
+            "title": "DRESSES",
+            "item_image": "shopify://shop_images/IMG_8988_6f885b1a-1bb4-4afe-a5cd-99de0d915925.jpg"
+          }
+        },
+        "collection_block_dWb4mF": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "co-ords",
+            "title": "CO-ORDS",
+            "item_image": "shopify://shop_images/DSC6692_9cfb6038-ed84-471d-a065-50fc0e7d2d83.jpg"
+          }
+        },
+        "collection_block_YWjcBj": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "tops",
+            "title": "TOPS",
+            "item_image": "shopify://shop_images/IMG_8992.jpg"
+          }
+        },
+        "collection_block_7iXb7f": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "skirts",
+            "title": "SKIRTS",
+            "item_image": "shopify://shop_images/IMG_8986.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "collection_block_w3zDRT",
+        "collection_block_dWb4mF",
+        "collection_block_YWjcBj",
+        "collection_block_7iXb7f"
+      ],
+      "custom_css": [],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "container": "container-fluid",
+        "layout": "grid",
+        "expanded": false,
+        "card_style": "standard",
+        "text_alignment": "left",
+        "hover_effect": "none",
+        "show_product_count": false,
+        "count_inline_title": false,
+        "image_rounded": false,
+        "items_per_row": 4,
+        "item_gap": 4,
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "autorotate": false,
+        "autorotate_speed": 2,
+        "mobile_disable_slider": false,
+        "use_scroll_mobile": true,
+        "mobile_gap": 4,
+        "hidden_slide_control_mobile": false,
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "icon_box_fCe8V7": {
+      "type": "icon-box",
+      "blocks": {
+        "iconbox_xHGrdq": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify://shop_images/svg-image-12.svg",
+            "image_by_url": "",
+            "title": "Free Shipping",
+            "description": "<p>PAN India Delivery on us<br/>Express options available.</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--link",
+            "button_size": ""
+          }
+        },
+        "iconbox_YyzQEQ": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify://shop_images/shield.svg",
+            "image_by_url": "",
+            "title": "Secure Payments",
+            "description": "<p>Cards, UPI, COD<br/>Shop stress-free.</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--link",
+            "button_size": ""
+          }
+        },
+        "iconbox_Xr3Ce6": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify://shop_images/mannequin.svg",
+            "image_by_url": "",
+            "title": "Easy Customisations",
+            "description": "<p>Custom fits available<br/>Just ask.</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--link",
+            "button_size": ""
+          }
+        },
+        "iconbox_7w7B7E": {
+          "type": "iconbox",
+          "settings": {
+            "image": "shopify://shop_images/bubble-chat.svg",
+            "image_by_url": "",
+            "title": "Personal Stylist",
+            "description": "<p>Fashion advice on speed dial<br/>DM us!</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "iconbox_xHGrdq",
+        "iconbox_YyzQEQ",
+        "iconbox_Xr3Ce6",
+        "iconbox_7w7B7E"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "item_per_row": 4,
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "card_color_scheme": "",
+        "card_style": "vertical",
+        "image_max_width": "40px",
+        "content_alignment": "center",
+        "hover_effect": "none",
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "use_scroll_mobile": false,
+        "use_grid_column_mb": true,
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "image_with_text_WLywcP": {
+      "type": "image-with-text",
+      "custom_css": [
+        "@media (max-width: 767px) {.m-image-with-text__inner {flex-direction: column-reverse; row-gap: 48px; } .m-richtext__description br, .m-richtext__title br {display: none; }}",
+        ".m-button {font-weight: 400;}"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "container": "container-fluid",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "item_gap": 20,
+        "item_gap_mobile": 28,
+        "layout": "right",
+        "image_column_size": "7",
+        "image_overlap": true,
+        "show_image_reverse": false,
+        "hover_effect": true,
+        "image_animation": "none",
+        "image": "shopify://shop_images/scarlet-lace-midi-dresses-313.webp",
+        "link": "",
+        "image_2": "shopify://shop_images/DSC6885.jpg",
+        "link_2": "",
+        "second_image_offset_top": 10,
+        "title": "Dresses you’ll turn <br> to again and again.",
+        "sub_title": "The Dress Edit",
+        "text": "<p>Here is your chance to upgrade your wardrobe<br/> with a variation of styles and fits that are both.</p>",
+        "text_size": "large",
+        "content_alignment": "left",
+        "button_label": "SHOP COLLECTION",
+        "button_link": "",
+        "button_style": "m-button--primary",
+        "button_size": "",
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "testimonials_YftqQr": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_jpc369": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Matches international luxury",
+            "description": "<p>\"Super amazing quality and brand, it totally matches the quality of international brands that i order from typically! I’d love to order more from Torqadorn\"</p>",
+            "footer": "<p>Rina Sharma</p>",
+            "image": "shopify://shop_images/2024-02-14.jpg",
+            "image_text": "",
+            "image_link": "",
+            "product": "silver-blue-peplum-flared-dress"
+          }
+        },
+        "testimonial_AkKCKP": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Showstopping designs, incredible service",
+            "description": "<p>\"Every piece is a showstopper - from silhouettes to design details. But what truly stands out? Their support team. They genuinely care about getting it right.\"</p>",
+            "footer": "<p>Soumya Arora</p>",
+            "image": "shopify://shop_images/2F6534B5-16AE-4B85-9FB3-6A2FC1E80B17.jpg",
+            "image_text": "",
+            "image_link": "",
+            "product": "valerie-denim-midi"
+          }
+        },
+        "testimonial_tXgrHm": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Versatile designs, quality crafted",
+            "description": "<p>\"Torqadorn is a stylish brand with latest updates ! It has amazing collection of classic and versatile pieces with good quality !The creme leather trench I bought from the brand is asked by many !\"</p>",
+            "footer": "<p>Ankita Agrawal</p>",
+            "image": "shopify://shop_images/2023-08-22.jpg",
+            "image_text": "",
+            "image_link": "",
+            "product": "cream-faux-leather-trench"
+          }
+        },
+        "testimonial_Vz4RGc": {
+          "type": "testimonial",
+          "disabled": true,
+          "settings": {
+            "title": "Sequins that stay put, fits like a dream",
+            "description": "<p>\"Found my perfect sequin statement pieces - a peach suit and green shirt. Premium quality with secure sequins that actually stay put. Fits like a dream and arrived right on schedule.\"</p>",
+            "footer": "<p>Himabindu Perla</p>",
+            "image": "shopify://shop_images/himabindu_perla.webp",
+            "image_text": "",
+            "image_link": "",
+            "product": "dusty-rose-sequins-co-ord-set"
+          }
+        },
+        "testimonial_TJHcaU": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Consistently excellent, proudly homegrown",
+            "description": "<p>\"I have been ordering regularly from this brand and love their designs and fit. Also their service and response to questions and concerns is fantastic. Love to see such amazing home grown brands. Keep up the good work ❤️</p>",
+            "footer": "<p>Gitanjali Mirchandani</p>",
+            "image": "shopify://shop_images/unnamed.webp",
+            "image_text": "",
+            "image_link": "",
+            "product": "aquila-ruffle-dress"
+          }
+        },
+        "testimonial_A8myhJ": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Flawless fit, coming back for more",
+            "description": "<p>\"The dress arrived in a mint condition and the packaging was adept. It fits perfectly and is definitely worth the buy! Will 100% purchase from this again\"</p>",
+            "footer": "<p>Dhriti Pal</p>",
+            "image": "shopify://shop_images/2024-05-18.jpg",
+            "image_text": "",
+            "image_link": "",
+            "product": "estelle-lace-mini"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_jpc369",
+        "testimonial_AkKCKP",
+        "testimonial_tXgrHm",
+        "testimonial_Vz4RGc",
+        "testimonial_TJHcaU",
+        "testimonial_A8myhJ"
+      ],
+      "settings": {
+        "heading": "What People Are Saying",
+        "heading_size": "h2",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container",
+        "color_scheme": "",
+        "design": "testimonials-8",
+        "show_stars": true,
+        "autorotate": true,
+        "show_navigation": true,
+        "show_pagination": false,
+        "star_color": "#1773b0",
+        "item_color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "padding_top": 100,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "lookbook_zXBBUj": {
+      "type": "lookbook",
+      "blocks": {
+        "shop_this_look_ajtDhq": {
+          "type": "shop-this-look",
+          "settings": {
+            "color_scheme": "",
+            "image": "shopify://shop_images/Untitled_design_5_3160194f-a3c0-4753-b6bb-ea11e46dde80.jpg",
+            "title_text": "<p>LEILA Co-ord<br/><br/>Sequins on sequins.<br/>Just because.</p>",
+            "title_size": "m:text-base",
+            "text_alignment": "left",
+            "title_link": "",
+            "button_label": "Shop this look",
+            "product_list": [
+              "leila-sequins-crop-and-maxi-skirt-co-ord",
+              "black-sequins-top",
+              "black-sequins-maxi-skirt"
+            ]
+          }
+        },
+        "shop_this_look_R3DpKA": {
+          "type": "shop-this-look",
+          "settings": {
+            "color_scheme": "",
+            "image": "shopify://shop_images/SHOPIFY-CATALOG-IMAGES-_1__1.webp",
+            "title_text": "<p>LUMI Top & Layla Skirt Co-ord<br/><br/>Easy to style.<br/>Ready to play.</p>",
+            "title_size": "m:text-base",
+            "text_alignment": "left",
+            "title_link": "shopify://products/cleo-textured-co-ord",
+            "button_label": "Shop this look",
+            "product_list": [
+              "lumi-corset-top-and-layla-draped-skirt-co-ord",
+              "white-embroidery-corset-top",
+              "rouge-draped-skirt"
+            ]
+          }
+        },
+        "shop_this_look_AmCJ7q": {
+          "type": "shop-this-look",
+          "settings": {
+            "color_scheme": "",
+            "image": "shopify://shop_images/1738362655_0.jpg",
+            "title_text": "<p>BELLA Top & HELENA Skirt Co-ord<br/><br/>Ruffled. Layered.<br/>Ready to move.</p>",
+            "title_size": "m:text-base",
+            "text_alignment": "left",
+            "title_link": "",
+            "button_label": "Shop this look",
+            "product_list": [
+              "bella-ruched-top-and-helena-maxi-skirt-co-ord",
+              "bella-ruched-top",
+              "helena-maxi-skirt"
+            ]
+          }
+        }
+      },
+      "block_order": [
+        "shop_this_look_ajtDhq",
+        "shop_this_look_R3DpKA",
+        "shop_this_look_AmCJ7q"
+      ],
+      "settings": {
+        "heading": "Check out mix & match",
+        "heading_size": "h2",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "color_scheme": "",
+        "image_aspect_ratio": "3/4",
+        "use_scroll_mobile": true,
+        "padding_top": 100,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit",
+        "enable_bg_zoom_effect": true
+      }
+    },
+    "product_tabs_q7TUJD": {
+      "type": "product-tabs",
+      "blocks": {
+        "tab_q3g9Wy": {
+          "type": "tab",
+          "settings": {
+            "title": "BEST SELLERS",
+            "collection": "best-sellers"
+          }
+        },
+        "tab_iEcBmE": {
+          "type": "tab",
+          "settings": {
+            "title": "NEW ARRIVALS",
+            "collection": "the-lovers-club-valentines-2025"
+          }
+        }
+      },
+      "block_order": [
+        "tab_q3g9Wy",
+        "tab_iEcBmE"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "tab_header": "horizontal",
+        "limit": 4,
+        "show_button": false,
+        "button_type": "link",
+        "button_label": "View all",
+        "button_style": "m-button--primary",
+        "button_size": "",
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "items_per_row": 4,
+        "item_gap": 4,
+        "enable_slider": false,
+        "show_navigation": true,
+        "show_pagination": false,
+        "mobile_disable_slider": false,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 4,
+        "padding_top": 100,
+        "padding_bottom": 10,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "collection_showcase_NQaFmK": {
+      "type": "collection-showcase",
+      "blocks": {
+        "collection_YY93UR": {
+          "type": "collection",
+          "settings": {
+            "title": "Birthday Fits",
+            "collection": "birthday",
+            "image": "shopify://shop_images/DSC6777.jpg",
+            "subheading": "",
+            "heading": "Birthday Fits",
+            "heading_size": "h2",
+            "button_text": "Shop more",
+            "button_style": "m-button--link",
+            "button_size": ""
+          }
+        },
+        "collection_RhPAyU": {
+          "type": "collection",
+          "settings": {
+            "title": "Brunch Picks",
+            "collection": "brunch-picks",
+            "image": "shopify://shop_images/cream-square-neck-top-and-mellow-yellow-pants-co-ord-set-729.webp",
+            "subheading": "",
+            "heading": "Brunch Picks",
+            "heading_size": "h2",
+            "button_text": "Shop more",
+            "button_style": "m-button--white",
+            "button_size": ""
+          }
+        },
+        "collection_DRzXAF": {
+          "type": "collection",
+          "settings": {
+            "title": "Date Night",
+            "collection": "resort",
+            "image": "shopify://shop_images/cocoa-brown-knit-top-and-velvet-skirt-co-ord-set-115.webp",
+            "subheading": "",
+            "heading": "Date Night",
+            "heading_size": "h2",
+            "button_text": "Shop more",
+            "button_style": "m-button--link",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_YY93UR",
+        "collection_RhPAyU",
+        "collection_DRzXAF"
+      ],
+      "disabled": true,
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "color_scheme_tab": "scheme-75a2a957-4366-4f71-9465-cb1ad9a8f255",
+        "image_position": "right",
+        "product_to_show": 3,
+        "pcard_image_ratio": "original",
+        "padding_top": 100,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_2_igURx6",
+    "custom_content_dHxtPT",
+    "collection_list_kLik8D",
+    "icon_box_fCe8V7",
+    "image_with_text_WLywcP",
+    "testimonials_YftqQr",
+    "lookbook_zXBBUj",
+    "product_tabs_q7TUJD",
+    "collection_showcase_NQaFmK"
+  ]
+}

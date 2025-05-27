@@ -1,0 +1,388 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "disabled": true,
+      "settings": {
+        "container": "container",
+        "text_alignment": "center",
+        "hide_current": false,
+        "hide_on_mb": false,
+        "animations": "inherit"
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_saving": false,
+            "sale_badge_type": "percentage"
+          }
+        },
+        "custom_liquid_yn6pVz": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"christmas-offer-widget\">\n  <div class=\"content-wrapper\">\n    <div class=\"offer-row\">\n      <p class=\"offer-message\">2025 looking good on You</p>\n      <p id=\"countdown-timer\" class=\"countdown-timer\" style=\"visibility: hidden;\"></p>\n    </div>\n    <p class=\"offer-subtext\">Start it with 10% off waiting in cart</p>\n  </div>\n</div>\n\n<style>\n.christmas-offer-widget {\n  position: relative;\n  width: 100%;\n  max-width: 100%;\n  height: 60px;\n  background: #fcfcfc;\n  border-radius: 4px;\n  overflow: hidden;\n  display: flex;\n  align-items: flex-start;\n  justify-content: flex-start;\n  padding: 10px;\n  box-sizing: border-box;\n  margin: 2px auto;\n  border: 1px solid #D3D3D3; /* Added border */\n}\n\n  .content-wrapper {\n    z-index: 2;\n    width: 100%;\n    padding: 0;\n  }\n\n  .offer-row {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    width: 100%;\n  }\n\n  .offer-message {\n    font-size: 12px;\n    color: #333333;\n    margin: 0;\n  }\n\n  .countdown-timer {\n    font-size: 12px;\n    color: #333333;\n    margin: 0;\n  }\n\n  .offer-subtext {\n    font-size: 10px;\n    color: #333333;\n    margin: 2px 0 0;\n  }\n\n  @media screen and (max-width: 768px) {\n    .christmas-offer-widget {\n      height: 55px;\n    }\n\n    .offer-message {\n      font-size: 12px;\n    }\n\n    .countdown-timer {\n      font-size: 12px;\n    }\n\n    .offer-subtext {\n      font-size: 10px;\n    }\n  }\n</style>\n\n<script>\n  document.addEventListener('DOMContentLoaded', function () {\n    // Countdown timer logic\n    function updateCountdown() {\n      const endDate = new Date('2025-01-10T00:00:00+05:30');\n      const now = new Date();\n      const timeLeft = endDate - now;\n\n      if (timeLeft <= 0) {\n        document.getElementById('countdown-timer').textContent = 'Offer Expired';\n        document.getElementById('countdown-timer').style.visibility = 'visible';\n        return;\n      }\n\n      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));\n      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));\n      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));\n      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);\n\n      const timerDisplay = document.getElementById('countdown-timer');\n      timerDisplay.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;\n      timerDisplay.style.visibility = 'visible';\n    }\n\n    updateCountdown();\n    setInterval(updateCountdown, 1000);\n  });\n</script>"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "size_title": "Size"
+          }
+        },
+        "inventory_status_HkjWzL": {
+          "type": "inventory_status",
+          "disabled": true,
+          "settings": {
+            "show_indicator_bar": false,
+            "normal_text": "",
+            "low_text": "",
+            "outofstock_text": "",
+            "backordered_text": "<p>Backordered</p>"
+          }
+        },
+        "shipping_VBJFtx": {
+          "type": "shipping",
+          "settings": {
+            "show_delivery_times": false,
+            "deliver_text": "Pre-Order today for our next lot dispatch on",
+            "deliver_days": "",
+            "date_format": "",
+            "show_shipping_text": true,
+            "shipping_text": "{{ product.metafields.custom.shipping_text | metafield_tag }}"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "button_style": true,
+            "buynow_text": "",
+            "show_quantity_selector": false,
+            "show_atc_button": true,
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true,
+            "heading_top": "Tell us your body measurements",
+            "heading_bottom": "Your Contact Details",
+            "submit_btn_txt": "*Your custom order is tailored especially for you. Please double-check your measurements as custom orders are not eligible for exchange.",
+            "text_tab_two": "Tell us how to get in touch with you",
+            "popup_image": "shopify://shop_images/shop-8e4b-aacdfe3d0878-1602173322297.png",
+            "link_whatsapp": "https://wa.me/+918376905539",
+            "tab_two_txt": "We want you to love your fit. Chat with us for personalised sizing assistance."
+          }
+        },
+        "trust_badge_bf3akk": {
+          "type": "trust_badge",
+          "disabled": true,
+          "settings": {
+            "trust_badges_text": "<p>Pre-Order today for our next lot dispatch on August 4th, 2024</p>",
+            "trust_badges_image": "shopify://shop_images/bell_3.svg",
+            "trust_badges_image_width": "10%",
+            "position": "below"
+          }
+        },
+        "addons": {
+          "type": "addons",
+          "disabled": true,
+          "settings": {
+            "show_atcp": false,
+            "show_ask_a_question": true,
+            "show_social": true
+          }
+        },
+        "custom_text_qcDQ8N": {
+          "type": "custom_text",
+          "disabled": true,
+          "settings": {
+            "content": "<p><strong>{{ product.metafields.custom.product_rating_.value }}</strong></p>"
+          }
+        },
+        "collapsible_tab_NGBEjb": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Details",
+            "content": "",
+            "liquid": "{{product.description}}",
+            "default_open": true
+          }
+        },
+        "collapsible_tab_ArqMaJ": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Customisation",
+            "content": "<p>We celebrate size-inclusivity / If your measurements fall outside the size chart, simply mention your measurements in the ‘customization request’ box at checkout and we’ll have everything made accordingly. There is absolutely no additional cost for sizes beyond XL.</p><p>No returns or COD will be accepted for customisations. </p>",
+            "liquid": "",
+            "default_open": false
+          }
+        },
+        "collapsible_tab_yYQhpe": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "FABRIC & FIT",
+            "content": "<p>{{ product.metafields.custom.fabric_fit | metafield_tag }}</p>",
+            "liquid": "",
+            "default_open": false
+          }
+        },
+        "collapsible_tab_Admpgr": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "HOW TO WEAR",
+            "content": "<p>{{ product.metafields.custom.how_to_wear | metafield_tag }}</p>",
+            "liquid": "",
+            "default_open": false
+          }
+        },
+        "collapsible_tab_8UGN7m": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "CARE INSTRUCTIONS",
+            "content": "<p>{{ product.metafields.descriptors.care_guide | metafield_tag }}</p>",
+            "liquid": "",
+            "default_open": false
+          }
+        },
+        "meta_LDHWxr": {
+          "type": "meta",
+          "settings": {
+            "show_collections": false,
+            "show_vendor": false,
+            "show_type": false,
+            "show_availability": false,
+            "show_sku": true
+          }
+        },
+        "custom_liquid_MpNHXC": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n  .trust-markers {\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n    background-color: #FCFCFC;\n    padding: 20px;\n  }\n  .trust-marker {\n    text-align: center;\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n  }\n  .trust-marker img {\n    max-width: 40px;\n    margin-bottom: 10px;\n  }\n  .trust-marker p {\n    font-size: 12px;\n    margin: 0;\n    min-height: 2em;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    text-align: center;\n  }\n  .trust-marker-divider {\n    height: 40px;\n    width: 1px;\n    background-color: #e0e0e0;\n    margin: 0 20px;\n  }\n</style>\n\n<div class=\"trust-markers\">\n  <div class=\"trust-marker\">\n    <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/air-cargo.svg?v=1717544368\" alt=\"Free Delivery\">\n    <p>Free<br>Delivery</p>\n  </div>\n  <div class=\"trust-marker-divider\"></div>\n  <div class=\"trust-marker\">\n    <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/fashion-designer.svg?v=1717543944\" alt=\"Easy Customisations\">\n  <p>Easy<br>Customisations</p>\n  </div>\n  <div class=\"trust-marker-divider\"></div>\n  <div class=\"trust-marker\">\n    <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/cod.svg?v=1717544440\" alt=\"Cash On Delivery\">\n    <p>Cash On<br>Delivery</p>\n  </div>\n</div>"
+          }
+        },
+        "custom_liquid_YXeWDM": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": ""
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "custom_liquid_yn6pVz",
+        "variant_picker",
+        "inventory_status_HkjWzL",
+        "shipping_VBJFtx",
+        "buy_buttons",
+        "trust_badge_bf3akk",
+        "addons",
+        "custom_text_qcDQ8N",
+        "collapsible_tab_NGBEjb",
+        "collapsible_tab_ArqMaJ",
+        "collapsible_tab_yYQhpe",
+        "collapsible_tab_Admpgr",
+        "collapsible_tab_8UGN7m",
+        "meta_LDHWxr",
+        "custom_liquid_MpNHXC",
+        "custom_liquid_YXeWDM"
+      ],
+      "custom_css": [
+        "@media (max-width: 768px) {.m-main-product--media {padding: 0; }}",
+        ".m-product-meta--label {display: none;}",
+        "@media only screen and (max-width: 767px) {.m-product-title {font-size: 18px; }}"
+      ],
+      "settings": {
+        "container": "container-fluid",
+        "layout": "layout-3",
+        "show_atwl": false,
+        "enable_history_state": false,
+        "enable_variant_group_images": false,
+        "disable_selected_variant_default": false,
+        "show_featured_media": true,
+        "show_zoom_button": true,
+        "enable_video_autoplay": true,
+        "show_nav_media_mobile": false,
+        "show_pagination_mobile": true,
+        "use_sticky_atc": false,
+        "use_sticky_atc_on_mobile": false,
+        "enable_dynamic_checkout": false,
+        "sticky_atc_wishtlist": false,
+        "sticky_atc_compare": false
+      }
+    },
+    "apps_J9Lh48": {
+      "type": "apps",
+      "blocks": {
+        "xo_gallery_xo_gallery_NW8jN4": {
+          "type": "shopify://apps/xo-gallery/blocks/xo-gallery/e61dfbaa-1a75-4e4e-bffc-324f17325251",
+          "settings": {
+            "id": 7,
+            "mid": ""
+          }
+        }
+      },
+      "block_order": [
+        "xo_gallery_xo_gallery_NW8jN4"
+      ],
+      "custom_css": [
+        "@media (min-width: 1024px) {.m-section-my {display: none; }}"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "header_alignment": "left",
+        "container": "container",
+        "background_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "17177624568d3dae92": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "product-details-tabs": {
+      "type": "product-details-tabs",
+      "blocks": {
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+            "header": "Product Details"
+          }
+        },
+        "tab": {
+          "type": "tab",
+          "disabled": true,
+          "settings": {
+            "header": "Fabric & Fit",
+            "content": "<p>{{ product.metafields.custom.fabric_fit | metafield_tag }}</p>",
+            "content_page": ""
+          }
+        },
+        "tab_6D9RgL": {
+          "type": "tab",
+          "disabled": true,
+          "settings": {
+            "header": "Care & Instructions",
+            "content": "<p>Shipping cost is based on weight. Just add products to your cart and use the Shipping Calculator to see the shipping price.</p><p>We want you to be 100% satisfied with your purchase. Items can be returned or exchanged within 30 days of delivery.</p>",
+            "content_page": ""
+          }
+        }
+      },
+      "block_order": [
+        "description",
+        "tab",
+        "tab_6D9RgL"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".m-tabs__header {justify-content: flex-start;}"
+      ],
+      "settings": {
+        "container": "container",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "default_open": false,
+        "padding_top": 0,
+        "padding_bottom": 50,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "custom_css": [
+        ".m-product-tag--soldout {background-color: transparent; color: black;}",
+        ".foxkit-preorder-badge {background-color: transparent; color: black;}",
+        ".m-product-tag--sale {background-color: transparent; color: black;}",
+        ".m-section__heading {font-family: \"Futura\", Arial, sans-serif;}"
+      ],
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "remove_params": false,
+        "heading": "More Styles You'll LOVE",
+        "heading_size": "h3",
+        "text_align": "left",
+        "limit": 4,
+        "columns": 4,
+        "column_gap": 8,
+        "enable_slider": false,
+        "use_scroll_mobile": false,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "1715332902703fde33": {
+      "type": "apps",
+      "blocks": {
+        "xo_gallery_xo_gallery_VdpEXi": {
+          "type": "shopify://apps/xo-gallery/blocks/xo-gallery/e61dfbaa-1a75-4e4e-bffc-324f17325251",
+          "settings": {
+            "id": 5,
+            "mid": ""
+          }
+        }
+      },
+      "block_order": [
+        "xo_gallery_xo_gallery_VdpEXi"
+      ],
+      "custom_css": [
+        "@media (min-width: 1024px) {.m-section-my {display: none; }}",
+        ".m-section-my {padding-left: 15px; padding-right: 15px;}"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "header_alignment": "left",
+        "container": "container",
+        "background_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main",
+    "apps_J9Lh48",
+    "17177624568d3dae92",
+    "product-details-tabs",
+    "product-recommendations",
+    "1715332902703fde33"
+  ]
+}

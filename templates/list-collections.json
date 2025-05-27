@@ -1,0 +1,240 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "collection-list-template",
+      "disabled": true,
+      "settings": {
+        "container": "container-fluid",
+        "display_type": "all",
+        "title": "All collection",
+        "description": "<p>Here is your chance to upgrade your wardrobe <br/>with a variation of styles and fits that are both feminine and relaxed.</p>",
+        "header_alignment": "left",
+        "items_per_row": 4,
+        "item_gap": 30,
+        "mobile_columns": "2",
+        "mobile_gap": 16,
+        "card_style": "inside-2",
+        "text_alignment": "center",
+        "hover_effect": "scaling-up",
+        "show_product_count": true,
+        "count_inline_title": true,
+        "image_rounded": false
+      }
+    },
+    "custom_liquid_Gee6JJ": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div style=\"display: flex; flex-direction: column; gap: 10px; padding: 0 15px;\">\n  <a href=\"https://torqadorn.com/collections/dresses\" style=\"text-decoration: none; color: inherit;\">\n    <div style=\"display: flex; justify-content: space-between; align-items: center; background-color: #fff; padding: 0px 10px 0px; border: 1px solid #ddd;\">\n      <div style=\"font-weight: 500; text-transform: uppercase; font-size: 12px;\">Dresses</div>\n      <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/1_27e27fe9-d32d-4565-9ff9-3d9ce3d02944.png?v=1719675537\" alt=\"Dresses & Jumpsuits\" style=\"max-width: 72px; height: auto;\">\n    </div>\n  </a>\n  \n  <a href=\"https://torqadorn.com/collections/co-ords\" style=\"text-decoration: none; color: inherit;\">\n    <div style=\"display: flex; justify-content: space-between; align-items: center; background-color: #fff; padding: 0px 10px 0px; border: 1px solid #ddd;\">\n      <div style=\"font-weight: 500; text-transform: uppercase; font-size: 12px;\">Co-ords</div>\n      <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/2_5a84a624-bb7d-4e98-9692-17da6254cc36.png?v=1719675537\" alt=\"Co-ords\" style=\"max-width: 72px; height: auto;\">\n    </div>\n  </a>\n  \n  <a href=\"https://torqadorn.com/collections/tops\" style=\"text-decoration: none; color: inherit;\">\n    <div style=\"display: flex; justify-content: space-between; align-items: center; background-color: #fff; padding: 0px 10px 0px; border: 1px solid #ddd;\">\n      <div style=\"font-weight: 500; text-transform: uppercase; font-size: 12px;\">Tops</div>\n      <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/3_f21e0e32-b75a-478c-97f7-f86114040274.png?v=1719675537\" alt=\"Tops & Shirts\" style=\"max-width: 72px; height: auto;\">\n    </div>\n  </a>\n  \n  <a href=\"https://torqadorn.com/collections/skirts\" style=\"text-decoration: none; color: inherit;\">\n    <div style=\"display: flex; justify-content: space-between; align-items: center; background-color: #fff; padding: 0px 10px 0px; border: 1px solid #ddd;\">\n      <div style=\"font-weight: 500; text-transform: uppercase; font-size: 12px;\">Skirts</div>\n      <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/4_6630acd5-5b0c-437d-9f3b-d4c4349aff68.png?v=1719675537\" alt=\"Skirts & Trousers\" style=\"max-width: 72px; height: auto;\">\n    </div>\n  </a>\n</div>",
+        "custom_class": ""
+      }
+    },
+    "custom_content_Ucmf4p": {
+      "type": "custom-content",
+      "blocks": {
+        "image_card_XQ47rR": {
+          "type": "image_card",
+          "settings": {
+            "width": "50%",
+            "color_scheme": "",
+            "content_position": "bottom_left",
+            "content_alignment": "center",
+            "text_size": "medium",
+            "text_color": "white",
+            "image": "shopify://shop_images/1_65e4282e-9117-4bc7-98cb-3452a4d2dd37.jpg",
+            "link": "shopify://collections/best-sellers",
+            "title": "BEST SELLERS",
+            "subtitle": "",
+            "description": "",
+            "button_label": "EXPLORE",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "button_fixed": true,
+            "use_content_above": true,
+            "block_custom_class": "",
+            "animations": "inherit"
+          }
+        },
+        "image_card_LwxQJF": {
+          "type": "image_card",
+          "settings": {
+            "width": "50%",
+            "color_scheme": "",
+            "content_position": "bottom_left",
+            "content_alignment": "center",
+            "text_size": "medium",
+            "text_color": "white",
+            "image": "shopify://shop_images/Untitled_design_42.png",
+            "link": "shopify://collections/vienna-s-s-24",
+            "title": "VIENNA SS'24",
+            "subtitle": "",
+            "description": "",
+            "button_label": "SHOP",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "button_fixed": true,
+            "use_content_above": true,
+            "block_custom_class": "",
+            "animations": "inherit"
+          }
+        },
+        "image_card_nVgrJn": {
+          "type": "image_card",
+          "settings": {
+            "width": "50%",
+            "color_scheme": "",
+            "content_position": "bottom_left",
+            "content_alignment": "center",
+            "text_size": "medium",
+            "text_color": "white",
+            "image": "shopify://shop_images/Instagram_Famous-min.jpg",
+            "link": "shopify://collections/instagram-famous",
+            "title": "INSTAGRAM FAMOUS",
+            "subtitle": "",
+            "description": "",
+            "button_label": "SHOP",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "button_fixed": true,
+            "use_content_above": true,
+            "block_custom_class": "",
+            "animations": "inherit"
+          }
+        },
+        "image_card_zEGeKM": {
+          "type": "image_card",
+          "settings": {
+            "width": "50%",
+            "color_scheme": "",
+            "content_position": "bottom_left",
+            "content_alignment": "center",
+            "text_size": "medium",
+            "text_color": "black",
+            "image": "shopify://shop_images/Menu_Items_Images-min.jpg",
+            "link": "shopify://collections/vacation",
+            "title": "VACAY EDIT",
+            "subtitle": "",
+            "description": "",
+            "button_label": "SHOP",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "button_fixed": true,
+            "use_content_above": true,
+            "block_custom_class": "",
+            "animations": "inherit"
+          }
+        },
+        "image_card_HgQ7xR": {
+          "type": "image_card",
+          "settings": {
+            "width": "50%",
+            "color_scheme": "",
+            "content_position": "bottom_left",
+            "content_alignment": "center",
+            "text_size": "medium",
+            "text_color": "white",
+            "image": "shopify://shop_images/Untitled_design_41.png",
+            "link": "shopify://collections/brunch",
+            "title": "BRUNCH PICKS",
+            "subtitle": "",
+            "description": "",
+            "button_label": "SHOP",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "button_fixed": true,
+            "use_content_above": true,
+            "block_custom_class": "",
+            "animations": "inherit"
+          }
+        },
+        "image_card_EKBBzF": {
+          "type": "image_card",
+          "settings": {
+            "width": "50%",
+            "color_scheme": "",
+            "content_position": "bottom_left",
+            "content_alignment": "center",
+            "text_size": "medium",
+            "text_color": "white",
+            "image": "shopify://shop_images/Untitled_design_43.png",
+            "link": "shopify://collections/date-night",
+            "title": "DATE NIGHT OUTFITS",
+            "subtitle": "",
+            "description": "",
+            "button_label": "SHOP",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "button_fixed": true,
+            "use_content_above": true,
+            "block_custom_class": "",
+            "animations": "inherit"
+          }
+        },
+        "image_card_74zVEV": {
+          "type": "image_card",
+          "disabled": true,
+          "settings": {
+            "width": "50%",
+            "color_scheme": "",
+            "content_position": "bottom_left",
+            "content_alignment": "center",
+            "text_size": "medium",
+            "text_color": "white",
+            "image": "shopify://shop_images/1715162694_0.jpg",
+            "link": "",
+            "title": "FESTIVAL CLOTHING",
+            "subtitle": "",
+            "description": "",
+            "button_label": "SHOP",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "button_fixed": true,
+            "use_content_above": true,
+            "block_custom_class": "",
+            "animations": "inherit"
+          }
+        }
+      },
+      "block_order": [
+        "image_card_XQ47rR",
+        "image_card_LwxQJF",
+        "image_card_nVgrJn",
+        "image_card_zEGeKM",
+        "image_card_HgQ7xR",
+        "image_card_EKBBzF",
+        "image_card_74zVEV"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "content_color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "gap": 30,
+        "gap_mobile": 16,
+        "use_scroll_mobile": false,
+        "padding_top": 10,
+        "padding_bottom": 20,
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "custom_liquid_Gee6JJ",
+    "custom_content_Ucmf4p"
+  ]
+}

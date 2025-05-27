@@ -1,0 +1,153 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection-header": {
+      "type": "collection-page-header",
+      "custom_css": [
+        "h1 {font-size: 30px;}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "container": "w-full",
+        "layout": "without_breadcrumb",
+        "image_position": "background",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "text_alignment": "center",
+        "text_color": "inherit",
+        "upper_title": false,
+        "show_desc": true,
+        "collection_all_desc": "",
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "enable_bg_zoom_effect": false
+      }
+    },
+    "1717761951c4effa7d": {
+      "type": "apps",
+      "disabled": true,
+      "custom_css": [
+        ".quinn_cards {padding: 0px;}"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "main": {
+      "type": "main-collection-product-grid",
+      "blocks": {
+        "banner_promotion_KppNc9": {
+          "type": "banner_promotion",
+          "disabled": true,
+          "settings": {
+            "color_scheme": "dark",
+            "text_size": "medium",
+            "text_color": "white",
+            "link": "",
+            "content_position": "bottom_center",
+            "content_alignment": "center",
+            "title": "SALE UP TO 25% OFF",
+            "subtitle": "Online Exclusive",
+            "button_label": "Shop The Sale",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "button_fixed": false
+          }
+        }
+      },
+      "block_order": [
+        "banner_promotion_KppNc9"
+      ],
+      "custom_css": [
+        ".m-product-card__action {display: grid; justify-content: end;}",
+        ".m-product-item {padding-left: 1px; padding-right: 1px;}",
+        ".m-product-card__info {margin-top: 0px; padding-left: 5px;}"
+      ],
+      "settings": {
+        "enable_box_1": true,
+        "Row_desktop": 1,
+        "Row_mobile": 2,
+        "image_src": "shopify://shop_images/Promo_Tile_1_-_Vienna_SS_24.jpg",
+        "vertical_align_1": "center",
+        "horizontal_align_1": "center",
+        "text_heading": "<p>VIENNA</p>",
+        "text_para": "<p> Spring Summer 24</p>",
+        "url_text": "Shop New Arrivals",
+        "btn_url": "shopify://collections/vienna-s-s-24",
+        "btn_clr1": "#ffffff",
+        "enable_box_2": true,
+        "Row_desktop_2": 3,
+        "Row_mobile_2": 5,
+        "image_src_2": "shopify://shop_images/Promo_Tile_1_-_Trusted_By_Trendsetters.jpg",
+        "vertical_align_2": "center",
+        "horizontal_align_2": "end",
+        "text_heading_2": "<p>Trusted By Trendsetters</p>",
+        "text_para_2": "<p>@komalpandey</p>",
+        "url_text_2": "",
+        "btn_url_2": "#",
+        "btn_clr2": "#ffffff",
+        "enable_box_3": true,
+        "Row_desktop_3": 5,
+        "Row_mobile_3": 9,
+        "image_src_3": "shopify://shop_images/Promo_Tile_1_-_Hot_this_week.jpg",
+        "vertical_align_3": "center",
+        "horizontal_align_3": "left",
+        "text_heading_3": "<p>Hot This Week</p>",
+        "text_para_3": "<p>VALERIE Denim Midi</p>",
+        "url_text_3": "SHOP",
+        "btn_url_3": "shopify://products/valerie-denim-midi",
+        "btn_clr3": "#ffffff",
+        "enable_box_4": true,
+        "Row_desktop_4": 7,
+        "Row_mobile_4": 12,
+        "image_src_4": "shopify://shop_images/Promo_Tile_Number_4_1.jpg",
+        "vertical_align_4": "center",
+        "horizontal_align_4": "center",
+        "text_heading_4": "<p>We're a squad of women who love getting dressed up (and helping each other look amazing). </p>",
+        "text_para_4": "<p>Join the club!</p>",
+        "url_text_4": "",
+        "btn_url_4": "shopify://products/cherry-red-faux-leather-flared-pants",
+        "btn_clr4": "#ffffff",
+        "container": "container-fluid",
+        "grid_layout": "grid",
+        "grid_columns": "5",
+        "show_columns_switcher": true,
+        "pagination_limit": 20,
+        "paginate_type": "infinite",
+        "show_sorting": true,
+        "show_filter": true,
+        "filters_type": "storefront_filters",
+        "sidebar": "fixed",
+        "sidebar_title": "Refine",
+        "limit_height_widget": false,
+        "limit_height": 410,
+        "change_product_variant_on_fitlering": true,
+        "show_product_count": true,
+        "collapsed_groups": "Product type, Brand, Vendor, Size",
+        "color_swatches": "color,colour,couleur,farbe",
+        "color_swatches_design": "list"
+      }
+    }
+  },
+  "order": [
+    "collection-header",
+    "1717761951c4effa7d",
+    "main"
+  ]
+}

@@ -1,0 +1,180 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection-header": {
+      "type": "collection-page-header",
+      "settings": {
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "container": "container-fluid",
+        "layout": "without_breadcrumb",
+        "image_position": "background",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "text_alignment": "center",
+        "text_color": "inherit",
+        "upper_title": false,
+        "show_desc": true,
+        "collection_all_desc": "",
+        "padding_top": 36,
+        "padding_bottom": 50,
+        "enable_bg_zoom_effect": true
+      }
+    },
+    "171776340120653ab2": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "main": {
+      "type": "main-collection-product-grid",
+      "blocks": {
+        "banner_promotion_KppNc9": {
+          "type": "banner_promotion",
+          "disabled": true,
+          "settings": {
+            "color_scheme": "dark",
+            "text_size": "medium",
+            "text_color": "white",
+            "link": "",
+            "content_position": "bottom_center",
+            "content_alignment": "center",
+            "title": "SALE UP TO 25% OFF",
+            "subtitle": "Online Exclusive",
+            "button_label": "Shop The Sale",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "button_fixed": false
+          }
+        }
+      },
+      "block_order": [
+        "banner_promotion_KppNc9"
+      ],
+      "custom_css": [
+        ".foxkit-preorder-badge {background-color: transparent; color: black;}",
+        ".m-product-tag--sale {background-color: transparent; color: black;}",
+        ".m-product-tag--soldout {background-color: transparent; color: black;}",
+        ".container-fluid {padding-left: 5px; padding-right: 5px;}",
+        ".m-collection-toolbar--wrapper {padding-left: 5px; padding-right: 5px;}",
+        ".m-product-card__action {display: grid; justify-content: end;}",
+        ".m-product-item {padding-left: 1px; padding-right: 1px;}",
+        ".m-product-card__info {margin-top: 0px; padding-left: 5px;}"
+      ],
+      "settings": {
+        "enable_box_1": true,
+        "Row_desktop": 1,
+        "Row_mobile": 2,
+        "image_src": "shopify://shop_images/1_56b31dc7-97d0-454f-a3fb-e534d907ef84.jpg",
+        "vertical_align_1": "end",
+        "horizontal_align_1": "left",
+        "text_heading": "<p>ASTRA</p>",
+        "text_para": "<p>Crystal Shacket</p>",
+        "url_text": "",
+        "btn_url": "shopify://products/astra-crystal-shacket",
+        "btn_clr1": "#ffffff",
+        "enable_box_2": true,
+        "Row_desktop_2": 3,
+        "Row_mobile_2": 5,
+        "image_src_2": "shopify://shop_images/2_38f23d13-be35-4229-b6ce-dadb7d32eb6b.jpg",
+        "vertical_align_2": "end",
+        "horizontal_align_2": "left",
+        "text_heading_2": "<p>HANA</p>",
+        "text_para_2": "<p>Ruffle Dress</p>",
+        "url_text_2": "",
+        "btn_url_2": "shopify://products/hana-ruffle-dress",
+        "btn_clr2": "#ffffff",
+        "enable_box_3": true,
+        "Row_desktop_3": 5,
+        "Row_mobile_3": 9,
+        "image_src_3": "shopify://shop_images/3_15e558ca-68b8-4624-8861-74d35784dbd7.jpg",
+        "vertical_align_3": "end",
+        "horizontal_align_3": "left",
+        "text_heading_3": "<p>NOLA</p>",
+        "text_para_3": "<p>Scarf Top</p>",
+        "url_text_3": "",
+        "btn_url_3": "shopify://products/nola-scarf-top",
+        "btn_clr3": "#ffffff",
+        "enable_box_4": true,
+        "Row_desktop_4": 7,
+        "Row_mobile_4": 12,
+        "image_src_4": "shopify://shop_images/5_7f60448d-1762-489f-99bd-f009c0dcdcc5.jpg",
+        "vertical_align_4": "end",
+        "horizontal_align_4": "left",
+        "text_heading_4": "<p>STELLA</p>",
+        "text_para_4": "<p>Ruffle Dress</p>",
+        "url_text_4": "",
+        "btn_url_4": "shopify://products/stella-ruffle-dress",
+        "btn_clr4": "#ffffff",
+        "container": "container-fluid",
+        "grid_layout": "grid",
+        "grid_columns": "5",
+        "show_columns_switcher": true,
+        "pagination_limit": 20,
+        "paginate_type": "infinite",
+        "show_sorting": true,
+        "show_filter": true,
+        "filters_type": "storefront_filters",
+        "sidebar": "fixed",
+        "sidebar_title": "Refine",
+        "limit_height_widget": false,
+        "limit_height": 410,
+        "change_product_variant_on_fitlering": true,
+        "show_product_count": true,
+        "collapsed_groups": "Product type, Brand, Vendor, Size",
+        "color_swatches": "color,colour,couleur,farbe",
+        "color_swatches_design": "list"
+      }
+    },
+    "recent-viewed": {
+      "type": "recent-viewed-products",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "heading": "Recently Viewed Products",
+        "heading_size": "h3",
+        "text_align": "left",
+        "limit": 8,
+        "columns": 5,
+        "column_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "hide_title": false,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": false,
+        "mobile_disable_slider": false,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 16,
+        "padding_top": 40,
+        "padding_bottom": 100,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    }
+  },
+  "order": [
+    "collection-header",
+    "171776340120653ab2",
+    "main",
+    "recent-viewed"
+  ]
+}

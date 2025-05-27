@@ -1,0 +1,274 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "promotion_banner_7yLJ8D": {
+      "type": "promotion-banner",
+      "blocks": {
+        "promotion_r4FQyw": {
+          "type": "promotion",
+          "settings": {
+            "subheading": "",
+            "heading": "BLACK FRIDAY",
+            "text_alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "promotion_r4FQyw"
+      ],
+      "custom_css": [
+        "@media (max-width: 768px) {.m-richtext__title {font-size: 70px; }}"
+      ],
+      "settings": {
+        "container": "container-full",
+        "color_scheme": "badge-sale",
+        "mb_background": "shopify://shop_images/Untitled_design_19.jpg",
+        "heading": "30% OFF, 12 HOURS ONLY",
+        "heading_size": "h2",
+        "text": "<p>Friday, November 29<br/>12 AM to 12 PM</p>",
+        "content_alignment": "center",
+        "banner_url": "",
+        "button_label": "CODE: BLACKFRIDAY30",
+        "button_style": "m-button--primary",
+        "button_size": "",
+        "padding_top": 70,
+        "padding_bottom": 70,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "countdown_timer_j9Rxb4": {
+      "type": "countdown-timer",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "default",
+        "align": "center",
+        "background_in_container": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "use_image_as_background": false,
+        "heading": "Black Friday Event ends in",
+        "description": "",
+        "time": "2024-11-29 06:30:00",
+        "heading_size": "h3",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "m-button--white",
+        "button_size": "",
+        "padding_top": 20,
+        "padding_bottom": 10,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "wishit_video_banner_nXVwDW": {
+      "type": "wishit-video-banner",
+      "blocks": {
+        "heading_xCWkYD": {
+          "type": "heading",
+          "settings": {
+            "heading": "2X THE STYLE, 20% OFF",
+            "heading_size": 22,
+            "heading_color": "#ffffff"
+          }
+        },
+        "text_yyzpNb": {
+          "type": "text",
+          "settings": {
+            "text": "Fill your cart with ₹12,000 worth of favourites. Enter code at checkout.",
+            "description_size": 14,
+            "description_line_height": 0,
+            "description_color": "#ffffff"
+          }
+        },
+        "buttons_BwWgcC": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Code: BLACKFRIDAY",
+            "button_link_1": "",
+            "button_bg_color_1": "#fefefe",
+            "button_color_1": "#111111",
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_bg_color_2": "#111111",
+            "button_color_2": "#fefefe"
+          }
+        }
+      },
+      "block_order": [
+        "heading_xCWkYD",
+        "text_yyzpNb",
+        "buttons_BwWgcC"
+      ],
+      "disabled": true,
+      "settings": {
+        "video_link_desktop": "shopify://files/videos/Black Friday- Desktop.mp4",
+        "video_link_mobile": "shopify://files/videos/Black friday mobile.mp4",
+        "overlay_bg_color": "rgba(0,0,0,0)",
+        "image_overlay_opacity": 0,
+        "video_height": "small",
+        "desktop_aspect_ratio": 0,
+        "mobile_aspect_ratio": 1.1,
+        "banner-max-width": 60,
+        "banner-top": 70,
+        "banner-left": 20,
+        "mobile-banner-top": 60
+      }
+    },
+    "collection-header": {
+      "type": "collection-page-header",
+      "disabled": true,
+      "custom_css": [
+        "h1 {font-size: 30px;}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "container": "w-full",
+        "layout": "without_breadcrumb",
+        "image_position": "background",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "text_alignment": "center",
+        "text_color": "inherit",
+        "upper_title": false,
+        "show_desc": true,
+        "collection_all_desc": "",
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "enable_bg_zoom_effect": false
+      }
+    },
+    "1717761951c4effa7d": {
+      "type": "apps",
+      "disabled": true,
+      "custom_css": [
+        ".quinn_cards {padding: 0px;}"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "main": {
+      "type": "main-collection-product-grid",
+      "blocks": {
+        "banner_promotion_KppNc9": {
+          "type": "banner_promotion",
+          "disabled": true,
+          "settings": {
+            "color_scheme": "dark",
+            "text_size": "medium",
+            "text_color": "white",
+            "link": "",
+            "content_position": "bottom_center",
+            "content_alignment": "center",
+            "title": "SALE UP TO 25% OFF",
+            "subtitle": "Online Exclusive",
+            "button_label": "Shop The Sale",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "button_fixed": false
+          }
+        }
+      },
+      "block_order": [
+        "banner_promotion_KppNc9"
+      ],
+      "custom_css": [
+        ".m-product-card__action {display: grid; justify-content: end;}",
+        ".m-product-item {padding-left: 1px; padding-right: 1px;}",
+        ".m-product-card__info {margin-top: 0px; padding-left: 5px;}"
+      ],
+      "settings": {
+        "show_card_style": false,
+        "show_grid_style": false,
+        "show_simple_style": true,
+        "enable_box_1": true,
+        "Row_desktop": 1,
+        "Row_mobile": 2,
+        "image_src": "shopify://shop_images/Promo_Tile_1_-_Vienna_SS_24.jpg",
+        "vertical_align_1": "center",
+        "horizontal_align_1": "center",
+        "text_heading": "<p>VIENNA</p>",
+        "text_para": "<p> Spring Summer 24</p>",
+        "url_text": "Shop New Arrivals",
+        "btn_url": "shopify://collections/vienna-s-s-24",
+        "btn_clr1": "#ffffff",
+        "enable_box_2": true,
+        "Row_desktop_2": 3,
+        "Row_mobile_2": 5,
+        "image_src_2": "shopify://shop_images/Promo_Tile_1_-_Trusted_By_Trendsetters.jpg",
+        "vertical_align_2": "center",
+        "horizontal_align_2": "end",
+        "text_heading_2": "<p>Trusted By Trendsetters</p>",
+        "text_para_2": "<p>@komalpandey</p>",
+        "url_text_2": "",
+        "btn_url_2": "#",
+        "btn_clr2": "#ffffff",
+        "enable_box_3": true,
+        "Row_desktop_3": 5,
+        "Row_mobile_3": 9,
+        "image_src_3": "shopify://shop_images/Promo_Tile_1_-_Hot_this_week.jpg",
+        "vertical_align_3": "center",
+        "horizontal_align_3": "left",
+        "text_heading_3": "<p>Hot This Week</p>",
+        "text_para_3": "<p>VALERIE Denim Midi</p>",
+        "url_text_3": "SHOP",
+        "btn_url_3": "shopify://products/valerie-denim-midi",
+        "btn_clr3": "#ffffff",
+        "enable_box_4": true,
+        "Row_desktop_4": 7,
+        "Row_mobile_4": 12,
+        "image_src_4": "shopify://shop_images/Promo_Tile_Number_4_1.jpg",
+        "vertical_align_4": "center",
+        "horizontal_align_4": "center",
+        "text_heading_4": "<p>We're a squad of women who love getting dressed up (and helping each other look amazing). </p>",
+        "text_para_4": "<p>Join the club!</p>",
+        "url_text_4": "",
+        "btn_url_4": "shopify://products/cherry-red-faux-leather-flared-pants",
+        "btn_clr4": "#ffffff",
+        "container": "container-fluid",
+        "grid_layout": "grid",
+        "grid_columns": "5",
+        "show_columns_switcher": true,
+        "pagination_limit": 36,
+        "paginate_type": "paginate",
+        "show_sorting": true,
+        "show_filter": true,
+        "filters_type": "storefront_filters",
+        "sidebar": "fixed",
+        "sidebar_title": "",
+        "limit_height_widget": false,
+        "limit_height": 410,
+        "change_product_variant_on_fitlering": true,
+        "show_product_count": true,
+        "collapsed_groups": "Product type, Brand, Vendor, Size",
+        "color_swatches": "color,colour,couleur,farbe",
+        "color_swatches_design": "list"
+      }
+    }
+  },
+  "order": [
+    "promotion_banner_7yLJ8D",
+    "countdown_timer_j9Rxb4",
+    "wishit_video_banner_nXVwDW",
+    "collection-header",
+    "1717761951c4effa7d",
+    "main"
+  ]
+}

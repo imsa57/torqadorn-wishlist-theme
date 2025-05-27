@@ -1,0 +1,239 @@
+<div class="cl-form-wrapper m:display-flex m:items-center m:justify-center">
+  <div class="cl-close-button m:display-flex m:items-center m:justify-center">X</div>
+  <div class="cl-form-content-wrapper m:w-full md:m:w-1/2 m:display-flex m:items-center m:justify-center">
+    <div class="cl-form-content" id="cl-form-1">
+      <div class="cl-offer-text h2">WANT €20 OFF YOUR FIRST ORDER</div>
+      <div class="cl-small-text">To claim, choose the category you're most interested in.</div>
+      <div class="cl-button-wrapper">
+        <form action="" class="cl-category-form">
+          <label class="m-button m-button--primary m:w-full" for="cl-form-1-button-1">
+            <input
+              class="sr-only"
+              type="radio"
+              name="cl-category-form"
+              id="cl-form-1-button-1"
+              value="Button-1"
+            >
+            Button-1
+          </label>
+          <label class="m-button m-button--primary m:w-full" for="cl-form-1-button-2">
+            <input
+              class="sr-only"
+              type="radio"
+              name="cl-category-form"
+              id="cl-form-1-button-2"
+              value="Button-1"
+            >
+            Button-2
+          </label>
+          <label class="m-button m-button--primary m:w-full" for="cl-form-1-button-3">
+            <input
+              class="sr-only"
+              type="radio"
+              name="cl-category-form"
+              id="cl-form-1-button-3"
+              value="Button-3"
+            >
+            Button-3
+          </label>
+          <label class="m-button m-button--primary m:w-full" for="cl-form-1-button-4">
+            <input
+              class="sr-only"
+              type="radio"
+              name="cl-category-form"
+              id="cl-form-1-button-4"
+              value="Button-4"
+            >
+            Button-4
+          </label>
+        </form>
+      </div>
+      <div class="cl-small-text">
+        By creating an account, you agree to receive promotional emails and exclusive offers from Rat & Boa.
+      </div>
+    </div>
+    <div class="cl-form-content" id="cl-form-2">
+      <div class="cl-offer-text h2">WANT €20 OFF YOUR FIRST ORDER?</div>
+      <div class="cl-small-text">Fill in your details below to create your account and start your journey with us.</div>
+      <div class="m-customer-forms">
+        <div class="container">
+          {% comment %}
+            <div id="recover" class="m-recover-form">
+              <h3>{{ 'customer.recover_password.title' | t }}</h3>
+              <p>{{ 'customer.recover_password.subtext' | t }}</p>
+
+               <div data-recover-form>
+                {% form 'recover_customer_password' %}
+                  {% if form.posted_successfully? %}
+                    <div class="notification show success m-customer__recover-form-posted">
+                      {{ 'customer.recover_password.success' | t }}
+                    </div>
+                  {% endif %}
+                  {% render 'form__error', form: form %}
+
+                  <input
+                    class="form-field form-field--input"
+                    type="email"
+                    name="email"
+                    placeholder="{{ 'customer.recover_password.email' | t }}"
+                    spellcheck="false"
+                    autocomplete="off"
+                    autocapitalize="off"
+                  >
+
+                  <div class="m-recover-form__action">
+                    <button type="submit" class="m-button m-button--primary">
+                      {{ 'customer.recover_password.submit' | t }}
+                    </button>
+                    <a href="#login" class="m-recover-form__cancel-btn m-button m-button--white"></a>
+                  </div>
+                {% endform %}
+              </div>
+            </div>
+          {% endcomment %}
+          <div id="login" class="m-login-form">
+            {% comment %} <h3>{{ 'customer.login.title' | t }}</h3> {% endcomment %}
+            {% form 'customer_login' %}
+              {% render 'form__error', form: form %}
+              <input
+                type="email"
+                name="customer[email]"
+                placeholder="{{ 'customer.login.email' | t }}"
+                class="form-field form-field--input"
+              >
+              <input
+                type="password"
+                name="customer[password]"
+                placeholder="{{ 'customer.login.password' | t }}"
+                class="form-field form-field--input"
+              >
+
+              {% comment %} <a href="#recover" class="m-reset-password-btn">{{ 'customer.login.forgot_password' | t }}</a> {% endcomment %}
+              <button class="m-button m-button--primary" style="margin-top:1rem;" type="submit">
+                {{ 'customer.login.sign_in' | t }}
+              </button>
+            {% endform %}
+          </div>
+          {% comment %}
+            <div class="m-sign-up">
+              <h3>{{ 'customer.login.new_customer' | t }}</h3>
+              <p>{{ 'customer.register.description' | t }}</p>
+              <a class="m-button m-button--primary" href="{{ routes.account_register_url }}">
+                {{- 'customer.register.title' | t -}}
+              </a>
+            </div>
+          {% endcomment %}
+        </div>
+      </div>
+      {% comment %}
+        <div class="cl-button-wrapper">
+          <form action="" class="cl-category-form">
+            <input class="m-button m-button--primary m:w-full" type="button" name="cl-category-form" id="" value="Button-1"/>
+            <input class="m-button m-button--primary m:w-full" type="button" name="cl-category-form" id="" value="Button-1"/>
+            <input class="m-button m-button--primary m:w-full" type="button" name="cl-category-form" id="" value="Button-1"/>
+            <input class="m-button m-button--primary m:w-full" type="button" name="cl-category-form" id="" value="Button-1"/>
+          </form>
+        </div>
+      {% endcomment %}
+      <div class="cl-small-text">
+        By creating an account, you agree to receive promotional emails and exclusive offers from Rat & Boa.
+      </div>
+    </div>
+  </div>
+  <div class="cl-form-image m:w-1/2 m:hidden md:m:block">
+    <img src="https://torqadorn.com/cdn/shop/files/sabrina-halter-waistcoat-638.webp?v=1744712576" width="" alt="">
+  </div>
+</div>
+<style>
+      .cl-form-wrapper{
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      z-index: 9999999999;
+      {% comment %} background: red; {% endcomment %}
+      }
+      .cl-close-button{
+      position: absolute;
+      top:20px;
+      right:20px;
+      font-size:20px;
+      background: white;
+      width: 3rem;
+      height: 3rem;
+      z-index: 1;
+      border-radius: 50%;
+      }
+      .cl-form-image{
+      position:relative;
+      height:100%;
+      }
+      .cl-form-image img{
+        height: -webkit-fill-available;
+      object-fit:cover;
+      }
+      .cl-form-image::after{
+          content:"";
+          position: absolute;
+          left:0;
+          top:0;
+          background:rgba(0,0,0,.4);
+          width:100%;
+          height:100%;
+      }
+      #cl-form-1 input{
+          clip: rect(0, 0, 0, 0);
+      overflow: hidden;
+      position: absolute;
+      height: 1px;
+      width: 1px;
+      }
+    .cl-form-content {
+      max-width: 320px;
+      width: 100%;
+      text-align: center;
+  }
+  .cl-form-content-wrapper {
+      position: relative;
+      background: black;
+      height: 100%;
+      color: #fff;
+      overflow: hidden;
+    }
+    .cl-form-content,
+    .cl-button-wrapper form {
+      display: grid;
+      gap: 1rem;
+    }
+    .cl-form-content-wrapper.open #cl-form-1 {
+      position: relative;
+      visibility: hidden;
+      opacity: 0;
+      z-index: -99999;
+    }
+    .cl-form-content-wrapper #cl-form-2 {
+      position: absolute;
+      transform: translateX(200%);
+      transition: transform 0.5s ease;
+      -webkit-transition: transform 0.5s ease;
+      -webkit-transform: translateX(200%);
+    }
+    .cl-form-content-wrapper.open #cl-form-2 {
+      transform: translateX(0);
+      -webkit-transform: translateX(0);
+    }
+</style>
+
+<script>
+  const clFormWrapper = document.querySelector('.cl-form-wrapper');
+  const clFormWrapperClose = clFormWrapper.querySelector('.cl-form-wrapper .cl-close-button');
+  const clForm2 = clFormWrapper.querySelector('#cl-form-2');
+  const clForm1 = clFormWrapper.querySelector('#cl-form-1');
+  clForm1.addEventListener('change', function () {
+    this.parentElement.classList.add('open');
+  });
+  clFormWrapperClose.addEventListener('click', function () {
+    this.parentElement.classList.add('m:hidden');
+  });
+</script>

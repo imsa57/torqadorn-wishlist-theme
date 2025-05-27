@@ -1,0 +1,591 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "disabled": true,
+      "settings": {
+        "container": "container",
+        "text_alignment": "center",
+        "hide_current": false,
+        "hide_on_mb": false,
+        "animations": "inherit"
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_saving": false,
+            "sale_badge_type": "percentage"
+          }
+        },
+        "custom_liquid_XE63zR": {
+          "type": "custom_liquid",
+          "disabled": true,
+          "settings": {
+            "custom_liquid": "<div class=\"christmas-offer-widget\">\n  <div class=\"content-wrapper\">\n    <div class=\"offer-row\">\n      <p class=\"offer-message\">2025 looking good on You</p>\n      <p id=\"countdown-timer\" class=\"countdown-timer\" style=\"visibility: hidden;\"></p>\n    </div>\n    <p class=\"offer-subtext\">Start it with 10% off waiting in cart</p>\n  </div>\n</div>\n\n<style>\n.christmas-offer-widget {\n  position: relative;\n  width: 100%;\n  max-width: 100%;\n  height: 60px;\n  background: #fcfcfc;\n  border-radius: 4px;\n  overflow: hidden;\n  display: flex;\n  align-items: flex-start;\n  justify-content: flex-start;\n  padding: 10px;\n  box-sizing: border-box;\n  margin: 2px auto;\n  border: 1px solid #D3D3D3; /* Added border */\n}\n\n  .content-wrapper {\n    z-index: 2;\n    width: 100%;\n    padding: 0;\n  }\n\n  .offer-row {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    width: 100%;\n  }\n\n  .offer-message {\n    font-size: 12px;\n    color: #333333;\n    margin: 0;\n  }\n\n  .countdown-timer {\n    font-size: 12px;\n    color: #333333;\n    margin: 0;\n  }\n\n  .offer-subtext {\n    font-size: 10px;\n    color: #333333;\n    margin: 2px 0 0;\n  }\n\n  @media screen and (max-width: 768px) {\n    .christmas-offer-widget {\n      height: 55px;\n    }\n\n    .offer-message {\n      font-size: 12px;\n    }\n\n    .countdown-timer {\n      font-size: 12px;\n    }\n\n    .offer-subtext {\n      font-size: 10px;\n    }\n  }\n</style>\n\n<script>\n  document.addEventListener('DOMContentLoaded', function () {\n    // Countdown timer logic\n    function updateCountdown() {\n      const endDate = new Date('2025-02-01T00:00:00+05:30');\n      const now = new Date();\n      const timeLeft = endDate - now;\n\n      if (timeLeft <= 0) {\n        document.getElementById('countdown-timer').textContent = 'Offer Expired';\n        document.getElementById('countdown-timer').style.visibility = 'visible';\n        return;\n      }\n\n      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));\n      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));\n      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));\n      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);\n\n      const timerDisplay = document.getElementById('countdown-timer');\n      timerDisplay.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;\n      timerDisplay.style.visibility = 'visible';\n    }\n\n    updateCountdown();\n    setInterval(updateCountdown, 1000);\n  });\n</script>"
+          }
+        },
+        "text_GpdCww": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.metafields.custom.low_stock_widget.value }}",
+            "text_style": "body"
+          }
+        },
+        "platmart_swatches_platmart_product_colors_Fz4Vdb": {
+          "type": "shopify://apps/platmart-swatches/blocks/platmart-product-colors/3d4801b8-13e2-488f-8d06-69ca04fc155d",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "size_title": "Size,Top Size,Shirt Size,Blazer Size,Blazer/Top Size,Bodysuit Size,Trench Size,Waistcoat Size,Top Coverage"
+          }
+        },
+        "custom_text_VnrQc7": {
+          "type": "custom_text",
+          "settings": {
+            "content": "{{ product.metafields.custom.shipping_text | metafield_tag }}"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "button_style": false,
+            "buynow_text": "Buy Now",
+            "show_quantity_selector": false,
+            "show_atc_button": true,
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true,
+            "heading_top": "Tell us your body measurements",
+            "heading_bottom": "Your Contact Details",
+            "submit_btn_txt": "*Your custom order is tailored especially for you. Please double-check your measurements as custom orders are not eligible for exchange.",
+            "text_tab_two": "Tell us how to get in touch with you",
+            "popup_image": "shopify://shop_images/shop-8e4b-aacdfe3d0878-1602173322297.png",
+            "link_whatsapp": "https://wa.me/+918376905539",
+            "tab_two_txt": "We want you to love your fit. Chat with us for personalised sizing assistance."
+          }
+        },
+        "custom_liquid_GXDWxT": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% comment %}early-access-widget.liquid{% endcomment %}\n\n<div class=\"eaw-early-access-widget\">\n  <div class=\"eaw-widget-content\">\n    <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/THE_lovers_club.jpg?v=1738330134\" alt=\"Free Gift Bag\" class=\"eaw-gift-bag-thumb\">\n    <div class=\"eaw-promo-text\">\n      <p>Early Access Exclusive - First 50 shoppers get a little something extra<br><strong><span id=\"eaw-bags-left\">28</span> left</strong></p>\n      <button class=\"eaw-learn-more-btn\" onclick=\"eawOpenPopup()\">Learn More</button>\n    </div>\n  </div>\n</div>\n\n<!-- Popup Modal -->\n<div id=\"eaw-promoPopup\" class=\"eaw-popup-modal\">\n  <div class=\"eaw-popup-content\">\n    <span class=\"eaw-close-popup\" onclick=\"eawClosePopup()\">&times;</span>\n    <div class=\"eaw-popup-images\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0526/4811/6407/files/THE_lovers_club.jpg?v=1738330134\" alt=\"Gift Bag View 2\" class=\"eaw-popup-img\">\n    </div>\n    <div class=\"eaw-popup-text\">\n      <p>Get this exclusive Valentine gift stack included with your purchase from our new collection. First 50 shoppers only! </p>\n    </div>\n  </div>\n</div>\n\n<style>\n.eaw-scroll-lock {\n  overflow: hidden !important;\n  height: 100vh !important;\n  width: 100vw !important;\n  position: fixed !important;\n  touch-action: none !important;\n}\n\n.eaw-early-access-widget {\n  margin: 20px 0;\n  position: relative;\n}\n\n.eaw-widget-content {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border: 1px solid #dedede;\n  border-radius: 4px;\n  padding: 12px 15px;\n  max-width: 100%;\n}\n\n\n.eaw-gift-bag-thumb {\n  width: 70px;\n  height: 70px;\n  object-fit: cover;\n  margin-right: 15px;\n}\n\n.eaw-promo-text {\n  display: flex;\n  align-items: center;\n  gap: 20px;\n  flex: 1;\n}\n\n.eaw-promo-text p {\n  margin: 0;\n  line-height: 1.4;\n}\n\n.eaw-learn-more-btn {\n  border: 1px solid black;\n  background: transparent;\n  padding: 8px 20px;\n  cursor: pointer;\n  transition: all 0.3s ease;\n  white-space: nowrap;\n  margin-left: auto;\nborder-radius: 4px;\n}\n\n.eaw-learn-more-btn:hover {\n  background: #f5f5f5;\n}\n\n.eaw-popup-modal {\n  display: none;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0,0,0,0.5);\n  z-index: 2147483645;\n  align-items: center;\n  justify-content: center;\n  overflow-y: hidden;\n}\n\n.eaw-popup-content {\n  position: fixed;\n  background-color: white;\n  padding: 20px;\n  width: 90%;\n  max-width: 600px;\n  border-radius: 4px;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  z-index: 2147483646;\n  max-height: 90vh;\n  overflow-y: auto;\n}\n\n.eaw-close-popup {\n  position: absolute;\n  right: 10px;\n  top: 10px;\n  font-size: 24px;\n  cursor: pointer;\n  width: 30px;\n  height: 30px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 50%;\n  z-index: 2147483647;\n  background-color: white;\n}\n\n.eaw-close-popup:hover {\n  background-color: #f5f5f5;\n}\n\n.eaw-popup-images {\n  display: flex;\n  justify-content: space-around;\n  margin-bottom: 20px;\n  gap: 20px;\n}\n\n.eaw-popup-img {\n  width: 45%;\n  max-width: 250px;\n  height: auto;\n  object-fit: cover;\n}\n\n.eaw-popup-text {\n  text-align: center;\n  padding: 0 20px;\n}\n\n@media (max-width: 768px) {\n  .eaw-widget-content {\n    padding: 10px 12px;\n  }\n  \n  .eaw-promo-text {\n    flex-direction: column;\n    align-items: flex-start;\n    gap: 12px;\n  }\n\n  .eaw-learn-more-btn {\n    margin-left: 0;\n  }\n  \n  .eaw-popup-content {\n    width: 95%;\n    padding: 15px;\n  }\n  \n  .eaw-popup-images {\n    flex-direction: column;\n    align-items: center;\n  }\n  \n  .eaw-popup-img {\n    width: 100%;\n    margin-bottom: 10px;\n  }\n}\n</style>\n\n<script>\ndocument.addEventListener('DOMContentLoaded', function() {\n  document.getElementById('eaw-bags-left').textContent = 4;\n  \n  let scrollPosition = 0;\n\n  function eawLockScroll() {\n    scrollPosition = window.pageYOffset;\n    document.body.classList.add('eaw-scroll-lock');\n    document.body.style.top = `-${scrollPosition}px`;\n  }\n\n  function eawUnlockScroll() {\n    document.body.classList.remove('eaw-scroll-lock');\n    document.body.style.top = '';\n    window.scrollTo(0, scrollPosition);\n  }\n\n  window.eawOpenPopup = function() {\n    const popup = document.getElementById('eaw-promoPopup');\n    popup.style.display = 'flex';\n    eawLockScroll();\n  }\n\n  window.eawClosePopup = function() {\n    const popup = document.getElementById('eaw-promoPopup');\n    popup.style.display = 'none';\n    eawUnlockScroll();\n  }\n\n  const popup = document.getElementById('eaw-promoPopup');\n  popup.addEventListener('click', function(event) {\n    if (event.target === popup) {\n      eawClosePopup();\n    }\n  });\n\n  const popupContent = document.querySelector('.eaw-popup-content');\n  popupContent.addEventListener('wheel', function(event) {\n    event.stopPropagation();\n  });\n});\n</script>"
+          }
+        },
+        "custom_liquid_rKHWQV": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div id='ss-trust-badges'></div>"
+          }
+        },
+        "custom_liquid_kLP7Rr": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"collapsible-section\">\n    <div class=\"collapsible-btn\">\n        Delivery Date Estimate\n    </div>\n    <div class=\"collapsible-content open\">\n        <div class=\"cod-checker\">\n            <input type=\"number\" id=\"postal-code\" maxlength=\"6\" placeholder=\"Enter your pincode\">\n            <button id=\"check-cod\">→</button>\n        </div>\n        <div class=\"delivery-estimator\" id=\"delivery-estimator\" style=\"display:none;\">\n            <ul>\n                <li><span style=\"font-weight: 600;\">COD Orders:</span> <span id=\"cod-delivery-days\"></span> days (<span id=\"cod-delivery-date\"></span>)</li>\n                <li><span style=\"font-weight: 600;\">Prepaid Orders:</span> <span id=\"prepaid-delivery-days\"></span> working days (<span id=\"prepaid-delivery-date\"></span>)</li>\n                <li><span style=\"font-weight: 600;\">Express Shipping:</span> <span id=\"express-delivery-days\"></span> working days (<span id=\"express-delivery-date\"></span>)</li>\n            </ul>\n        </div>\n    </div>\n</div>\n\n<style>\n.collapsible-section {\n    width: 100%;\n    padding-top: 0px;\n}\n\n.collapsible-btn {\n    background: none;\n    border: none;\n    width: 100%;\n    text-align: left;\n    padding-bottom: 10px;\n    font-family: 'Futura', sans-serif;\n    font-weight: normal;\n    color: #333;\n    outline: none;\n    font-size: 18px;\n    margin-bottom: 15px;\n}\n\n@media (max-width: 768px) {\n    .collapsible-btn {\n        font-size: 14px;\n    }\n}\n\n.collapsible-content {\n    font-size: 14px;\n    color: #333;\n    padding-top: 0px;\n    padding-bottom: 15px;\n    border-bottom: 1px solid #e0e0e0;\n}\n\n.delivery-estimator ul {\n    list-style-type: none;\n    padding-left: 0;\n}\n\n.delivery-estimator li {\n    margin-bottom: 8px;\n}\n\n.delivery-estimator {\n    background-color: #fcfcfc;\n    padding: 0;\n    margin-top: 20px;\n}\n\n.cod-checker {\n    margin-top: 0;\n    display: flex;\n    justify-content: space-between;\n    align-items: stretch;\n    margin-bottom: 20px;\n}\n\n#postal-code {\n    width: 85%;\n    padding: 12px;\n    font-size: 14px;\n    background-color: transparent;\n    border: 1px solid #E0E0E0;\n    border-right: none;\n    color: #333;\n    border-radius: 2px 0 0 2px;\n    box-sizing: border-box;\n    height: 42px;\n    line-height: normal;\n}\n\n#check-cod {\n    width: 15%;\n    padding: 0 12px;\n    font-size: 18px;\n    background-color: #333333;\n    color: white;\n    border: none;\n    border-left: none;\n    cursor: pointer;\n    border-radius: 0 2px 2px 0;\n    box-sizing: border-box;\n    height: 42px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    text-align: center;\n}\n\n#check-cod:disabled {\n    background-color: #ccc;\n    cursor: not-allowed;\n}\n</style>\n\n<script>\ndocument.addEventListener('DOMContentLoaded', function() {\n    function addDaysSkippingWeekends(date, days) {\n        let result = new Date(date);\n        let addedDays = 0;\n        while (addedDays < days) {\n            result.setDate(result.getDate() + 1);\n            if (result.getDay() !== 0 && result.getDay() !== 6) {\n                addedDays++;\n            }\n        }\n        return result;\n    }\n\n    function formatDate(date) {\n        const options = { weekday: 'short', month: 'short', day: 'numeric' };\n        return date.toLocaleDateString('en-US', options).replace(/, \\d{4}/, '');\n    }\n\n    function showDeliveryDates() {\n        const today = new Date();\n\n        const codDeliveryStartDate = addDaysSkippingWeekends(today, 8);\n        const codDeliveryEndDate = addDaysSkippingWeekends(today, 9);\n        document.getElementById('cod-delivery-days').innerText = '8-9';\n        document.getElementById('cod-delivery-date').innerText = `${formatDate(codDeliveryStartDate)} - ${formatDate(codDeliveryEndDate)}`;\n\n        const prepaidDeliveryDate = addDaysSkippingWeekends(today, 7);\n        document.getElementById('prepaid-delivery-days').innerText = '7';\n        document.getElementById('prepaid-delivery-date').innerText = formatDate(prepaidDeliveryDate);\n\n        const expressDeliveryDate = addDaysSkippingWeekends(today, 4);\n        document.getElementById('express-delivery-days').innerText = '4';\n        document.getElementById('express-delivery-date').innerText = formatDate(expressDeliveryDate);\n        \n        document.getElementById('delivery-estimator').style.display = 'block';\n    }\n\n    function checkCODAvailability() {\n        const postalCode = document.getElementById('postal-code').value;\n        if (postalCode.length === 6 && /^\\d+$/.test(postalCode)) {\n            showDeliveryDates();\n        } else {\n            alert(\"Please enter a valid 6-digit postal code.\");\n            document.getElementById('delivery-estimator').style.display = 'none';\n        }\n    }\n\n    document.getElementById('check-cod').addEventListener('click', checkCODAvailability);\n});\n</script>"
+          }
+        },
+        "collapsible_tab_NGBEjb": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Details",
+            "content": "",
+            "liquid": "{{product.description}}",
+            "default_open": true
+          }
+        },
+        "collapsible_tab_ArqMaJ": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Customisation",
+            "content": "<p>We celebrate size-inclusivity / If your measurements fall outside the size chart, simply mention your measurements in the ‘customization request’ box at checkout and we’ll have everything made accordingly. There is absolutely no additional cost for sizes beyond XL.</p><p>No returns or COD will be accepted for customisations. </p>",
+            "liquid": "",
+            "default_open": false
+          }
+        },
+        "meta_LDHWxr": {
+          "type": "meta",
+          "settings": {
+            "show_collections": false,
+            "show_vendor": false,
+            "show_type": false,
+            "show_availability": false,
+            "show_sku": true
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "custom_liquid_XE63zR",
+        "text_GpdCww",
+        "platmart_swatches_platmart_product_colors_Fz4Vdb",
+        "variant_picker",
+        "custom_text_VnrQc7",
+        "buy_buttons",
+        "custom_liquid_GXDWxT",
+        "custom_liquid_rKHWQV",
+        "custom_liquid_kLP7Rr",
+        "collapsible_tab_NGBEjb",
+        "collapsible_tab_ArqMaJ",
+        "meta_LDHWxr"
+      ],
+      "custom_css": [
+        "@media (max-width: 768px) {.m-main-product--media {padding: 0; }}",
+        ".m-product-meta--label {display: none;}",
+        "@media only screen and (max-width: 767px) {.m-product-title {font-size: 18px; }}"
+      ],
+      "settings": {
+        "container": "container-fluid",
+        "layout": "layout-3",
+        "show_atwl": false,
+        "enable_history_state": false,
+        "enable_variant_group_images": false,
+        "disable_selected_variant_default": false,
+        "show_featured_media": true,
+        "show_zoom_button": true,
+        "enable_video_autoplay": true,
+        "show_nav_media_mobile": false,
+        "show_pagination_mobile": false,
+        "use_sticky_atc": false,
+        "use_sticky_atc_on_mobile": true,
+        "enable_dynamic_checkout": false,
+        "sticky_atc_wishtlist": false,
+        "sticky_atc_compare": false
+      }
+    },
+    "ss_trust_badges_2_tVyqEC": {
+      "type": "ss-trust-badges-2",
+      "blocks": {
+        "item_n9LipL": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "title": "<p>Free Shipping for you</p>",
+            "subtitle": "<p>Express Delivery Available</p>"
+          }
+        },
+        "item_rqrdVP": {
+          "type": "item",
+          "settings": {
+            "icon": "mobile",
+            "image": "shopify://shop_images/shield.svg",
+            "title": "<p>Secure Payments</p>",
+            "subtitle": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_n9LipL",
+        "item_rqrdVP"
+      ],
+      "custom_css": [
+        ".main-product__block {border-radius: 4px; overflow: hidden;}"
+      ],
+      "settings": {
+        "trust_position": "below_buy",
+        "template": "standard",
+        "svg_color": "#333333",
+        "bg_color": "#fcfcfc",
+        "bg_color_item": "",
+        "title_color": "#333333",
+        "subtitle_color": "#716969",
+        "icon_size": 26,
+        "title_font_size": 14,
+        "subtitle_font_size": 11,
+        "subtitle_margin_top": 5,
+        "space_items": 8,
+        "pt": 0,
+        "pb": 0,
+        "mt": 0,
+        "mb": 0
+      }
+    },
+    "ss_size_guide_Nr9bLt": {
+      "type": "ss-size-guide",
+      "blocks": {
+        "tab_aLnTMx": {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Sizes",
+            "tab_text": "",
+            "size_chart_page": "size-guide"
+          }
+        },
+        "tab_RaMnEg": {
+          "type": "tab",
+          "settings": {
+            "tab_title": "How to measure",
+            "tab_text": "<p><strong>A. CHEST:</strong> Place the tape close under the armhole and measure from side seam to side seam.<br/><br/><strong>B. WAIST:</strong> This is the narrowest part of the waist. Place the tape from side to side directly at the waistline.<br/><br/><strong>C. HIPS:</strong> Place the tape approximately 7–9 inches below the natural waistline and measure from side to side at the hip line.</p>",
+            "size_chart_page": "",
+            "image": "shopify://shop_images/shop-8e4b-aacdfe3d0878-1602173322297_1.png"
+          }
+        }
+      },
+      "block_order": [
+        "tab_aLnTMx",
+        "tab_RaMnEg"
+      ],
+      "disabled": true,
+      "settings": {
+        "guide_position": "above_buy",
+        "toggle": "Size Guide",
+        "toggle_custom": true,
+        "toggle_font": "futura_n4",
+        "toggle_size": 13,
+        "toggle_size_mobile": 13,
+        "toggle_height": 50,
+        "toggle_align": "left",
+        "toggle_align_mobile": "left",
+        "icon": "shopify://shop_images/svgexport-13_eb3346d7-b444-46c3-b739-cde2067ab887.svg",
+        "icon_size": 24,
+        "icon_size_mobile": 24,
+        "modal_width": 70,
+        "modal_width_mobile": 100,
+        "modal_padding_vertical": 48,
+        "modal_padding_vertical_mobile": 20,
+        "modal_padding_horizontal": 80,
+        "modal_padding_horizontal_mobile": 10,
+        "modal_radius": 0,
+        "modal_border_thickness": 0,
+        "modal_overlay": 0.3,
+        "close_icon_size": 20,
+        "close_icon_size_mobile": 20,
+        "toggles_border_thickness": 1,
+        "title_padding_vertical": 20,
+        "title_padding_vertical_mobile": 6,
+        "title_padding_horizontal": 20,
+        "title_padding_horizontal_mobile": 50,
+        "title_border_thickness": 1,
+        "title_custom": true,
+        "title_font": "futura_n4",
+        "title_size": 16,
+        "title_size_mobile": 16,
+        "title_height": 130,
+        "tab_gap": 20,
+        "tab_gap_mobile": 20,
+        "tab_mt": 20,
+        "tab_mt_mobile": 20,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 20,
+        "text_size_mobile": 14,
+        "text_height": 150,
+        "text_align": "center",
+        "text_align_mobile": "center",
+        "modal_overlay_color": "#000000",
+        "modal_bg_color": "#ffffff",
+        "modal_border_color": "#000000",
+        "close_icon_color": "#000000",
+        "toggles_border_color": "#e5e5e5",
+        "title_color": "#000000",
+        "title_hover_color": "#000000",
+        "title_active_color": "#000000",
+        "title_bg_color": "#f6f8fa",
+        "title_bg_hover_color": "#f6f8fa",
+        "title_bg_active_color": "#ffffff",
+        "title_border_color": "#e5e5e5",
+        "title_border_hover_color": "#e5e5e5",
+        "title_border_active_color": "#e5e5e5",
+        "text_color": "#000000",
+        "toggle_color": "#000000",
+        "toggle_hover_color": "#555555",
+        "background_color": "",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": -20,
+        "margin_bottom": -8,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 0,
+        "padding_horizontal_mobile": 0,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    },
+    "empty_space_hDHAN3": {
+      "type": "empty-space",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "show_divider_line": false,
+        "divider_style": "solid",
+        "divider_height": 1,
+        "padding_top": 10,
+        "padding_bottom": 10,
+        "custom_class": ""
+      }
+    },
+    "172928850694bf08cd": {
+      "type": "apps",
+      "blocks": {
+        "xo_gallery_xo_gallery_product_TN7jEi": {
+          "type": "shopify://apps/xo-gallery/blocks/xo-gallery-product/e61dfbaa-1a75-4e4e-bffc-324f17325251",
+          "settings": {
+            "product": "{{product}}"
+          }
+        }
+      },
+      "block_order": [
+        "xo_gallery_xo_gallery_product_TN7jEi"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "empty_space_Bdb4Mb": {
+      "type": "empty-space",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "show_divider_line": false,
+        "divider_style": "solid",
+        "divider_height": 1,
+        "padding_top": 10,
+        "padding_bottom": 10,
+        "custom_class": ""
+      }
+    },
+    "17259670373fee1b19": {
+      "type": "apps",
+      "blocks": {
+        "foxkit_sales_boost_related_products_NW39EL": {
+          "type": "shopify://apps/foxkit-sales-boost/blocks/related-products/13f41957-6b79-47c1-99a2-e52431f06fff",
+          "settings": {
+            "heading_size": "h2",
+            "header_alignment": "left",
+            "limit": 10,
+            "columns": 4,
+            "column_gap": 4
+          }
+        }
+      },
+      "block_order": [
+        "foxkit_sales_boost_related_products_NW39EL"
+      ],
+      "custom_css": [
+        "@media only screen and (max-width: 768px) {.foxkit-related-products__heading {font-size: 15px; color: #333333; }}",
+        "@media only screen and (min-width: 769px) {.foxkit-related-products__heading {font-size: 17px; color: #333333; }}"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "w-full",
+        "background_color": "#fcfcfc",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "empty_space_Waqgrb": {
+      "type": "empty-space",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "show_divider_line": false,
+        "divider_style": "solid",
+        "divider_height": 1,
+        "padding_top": 16,
+        "padding_bottom": 16,
+        "custom_class": ""
+      }
+    },
+    "custom_liquid_G4caJR": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<p style=\"font-size: 15px; padding-left: 15px; padding-right: 15px; margin-bottom: 15px; color: #323232;\">\n    Styled & Loved by You\n</p>\n\n<div style=\"margin-top: -25px;\">\n    <script \n        type=\"text/javascript\" \n        src=\"https://cdn.grw.reputon.com/assets/widget.js?shop=torqadorn.myshopify.com\" defer></script>\n\n    <div class=\"reputon-google-reviews-widget\"\n        data-content-index=\"1\"\n        data-theme=\"light\"\n        data-type=\"carousel\"\n        data-autoscroll=\"true\"\n        data-show-review-photos=\"false\"\n        data-write-review=\"false\"\n        data-show-rating=\"false\"\n        data-fixed-reviews-height=\"false\"></div>\n</div>",
+        "custom_class": ""
+      }
+    },
+    "empty_space_BQ9b9t": {
+      "type": "empty-space",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "show_divider_line": false,
+        "divider_style": "solid",
+        "divider_height": 1,
+        "padding_top": 16,
+        "padding_bottom": 16,
+        "custom_class": ""
+      }
+    },
+    "apps_qHNQKD": {
+      "type": "apps",
+      "blocks": {
+        "xo_gallery_xo_gallery_kbQAqM": {
+          "type": "shopify://apps/xo-gallery/blocks/xo-gallery/e61dfbaa-1a75-4e4e-bffc-324f17325251",
+          "settings": {
+            "id": 7,
+            "mid": ""
+          }
+        }
+      },
+      "block_order": [
+        "xo_gallery_xo_gallery_kbQAqM"
+      ],
+      "custom_css": [
+        "@media (min-width: 1024px) {.m-section-my {display: none; }}"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "header_alignment": "left",
+        "container": "container",
+        "background_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "product-details-tabs": {
+      "type": "product-details-tabs",
+      "blocks": {
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+            "header": "Product Details"
+          }
+        },
+        "tab": {
+          "type": "tab",
+          "disabled": true,
+          "settings": {
+            "header": "Fabric & Fit",
+            "content": "<p>{{ product.metafields.custom.fabric_fit | metafield_tag }}</p>",
+            "content_page": ""
+          }
+        },
+        "tab_6D9RgL": {
+          "type": "tab",
+          "disabled": true,
+          "settings": {
+            "header": "Care & Instructions",
+            "content": "<p>Shipping cost is based on weight. Just add products to your cart and use the Shipping Calculator to see the shipping price.</p><p>We want you to be 100% satisfied with your purchase. Items can be returned or exchanged within 30 days of delivery.</p>",
+            "content_page": ""
+          }
+        }
+      },
+      "block_order": [
+        "description",
+        "tab",
+        "tab_6D9RgL"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".m-tabs__header {justify-content: flex-start;}"
+      ],
+      "settings": {
+        "container": "container",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "default_open": false,
+        "padding_top": 0,
+        "padding_bottom": 50,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "custom_css": [
+        ".m-product-tag--soldout {background-color: transparent; color: black;}",
+        ".foxkit-preorder-badge {background-color: transparent; color: black;}",
+        ".m-product-tag--sale {background-color: transparent; color: black;}",
+        ".m-section__heading {font-family: \"Futura\", Arial, sans-serif;}"
+      ],
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "remove_params": false,
+        "heading": "More Styles You'll LOVE",
+        "heading_size": "h3",
+        "text_align": "left",
+        "limit": 4,
+        "columns": 4,
+        "column_gap": 8,
+        "enable_slider": false,
+        "use_scroll_mobile": false,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "1715332902703fde33": {
+      "type": "apps",
+      "blocks": {
+        "xo_gallery_xo_gallery_VdpEXi": {
+          "type": "shopify://apps/xo-gallery/blocks/xo-gallery/e61dfbaa-1a75-4e4e-bffc-324f17325251",
+          "settings": {
+            "id": 5,
+            "mid": ""
+          }
+        }
+      },
+      "block_order": [
+        "xo_gallery_xo_gallery_VdpEXi"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "@media (min-width: 1024px) {.m-section-my {display: none; }}",
+        ".m-section-my {padding-left: 15px; padding-right: 15px;}"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "header_alignment": "left",
+        "container": "container",
+        "background_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main",
+    "ss_trust_badges_2_tVyqEC",
+    "ss_size_guide_Nr9bLt",
+    "empty_space_hDHAN3",
+    "172928850694bf08cd",
+    "empty_space_Bdb4Mb",
+    "17259670373fee1b19",
+    "empty_space_Waqgrb",
+    "custom_liquid_G4caJR",
+    "empty_space_BQ9b9t",
+    "apps_qHNQKD",
+    "product-details-tabs",
+    "product-recommendations",
+    "1715332902703fde33"
+  ]
+}

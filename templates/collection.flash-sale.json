@@ -1,0 +1,193 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_liquid_JUtBtF": {
+      "type": "custom-liquid",
+      "custom_css": [],
+      "settings": {
+        "custom_liquid": "<div style=\"background: #1e1e1e; color: #fff; font-family: 'Futura', sans-serif; padding: 40px;\">\n  <style>\n    .offer-container {\n      max-width: 1200px;\n      margin: 0 auto;\n      text-align: center;\n    }\n    .offer-heading {\n      font-size: 44px;\n      font-weight: 900;\n      margin-bottom: 10px;\n      letter-spacing: 1px;\n      color: #fff;\n      font-family: 'Futura', sans-serif;\n    }\n    .offer-date {\n      font-size: 16px;\n      margin-bottom: 30px;\n      border: 1px solid #aaa;\n      background-color: #ccc;\n      color: #000;\n      display: inline-block;\n      padding: 5px 10px;\n      font-weight: 400;\n      font-family: 'Futura', sans-serif;\n    }\n    .offer-pairs {\n      display: flex;\n      justify-content: center;\n      align-items: flex-start;\n      gap: 10px;\n    }\n    .offer-wrapper {\n      display: flex;\n      flex-direction: column;\n      align-items: center;\n      width: 30%;\n      min-width: 100px;\n      box-sizing: border-box;\n    }\n    .offer-card {\n      background-color: rgba(255,255,255,0.1);\n      border-radius: 8px;\n      padding: 20px;\n      text-transform: uppercase;\n      width: 100%;\n      font-family: 'Futura', sans-serif;\n    }\n    .offer-percentage {\n      margin: 0;\n      font-size: 22px;\n      font-weight: 700;\n      letter-spacing: 1px;\n      font-family: 'Futura', sans-serif;\n    }\n    .offer-detail {\n      margin: 5px 0 0;\n      font-size: 14px;\n      text-transform: none;\n      font-family: 'Futura', sans-serif;\n    }\n    .offer-code {\n      margin-top: 10px;\n      font-size: 16px;\n      font-weight: 700;\n      color: #FFD700;\n      text-transform: uppercase;\n      font-family: 'Futura', sans-serif;\n    }\n    @media screen and (max-width: 600px) {\n      .offer-heading {\n        font-size: 40px;\n      }\n      .offer-date {\n        font-size: 14px;\n      }\n      .offer-wrapper {\n        width: 30%;\n        padding: 0;\n      }\n      .offer-card {\n        padding: 10px;\n      }\n      .offer-percentage {\n        font-size: 12px;\n      }\n      .offer-detail {\n        font-size: 12px;\n      }\n      .offer-code {\n        font-size: 12px;\n      }\n    }\n  </style>\n\n  <div class=\"offer-container\">\n    <h1 class=\"offer-heading\">Upto 30% off flash event</h1>\n    <p class=\"offer-date\">Feb 27-28</p>\n    <div class=\"offer-pairs\">\n      <div class=\"offer-wrapper\">\n        <div class=\"offer-card\">\n          <p class=\"offer-percentage\">15% OFF</p>\n          <p class=\"offer-detail\">On orders ₹10,000+</p>\n        </div>\n        <div class=\"offer-code\">Code: TORQ15</div>\n      </div>\n      <div class=\"offer-wrapper\">\n        <div class=\"offer-card\">\n          <p class=\"offer-percentage\">20% OFF</p>\n          <p class=\"offer-detail\">On orders ₹15,000+</p>\n        </div>\n        <div class=\"offer-code\">Code: TORQ20</div>\n      </div>\n      <div class=\"offer-wrapper\">\n        <div class=\"offer-card\">\n          <p class=\"offer-percentage\">30% OFF</p>\n          <p class=\"offer-detail\">On orders ₹25,000+</p>\n        </div>\n        <div class=\"offer-code\">Code: TORQ30</div>\n      </div>\n    </div>\n  </div>\n</div>",
+        "custom_class": ""
+      }
+    },
+    "custom_liquid_CgKMet": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>\n  .klaviyo-form-SdqhGR {\n    background-color: #1e1e1e;\n    padding: 20px;\n    border-radius: 0px;\n    color: #ffffff;\n  }\n</style>\n<div class=\"klaviyo-form-SdqhGR\">\n</div>",
+        "custom_class": ""
+      }
+    },
+    "custom_content_UNR7xt": {
+      "type": "custom-content",
+      "blocks": {
+        "liquid_MXELg4": {
+          "type": "liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"klaviyo-form-SdqhGR\"></div>",
+            "width": "50%",
+            "block_custom_class": "",
+            "animations": "inherit"
+          }
+        }
+      },
+      "block_order": [
+        "liquid_MXELg4"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "w-full",
+        "color_scheme": "",
+        "content_color_scheme": "",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "gap": 30,
+        "gap_mobile": 16,
+        "use_scroll_mobile": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "collection-header": {
+      "type": "collection-page-header",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "container": "container",
+        "layout": "inside",
+        "image_position": "top",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "text_alignment": "center",
+        "text_color": "inherit",
+        "upper_title": false,
+        "show_desc": false,
+        "collection_all_desc": "",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "enable_bg_zoom_effect": true
+      }
+    },
+    "flash-sale": {
+      "type": "flash-sale",
+      "disabled": true,
+      "settings": {}
+    },
+    "main": {
+      "type": "main-collection-product-grid",
+      "disabled": true,
+      "settings": {
+        "show_card_style": false,
+        "show_grid_style": false,
+        "show_simple_style": false,
+        "enable_box_1": true,
+        "Row_desktop": 1,
+        "Row_mobile": 1,
+        "vertical_align_1": "center",
+        "horizontal_align_1": "left",
+        "text_heading": "",
+        "text_para": "",
+        "url_text": "Learn more",
+        "btn_url": "",
+        "btn_clr1": "",
+        "enable_box_2": true,
+        "Row_desktop_2": 3,
+        "Row_mobile_2": 3,
+        "vertical_align_2": "center",
+        "horizontal_align_2": "left",
+        "text_heading_2": "",
+        "text_para_2": "",
+        "url_text_2": "Learn more",
+        "btn_url_2": "",
+        "btn_clr2": "",
+        "enable_box_3": false,
+        "Row_desktop_3": 5,
+        "Row_mobile_3": 4,
+        "vertical_align_3": "center",
+        "horizontal_align_3": "left",
+        "text_heading_3": "",
+        "text_para_3": "",
+        "url_text_3": "Learn more",
+        "btn_url_3": "",
+        "btn_clr3": "",
+        "enable_box_4": false,
+        "Row_desktop_4": 12,
+        "Row_mobile_4": 7,
+        "vertical_align_4": "center",
+        "horizontal_align_4": "left",
+        "text_heading_4": "",
+        "text_para_4": "",
+        "url_text_4": "Learn more",
+        "btn_url_4": "",
+        "btn_clr4": "",
+        "container": "container",
+        "grid_layout": "grid",
+        "grid_columns": "4",
+        "show_columns_switcher": true,
+        "pagination_limit": 12,
+        "paginate_type": "paginate",
+        "show_sorting": true,
+        "show_filter": false,
+        "filters_type": "tags_filter",
+        "sidebar": "leftColumn",
+        "sidebar_title": "Filters",
+        "limit_height_widget": false,
+        "limit_height": 300,
+        "change_product_variant_on_fitlering": true,
+        "show_product_count": true,
+        "collapsed_groups": "Brand, Vendor, Size",
+        "color_swatches": "color,colour,couleur,farbe",
+        "color_swatches_design": "inline"
+      }
+    },
+    "recent-viewed": {
+      "type": "recent-viewed-products",
+      "disabled": true,
+      "settings": {
+        "container": "container",
+        "color_scheme": "",
+        "heading": "Recently Viewed Products",
+        "heading_size": "h3",
+        "text_align": "left",
+        "limit": 8,
+        "columns": 4,
+        "column_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": false,
+        "hide_title": false,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": false,
+        "mobile_disable_slider": false,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 16,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    }
+  },
+  "order": [
+    "custom_liquid_JUtBtF",
+    "custom_liquid_CgKMet",
+    "custom_content_UNR7xt",
+    "collection-header",
+    "flash-sale",
+    "main",
+    "recent-viewed"
+  ]
+}

@@ -1,0 +1,191 @@
+<style>
+
+  .m-page404 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    font-family: 'Futura', sans-serif;
+  }
+  @media (min-width: 768px) {
+    .m-page404 {
+      background-image: url('https://cdn.shopify.com/s/files/1/0526/4811/6407/files/escap_r_ism_collection_sketches.jpg?v=1725837154');
+      height: 100vh;
+    }
+  }
+  @media (max-width: 767px) {
+    .m-page404 {
+      background-image: url('https://cdn.shopify.com/s/files/1/0526/4811/6407/files/404_BANNER_1.webp?v=1727880352');
+      background-size: 450px 600px;
+      background-position: center;
+      height: auto;
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+  }
+  .m-page404__content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    max-width: 90%;
+  }
+  .m-page404__text-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    padding: 5px 20px 30px 20px;
+    border-radius: 5px;
+  }
+  .m-page404__text-overlay h1 {
+    margin-bottom: 15px;
+  }
+  .m-page404__text-overlay p {
+    margin-bottom: 25px;
+  }
+  .m-button--primary {
+    border: 1px solid #ffffff;
+    padding: 12px 24px;
+    background-color: transparent;
+    color: {{ section.settings.text_color }};
+    border-radius: 5px;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    transition: all 0.3s ease;
+  }
+  .m-button--primary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  .m-button--primary .arrow {
+    margin-left: 8px;
+    font-size: 1.2em;
+  }
+  .glitch {
+    font-size: 8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    color: {{ section.settings.text_color }};
+  }
+  .glitch::before,
+  .glitch::after {
+    content: '404';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+  }
+  .glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff00ff;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim 2s infinite linear alternate-reverse;
+  }
+  .glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 #00ffff;
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2s infinite linear alternate-reverse;
+  }
+  @keyframes glitch-anim {
+    0% { clip: rect(68px, 9999px, 39px, 0); }
+    5% { clip: rect(42px, 9999px, 98px, 0); }
+    10% { clip: rect(89px, 9999px, 18px, 0); }
+    15% { clip: rect(10px, 9999px, 75px, 0); }
+    20% { clip: rect(51px, 9999px, 46px, 0); }
+    25% { clip: rect(83px, 9999px, 30px, 0); }
+    30% { clip: rect(92px, 9999px, 67px, 0); }
+    35% { clip: rect(28px, 9999px, 86px, 0); }
+    40% { clip: rect(36px, 9999px, 79px, 0); }
+    45% { clip: rect(56px, 9999px, 23px, 0); }
+    50% { clip: rect(95px, 9999px, 15px, 0); }
+    55% { clip: rect(14px, 9999px, 49px, 0); }
+    60% { clip: rect(72px, 9999px, 34px, 0); }
+    65% { clip: rect(60px, 9999px, 81px, 0); }
+    70% { clip: rect(83px, 9999px, 5px, 0); }
+    75% { clip: rect(71px, 9999px, 94px, 0); }
+    80% { clip: rect(29px, 9999px, 43px, 0); }
+    85% { clip: rect(55px, 9999px, 33px, 0); }
+    90% { clip: rect(20px, 9999px, 61px, 0); }
+    95% { clip: rect(48px, 9999px, 77px, 0); }
+    100% { clip: rect(37px, 9999px, 52px, 0); }
+  }
+</style>
+
+<div class="m-page404">
+  <div class="m-page404__content">
+    <div class="m-page404__text-overlay">
+      <div class="glitch">404</div>
+      <h1 class="h1" style="font-size: 2rem; letter-spacing: 1px; color: {{ section.settings.text_color }};">Looks Like This Page Took an Unscheduled Break.</h1>
+      <p class="h1" style="font-size: 1.2rem; color: {{ section.settings.text_color }};">Don't fret, there's plenty more to see.</p>
+      <a href="{{ routes.root_url }}" class="m-button m-button--primary">
+        Continue Shopping <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function glitchText() {
+    const glitch = document.querySelector('.glitch');
+    const glitchChars = '!@#$%^&*()_+{}|:<>?';
+    let originalText = '404';
+    
+    setInterval(() => {
+      let newText = '';
+      for (let i = 0; i < originalText.length; i++) {
+        if (Math.random() > 0.7) {
+          newText += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+        } else {
+          newText += originalText[i];
+        }
+      }
+      glitch.textContent = newText;
+    }, 100);
+  }
+
+  glitchText();
+</script>
+
+{% schema %}
+{
+  "name": "404",
+  "class": "h-full",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text Settings"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#fff"
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button Border Color",
+      "default": "#fff"
+    }
+  ]
+}
+{% endschema %}
