@@ -478,6 +478,13 @@
                     assign btn_class = 'm-button--secondary'
                   endif
                 %}
+                {% liquid
+                if product.selected_or_first_available_variant.available 
+                   assign act_button_text =  'products.product.add_to_cart' | t 
+                else 
+                   assign act_button_text =  'products.product.sold_out' | t 
+                endif
+                %}
                 <button
                   type="submit"
                   name="add"
@@ -496,11 +503,7 @@
                     </svg>
                   </span>
                   <span class="m-add-to-cart--text m-add-to-cart--buttontext">
-                    {% if product.selected_or_first_available_variant.available %}
-                      {{ 'products.product.add_to_cart' | t }}
-                    {% else %}
-                      {{ 'products.product.sold_out' | t }}
-                    {% endif %}
+                     {{ act_button_text }}
                   </span>
                   {% if block.settings.button_style %}
                     <span class="image_bag">
@@ -1305,9 +1308,9 @@
         <slide-popup-button
           class="m-button m-button--primary m:w-full select-size-button-1"
           data-popup-id="size-popup"
-          style="max-width: calc(100% - 60px);padding-block:13px;"
+          style="max-width: calc(100% - 68px);padding-block:13px;"
         >
-          <b>{{ select_size_text }}</b>
+         {{ select_size_text }}
         </slide-popup-button>
       {% when 'in_the_set' %}
         {% if product.metafields.custom.in_the_set.value != blank %}

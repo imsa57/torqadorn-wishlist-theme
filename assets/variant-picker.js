@@ -424,8 +424,10 @@ if (!customElements.get("variant-picker")) {
         ? this.currentVariant.unit_price_measurement.reference_unit
         : this.currentVariant.unit_price_measurement.reference_value +
           this.currentVariant.unit_price_measurement.reference_unit;
-    updateButton(e = !0, t, i = !0) {
+    async updateButton(e = !0, t, i = !0) {
       const a = document.querySelectorAll(`.product-form-${this.sectionId}`);
+      const popupButtons = document.querySelectorAll(`[data-section-type="product-page"] slide-popup-button[data-popup-id="size-popup"]`);
+      const cartItemsNames = await this.getCart();
       a &&
         a.forEach((i) => {
           const a = i.querySelector('[name="add"]'),
@@ -437,11 +439,31 @@ if (!customElements.get("variant-picker")) {
                 a.classList.add("disabled"),
                 s && s.classList.add("disabled"),
                 t && (r.textContent = t))
-              : (a.removeAttribute("disabled"),
+              : (
+                (r.textContent = cartItemsNames.includes(this.currentVariant.name)?'IN YOUR BAG':window.MinimogStrings.addToCart),
+                a.removeAttribute("disabled"),
                 a.classList.remove("disabled"),
-                s && s.classList.remove("disabled"),
-                (r.textContent = window.MinimogStrings.addToCart)));
+                s && s.classList.remove("disabled")
+              ));
         });
+        popupButtons.forEach(e=>{
+          if(cartItemsNames.includes(this.currentVariant.name)){
+            e.textContent = 'IN YOUR BAG';
+          }else{
+            e.textContent = 'ADD TO BAG';
+          }
+        })
+    }
+     async getCart(){
+    return fetch('/cart.js')
+      .then(response => response.json())
+      .then(cart => {
+        return cart.items.map(e=>e.title);
+      })
+      .catch(error => {
+        console.error('Error fetching cart:', error);
+        return [];
+      });
     }
     updateProductMeta() {
       const { available: e, sku: t } = this.currentVariant,

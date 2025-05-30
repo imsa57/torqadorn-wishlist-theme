@@ -5,6 +5,25 @@
 .m-footer .social-media-links {
   margin-top: 16px;
 }
+.m-footer-image-wrapper {
+  gap: 20px;
+}
+.footer-image-box {
+  width: calc(calc(100% / 3) - 15px);
+  height: 140px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.footer-image-box > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 0.5s ease;
+}
+.footer-image-box:hover > img {
+  transform: scale(1.2);
+}
 @media screen and (max-width: 639px) {
   .m-footer .social-media-links svg {
     width: 16px;
@@ -24,13 +43,16 @@
   .m-footer .m-footer--currency-language {
     margin-bottom: 0;
   }
+  .m-footer-image-wrapper {
+    flex-wrap: nowrap;
+  }
 }
 .m-footer .m-follow-on-shop {
   margin-top: 10px;
 }
 .m-footer--middle .m-footer--block {
   padding-top: 80px;
-  padding-bottom: 80px;
+  /* padding-bottom: 80px; */
 }
 .m-footer--middle .m-footer--block.order-first {
   order: -9999;
@@ -90,24 +112,27 @@
 @media screen and (max-width: 1279px) {
   .m-footer--middle .m-footer--block {
     padding-top: 50px;
-    padding-bottom: 50px;
+    /* padding-bottom: 50px; */
   }
 }
 @media screen and (max-width: 767px) {
   .m-footer--middle .m-footer--block {
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-bottom: 16px;
+    /* padding-top: 30px; */
+    /* padding-bottom: 0; */
+    /* margin-bottom: 30px; */
   }
   .m-footer--middle .m-footer--block-spacing {
     margin-bottom: 0;
+  }
+  .m-footer-block-2.m-footer--middle .m-footer--block {
+    width: 50%;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .m-footer--middle .m-footer--block {
     width: 50%;
-    padding-top: 0;
-    padding-bottom: 30px;
+    /* padding-top: 30px; */
+    /* padding-bottom: 30px; */
   }
   .m-footer--middle .m-footer--block-spacing {
     display: none;
@@ -116,6 +141,9 @@
 @media screen and (min-width: 768px) {
   .m-footer--middle .m-accordion--item .m-accordion--item-button:after {
     display: none;
+  }
+  .m-footer-block-2.m-footer--middle .m-footer--block {
+    width: calc(100% / 3);
   }
 }
 @media screen and (min-width: 768px) {

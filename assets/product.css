@@ -846,7 +846,7 @@
 
 .shop-the-look-popup > slide-popup-button, 
 #lookbook-button > button {
-  padding: 6px;
+  padding: 4px;
     border-radius: 4px;
     background: white;
     color: black;
@@ -872,7 +872,7 @@ font-size: 14px;
   gap:3.5rem;
 }
 .m-product-form--wrapper foxkit-visible-check{
-  width:100%;
+  width:70%;
   display: flex; 
 }
 .divider-block{
@@ -885,10 +885,33 @@ font-size: 14px;
     margin-inline: -16px;
   }
 }
-.main-product__block-select_size .swym-button-bar {
+
+.main-product__block-select_size .swym-button-bar,.m-product-form--wrapper .swym-button-bar{
   margin: 0 !important;
   display: inline-block;
   background: white;
   border: 1px solid #f4f4f4;
   border-radius: 4px;
+  margin-left: 10px !important;
+}
+.m-product-form--wrapper [type="submit"]{
+padding-block:13px;
+}
+
+foxkit-visible-check:has([style*="display: none"]) {
+  display: none !important;
+}
+.in-cart-item:hover{
+  background: antiquewhite;
+  border-color: white;
+}
+.m-add-to-cart.in-cart-item,[data-section-type="product-page"] slide-popup-button.in-cart-item{
+  background: antiquewhite;
+  border-color: white;
+  color: black;
+  font-weight: 500;
+  border-radius: 22px;
+}
+slide-popup-button[data-popup-id="size-popup"]{
+  font-weight: 400;
 }

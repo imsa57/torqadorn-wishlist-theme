@@ -132,7 +132,8 @@
               assign button_type = 'text'
             endif
           %}
-          <div class="m-newsletter-section__form m:w-full{% if form_layout == 'horizontal' %} sm:m:w-1/2{% endif %}{% if form_layout == 'vertical' %} md:m:w-7/12 xl:m:w-4/12{% endif %}">
+          {% comment %} <div class="m-newsletter-section__form m:w-full{% if form_layout == 'horizontal' %} sm:m:w-1/2{% endif %}{% if form_layout == 'vertical' %} md:m:w-7/12 xl:m:w-4/12{% endif %}"> {% endcomment %}
+          <div class="m-newsletter-section__form m:w-full lg:m:w-9/12">
             {% render 'newsletter-form',
               custom_id: section.id,
               style: form_style,

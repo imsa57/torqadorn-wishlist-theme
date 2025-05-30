@@ -266,6 +266,9 @@
       {% comment %} End header logo mobile {% endcomment %}
       {% if show_cart_icon or search_settings != 'hide' %}
         <div class="m-header__mobile-right m:w-3/12 m:flex m:flex-1 m:justify-end">
+          <a href="#swym-wishlist" class="swym-wishlist">
+            <i aria-hidden="true" focusable="false" role="presentation" class="icon icon-swym-wishlist"></i>
+          </a>
           {% if search_settings != 'hide' %}
             <m-search-popup class="m:flex m:justify-center m:items-center" data-open-search-popup>
               <span class="m-header__search-icon">
@@ -383,6 +386,9 @@
                 , header_settings: section.settings %}
             </div>
             <div class="m-header__right m:w-5/12">
+              <a href="#swym-wishlist" class="swym-wishlist">
+                <i style="transform: translateY(2px);" aria-hidden="true" focusable="false" role="presentation" class="icon icon-swym-wishlist"></i>
+              </a>
               {% liquid
                 if show_language_switcher
                   render 'language-switcher', box_size: 'm:hidden xl:m:block'
@@ -446,6 +452,9 @@
                 , menu: 'secondary_menu' %}
             </div>
             <div class="m-header__right m:w-2/12">
+              <a href="#swym-wishlist" class="swym-wishlist">
+                <i style="transform: translateY(2px);" aria-hidden="true" focusable="false" role="presentation" class="icon icon-swym-wishlist"></i>
+              </a>
               {% liquid
                 if show_account_icon
                   render 'header-option-item__account', display_by: 'icon'
@@ -478,6 +487,9 @@
                 , section: section %}
             </div>
             <div class="m-header__right">
+              <a href="#swym-wishlist" class="swym-wishlist">
+                <i style="transform: translateY(2px);" aria-hidden="true" focusable="false" role="presentation" class="icon icon-swym-wishlist"></i>
+              </a>
               {% liquid
                 if show_language_switcher
                   render 'language-switcher', box_size: 'm:hidden xl:m:block'
@@ -537,6 +549,9 @@
                   , header_settings: section.settings %}
               </div>
               <div class="m-header__right m:w-2/5">
+                <a href="#swym-wishlist" class="swym-wishlist">
+                  <i style="transform: translateY(2px);" aria-hidden="true" focusable="false" role="presentation" class="icon icon-swym-wishlist"></i>
+                </a>
                 {% liquid
                   if show_account_icon
                     render 'header-option-item__account', display_by: 'icon'
@@ -574,6 +589,9 @@
                   , header_settings: section.settings %}
               </div>
               <div class="m-header__right m:w-8/12">
+                <a href="#swym-wishlist" class="swym-wishlist">
+                  <i style="transform: translateY(2px);" aria-hidden="true" focusable="false" role="presentation" class="icon icon-swym-wishlist"></i>
+                </a>
                 {% liquid
                   render 'header-option-item__search', header_settings: section.settings
 

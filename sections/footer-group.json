@@ -17,21 +17,21 @@
         ".m-newsletter-section__heading {font-family: \"Futura\", sans-serif;}"
       ],
       "settings": {
-        "container": "container",
-        "color_scheme": "scheme-03b0ba07-abd7-4a9d-8cbd-ba5ce7d4ed2c",
+        "container": "container-fluid",
+        "color_scheme": "footer",
         "form_layout": "vertical",
         "form_design": "2",
-        "heading": "More TORQ this Way",
-        "description": "<p>Join our inner circle and get access to style secrets, exclusive offers, and 10% off your first order!</p>",
+        "heading": "Get the latest scoop!",
+        "description": "",
         "text_size": "h2",
         "email_placeholder": "Enter Your Email",
-        "submit_button": "JOIN",
+        "submit_button": "",
         "text_color": "black",
         "show_icon": false,
         "icon_img_width": "30",
         "show_agreement": false,
         "padding_top": 60,
-        "padding_bottom": 60,
+        "padding_bottom": 50,
         "custom_class": "",
         "animations": "inherit"
       }
@@ -39,6 +39,48 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "footer_image_7pmrqi": {
+          "type": "footer_image",
+          "settings": {
+            "image": "shopify://shop_images/NEWEST_STYLES_1360_x_960_px_1.jpg",
+            "image_url": ""
+          }
+        },
+        "footer_image_qhypJx": {
+          "type": "footer_image",
+          "settings": {
+            "image": "shopify://shop_images/Menu_Banners-Tops.jpg",
+            "image_url": ""
+          }
+        },
+        "footer_image_nmJaer": {
+          "type": "footer_image",
+          "settings": {
+            "image": "shopify://shop_images/Menu_Banners-Coords_2.jpg",
+            "image_url": ""
+          }
+        },
+        "footer_image_Lhikkw": {
+          "type": "footer_image",
+          "settings": {
+            "image": "shopify://shop_images/DSC03619.jpg",
+            "image_url": ""
+          }
+        },
+        "footer_image_n6YzYf": {
+          "type": "footer_image",
+          "settings": {
+            "image": "shopify://shop_images/Menu_Banners-Skirts.jpg",
+            "image_url": ""
+          }
+        },
+        "footer_image_HqhEEX": {
+          "type": "footer_image",
+          "settings": {
+            "image": "shopify://shop_images/image_2.jpg",
+            "image_url": "shopify://products/amara-flower-top"
+          }
+        },
         "menu_EqEqai": {
           "type": "menu",
           "settings": {
@@ -86,6 +128,12 @@
         }
       },
       "block_order": [
+        "footer_image_7pmrqi",
+        "footer_image_qhypJx",
+        "footer_image_nmJaer",
+        "footer_image_Lhikkw",
+        "footer_image_n6YzYf",
+        "footer_image_HqhEEX",
         "menu_EqEqai",
         "49e72833-c68f-4a7b-ab64-3ef0cae99bcb",
         "93571032-b171-4c66-8b3e-96cd91946363",
@@ -99,14 +147,14 @@
       ],
       "settings": {
         "color_scheme": "scheme-cee058e4-58e3-46aa-9af9-219dadc79066",
-        "design": "footer-1",
+        "design": "footer-3",
         "container": "container-fluid",
         "bordered": false,
         "copyright": "© HOUSE OF WISTERIA VINE - AP",
         "show_country_selector": false,
         "show_currency_selector": true,
         "show_language_selector": false,
-        "show_social_links": true,
+        "show_social_links": false,
         "enable_follow_on_shop": false,
         "show_payment_icons": false,
         "payment_icons_width": 20,

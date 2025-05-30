@@ -17,22 +17,82 @@
 {%- capture page_title -%}
     {{ 'cart.general.title' | t }}
 {%- endcapture -%}
+<div class="container need-help-container">
+  <div class="cart-need-help-wrapper">
+    <div class="text">
+      <h3>Need Help?</h3>
+      <p>Our fashion experts are here to assist you</p>
+    </div>
+    <div class="cart-special-layout m:grid m:grid-3-cols m:w-full">
+      <a class="m-button" href="tel:+918376905539">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-phone-icon lucide-phone"
+        >
+          <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path>
+        </svg>
+        Call Us</a
+      >
+      <a class="m-button" href="mailto:torqadorn@torqadorn.com">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-mail-icon lucide-mail"
+        >
+          <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect>
+        </svg>
+        Email Us</a
+      >
+      <a class="m-button" href="https://wa.me/918376905539">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-message-circle-icon lucide-message-circle"
+        >
+          <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+        </svg>
+        Whatsapp Us</a
+      >
+    </div>
+  </div>
+</div>
 {% render 'page-title', title: page_title, container: 'container' %}
 <div class="container">
-   
   <m-cart class="m-cart{% if cart == empty %} m-cart--empty{% endif %}" id="MinimogCart">
-    <form class="md:m:display-flex" style="gap:20px" action="{{ routes.cart_url }}" method="post" novalidate>
+    <form class="md:m:display-flex" style="gap:40px" action="{{ routes.cart_url }}" method="post" novalidate>
       <div class="m-cart__wrapper">
-        {%  comment %}
-        <div class="m-cart__header m:flex">
-          <div class="m-cart__column m-cart__column--product">{{ 'cart.label.product' | t }}</div>
-          <div class="m-cart__column m-cart__column--price">{{ 'cart.label.price' | t }}</div>
-          <div class="m-cart__column m-cart__column--quantity m:hidden md:m:block">{{ 'cart.label.quantity' | t }}</div>
-          <div class="m-cart__column m-cart__column--subtotal m:text-right m:hidden md:m:block">
-            {{ 'cart.label.total' | t }}
+        {% comment %}
+          <div class="m-cart__header m:flex">
+            <div class="m-cart__column m-cart__column--product">{{ 'cart.label.product' | t }}</div>
+            <div class="m-cart__column m-cart__column--price">{{ 'cart.label.price' | t }}</div>
+            <div class="m-cart__column m-cart__column--quantity m:hidden md:m:block">{{ 'cart.label.quantity' | t }}</div>
+            <div class="m-cart__column m-cart__column--subtotal m:text-right m:hidden md:m:block">
+              {{ 'cart.label.total' | t }}
+            </div>
           </div>
-        </div>
-        {%  endcomment %}
+        {% endcomment %}
         <div class="m-cart__body" data-minimog-cart-items>
           {%- if cart.item_count > 0 -%}
             <div class="m-cart__items">
@@ -46,6 +106,26 @@
                 %}
                 {% comment %}Custom element for FoxKit In-cart upsells{% endcomment %}
                 {% if forloop.last %}
+                  <slide-popup-button
+                    class="coupon-button m-button m:w-full m:flex m:items-center m:justify-center"
+                    data-popup-id="coupon-code-popup-cart-page"
+                  >
+                    <svg
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xml:space="preserve"
+                      style=""
+                      viewBox="0 0 50 50"
+                      y="0"
+                      x="0"
+                      height="22"
+                      width="22"
+                      version="1.1"
+                    >
+                      <g><path data-original="#000000" opacity="1" fill="#6c6c6c" d="M48 20.04a.5.5 0 0 0 .5-.5V10a.5.5 0 0 0-.5-.5H2a.5.5 0 0 0-.5.5v9.54a.5.5 0 0 0 .5.5c2.735 0 4.96 2.225 4.96 4.96S4.735 29.96 2 29.96a.5.5 0 0 0-.5.5V40a.5.5 0 0 0 .5.5h46a.5.5 0 0 0 .5-.5v-9.54a.5.5 0 0 0-.5-.5c-2.735 0-4.96-2.225-4.96-4.96s2.225-4.96 4.96-4.96zM42.04 25a5.968 5.968 0 0 0 5.46 5.939V39.5H14.214V38a.5.5 0 0 0-1 0v1.5H2.5v-8.561c3.053-.254 5.46-2.821 5.46-5.939s-2.407-5.685-5.46-5.939V10.5h10.714V12a.5.5 0 0 0 1 0v-1.5H47.5v8.561A5.968 5.968 0 0 0 42.04 25z"/><path data-original="#000000" opacity="1" fill="#6c6c6c" d="M13.714 30.071a.5.5 0 0 0-.5.5v3.714a.5.5 0 0 0 1 0v-3.714a.5.5 0 0 0-.5-.5zM13.714 15.214a.5.5 0 0 0-.5.5v3.714a.5.5 0 0 0 1 0v-3.714a.5.5 0 0 0-.5-.5zM13.714 22.643a.5.5 0 0 0-.5.5v3.714a.5.5 0 0 0 1 0v-3.714a.5.5 0 0 0-.5-.5z"/></g>
+                    </svg>
+                    <span> OFFERS & COUPONS </span>
+                  </slide-popup-button>
                   {% liquid
                     assign collections = ''
                     for collection in item.product.collections
@@ -177,6 +257,79 @@
                 <span class="ymq_cart_total_price">{{- cart.total_price | money -}}</span>
               </span>
             </div>
+            <div class="shipping-text-toggle-wrapper m:flex m:items-center m:justify-end m:text-xs">
+              <span class="" shipping-text-toggle>View breakdown</span>
+              <svg
+                width="10"
+                height="10"
+                viewBox="0 0 16 16"
+                fill="none"
+                style="margin-left:3px;"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M13.5306 6.53073L8.5306 11.5307C8.46092 11.6007 8.37813 11.6561 8.28696 11.694C8.1958 11.7318 8.09806 11.7513 7.99935 11.7513C7.90064 11.7513 7.8029 11.7318 7.71173 11.694C7.62057 11.6561 7.53778 11.6007 7.4681 11.5307L2.4681 6.53073C2.3272 6.38984 2.24805 6.19874 2.24805 5.99948C2.24805 5.80023 2.3272 5.60913 2.4681 5.46823C2.60899 5.32734 2.80009 5.24818 2.99935 5.24818C3.19861 5.24818 3.3897 5.32734 3.5306 5.46823L7.99997 9.93761L12.4693 5.46761C12.6102 5.32671 12.8013 5.24756 13.0006 5.24756C13.1999 5.24756 13.391 5.32671 13.5318 5.46761C13.6727 5.60851 13.7519 5.7996 13.7519 5.99886C13.7519 6.19812 13.6727 6.38921 13.5318 6.53011L13.5306 6.53073Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <div class="m:hidden" shipping-text-toggle-content style="padding-top: 10px;">
+              {% comment %}
+                <div class="m-cart__subtotal m:flex m:justify-between m:text-base">
+                  <span class="">Shipping in India</span>
+                  <span class=" m:font-medium"> Included </span>
+                </div>
+                <div class="m-cart__subtotal m:flex m:justify-end m:text-xs">
+                  <span class=""> *All taxes are included in product prices </span>
+                </div>
+              {% endcomment %}
+              <div class="m-cart-breakdown-box">
+                <div class="m-cart-breakdown-row-1 m:flex m:justify-between m:items-center">
+                  <span class="m-cart-breakdown-label" style="color: #222;"> Items ({{ cart.item_count }}) </span>
+                  <span class="m-cart-breakdown-value" style="color: #222;">
+                    {% if settings.currency_code_enabled %}
+                      {{ cart.original_total_price | money_with_currency }}
+                    {% else %}
+                      {{ cart.original_total_price | money }}
+                    {% endif %}
+                  </span>
+                </div>
+                {% if cart.discount_applications.size > 0 %}
+                  {% for discount_application in cart.discount_applications %}
+                    <div class="m-cart-breakdown-row m:flex m:justify-between m:items-center">
+                      <span class="m-cart-breakdown-label m:flex m:items-center" style="color: #1673b0;">
+                        <svg
+                          width="16"
+                          height="16"
+                          fill="none"
+                          style="margin-right:4px;"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect x="2" y="7" width="12" height="2" rx="1" fill="#1673b0"/>
+                          <rect x="7" y="2" width="2" height="12" rx="1" fill="#1673b0"/>
+                        </svg>
+                        Discount ({{ discount_application.title }})
+                      </span>
+                      <span class="m-cart-breakdown-value" style="color: #1673b0">
+                        - {{ discount_application.total_allocated_amount | money }}
+                      </span>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+                <div class="m-cart-breakdown-row m:flex m:justify-between m:items-center">
+                  <span class="m-cart-breakdown-label" style="color: #222;"> Shipping in India </span>
+                  <div>
+                    <span class="m-cart-breakdown-value">
+                      {% comment %} Example: ₹150, you may want to dynamically show shipping if not free {% endcomment %}
+                      <s>₹150</s>
+                    </span>
+                    <span class="m-cart-breakdown-value-text"> Included </span>
+                  </div>
+                </div>
+                <div class="m-cart-breakdown-row m:flex m:items-center" style="margin-bottom: 0;">
+                  <span class="m-cart-breakdown-note" style="color: #888; font-size: 12px;">
+                    *All taxes are included in product prices
+                  </span>
+                </div>
+              </div>
+            </div>
             {%- capture taxes_shipping_checkout -%}
               {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
                 {{ 'cart.general.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
@@ -188,7 +341,7 @@
                 {{ 'cart.general.taxes_and_shipping_at_checkout' | t }}
               {%- endif -%}
             {%- endcapture -%}
-            <div class="m-cart__shipping-note m:text-sm m:text-color-subtext">{{ taxes_shipping_checkout }}</div>
+            {% comment %} <div class="m-cart__shipping-note m:text-sm m:text-color-subtext">{{ taxes_shipping_checkout }}</div> {% endcomment %}
           </div>
           <div class="m-cart__checkout">
             {% assign show_terms = false %}
@@ -220,18 +373,61 @@
                 data-terms-action disabled
               {% endif %}
             >
-              <button type="submit" name="checkout" class="m:w-full m-button m-button--primary m:justify-center">
-                <span>
-                  <svg
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="15"
-                    height="19"
-                  >
-                    <defs><clipPath id="clip-path"><path fill="none" d="M0 0h15v19H0z"/></clipPath></defs><g id="Component_10" data-name="Component 10" clip-path="url(#clip-path)" fill="none"><g id="Group_189" data-name="Group 189" transform="translate(-1183 -25)"><g id="Subtraction_1" data-name="Subtraction 1"><path d="M-9007-178.5a7.434 7.434 0 00-4.5-1.5 7.438 7.438 0 00-4.5 1.5v-2a4.5 4.5 0 014.5-4.5 4.5 4.5 0 014.5 4.5v2z" transform="translate(10202 210)"/><path d="M-9007.999-180.25v-.25c0-1.93-1.57-3.5-3.5-3.5s-3.5 1.57-3.5 3.5v.25a8.45 8.45 0 013.5-.75c1.226 0 2.41.256 3.5.75m1 1.75l-.002-.001a7.434 7.434 0 00-4.498-1.5 7.438 7.438 0 00-4.5 1.5v-2c0-2.48 2.019-4.5 4.5-4.5s4.5 2.02 4.5 4.5v2.001z" fill="#fff" transform="translate(10202 210)"/></g><g id="Union_1" data-name="Union 1"><path d="M-2202-177.5v-3a2.5 2.5 0 01-1-2 2.5 2.5 0 012.5-2.5 2.5 2.5 0 012.5 2.5 2.5 2.5 0 01-1 2v3a1.5 1.5 0 01-1.5 1.5 1.5 1.5 0 01-1.5-1.5z" transform="translate(3391 217)"/><path d="M-2200.5-177a.5.5 0 00.5-.5v-3.5l.4-.3a1.502 1.502 0 00-.9-2.7 1.502 1.502 0 00-.9 2.7l.4.3v3.5a.5.5 0 00.5.5m0 1a1.5 1.5 0 01-1.5-1.5v-3a2.5 2.5 0 113 0v3a1.5 1.5 0 01-1.5 1.5z" fill="#fff" transform="translate(3391 217)"/></g></g><g id="Ellipse_23" data-name="Ellipse 23" transform="translate(0 4)" stroke="#fff" stroke-width="1"><circle cx="7.5" cy="7.5" r="7.5" stroke="none"/><circle cx="7.5" cy="7.5" r="7"/></g></g>
-                  </svg>
-                </span>
-                <span><b>{{ 'cart.general.checkout' | t | upcase }}</b></span>
+              <button type="submit" name="checkout" class="m:w-full m-button m-button--primary">
+                {% comment %}
+                  <span>
+                    <svg
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="15"
+                      height="19"
+                    >
+                      <defs><clipPath id="clip-path"><path fill="none" d="M0 0h15v19H0z"/></clipPath></defs><g id="Component_10" data-name="Component 10" clip-path="url(#clip-path)" fill="none"><g id="Group_189" data-name="Group 189" transform="translate(-1183 -25)"><g id="Subtraction_1" data-name="Subtraction 1"><path d="M-9007-178.5a7.434 7.434 0 00-4.5-1.5 7.438 7.438 0 00-4.5 1.5v-2a4.5 4.5 0 014.5-4.5 4.5 4.5 0 014.5 4.5v2z" transform="translate(10202 210)"/><path d="M-9007.999-180.25v-.25c0-1.93-1.57-3.5-3.5-3.5s-3.5 1.57-3.5 3.5v.25a8.45 8.45 0 013.5-.75c1.226 0 2.41.256 3.5.75m1 1.75l-.002-.001a7.434 7.434 0 00-4.498-1.5 7.438 7.438 0 00-4.5 1.5v-2c0-2.48 2.019-4.5 4.5-4.5s4.5 2.02 4.5 4.5v2.001z" fill="#fff" transform="translate(10202 210)"/></g><g id="Union_1" data-name="Union 1"><path d="M-2202-177.5v-3a2.5 2.5 0 01-1-2 2.5 2.5 0 012.5-2.5 2.5 2.5 0 012.5 2.5 2.5 2.5 0 01-1 2v3a1.5 1.5 0 01-1.5 1.5 1.5 1.5 0 01-1.5-1.5z" transform="translate(3391 217)"/><path d="M-2200.5-177a.5.5 0 00.5-.5v-3.5l.4-.3a1.502 1.502 0 00-.9-2.7 1.502 1.502 0 00-.9 2.7l.4.3v3.5a.5.5 0 00.5.5m0 1a1.5 1.5 0 01-1.5-1.5v-3a2.5 2.5 0 113 0v3a1.5 1.5 0 01-1.5 1.5z" fill="#fff" transform="translate(3391 217)"/></g></g><g id="Ellipse_23" data-name="Ellipse 23" transform="translate(0 4)" stroke="#fff" stroke-width="1"><circle cx="7.5" cy="7.5" r="7.5" stroke="none"/><circle cx="7.5" cy="7.5" r="7"/></g></g>
+                    </svg>
+                  </span>
+                  <span><b>{{ 'cart.general.checkout' | t | upcase }}</b></span>
+                {% endcomment %}
+                <div class="button-content m:flex m:items-center m:justify-between m:w-full">
+                  <div checkout-data-cart-subtotal>
+                    <span class="m-cart__subtotal--price m:font-medium" data-cart-subtotal-price>
+                      {% if settings.currency_code_enabled %}
+                        {{ cart.total_price | money_with_currency }}
+                      {% else %}
+                        {{ cart.total_price | money }}
+                      {% endif %}
+                    </span>
+                  </div>
+                  {% comment %}
+                    <span class="lock-icon">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0526/4811/6407/files/svg-image-9.svg?v=1720861706"
+                        alt="Secure checkout"
+                        width="20"
+                        height="20"
+                      >
+                    </span>
+                  {% endcomment %}
+                  <span class="checkout-text m:flex">
+                    {{- 'cart.general.checkout' | t }}
+                    {% comment %}
+                      <span class="checkout-button-icon-wrapper m:flex m:items-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="346.845 368.41 680.149 304.513"
+                          width="32"
+                          height="auto"
+                          fill="#fff"
+                        >
+                          <defs/>
+                          <path d="m124 450.456c9 4 17 9 26 14 11 6 15 18 10 29-4 12-16 17-28 14-11-3-21-6-31-10l-1 2c21 17 41 34 62 52 3 2 4 2 6-1 41-49 82-97 123-146 3-4 4-6 0-10-25-20-49-40-73-60-3-3-4-3-7 0-10 13-21 26-32 39-19 22-38 45-57 67-4 5-4 7 2 10zm64-43c20 1 37 18 37 37s-14 33-33 32c-20 0-37-17-37-36s15-33 33-33zm60 235c2 3 4 3 7 2 23-2 46-4 71-6-8-19-14-38-24-55-7-13-18-23-35-24-26-3-52-1-78-1-8 0-13 6-12 13 0 7 5 12 13 13h30c4 0 7 0 7 5 1 4-3 4-7 4h-50c-10 0-19-3-27-9-12-9-24-17-37-25-7-5-15-4-19 2-6 6-5 14 2 21l39 33c12 11 26 17 43 17 17-1 35 0 52 0 10 0 19 2 25 10zm-97-153c2-8-1-13-8-17-14-7-27-15-40-23-5-2-8-5-6-11 1-5 5-6 10-6 4 0 8 2 10-2 10-11 20-23 31-36-6-1-10-2-15-3-17-3-33-7-51-2-16 5-31 10-48 13-4 0-4 3-4 5v62c7-2 13-3 18-5 8-3 15-1 20 6 4 4 8 8 14 10 17 6 34 12 51 17 9 3 16-1 18-8zm180 159c-27 3-54 6-81 8-6 0-5 4-5 7 0 4 2 5 5 5h71c15 0 16 0 14-16 0-2 0-4-4-4zm-319-254h-7c-4-1-5 1-5 6 3 26 5 52 7 78 1 5 3 5 7 5 5 1 6-2 6-6-1-13 0-25 0-38s-1-25 0-38c0-6-2-8-8-7zm158 49c2 4 5 7 10 7s8-2 12-4c2-1 4-2 6 0s0 4-2 6c-1 1-2 2-4 3s-5 2-2 6c2 3 4 4 8 2 1-2 3-5 6-3 2 2 3 2 5 0 2-3 2-4 0-7-2-1-1-4 0-5 0-13-8-18-20-12-3 1-6 5-8 2-2-4 2-6 4-8 2-1 4-1 3-4-4-10-11 3-15-2-2-1-5 4-5 4 5 4 0 10 2 15zm218 25c4 2 8 3 12 3 3 0 5 0 8-1s5-1 7-3c3-1 5-2 7-4s3-4 4-7l-8-5c-1 2-2 4-4 5-1 2-2 3-4 4-1 0-3 1-5 1s-3 1-4 1c-3 0-6-1-9-2-2-1-4-3-6-5s-3-5-4-8-2-6-2-9 0-6 1-8 2-6 4-8 4-4 7-5c2-2 5-3 8-3 2 0 3 1 5 1s3 1 5 2c1 0 3 2 4 3s2 3 3 5l8-6c-2-4-5-7-9-10s-9-4-15-4c-5 0-10 1-13 3s-7 4-10 7c-3 4-5 7-6 11-2 4-2 8-2 12s0 8 2 12c1 4 3 7 6 10 3 4 6 7 10 8zm86-9v-17c0-7-2-11-6-15s-8-5-15-5-13 2-19 6l3 7c2-2 5-3 8-4 2-1 5-2 7-2 4 0 7 1 9 3s3 5 3 9v3c-2-1-4-1-6-2s-5 0-7 0c-3 0-6 0-8 1s-5 2-6 3c-2 1-4 3-5 5-1 1-1 4-1 6s0 4 1 6 2 3 3 5l6 3s4 1 6 1c4 0 7-1 10-2 3-2 6-4 8-7v3c1 2 1 3 2 4s3 1 5 1h5v-9h-3zm-10-3c0 1-1 2-2 3-1 2-3 3-5 4s-5 1-7 1c-3 0-5 0-7-2s-3-4-3-6c0-3 2-5 4-6s5-3 9-3c1 0 3 1 5 1s4 1 6 2zm40 8c-6 0-12-2-18-6l-4 7c2 1 3 2 5 3s3 1 5 2 4 1 6 1 4 1 6 1c3 0 6-1 8-1s5-2 6-3 3-3 4-5 2-4 2-6-1-4-2-5c0-2-1-3-3-4s-3-2-6-3-5-1-8-2c-2-1-4-1-5-2s-3 0-4-1c0 0-1-1-1-2-1 0-1-1-1-2 0-2 1-4 3-5s4-2 6-2c5 0 10 2 15 5l4-6c-2-2-5-3-8-4s-7-2-11-2c-2 0-5 0-7 1l-6 3c-2 1-3 3-4 5s-1 4-1 6v5l3 3c2 1 3 2 6 3s4 2 7 2c5 1 8 2 10 3s3 3 3 5-1 3-3 5c-2 1-4 1-7 1zm68-36c-1-2-3-3-5-4s-4-2-7-2c-4 0-7 1-10 3s-6 4-8 8v-29h-10v67h10v-29c1-1 1-3 2-4 1-2 2-3 4-4s2-2 4-2c1-1 2-1 4-1 3 0 5 1 7 3s2 6 2 10v27h10v-29c0-3 0-5-1-8s-1-4-2-6zm77 36c2-2 3-5 5-8s1-6 1-9 0-7-1-10c-2-3-3-5-5-7-3-3-5-5-8-6s-7-2-10-2c-4 0-7 1-10 2s-6 3-8 6c-2 2-4 4-5 7s-2 7-2 10 1 6 2 9 3 6 5 8c2 3 4 4 7 6s7 2 11 2c3 0 7-1 10-2s5-3 8-6zm-18-1c-2 0-4 0-6-1s-3-2-4-3c-2-2-3-4-3-6s-2-4-2-6 1-4 2-6c0-2 1-4 3-6s2-2 4-3 4-1 6-1 4 0 5 1 4 2 5 3c1 2 2 3 3 5s1 5 1 7-1 4-1 6c-1 2-2 4-3 5-2 2-3 3-5 4-1 1-3 1-5 1zm43-21c1-1 1-3 2-4 1-2 3-3 4-4s2-2 4-2c1-1 3-1 4-1 3 0 5 1 7 3 1 2 2 6 2 10v27h10v-29c0-3 0-5-1-8s-1-4-2-6-2-3-4-4-4-2-7-2c-4 0-8 1-12 3-3 2-6 4-8 8v-10h-9v48h10zm-212 84c-5-5-11-9-18-12s-15-4-25-4h-41v114h41c9 0 17-2 24-4s12-7 17-12 9-11 12-18 4-15 4-23-2-16-4-23-6-12-10-18zm-11 55c-1 5-4 9-6 12-3 4-7 6-11 8s-9 3-14 3h-20v-75h20c5 0 10 1 14 3s8 4 11 7 5 8 6 12c2 5 2 10 2 15 0 6 0 11-2 15zm112-30c-4-4-9-7-14-9s-12-4-19-4c-6 0-13 1-18 4-6 2-10 5-14 9s-7 9-9 14-3 11-3 17 1 11 3 17 5 9 9 13 8 7 14 10 11 3 18 3c10 0 18-2 25-6s11-9 14-16l-18-5c-1 3-4 6-8 8s-8 3-12 3c-3 0-5 0-8-1s-5-2-7-4-4-4-5-7c-1-2-2-5-2-9h65v-3-4c0-5-1-11-3-16s-5-10-8-14zm-55 24c1-4 1-6 3-9 1-3 2-5 4-7s4-3 7-4c2-1 5-1 8-1 6 0 11 2 15 5s6 9 7 16zm114 30h-5c-5 0-8-3-8-9v-90h-22v98c0 7 2 12 6 15s9 6 15 6c3 0 7-1 11-1 4-1 7-2 10-3l-3-18c-1 1-3 1-4 2zm16-65h22v84h-22zm0-33h22v21h-22zm76 99-22-66h-22l31 84h23l31-84h-20zm123-55c-3-4-8-7-13-9s-12-4-19-4-13 1-18 4c-6 2-11 5-14 9s-7 9-9 14-3 11-3 17 1 11 3 17 5 9 9 13 8 7 14 10 11 3 18 3c9 0 18-2 24-6s12-9 15-16l-18-5c-2 3-4 6-8 8s-8 3-12 3c-3 0-6 0-8-1-3-1-5-2-7-4s-4-4-5-7c-1-2-2-5-2-9h65v-3-4c0-5-1-11-3-16s-5-10-9-14zm-54 24c0-4 1-6 2-9 2-3 3-5 5-7s4-3 7-4c2-1 5-1 8-1 6 0 11 2 15 5s6 9 7 16zm125-37c-5 0-10 2-15 6s-8 8-11 14v-18h-20v84h22v-51c2-5 5-9 11-11 5-2 11-4 17-4v-19c0-1-1-1-2-1zm72 2-20 65-23-65h-22l33 84-3 9s-2 4-3 5l-3 3h-8s-4 0-6-1v19c4 1 8 1 12 1 6 0 12-1 17-5 5-3 9-8 11-15l35-100z"/>
+                        </svg>
+                        {% comment %} <span class="checkout-button-icon"></span> {% endcomment %}
+                        <span class="checkout-button-icon"></span>
+                        <span class="checkout-button-icon"></span>
+                      </span>
+                    {% endcomment %}
+                  </span>
+                </div>
               </button>
             </div>
             {%- if additional_checkout_buttons -%}
@@ -291,48 +487,60 @@
             <h3 class="m-section__header">{{ section.settings.heading }}</h3>
           {% endif %}
           {% if section.blocks.size > 0 %}
-          <div class="m-collapsible-section__wrapper">
-            {% for block in section.blocks %}
-              <collapsible-tab
-                class="m-collapsible no-js-hidden"
-                data-block-id="collapsible-tab-{{ block.id }}"
-                {% if block.settings.open %}
-                  open="true"
-                {% endif %}
-              >
-                <h3 class="m-collapsible--button {{ block.settings.text_size }}" data-trigger>
-                  <span class="m:display-flex m:items-center">
-                    <span style="margin-right:6px;">{% if block.settings.icon != blank %}{{ block.settings.icon |image_url: width: 20 |image_tag }}{% endif %}</span>{{ block.settings.header }}
-                  </span>
-                  <span class="m-collapsible--icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M13.5306 6.53073L8.5306 11.5307C8.46092 11.6007 8.37813 11.6561 8.28696 11.694C8.1958 11.7318 8.09806 11.7513 7.99935 11.7513C7.90064 11.7513 7.8029 11.7318 7.71173 11.694C7.62057 11.6561 7.53778 11.6007 7.4681 11.5307L2.4681 6.53073C2.3272 6.38984 2.24805 6.19874 2.24805 5.99948C2.24805 5.80023 2.3272 5.60913 2.4681 5.46823C2.60899 5.32734 2.80009 5.24818 2.99935 5.24818C3.19861 5.24818 3.3897 5.32734 3.5306 5.46823L7.99997 9.93761L12.4693 5.46761C12.6102 5.32671 12.8013 5.24756 13.0006 5.24756C13.1999 5.24756 13.391 5.32671 13.5318 5.46761C13.6727 5.60851 13.7519 5.7996 13.7519 5.99886C13.7519 6.19812 13.6727 6.38921 13.5318 6.53011L13.5306 6.53073Z" fill="currentColor"/>
-                    </svg>
-                  </span>
-                </h3>
-                <div class="m-collapsible--content" data-content hidden>
-                  <div class="m-collapsible--content__inner">
-                    {% case block.type %}
-                      {% when 'item' %}
-                        <div class="rte">
-                          {{ block.settings.content }}
-                          {{ block.settings.content_page.content }}
-                        </div>
-                      {% when 'liquid' %}
-                        {{ block.settings.custom_liquid }}
-                      {% else %}
-  
-                    {% endcase %}
-                  </div>
-                </div>
-              </collapsible-tab>
-            {% endfor %}
-          </div>
-        {% endif %}
-        </div>
+            <div class="m-collapsible-section__wrapper">
+              {% for block in section.blocks %}
+                <collapsible-tab
+                  class="m-collapsible no-js-hidden"
+                  data-block-id="collapsible-tab-{{ block.id }}"
+                  {% if block.settings.open %}
+                    open="true"
+                  {% endif %}
+                >
+                  <h3 class="m-collapsible--button {{ block.settings.text_size }}" data-trigger>
+                    <span class="m:display-flex m:items-center">
+                      <span style="margin-right:6px;">
+                        {%- if block.settings.icon != blank -%}
+                          {{- block.settings.icon | image_url: width: 20 | image_tag -}}
+                        {%- endif -%}
+                      </span>
+                      {{- block.settings.header }}
+                    </span>
+                    <span class="m-collapsible--icon">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.5306 6.53073L8.5306 11.5307C8.46092 11.6007 8.37813 11.6561 8.28696 11.694C8.1958 11.7318 8.09806 11.7513 7.99935 11.7513C7.90064 11.7513 7.8029 11.7318 7.71173 11.694C7.62057 11.6561 7.53778 11.6007 7.4681 11.5307L2.4681 6.53073C2.3272 6.38984 2.24805 6.19874 2.24805 5.99948C2.24805 5.80023 2.3272 5.60913 2.4681 5.46823C2.60899 5.32734 2.80009 5.24818 2.99935 5.24818C3.19861 5.24818 3.3897 5.32734 3.5306 5.46823L7.99997 9.93761L12.4693 5.46761C12.6102 5.32671 12.8013 5.24756 13.0006 5.24756C13.1999 5.24756 13.391 5.32671 13.5318 5.46761C13.6727 5.60851 13.7519 5.7996 13.7519 5.99886C13.7519 6.19812 13.6727 6.38921 13.5318 6.53011L13.5306 6.53073Z" fill="currentColor"/>
+                      </svg>
+                    </span>
+                  </h3>
+                  <div class="m-collapsible--content" data-content hidden>
+                    <div class="m-collapsible--content__inner">
+                      {% case block.type %}
+                        {% when 'item' %}
+                          <div class="rte">
+                            {{ block.settings.content }}
+                            {{ block.settings.content_page.content }}
+                          </div>
+                        {% when 'liquid' %}
+                          {{ block.settings.custom_liquid }}
+                        {% else %}
 
+                      {% endcase %}
+                    </div>
+                  </div>
+                </collapsible-tab>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
       </div>
     </form>
+    {%- capture cart_offer_content -%}
+      {%- render 'offers-coupon' -%}
+    {%- endcapture -%}
+    {%- render 'popup-slide',
+      id: 'coupon-code-popup-cart-page',
+      heading: 'Offers & Coupons',
+      content: cart_offer_content
+    -%}
   </m-cart>
 </div>
 {% comment %}<!-- ymq option done -->{% endcomment %}
@@ -355,8 +563,8 @@
       "settings": [
         {
           "type": "image_picker",
-          "id":"icon",
-          "label":"icon image"
+          "id": "icon",
+          "label": "icon image"
         },
         {
           "type": "text",

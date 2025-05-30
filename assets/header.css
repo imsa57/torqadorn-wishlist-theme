@@ -1164,3 +1164,27 @@
     color: #333;
     transform: translateY(50%);
 }
+.swym-wishlist[href="#swym-wishlist"]{
+  padding: 10px;
+  display: flex;
+  align-items: end;
+}
+i.icon-swym-wishlist {
+  font-family: 'swym-font';
+  font-style: normal;
+  vertical-align: middle;
+  }
+  i.icon-swym-wishlist+span {
+  vertical-align: middle;
+  }
+  i.icon-swym-wishlist:after {
+  content: '';
+  font-size: 140%;
+  line-height: 18px;
+  text-align: center;
+  display: inline;
+  }
+  /*content rendered after swym is ready to avoid showing block/invalid chars*/
+  .swym-ready i.icon-swym-wishlist:after {
+  content: '\f004';
+  }

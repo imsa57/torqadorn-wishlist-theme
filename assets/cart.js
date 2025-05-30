@@ -20,6 +20,8 @@ class MCartTemplate extends HTMLElement {
       (this.mainCartItems = this.querySelector("[data-minimog-cart-items]")),
       (this.cartSubTotal = this.querySelector("[data-cart-subtotal]")),
       (this.cartDiscount = this.querySelector("[data-minimog-cart-discounts]")),
+      (this.cartBreakdownButton = this.querySelector("[shipping-text-toggle]")),
+      (this.cartBreakdownContent = this.querySelector("[shipping-text-toggle-content]")),
       (this.giftWrapping = this.querySelector("[data-minimog-gift-wrapping]"));
     let t = this.cartDrawerInner;
     this.isCartPage && (t = document.body),
@@ -36,6 +38,10 @@ class MCartTemplate extends HTMLElement {
           this.updateCartCount(t.item_count);
         });
       });
+      this.cartBreakdownButton.addEventListener('click',()=>{
+        this.cartBreakdownButton.classList.toggle('open');
+        this.cartBreakdownContent.classList.toggle('m:hidden');
+      })
   }
   updateCartCount(t) {
     document.querySelectorAll(".m-cart-count-bubble").forEach((e) => {
@@ -74,6 +80,15 @@ class MCartTemplate extends HTMLElement {
             ((this.cartSubTotal.innerHTML = r.innerHTML),
             (this.cartDiscount.innerHTML = a.innerHTML),
             (this.giftWrapping.innerHTML = s.innerHTML)));
+            this.getSectionsToRender().forEach((t) => {
+              (
+                document.getElementById(t.id).querySelector(t.selector) ||
+                document.getElementById(t.id)
+              ).innerHTML = this.getSectionInnerHTML(
+                e,
+                t.selector
+              );
+            });    
       })
       .catch((t) => {});
   }
@@ -187,7 +202,203 @@ class MCartTemplate extends HTMLElement {
         section: "cart-template",
         selector: "[data-minimog-gift-wrapping]",
       },
+      {
+        id: "MinimogCart",
+        section: "cart-template",
+        selector: "[shipping-text-toggle-content]",
+      },
+      {
+        id: "MinimogCart",
+        section: "cart-template",
+        selector: "[checkout-data-cart-subtotal]",
+      },
+      {
+        id: "MinimogCart",
+        section: "cart-template",
+        selector: ".offers-coupon-list",
+      },
     ];
   }
 }
 customElements.define("m-cart", MCartTemplate);
+class MDISCOUNTFORM extends HTMLElement{
+  constructor(){
+    super();
+this.addEventListener('submit',this.handleDiscountSubmit.bind(this));
+  }
+  handleDiscountSubmit(e) {
+    e.preventDefault();
+    const code = this.querySelector("input").value.trim();
+    const applyFormButton =
+      this.querySelector('[type="submit"]');
+    const textEl = applyFormButton.querySelector(".apply-text");
+    const loaderEl = applyFormButton.querySelector(".loader");
+    const errorEl = this.querySelector(
+      "[apply-coupon-error]"
+    );
+    const cartDrwaerEL = document.querySelector('m-cart-drawer');
+    const cartPage = document.querySelector('m-cart');
+    if (!code) {
+      return;
+    }
+    document.querySelector("discount-code-button").applyDiscountCode.call(
+      applyFormButton,
+      code,
+      textEl,
+      loaderEl,
+      cartDrwaerEL,
+      errorEl,
+      cartPage
+    );
+  }
+}
+customElements.define("m-discount-form",MDISCOUNTFORM );
+class DiscountCodeButton extends HTMLElement {
+  constructor() {
+    super();
+  }
+  connectedCallback() {
+    // Add your initialization code here
+    this.cartDrwaer = document.querySelector("m-cart-drawer");
+    this.cartPage = document.querySelector("m-cart");
+    this.discountCode = this.getAttribute("data-coupon-code");
+    if(this.cartDrwaer){
+      this.skipDiscount = this.cartDrwaer.querySelector(
+        ".offers-coupon-skip-btn"
+      );
+      this.popupSlide = this.cartDrwaer.querySelector("slide-popup");
+      this.skipDiscount.addEventListener("click", () => {
+        this.popupSlide.close();
+      });
+    }
+    this.applyText = this.querySelector(".apply-text");
+    this.loader = this.querySelector(".loader");
+
+    this.addEventListener(
+      "click",
+      this.applyDiscountCode.bind(
+        this,
+        this.discountCode,
+        this.applyText,
+        this.loader,
+        this.cartDrwaer,
+        "",
+        this.cartPage
+      )
+    );
+   
+  }
+  applyDiscountCode(
+    code,
+    textEl,
+    loaderEl,
+    cartDrwaerEL,
+    errorEl,
+    cartPage
+  ) {
+    // console.log(code);
+    let error = false;
+    // this.setAttribute("disabled", true);
+    textEl.innerHTML = "Applying..";
+    loaderEl.classList.remove("m:hidden");
+    let authorization_token;
+    const checkout_json_url = "/wallets/checkouts/";
+    // Definição movida para aqui
+
+    let discountApplyUrl =
+      "/discount/" + code + "?v=" + Date.now() + "&redirect=/checkout/";
+    fetch(discountApplyUrl)
+      .then((response) => {
+        return response.text();
+      })
+      .then(() => {
+        return fetch("/payments/config", {
+          method: "GET",
+        });
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        authorization_token = btoa(data.paymentInstruments.accessToken);
+        return fetch("/cart.js");
+      })
+      .then((res) => res.json())
+      .then((cartData) => {
+        console.log(cartData);
+        if (cartData.discount_codes.length > 0) {
+          cartData.discount_codes.forEach((discount) => {
+            if (discount.applicable === false) {
+              error = true;
+              // throw new Error("Discount code already applied");
+            }
+          });
+        }
+        let body = {
+          checkout: {
+            country: Shopify.country,
+            discount_code: code,
+            line_items: cartData.items,
+            presentment_currency: Shopify.currency.active,
+          },
+        };
+        return fetch(checkout_json_url, {
+          headers: {
+            accept: "*/*",
+            "cache-control": "no-cache",
+            authorization: "Basic " + authorization_token,
+            "content-type": "application/json, text/javascript",
+            pragma: "no-cache",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "same-origin",
+          },
+          referrerPolicy: "strict-origin-when-cross-origin",
+          method: "POST",
+          mode: "cors",
+          credentials: "include",
+          body: JSON.stringify(body),
+        });
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.checkout && data.checkout.discount_codes.length > 0) {
+          // console.log(data.checkout)
+          console.log(data);
+        } else {
+          this._this.clearLocalStorage();
+          if (data.checkout?.discount_violations.length > 0) {
+            throw new Error(
+              data.checkout.discount_violations[0].non_applicable_reason
+            );
+          }
+          if (data?.errors) {
+            throw new Error(data.errors.discount.code[0].message);
+          }
+          // this._this.discountCodeError.innerHTML =
+          //   data.errors.discount.code[0].message;
+        }
+      })
+      .catch((error) => {
+        // console.error("Erro ao aplicar o desconto:", error);
+        //  this._this.discountCodeError.innerHTML = error;
+      })
+      .finally(() => {
+        // this.setAttribute("disabled", false);
+        textEl.innerHTML = "Apply";
+        loaderEl.classList.add("m:hidden");
+        if(cartDrwaerEL){
+          cartDrwaerEL.onCartDrawerUpdate();
+        }
+        if(cartPage){
+          cartPage.onCartUpdate();
+        }
+        if (error && errorEl) {
+          errorEl.classList.remove("m:hidden");
+          setTimeout(() => {
+            errorEl.classList.add("m:hidden");
+          }, 3000);
+        }
+      });
+  }
+}
+
+customElements.define("discount-code-button", DiscountCodeButton);

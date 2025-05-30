@@ -373,7 +373,7 @@
       "type": "apps",
       "blocks": {
         "foxkit_sales_boost_related_products_NW39EL": {
-          "type": "shopify://apps/foxkit-aio-upsell/blocks/related-products/13f41957-6b79-47c1-99a2-e52431f06fff",
+          "type": "shopify://apps/foxkit-sales-boost/blocks/related-products/13f41957-6b79-47c1-99a2-e52431f06fff",
           "settings": {
             "heading_size": "h2",
             "header_alignment": "left",

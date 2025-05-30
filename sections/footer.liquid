@@ -6,7 +6,7 @@
   <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 <m-footer class="m-footer m:block" data-section-type="footer" data-section-id="{{ section.id }}">
-  {% render 'footer-blocks',
+  {% render 'footer-blocks-2',
     blocks: section.blocks,
     bordered: section.settings.bordered,
     container: section.settings.container
@@ -164,8 +164,25 @@
       "label": "Show menu item divider"
     }
   ],
-  "max_blocks": 5,
   "blocks": [
+    {
+    "type": "footer_image",
+    "name":"Footer image",
+    "limit": 6,
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image",
+        "info":"200 x 200 recommended"
+      },
+      {
+        "type": "url",
+        "id": "image_url",
+        "label": "Image URL"
+      },
+    ]
+    },
     {
       "type": "menu",
       "name": "Menu",

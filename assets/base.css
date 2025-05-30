@@ -2434,6 +2434,13 @@ span.m-add-to-cartprice {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
-m-cart-drawer-items .swym-wishlist-collections-v2-container{
+.m-cart-item--drawer__wrapper .swym-wishlist-collections-v2-container{
   display: none !important;
+}
+.x-rotate {
+  transform: rotateX(0);
+  transition: transform 0.8s ease;
+}
+.x-rotate:hover {
+  transform: rotateX(360deg);
 }
